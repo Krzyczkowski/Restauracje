@@ -24,17 +24,19 @@ public class LogPanel {
     @FXML
     protected void authorization(){
         //Miejsce na autoryzacje u góry klasy już zadeklarowane pola z zmiennymi...
-        if(Client.connect("localhost",1234,login.getText(),password.getText(),place.getValue().toString()))
+        try {
+            if (Client.connect("localhost", 1234, login.getText(), password.getText(), place.getValue().toString())) {
+                //okienko poprawne dane
+            }
+            //okienko nie poprawne dane
+        }catch (Exception e)
         {
-            //okienko poprawne dane
+            System.out.println("Serwer wyłączony");
         }
-        //okienko nie poprawne dane
-
     }
 
     @FXML
     protected void onExitbutton(){
-        System.out.println("xd");
         Platform.exit();
     }
 
