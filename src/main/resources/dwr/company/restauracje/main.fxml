@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
-      <VBox prefHeight="600.0" prefWidth="226.0" style="-fx-background-color: #1B1B32;">
+      <VBox prefHeight="600.0" prefWidth="226.0" style="-fx-background-color: #1B1B32;" >
          <children>
             <Button alignment="CENTER" mnemonicParsing="false" prefHeight="52.0" prefWidth="226.0" text="DWR" />
          </children>

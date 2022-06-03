@@ -1,9 +1,14 @@
 package dwr.company.restauracje;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 // Server class
 class Server {
+    private static Socket client;
     public static void main(String[] args) {
         ServerSocket server = null;
         try {
@@ -17,7 +22,7 @@ class Server {
 
                 // socket object to receive incoming client
                 // requests
-                Socket client = server.accept();
+                client = server.accept();
 
                 // Displaying that new client is connected
                 // to server
@@ -41,6 +46,19 @@ class Server {
             }
         }
     }
+    private static boolean authorization(String name, String password,String DBname) throws FileNotFoundException {
+        //tak ma być
+        //Scanner odczyt = new Scanner(new File(DBname));
+        //dla testow to :
+        Scanner odczyt = new Scanner(new File("Users"));
+        while(odczyt.hasNext())
+        {
+            if(odczyt.nextLine().equals(name+";"+password))
+                return true;
+        }
+        return false;
+        }
+
     private static class ClientHandler implements Runnable {
         private final Socket clientSocket;
 
@@ -50,21 +68,37 @@ class Server {
         }
 
         public void run() {
-            PrintWriter out = null;
-            BufferedReader in = null;
+            String message;
+            JSONObject JSON;
+            DataOutputStream out;
+            DataInputStream in;
+            try {
+                out = new DataOutputStream(client.getOutputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                in = new DataInputStream(client.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             try {
 
                 // get the outputstream of client
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-
-                // get the inputstream of client
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-                String line;
-                while ((line = in.readLine()) != null) {
-                    System.out.printf(" Sent from the client: %s\n", line);
-                    out.println(line);
+                message=(String)in.readUTF();
+                JSON=(JSONObject) JSONValue.parse(message);
+                if(authorization(JSON.get("UserName").toString(),JSON.get("UserPass").toString(),JSON.get("DBName").toString()))
+                {
+                    JSON=new JSONObject();
+                    JSON.put("result","true");
                 }
+                else{
+                    JSON=new JSONObject();
+                    JSON.put("result","false");
+                }
+                System.out.println(JSON.get("result"));
+                out.writeUTF(JSON.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

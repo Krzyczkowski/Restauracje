@@ -13,7 +13,7 @@ public class LogPanel {
     @FXML
     private ComboBox place;
     @FXML
-    private TextField login;
+    protected TextField login;
     @FXML
     private PasswordField password;
     @FXML
@@ -24,6 +24,12 @@ public class LogPanel {
     @FXML
     protected void authorization(){
         //Miejsce na autoryzacje u góry klasy już zadeklarowane pola z zmiennymi...
+        if(Client.connect("localhost",1234,login.getText(),password.getText(),place.getValue().toString()))
+        {
+            //okienko poprawne dane
+        }
+        //okienko nie poprawne dane
+
     }
 
     @FXML
@@ -31,4 +37,5 @@ public class LogPanel {
         System.out.println("xd");
         Platform.exit();
     }
+
 }
