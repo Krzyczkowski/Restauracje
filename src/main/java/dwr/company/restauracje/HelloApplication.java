@@ -10,8 +10,8 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("logPanel.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("aplikacja dziala od Rafała!");
         stage.setScene(scene);
         stage.show();
