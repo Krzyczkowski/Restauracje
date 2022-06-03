@@ -12,7 +12,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -33,7 +32,7 @@
             </Button>
             <Button fx:id="exitButton" onMouseClicked="#onExitbutton" alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #032475;" text="X" textFill="WHITE">
                <font>
-                  <Font name="Calibri Bold Italic" size="18.0" />
+                  <Font name="Calibri Bold" size="18.0" />
                </font>
             </Button>
          </children>

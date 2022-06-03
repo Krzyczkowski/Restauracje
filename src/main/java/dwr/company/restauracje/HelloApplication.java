@@ -31,8 +31,8 @@ public class HelloApplication extends Application {
         scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getSceneX() - xCordinates);
-                stage.setY(mouseEvent.getSceneY() - yCordinates);
+                stage.setX(mouseEvent.getScreenX() - xCordinates);
+                stage.setY(mouseEvent.getScreenY() - yCordinates);
             }
         });
 
@@ -41,7 +41,6 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
     public static void main(String[] args) {
         launch();
     }
