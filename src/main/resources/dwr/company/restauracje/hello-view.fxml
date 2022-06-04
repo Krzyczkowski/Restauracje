@@ -13,7 +13,7 @@
     </padding>
     <Label fx:id="welcomeText"/>
 
-    <Button styleClass="button" text="gi5!" onAction="#onHelloButtonClick"/>
+    <Button styleClass="button" text="gi5!" onAction="#onHelloButtonClick" />
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
