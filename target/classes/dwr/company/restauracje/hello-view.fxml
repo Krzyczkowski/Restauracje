@@ -15,6 +15,6 @@
 
     <Button styleClass="button" text="gi5!" onAction="#onHelloButtonClick"/>
     <stylesheets>
-        <URL value="@style.css" />
+        <URL value="@../../../styles/style.css" />
     </stylesheets>
 </VBox>
