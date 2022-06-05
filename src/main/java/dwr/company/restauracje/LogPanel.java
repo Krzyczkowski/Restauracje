@@ -32,6 +32,7 @@ public class LogPanel {
                 //okienko poprawne dane
             } else {
                 Warning.setText("Niepoprawny lohin lub hasło...");
+                //Dziala jak natura chciala
             }
         }catch (Exception e)
         {
