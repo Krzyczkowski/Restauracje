@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class StartAplication extends Application {
     private double xCordinates = 0;
@@ -19,7 +20,7 @@ public class StartAplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(StartAplication.class.getResource("logPanel.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.initStyle(StageStyle.UNDECORATED);
-
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
