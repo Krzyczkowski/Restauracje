@@ -59,7 +59,7 @@
                      <String fx:value="lok3" />
                   </FXCollections>
                </items>
-            </ComboBox>
+            </ComboBox >
             <Label prefHeight="17.0" prefWidth="213.0" text="Login" textFill="#032475">
                <font>
                   <Font name="Calibri Bold Italic" size="24.0" />
