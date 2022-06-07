@@ -34,6 +34,12 @@ public class LogPanel {
             if (Client.connect("localhost", 1234, login.getText(), password.getText(), place.getValue().toString())) {
                 Warning.setText("");
                 //okienko poprawne dane
+                try {
+                    mainWindow();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
             } else {
                 Warning.setText("Niepoprawny login lub hasło...");
                 //Dziala jak natura chciala
