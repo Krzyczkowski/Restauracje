@@ -60,8 +60,8 @@ public class LogPanel {
     }
 
     protected void mainWindow() throws IOException {
-        FXMLLoader mainWindowLoader = new FXMLLoader(StartAplication.class.getResource("main.fxml"));
-        Scene mainWidowScene = new Scene(mainWindowLoader.load(), 340, 200);
+        FXMLLoader mainWindowLoader = new FXMLLoader(StartAplication.class.getResource("mainWindow.fxml"));
+        Scene mainWidowScene = new Scene(mainWindowLoader.load(), 1200, 700);
         Stage mainWindow = new Stage();
         mainWindow.setTitle("gowne");
         mainWindow.setScene(mainWidowScene);
