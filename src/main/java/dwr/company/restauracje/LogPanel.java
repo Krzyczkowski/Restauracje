@@ -2,10 +2,14 @@ package dwr.company.restauracje;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.AccessibleAction;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LogPanel {
     @FXML
@@ -38,6 +42,11 @@ public class LogPanel {
         {
             Warning.setText("Brak połączenia z serwerem.");
             System.out.println("Serwer wyłączony");
+            try {
+                mainWindow();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -48,6 +57,15 @@ public class LogPanel {
     @FXML
     protected  void onMinimalizationButton(){
         ((Stage) minimalizeButton.getParent().getScene().getWindow()).setIconified(true);
+    }
+
+    protected void mainWindow() throws IOException {
+        FXMLLoader mainWindowLoader = new FXMLLoader(StartAplication.class.getResource("main.fxml"));
+        Scene mainWidowScene = new Scene(mainWindowLoader.load(), 340, 200);
+        Stage mainWindow = new Stage();
+        mainWindow.setTitle("gowne");
+        mainWindow.setScene(mainWidowScene);
+        mainWindow.show();
     }
 
 }
