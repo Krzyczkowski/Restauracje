@@ -22,7 +22,7 @@ class Client {
 
 
     /**
-     *
+     * Polaczenie z serwerem obslugujacym baze danych
      * @param host nazwa hosta serwer
      * @param port numer portu serwera
      * @param userName nazwa użytkownika
