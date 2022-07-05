@@ -18,18 +18,18 @@ class Client {
     private static DataInputStream in; // reading from server
     private static Scanner sc;       // scanner for input
     private static String line;
-
+    private static Socket socket;
 
 
     /**
      * Polaczenie z serwerem obslugujacym baze danych
-     * @param host nazwa hosta serwer
-     * @param port numer portu serwera
-     * @param userName nazwa użytkownika
-     * @param userPass hasło użytkownika
-     * @param DBName nazwa bazdy danych do zalogowania
+     * @param host nazwa hosta serwer API
+     * @param port numer portu serwera API
+     * @param userName nazwa użytkownika API
+     * @param userPass hasło użytkownika API
+     * @param DBName nazwa bazdy danych (restauracji) do zalogowania
      * @return true - gdy użytkownik istnieje i ma dostep do BD
-    false - gdy użytkownik nieistnieje
+               false - gdy użytkownik nieistnieje
      * @throws IOException gdy serwer jest nie aktywny
      */
     protected static boolean connect(String host, Integer port, String userName, String userPass, String DBName) throws IOException {
@@ -37,26 +37,34 @@ class Client {
         // number
         //debugowanie
         //System.out.println(host+" "+port+" "+userName+" "+userPass+" "+DBName);
-        try (Socket socket = new Socket(host, port))// zwraca błąd w przypadku braku komunikacji z serwerem
-        {
-            JSONObject message = new JSONObject();
-            out=new DataOutputStream(socket.getOutputStream());
-            in =new DataInputStream (socket.getInputStream());
+        JSONObject message = new JSONObject();
+        try {   // zwraca błąd w przypadku braku komunikacji z serwerem
+            socket = new Socket(host, port);
+            out = new DataOutputStream(socket.getOutputStream());
+            in = new DataInputStream(socket.getInputStream());
             //wysyłanie do serwera danych
-            message.put("UserName",userName);
-            message.put("UserPass",userPass);
-            message.put("DBName",DBName);
+            message.put("UserName", userName);
+            message.put("UserPass", userPass);
+            message.put("DBName", DBName);
             out.writeUTF(message.toString());
             // reading from server
             String str;
-            str=in.readUTF();
-            message=(JSONObject) JSONValue.parse(str);
+            str = in.readUTF();
+            message = (JSONObject) JSONValue.parse(str);
             System.out.println(message.get("result"));
-            //warunki
-
-            return message.get("result").toString().equals("true");
+        } catch (Exception e) {
+            System.err.println(e);
         }
-
+        return message.get("result").toString().equals("true");
 
     }
+
+    protected static void getAllUsers(){
+            JSONObject message = new JSONObject();
+            message.put("command","getAllUsers");
+
+    }
+
+
+
 }
