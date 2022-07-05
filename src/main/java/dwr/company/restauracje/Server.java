@@ -122,6 +122,7 @@ class Server {
         }
         static private void communication() throws IOException {
             String message;
+            //komentarz
             JSONObject JSON;
             DataOutputStream out;
             DataInputStream in;
