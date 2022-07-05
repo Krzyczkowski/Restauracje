@@ -50,14 +50,19 @@ class Client {
             // reading from server
             String str;
             str = in.readUTF();
+            getAllUsers();
+            getAllUsers();
+            getAllUsers();
+            message.clear();
+            message.put("command","break");
+            out.writeUTF(message.toString());
             message = (JSONObject) JSONValue.parse(str);
             System.out.println(message.get("result"));
-            getAllUsers();
-            getAllUsers();
-            getAllUsers();
+
         } catch (Exception e) {
             System.err.println(e);
         }
+
         return message.get("result").toString().equals("true");
 
     }
@@ -71,6 +76,7 @@ class Client {
             str = in.readUTF();
             message = (JSONObject) JSONValue.parse(str);
             System.out.println(message.get("result"));
+
     }
     protected static void getUserByName(String userName) throws IOException {
         JSONObject message = new JSONObject();
