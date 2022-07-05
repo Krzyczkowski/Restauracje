@@ -1,5 +1,5 @@
 package dwr.company.restauracje;
 
-public class ServerAPI {
+public class DatabaseAPI {
 
 }
