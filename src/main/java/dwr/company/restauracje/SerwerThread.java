@@ -7,6 +7,9 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Klasa odpowiedzialna za obsługe 1 klienta
+ */
 class SerwerThread implements Runnable {
     private final Socket clientSocket;
     private String name;
