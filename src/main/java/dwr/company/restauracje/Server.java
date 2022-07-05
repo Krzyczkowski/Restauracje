@@ -85,11 +85,6 @@ class Server {
             DataInputStream in;
             try {
                 out = new DataOutputStream(client.getOutputStream());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            try {
                 in = new DataInputStream(client.getInputStream());
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -132,6 +127,10 @@ class Server {
     }
     static private void communication()
     {
+        String message;
+        JSONObject JSON;
+        DataOutputStream out;
+        DataInputStream in;
         while (true){
 
 
