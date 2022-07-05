@@ -1,2 +1,49 @@
-.button:hover{
+
+#minimalizeButton {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}
+
+#minimalizeButton:hover {
+    -fx-text-alignment: center;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+}
+
+#exitButton {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}
+
+#exitButton:hover {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.combo-box {
+    -fx-text-fill: #032475;
+    -fx-focus-color: #032475;
+    -fx-faint-focus-color:  #03247515;
+}
+
+.text-field {
+    -fx-text-fill: #032475;
+    -fx-focus-color: #032475;
+    -fx-faint-focus-color:  #03247515;
+}
+
+#logInbutton {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 3;
+    -fx-border-color: #032475;
+}
+
+#logInbutton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 3;
 }

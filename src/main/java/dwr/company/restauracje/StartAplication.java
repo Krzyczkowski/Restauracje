@@ -9,17 +9,18 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class HelloApplication extends Application {
+public class StartAplication extends Application {
     private double xCordinates = 0;
     private double yCordinates = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartAplication.class.getResource("logPanel.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        //stage.initStyle(StageStyle.UNDECORATED);
-
+        stage.initStyle(StageStyle.UNDECORATED);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

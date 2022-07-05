@@ -4,11 +4,14 @@ import org.json.simple.JSONValue;
 
 import java.io.*;
 import java.net.*;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.Scanner;
 
 // Server class
 class Server {
     private static Socket client;
+    private static String name;
+    private static int accesLevel;
     public static void main(String[] args) {
         ServerSocket server = null;
         try {
@@ -46,18 +49,26 @@ class Server {
             }
         }
     }
-    private static boolean authorization(String name, String password,String DBname) throws FileNotFoundException {
-        //tak ma być
-        //Scanner odczyt = new Scanner(new File(DBname));
-        //dla testow to :
-        Scanner odczyt = new Scanner(new File("Users"));
+    private static boolean authorization(String userName, String password,String DBname) throws FileNotFoundException {
+        String s;
+        Scanner odczyt = new Scanner(new File(DBname));
         while(odczyt.hasNext())
         {
-            if(odczyt.nextLine().equals(name+";"+password))
-                return true;
+            s=odczyt.nextLine();
+            System.out.println(s.substring(0,s.lastIndexOf(";")));
+            if(s.substring(0,s.lastIndexOf(";")).length()==userName.length()+password.length()+1)
+            {
+                if (s.substring(0,s.lastIndexOf(";")).equals(userName+";"+password)) // true jeśli jest w bazie)
+                {
+                    name = userName;
+                    accesLevel=Integer.parseInt(s.substring(s.lastIndexOf(";")+1));
+                    return true;
+                }
+            }
+
         }
         return false;
-        }
+    }
 
     private static class ClientHandler implements Runnable {
         private final Socket clientSocket;
