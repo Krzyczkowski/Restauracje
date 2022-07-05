@@ -4,7 +4,7 @@ import org.json.simple.JSONValue;
 
 import java.io.*;
 import java.net.*;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
+
 import java.util.Scanner;
 
 // Server class
