@@ -141,6 +141,9 @@ class Server {
                 message = JSON.get("command").toString();
                 switch (message) {
                     case "getAllUsers":
+                        JSON.clear();
+                        JSON.put("result","Oto wszyscy userzy!");
+                        out.writeUTF(JSON.toString());
                         break;
                     case "getUser":
                         break;
