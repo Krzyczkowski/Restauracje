@@ -64,9 +64,13 @@ class Client {
             message.put("command","getAllUsers");
             message.put("params",""); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
             out.writeUTF(message.toString());
-
     }
-
+    protected static void getUserByName(String userName) throws IOException {
+        JSONObject message = new JSONObject();
+        message.put("command","getAllUsers");
+        message.put("params",userName); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+        out.writeUTF(message.toString());
+    }
 
 
 }
