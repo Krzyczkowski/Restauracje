@@ -103,13 +103,16 @@ class Server {
                 {
                     JSON=new JSONObject();
                     JSON.put("result","true");
+                    System.out.println(JSON.get("result"));
+                    out.writeUTF(JSON.toString());
+                    communication();
                 }
                 else{
                     JSON=new JSONObject();
                     JSON.put("result","false");
+                    System.out.println(JSON.get("result"));
+                    out.writeUTF(JSON.toString());
                 }
-                System.out.println(JSON.get("result"));
-                out.writeUTF(JSON.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -125,6 +128,13 @@ class Server {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+    static private void communication()
+    {
+        while (true){
+
+
         }
     }
 }
