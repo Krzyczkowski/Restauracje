@@ -4,6 +4,7 @@ module dwr.company.restauracje {
 
     requires org.kordamp.bootstrapfx.core;
     requires  json.simple;
+    requires java.sql;
 
     opens dwr.company.restauracje to javafx.fxml;
     exports dwr.company.restauracje;
