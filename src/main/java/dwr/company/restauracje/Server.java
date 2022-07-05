@@ -136,7 +136,8 @@ class Server {
                 message = in.readUTF();
                 JSON = (JSONObject) JSONValue.parse(message);
                 message = JSON.get("command").toString();
-                if (message.equals("break")) break;
+                if (message.equals("break"))
+                    break;
                 switch (message) {
                     case "getAllUsers":
                         JSON.clear();

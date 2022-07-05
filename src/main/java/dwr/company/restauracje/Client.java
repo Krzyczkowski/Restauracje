@@ -72,10 +72,7 @@ class Client {
             message.put("command","getAllUsers");
             message.put("params",""); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
             out.writeUTF(message.toString());
-            String str;
-            str = in.readUTF();
-            message = (JSONObject) JSONValue.parse(str);
-            System.out.println(message.get("result"));
+            System.out.println(getQuery().get("result"));
 
     }
     protected static void getUserByName(String userName) throws IOException {
@@ -84,6 +81,12 @@ class Client {
         message.put("params",userName); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
         out.writeUTF(message.toString());
     }
-
+    private static JSONObject getQuery() throws IOException {
+        String str;
+        JSONObject message;
+        str = in.readUTF();
+        message = (JSONObject) JSONValue.parse(str);
+        return message;
+    }
 
 }
