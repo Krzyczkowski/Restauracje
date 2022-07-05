@@ -59,9 +59,11 @@ class Client {
 
     }
 
-    protected static void getAllUsers(){
+    protected static void getAllUsers() throws IOException {
             JSONObject message = new JSONObject();
             message.put("command","getAllUsers");
+            message.put("params",""); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+            out.writeUTF(message.toString());
 
     }
 
