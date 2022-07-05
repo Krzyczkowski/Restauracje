@@ -48,11 +48,6 @@ public class LogPanel {
         {
             Warning.setText("Brak połączenia z serwerem.");
             System.out.println("Serwer wyłączony");
-            try {
-                mainWindow();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
         }
     }
 
