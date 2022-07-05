@@ -92,7 +92,7 @@ class Server {
             try {
 
                 // get the outputstream of client
-                message=(String)in.readUTF();
+                message=in.readUTF();
                 JSON=(JSONObject) JSONValue.parse(message);
                 if(authorization(JSON.get("UserName").toString(),JSON.get("UserPass").toString(),JSON.get("DBName").toString()))
                 {
@@ -112,13 +112,9 @@ class Server {
                 e.printStackTrace();
             } finally {
                 try {
-                    if (out != null) {
                         out.close();
-                    }
-                    if (in != null) {
                         in.close();
                         clientSocket.close();
-                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -136,9 +132,11 @@ class Server {
                 throw new RuntimeException(e);
             }
             while (true) {
-                message = (String) in.readUTF();
+                message = in.readUTF();
                 JSON = (JSONObject) JSONValue.parse(message);
                 message = JSON.get("command").toString();
+                if (message.equals("break"))
+                    break;
                 switch (message) {
                     case "getAllUsers":
                         JSON.clear();
