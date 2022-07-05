@@ -124,16 +124,28 @@ class Server {
                 }
             }
         }
-    }
-    static private void communication()
-    {
-        String message;
-        JSONObject JSON;
-        DataOutputStream out;
-        DataInputStream in;
-        while (true){
-
-
+        static private void communication() throws IOException {
+            String message;
+            JSONObject JSON;
+            DataOutputStream out;
+            DataInputStream in;
+            try {
+                out = new DataOutputStream(client.getOutputStream());
+                in = new DataInputStream(client.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            while (true) {
+                message = (String) in.readUTF();
+                JSON = (JSONObject) JSONValue.parse(message);
+                message = JSON.get("command").toString();
+                switch (message) {
+                    case "getAllUsers":
+                        break;
+                    case "getUser":
+                        break;
+                }
+            }
         }
     }
 }
