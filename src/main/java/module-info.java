@@ -7,6 +7,7 @@ module dwr.company.restauracje {
     requires java.sql;
     //requires java.persistence;
     requires javax.persistence;
+    requires org.jboss.logging;
 
     opens dwr.company.restauracje to javafx.fxml;
     exports dwr.company.restauracje;

@@ -10,7 +10,7 @@ class Server {
         ServerSocket server = null;
         try {
             // server is listening on port 1234
-            server = new ServerSocket(1234);
+            server = new ServerSocket(1235);
             server.setReuseAddress(true);
             // running infinite loop for getting
             // client request
