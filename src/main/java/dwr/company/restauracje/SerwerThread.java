@@ -81,6 +81,9 @@ class SerwerThread implements Runnable {
                 break;
             switch (message) {
                 case "getAllUsers":
+                    DatabaseAPI db = new DatabaseAPI();
+                    db.getAllUsers();
+
                     JSON.clear();
                     JSON.put("result","Oto wszyscy userzy!");
                     out.writeUTF(JSON.toString());

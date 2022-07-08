@@ -5,10 +5,10 @@ import javax.persistence.Persistence;
 import java.sql.*;
 public class DatabaseAPI {
     //polaczenie z PSQL
-    EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "jpa" );
+     static EntityManagerFactory emfactory ;
 
-    EntityManager entitymanager = emfactory.createEntityManager( );
-    private void connect(){
+    static EntityManager entitymanager;
+    public DatabaseAPI(){
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "jpa" );
 
         EntityManager entitymanager = emfactory.createEntityManager( );
@@ -17,7 +17,7 @@ public class DatabaseAPI {
     }
 
     // pierwsze query dla bazy poki co niedokonczone
-    private void getAllUsers(){
+    public void getAllUsers(){
         Employee emp = entitymanager.find(Employee.class,1);
         System.out.println(emp.getId()+" "+emp.getName()+" "+emp.getLastname());
     }
