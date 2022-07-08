@@ -9,6 +9,7 @@
           <factory-entry name="restauracje" value="6af15067-43a8-41cd-9539-d0eff68fea01" />
         </datasource-mapping>
         <naming-strategy-map />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
   </component>
