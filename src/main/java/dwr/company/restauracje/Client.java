@@ -4,10 +4,8 @@ package dwr.company.restauracje;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import javax.persistence.*;
 import java.io.*;
 import java.net.*;
-import java.util.Objects;
 
 
 // Client class
@@ -15,17 +13,11 @@ import java.util.Objects;
 /**
  * Klasa odpowiedzialna za komunikacje z serwerem obsługującym BD
  */
-@Entity
+
 class Client {
     private static DataOutputStream out; // writing to server
     private static DataInputStream in; // reading from server     // scanner for input
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "phone")
-    private String phone;
-    @Basic
-    @Column(name = "address")
-    private String address;
+
 
     /**
      * Polaczenie z serwerem obslugujacym baze danych
@@ -120,32 +112,7 @@ class Client {
         return message;
     }
 
-    public String getPhone() {
-        return phone;
-    }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return Objects.equals(phone, client.phone) && Objects.equals(address, client.address);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(phone, address);
-    }
 }
