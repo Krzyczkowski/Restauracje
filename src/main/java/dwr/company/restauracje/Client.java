@@ -77,8 +77,6 @@ class Client {
             String str;
             str = in.readUTF();
             getAllUsers();
-            getAllUsers();
-            getAllUsers();
             message.clear();
             message.put("command", "break");
             out.writeUTF(message.toString());
@@ -90,10 +88,13 @@ class Client {
 
     protected static void getAllUsers() throws IOException {
             JSONObject message = new JSONObject();
+            String str;
+            str = in.readUTF();
             message.put("command","getAllUsers");
             message.put("params",""); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
             out.writeUTF(message.toString());
-            System.out.println(getQuery().get("result"));
+            message = (JSONObject) JSONValue.parse(str);
+            System.out.println(message.get("result"));
 
     }
 
