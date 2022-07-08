@@ -6,6 +6,7 @@ module dwr.company.restauracje {
     requires  json.simple;
     requires java.sql;
     requires java.persistence;
+    requires javax.persistence;
 
     opens dwr.company.restauracje to javafx.fxml;
     exports dwr.company.restauracje;
