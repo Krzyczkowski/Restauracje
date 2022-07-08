@@ -5,7 +5,7 @@ module dwr.company.restauracje {
     requires org.kordamp.bootstrapfx.core;
     requires  json.simple;
     requires java.sql;
-    requires java.persistence;
+    //requires java.persistence;
     requires javax.persistence;
 
     opens dwr.company.restauracje to javafx.fxml;
