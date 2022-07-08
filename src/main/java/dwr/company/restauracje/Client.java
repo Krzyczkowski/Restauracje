@@ -89,10 +89,12 @@ class Client {
     protected static void getAllUsers() throws IOException {
             JSONObject message = new JSONObject();
             String str;
-            str = in.readUTF();
+
             message.put("command","getAllUsers");
             message.put("params",""); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
             out.writeUTF(message.toString());
+        System.out.println("działa");
+            str = in.readUTF();
             message = (JSONObject) JSONValue.parse(str);
             System.out.println(message.get("result"));
 

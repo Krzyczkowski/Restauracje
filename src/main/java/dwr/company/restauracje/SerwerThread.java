@@ -74,13 +74,16 @@ class SerwerThread implements Runnable {
             throw new RuntimeException(e);
         }
         while (true) {
+            System.out.println("działa");
             message = in.readUTF();
             JSON = (JSONObject) JSONValue.parse(message);
             message = JSON.get("command").toString();
+            System.out.println(message);
             if (message.equals("break"))
                 break;
             switch (message) {
                 case "getAllUsers":
+
                     DatabaseAPI db = new DatabaseAPI();
 
                     JSON.clear();

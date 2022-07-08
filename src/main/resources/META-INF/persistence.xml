@@ -9,9 +9,10 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://sxterm.mat.umk.pl/lb_jerzy"/>
-            <property name="javax.persistence.jdbc.user" value="lb_jerzy"/>
-            <property name="javax.persistence.jdbc.password" value="***"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/postgres"/>
+            <property name="javax.persistence.jdbc.user" value="serwer"/>
+            <property name="javax.persistence.jdbc.password" value="haslo"/>
+            <property name="hbm2ddl.auto" value="none"/>
         </properties>
     </persistence-unit>
 </persistence>
