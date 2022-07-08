@@ -6,7 +6,7 @@ import java.net.*;
 
 // Server class
 class Server {
-    public void main(String[] args) {
+     public static void main(String[] args) {
         ServerSocket server = null;
         try {
             // server is listening on port 1234
