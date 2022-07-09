@@ -6,11 +6,11 @@ import java.net.*;
 
 // Server class
 class Server {
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         ServerSocket server = null;
         try {
             // server is listening on port 1234
-            server = new ServerSocket(1234);
+            server = new ServerSocket(1235);
             server.setReuseAddress(true);
             // running infinite loop for getting
             // client request
