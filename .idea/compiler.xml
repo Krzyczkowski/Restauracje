@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="restauracje" />
+        <module name="DWRestauracje" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="restauracje" target="17" />
+      <module name="DWRestauracje" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
