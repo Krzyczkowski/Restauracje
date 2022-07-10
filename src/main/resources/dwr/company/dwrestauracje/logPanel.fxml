@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane prefHeight="378.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwr.company.dwrestauracje.LogPanel">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #032475;" GridPane.columnIndex="2">
+         <children>
+            <Button fx:id="minimalizeButton" mnemonicParsing="false" onAction="#onMinimalizationButton" prefHeight="10.0" prefWidth="13.0" text="-">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onMouseClicked="#onExitbutton" text="X">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <VBox prefHeight="383.0" prefWidth="309.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         <children>
+            <Label prefHeight="17.0" prefWidth="213.0" text="Lokal" textFill="#032475">
+               <font>
+                  <Font name="Calibri Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="place" prefHeight="25.0" prefWidth="236.0" visibleRowCount="3">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="lok1" />
+                     <String fx:value="lok2" />
+                     <String fx:value="lok3" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Label prefHeight="17.0" prefWidth="213.0" text="Login" textFill="#032475">
+               <font>
+                  <Font name="Calibri Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="login">
+               <font>
+                  <Font name="Calibri Bold Italic" size="16.0" />
+               </font></TextField>
+            <Label prefHeight="17.0" prefWidth="213.0" text="Hasło" textFill="#032475">
+               <font>
+                  <Font name="Calibri Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="password">
+               <font>
+                  <Font name="Calibri Bold Italic" size="16.0" />
+               </font></PasswordField>
+            <Label fx:id="Warning" prefHeight="41.0" prefWidth="240.0" textFill="RED">
+               <font>
+                  <Font name="Calibri Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="logInbutton" alignment="CENTER" mnemonicParsing="false" onAction="#authorization" prefHeight="25.0" prefWidth="133.0" text="Zaloguj">
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Calibri Bold Italic" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <AnchorPane prefHeight="400.0" prefWidth="308.0" style="-fx-background-color: #032475;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <ImageView fitHeight="109.0" fitWidth="99.0" layoutX="101.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@dwrr.png" />
+               </image>
+            </ImageView>
+            <Line endX="100.0" layoutX="150.0" layoutY="141.0" startX="-100.0" stroke="WHITE" />
+            <Text fill="WHITE" layoutX="101.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Company" wrappingWidth="99.0">
+               <font>
+                  <Font name="Calibri Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#ebebeb" layoutX="50.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj w aplikacji RESTORITO" textAlignment="CENTER" wrappingWidth="201.0">
+               <font>
+                  <Font name="Calibri Bold Italic" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+   <rowConstraints>
+      <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="23.0" />
+      <RowConstraints maxHeight="368.0" minHeight="339.0" prefHeight="355.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+</GridPane>
