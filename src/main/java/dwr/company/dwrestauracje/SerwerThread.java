@@ -67,9 +67,11 @@ class SerwerThread implements Runnable {
         JSONObject JSON;
         DataOutputStream out;
         DataInputStream in;
+        DatabaseAPI db; // class for database communication
         try {
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(clientSocket.getInputStream());
+            db = new DatabaseAPI();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -82,9 +84,9 @@ class SerwerThread implements Runnable {
             switch (message) {
                 case "getAllUsers":
                     System.out.println("dostalem funkcje getAllUsers() od klienta");
-                    DatabaseAPI db = new DatabaseAPI();
                     JSON.clear();
-                    JSON.put("result","abc");
+                    JSON = db.getAllUsers();
+                    System.out.println(JSON.toString());
                     out.writeUTF(JSON.toString());
                     break;
                 case "getUser":
@@ -93,23 +95,27 @@ class SerwerThread implements Runnable {
         }
     }
     private boolean authorization(String userName, String password,String DBname) throws FileNotFoundException {
-        String s;
-        Scanner odczyt = new Scanner(new File(DBname));
-        while(odczyt.hasNext())
-        {
-            s=odczyt.nextLine();
-            System.out.println(s.substring(0,s.lastIndexOf(";")));
-            if(s.substring(0,s.lastIndexOf(";")).length()==userName.length()+password.length()+1)
-            {
-                if (s.substring(0,s.lastIndexOf(";")).equals(userName+";"+password)) // true jeśli jest w bazie)
-                {
-                    name = userName;
-                    accesLevel=Integer.parseInt(s.substring(s.lastIndexOf(";")+1));
-                    return true;
-                }
-            }
-        }
-        return false;
+        /// NA RAZIE JEST OD RAZU RETURN TRUE !!!!!! potem poprawic o sprawdzenie
+        // w bazie danych poprawnosci dannych logowania
+        return true;
+//        String s;
+//
+//        Scanner odczyt = new Scanner(new File(DBname));
+//        while(odczyt.hasNext())
+//        {
+//            s=odczyt.nextLine();
+//            System.out.println(s.substring(0,s.lastIndexOf(";")));
+//            if(s.substring(0,s.lastIndexOf(";")).length()==userName.length()+password.length()+1)
+//            {
+//                if (s.substring(0,s.lastIndexOf(";")).equals(userName+";"+password)) // true jeśli jest w bazie)
+//                {
+//                    name = userName;
+//                    accesLevel=Integer.parseInt(s.substring(s.lastIndexOf(";")+1));
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
     }
 
 }
