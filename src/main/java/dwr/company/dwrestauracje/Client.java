@@ -1,11 +1,16 @@
 package dwr.company.dwrestauracje;
 
 
+import entity.Employee;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import java.io.*;
 import java.net.*;
+import java.security.spec.RSAOtherPrimeInfo;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 // Client class
@@ -99,8 +104,18 @@ class Client {
 
             str = in.readUTF();
             message = (JSONObject) JSONValue.parse(str);
-            System.out.println(message.get("result"));
 
+            JSONObject joE = new JSONObject(); // JO for every Employee
+            List<Employee> employeeList = new ArrayList<>();
+            Employee e = new Employee();
+            for(Integer i = 0; i<message.size();i++){
+                joE = (JSONObject) message.get(i.toString());
+                e.JSONtoEmployee(joE);
+                employeeList.add(e);
+            }
+        for (Employee ee: employeeList) {
+            System.out.println(ee);
+        }
     }
 
     protected static void getUserByName(String userName) throws IOException {

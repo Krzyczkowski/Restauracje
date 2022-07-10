@@ -1,6 +1,10 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
+
+import static java.lang.Integer.parseInt;
 
 @Entity
 public class Employee {
@@ -59,5 +63,19 @@ public class Employee {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         return result;
+    }
+    public JSONObject toJSON() {
+
+        JSONObject jo2 = new JSONObject();
+        JSONObject jo = new JSONObject();
+        jo.put("id", id);
+        jo.put("name", name);
+        jo.put("lastname", lastname);
+        return jo;
+    }
+    public void JSONtoEmployee( JSONObject jo) {
+        this.id =  parseInt((String )jo.get("id"),10);
+        this.name = (String) jo.get("name");
+        this.lastname = (String) jo.get("lastname");
     }
 }
