@@ -3,6 +3,7 @@ package dwr.company.restauracje;
 
 
 import entity.Employee;
+import entity.Logins;
 import org.json.simple.JSONObject;
 
 import javax.persistence.EntityManager;

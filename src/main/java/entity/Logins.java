@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Logins {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+
     @Column(name = "id")
     private int id;
     @Basic
@@ -26,6 +27,9 @@ public class Logins {
     @Basic
     @Column(name = "salary")
     private float salary;
+
+
+
 
     public int getId() {
         return id;
@@ -82,6 +86,10 @@ public class Logins {
     public void setSalary(float salary) {
         this.salary = salary;
     }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {
