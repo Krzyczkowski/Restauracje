@@ -74,8 +74,16 @@ public class Employee {
         return jo;
     }
     public void JSONtoEmployee( JSONObject jo) {
-        this.id =  parseInt((String )jo.get("id"),10);
+        this.id =  (int) (long) jo.get("id");
         this.name = (String) jo.get("name");
         this.lastname = (String) jo.get("lastname");
+    }
+
+    public Employee(JSONObject jo) {
+        this.id =  (int) (long) jo.get("id");
+        this.name = (String) jo.get("name");
+        this.lastname = (String) jo.get("lastname");
+    }
+    public Employee() {
     }
 }

@@ -1,11 +1,10 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 /**
  * Klasa odpowiedzialna za obsługe 1 klienta
@@ -93,6 +92,7 @@ class SerwerThread implements Runnable {
                     break;
             }
         }
+        db.close();
     }
     private boolean authorization(String userName, String password,String DBname) throws FileNotFoundException {
         /// NA RAZIE JEST OD RAZU RETURN TRUE !!!!!! potem poprawic o sprawdzenie

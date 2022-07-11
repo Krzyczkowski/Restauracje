@@ -1,4 +1,4 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

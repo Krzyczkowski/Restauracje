@@ -1,4 +1,4 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 
 
@@ -30,7 +30,7 @@ public class DatabaseAPI {
         JSONObject jo = new JSONObject();
 
         //----- Zapytanie - lista pracowników
-        Query query = em.createQuery("from Employee", Employee.class);
+        Query query = em.createQuery("SELECT emp FROM Employee emp");
         List<Employee> list = query.getResultList();
 
         for(Integer i=0; i<list.size();i++){

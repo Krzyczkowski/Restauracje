@@ -1,4 +1,4 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class StartAplication extends Application {
     private double xCordinates = 0;

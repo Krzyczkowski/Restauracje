@@ -1,4 +1,4 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 
 import entity.Employee;
@@ -7,9 +7,7 @@ import org.json.simple.JSONValue;
 
 import java.io.*;
 import java.net.*;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -85,12 +83,12 @@ class Client {
             str = in.readUTF();
 
             getAllUsers();
-
+            str = in.readUTF();
             // wylaczenie
             message.put("command", "break");
             out.writeUTF(message.toString());
 
-            return false;
+            return true;
         }
     }
 
@@ -107,14 +105,14 @@ class Client {
 
             JSONObject joE = new JSONObject(); // JO for every Employee
             List<Employee> employeeList = new ArrayList<>();
-            Employee e = new Employee();
             for(Integer i = 0; i<message.size();i++){
                 joE = (JSONObject) message.get(i.toString());
-                e.JSONtoEmployee(joE);
-                employeeList.add(e);
+                employeeList.add(new Employee(joE));
+
             }
-        for (Employee ee: employeeList) {
-            System.out.println(ee);
+            System.out.println(employeeList.size());
+        for (Integer j = 0; j<employeeList.size();j++) {
+            System.out.println(employeeList.get(j).getId()+" "+employeeList.get(j).getName()+" "+employeeList.get(j).getLastname());
         }
     }
 
