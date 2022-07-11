@@ -44,5 +44,13 @@ public class DatabaseAPI {
     public void close(){
         em.close();
     }
-
+    public JSONObject getEmplyeeById(int id){
+        em.getTransaction().begin();
+        JSONObject jo = new JSONObject();
+        //----- Zapytanie - lista pracowników
+        Employee emp = em.find(Employee.class, id);
+        em.getTransaction().commit();
+        jo.put(id,emp.toJSON());
+        return (jo);
+    }
 }

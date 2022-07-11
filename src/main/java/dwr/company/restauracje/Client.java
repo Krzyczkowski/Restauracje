@@ -96,26 +96,36 @@ class Client {
             JSONObject message = new JSONObject();
             String str;
 
-            message.put("command","getAllUsers");
-            message.put("params",""); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+            message.put("command","getUser");
+            message.put("params",1); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
             out.writeUTF(message.toString());
-
             str = in.readUTF();
             message = (JSONObject) JSONValue.parse(str);
-
             JSONObject joE = new JSONObject(); // JO for every Employee
             List<Employee> employeeList = new ArrayList<>();
             for(Integer i = 0; i<message.size();i++){
                 joE = (JSONObject) message.get(i.toString());
                 employeeList.add(new Employee(joE));
-
             }
             System.out.println(employeeList.size());
         for (Integer j = 0; j<employeeList.size();j++) {
             System.out.println(employeeList.get(j).getId()+" "+employeeList.get(j).getName()+" "+employeeList.get(j).getLastname());
         }
     }
+    protected static void getEmployeeById(int id) throws IOException {
+        JSONObject message = new JSONObject();
+        String str;
 
+        message.put("command","getUser");
+        message.put("params",1); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+        out.writeUTF(message.toString());
+        str = in.readUTF();
+        message = (JSONObject) JSONValue.parse(str);
+        JSONObject joE = new JSONObject(); // JO for every Employee
+        Employee emp = new Employee(joE);
+        System.out.println(emp.getId()+" "+emp.getName()+" "+emp.getLastname());
+
+    }
     protected static void getUserByName(String userName) throws IOException {
         JSONObject message = new JSONObject();
         message.put("command","getUser");
