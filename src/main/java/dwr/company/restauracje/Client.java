@@ -64,9 +64,8 @@ class Client {
     protected static boolean connectConsole(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
         // establish a connection by providing host and port
         // number
-        //debugowanie
-        //System.out.println(host+" "+port+" "+userName+" "+userPass+" "+DBName);
-
+        // debugowanie
+        // System.out.println(host+" "+port+" "+userName+" "+userPass+" "+DBName);
         try (Socket socket = new Socket(host, port)) {
             out = new DataOutputStream(socket.getOutputStream());
             in = new DataInputStream(socket.getInputStream());
@@ -82,8 +81,15 @@ class Client {
             String str;
             str = in.readUTF();
 
-            getAllUsers();
-            str = in.readUTF();
+            /**
+             *
+             *
+             * PONIZEJ KOD DO URUCHAMIANIA ZAPYTAN
+             *
+             *
+             **/
+            updateEmployee("Wiktor","K",2);
+            getAllEmployees();
             // wylaczenie
             message.put("command", "break");
             out.writeUTF(message.toString());
@@ -96,8 +102,8 @@ class Client {
             JSONObject message = new JSONObject();
             String str;
 
-            message.put("command","getUser");
-            message.put("params",1); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+            message.put("command","getAllEmployees");
+            message.put("params",""); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
             out.writeUTF(message.toString());
             str = in.readUTF();
             message = (JSONObject) JSONValue.parse(str);
@@ -116,20 +122,53 @@ class Client {
         JSONObject message = new JSONObject();
         String str;
 
-        message.put("command","getUser");
-        message.put("params",1); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+        message.put("command","getEmployeeById");
+        message.put("params",id);
         out.writeUTF(message.toString());
         str = in.readUTF();
         message = (JSONObject) JSONValue.parse(str);
-        JSONObject joE = new JSONObject(); // JO for every Employee
-        Employee emp = new Employee(joE);
-        System.out.println(emp.getId()+" "+emp.getName()+" "+emp.getLastname());
-
+        JSONObject joE = new JSONObject();
+        List<Employee> employeeList = new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++){
+            joE = (JSONObject) message.get(i.toString());
+            employeeList.add(new Employee(joE));
+        }
+        for (Integer j = 0; j<employeeList.size();j++) {
+            System.out.println(employeeList.get(j).getId()+" "+employeeList.get(j).getName()+" "+employeeList.get(j).getLastname());
+        }
     }
-    protected static void getUserByName(String userName) throws IOException {
+    protected static void getEmployeeByName(String Name) throws IOException {
         JSONObject message = new JSONObject();
         message.put("command","getUser");
         message.put("params",userName); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+        out.writeUTF(message.toString());
+    }
+    protected static void insertEmployee(String name, String lastName) throws IOException {
+        JSONObject message = new JSONObject();
+        Employee emp = new Employee();
+        emp.setLastname(lastName);
+        emp.setName(name);
+        emp.setId(0);
+        message.put("command","insertEmployee");
+        message.put("params",emp.toJSON());
+        out.writeUTF(message.toString());
+
+    }
+
+    protected static void deleteEmployee(Integer id) throws IOException {
+        JSONObject message = new JSONObject();
+        message.put("command","deleteEmployee");
+        message.put("params",id);
+        out.writeUTF(message.toString());
+    }
+    protected static void updateEmployee(String name, String lastName,int id) throws IOException {
+        JSONObject message = new JSONObject();
+        Employee emp = new Employee();
+        emp.setLastname(lastName);
+        emp.setName(name);
+        emp.setId(id);
+        message.put("command","updateEmployee");
+        message.put("params",emp.toJSON());
         out.writeUTF(message.toString());
     }
 

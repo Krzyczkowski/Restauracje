@@ -88,14 +88,8 @@ class SerwerThread implements Runnable {
                     System.out.println(JSON.toString());
                     out.writeUTF(JSON.toString());
                     break;
-                case "getUser":
-                    System.out.println("dostalem funkcje getAllUsers() od klienta");
-                    int i = (int)(long) JSON.get("params");
-                    System.out.println("id: "+i);
-                    JSON.clear();
-                    JSON = db.getEmplyeeById(i);
-                    System.out.println(JSON.toString());
-                    out.writeUTF(JSON.toString());
+                case "getEmployeeById":
+                    getEmployeeById( (int)(long) JSON.get("params"));
                     break;
             }
         }

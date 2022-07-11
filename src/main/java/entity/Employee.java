@@ -1,14 +1,17 @@
 package entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 
+
 import static java.lang.Integer.parseInt;
 
 @Entity
-public class Employee {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Employee  {
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Id
     @Column(name = "id")
     private int id;
