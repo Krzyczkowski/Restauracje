@@ -160,6 +160,5 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-
 }
 

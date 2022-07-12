@@ -93,7 +93,7 @@ class Client {
             //updateEmployee("Wiktor","K",2);
             //getAllEmployees();
             getEmployeesFullInfo();
-            getEmployeesFullInfo();
+
             message.clear();
                 // wylaczenie
                 message.put("command", "break");
@@ -186,6 +186,7 @@ class Client {
         message.put("command","getEmployeesFullInfo");
         message.put("params","");
         out.writeUTF(message.toString());
+        String str = in.readUTF();
     }
 
 

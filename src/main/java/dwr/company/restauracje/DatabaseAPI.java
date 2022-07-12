@@ -75,17 +75,16 @@ public class DatabaseAPI {
     }
     public JSONObject getAllEmployeesFullInfo()
     {
+        JSONObject jo = new JSONObject();
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT log FROM Logins log");
         List<Logins> list = query.getResultList();
-        for (Logins result : list) {
-            em.persist(result);
-            System.out.println(result.getEmp().getName()+result.getEmp().getLastname()+result.getLogin()+result.getPassword());
-        }
-        // logins.
-        em.getTransaction().commit();
 
-        return new JSONObject();
+        em.getTransaction().commit();
+        for(Integer i=0; i<list.size();i++){
+            jo.put(i.toString(),list.get(i).toJSON());
+        }
+        return jo;
     }
 
     public int getDatebaseIdByName(String name){

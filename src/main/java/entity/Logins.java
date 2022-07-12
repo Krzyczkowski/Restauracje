@@ -142,7 +142,7 @@ public class Logins {
         jo.put("pesel", pesel);
         jo.put("levelaccess", levelaccess);
         jo.put("salary", salary);
-        jo.put("salary", salary);
+        jo.put("idrestaurant", idrestaurant);
         return jo;
     }
 }
