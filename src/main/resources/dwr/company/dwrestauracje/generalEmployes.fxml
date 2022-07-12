@@ -41,6 +41,11 @@
                 </Label>
                 <VBox prefHeight="317.0" prefWidth="350.0">
                     <children>
+                        <Button fx:id="menuButton0" onMouseClicked="#orderSection" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="Calibri Bold" size="27.0" />
+                            </font>
+                        </Button>
                         <Button fx:id="menuButton1" onMouseClicked="#employesSection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="38.0" prefWidth="350.0" text="Pracownicy" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />

@@ -2,7 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -35,27 +39,32 @@
                 </Label>
                 <VBox prefHeight="317.0" prefWidth="350.0">
                     <children>
-                        <Button fx:id="menuButton1" onMouseClicked="#employesSection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="38.0" prefWidth="350.0" text="Pracownicy" textFill="WHITE">
+                  <Button fx:id="menuButton0" onMouseClicked="#orderSection" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="27.0" />
+                     </font>
+                  </Button>
+                        <Button fx:id="menuButton1" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#employesSection" prefHeight="38.0" prefWidth="350.0" text="Pracownicy" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                        <Button fx:id="menuButton2" onMouseClicked="#productSection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="22.0" prefWidth="350.0" text="Produkty" textFill="WHITE">
+                        <Button fx:id="menuButton2" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#productSection" prefHeight="22.0" prefWidth="350.0" text="Produkty" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                        <Button fx:id="menuButton3" onMouseClicked="#warehouseSection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="14.0" prefWidth="350.0" text="Magazyn" textFill="WHITE">
+                        <Button fx:id="menuButton3" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#warehouseSection" prefHeight="14.0" prefWidth="350.0" text="Magazyn" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                        <Button fx:id="menuButton4" onMouseClicked="#historySection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="32.0" prefWidth="350.0" text="Historia Zamówień" textFill="WHITE">
+                        <Button fx:id="menuButton4" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#historySection" prefHeight="32.0" prefWidth="350.0" text="Historia Zamówień" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                  <Button mnemonicParsing="false"  prefHeight="25.0" prefWidth="435.0" style="-fx-background-color: #032475;" />
+                  <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="350.0" style="-fx-background-color: #032475;" />
                     </children>
                     <VBox.margin>
                         <Insets top="20.0" />
@@ -68,7 +77,7 @@
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="logOut" onMouseClicked="#logOut" mnemonicParsing="false" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
+                  <Button fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -79,5 +88,47 @@
             </HBox>
             </children>
         </VBox>
+      <AnchorPane layoutX="1.0" layoutY="-1.0" prefHeight="700.0" prefWidth="849.0">
+         <children>
+            <Label layoutX="300.0" layoutY="16.0" prefHeight="41.0" prefWidth="405.0" text="Lista produktów" textFill="#032475">
+               <font>
+                  <Font name="Calibri Bold" size="36.0" />
+               </font>
+            </Label>
+            <TextField fx:id="searchProduct" layoutX="31.0" layoutY="73.0" prefHeight="32.0" prefWidth="412.0">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </TextField>
+            <ComboBox fx:id="choseCategory" layoutX="464.0" layoutY="73.0" prefHeight="32.0" prefWidth="226.0" />
+            <Button fx:id="findProduct" layoutX="709.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" text="Szukaj">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Button>
+            <TableView fx:id="tableWithProducts" layoutX="33.0" layoutY="129.0" prefHeight="479.0" prefWidth="788.0" style="-fx-background-color: bec5eb;">
+              <columns>
+                <TableColumn prefWidth="317.0" text="Nazwa" />
+                <TableColumn minWidth="0.0" prefWidth="313.0" text="Kategoria" />
+                  <TableColumn minWidth="0.0" prefWidth="156.0" text="Cena" />
+              </columns>
+            </TableView>
+            <Button fx:id="addProduct" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="165.0" text="Dodaj">
+               <font>
+                  <Font name="Calibri" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="editProduct" layoutX="338.0" layoutY="630.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="165.0" text="Edytuj">
+               <font>
+                  <Font name="Calibri" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="deletProduct" layoutX="644.0" layoutY="630.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="173.0" text="Usuń">
+               <font>
+                  <Font name="Calibri" size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

@@ -12,8 +12,8 @@ import java.io.IOException;
 public class GeneralWindowSet {
     //Scenes, stage, loaders
     protected static Stage window;
-    protected static Scene employesScene, productsScene, warehouseScene, historyScene;
-    protected FXMLLoader employesWindowLoader, historyWindowLoader, productsWindowLoader, warehouseWindwoLoader;
+    protected static Scene employesScene, productsScene, warehouseScene, historyScene, orderScene;
+    protected FXMLLoader employesWindowLoader, historyWindowLoader, productsWindowLoader, warehouseWindwoLoader, orderWindowLoader;
 
     //Mouse click cordinates
     private double xCordinates = 0;
@@ -42,7 +42,9 @@ public class GeneralWindowSet {
         historyWindowLoader = new FXMLLoader(App.class.getResource("generalHistory.fxml"));
         productsWindowLoader = new FXMLLoader(App.class.getResource("generalProducts.fxml"));
         warehouseWindwoLoader = new FXMLLoader(App.class.getResource("generalWarehouse.fxml"));
+        orderWindowLoader = new FXMLLoader(App.class.getResource("generalOrder.fxml"));
 
+        orderScene = new Scene(orderWindowLoader.load(), 1200, 700);
         employesScene = new Scene(employesWindowLoader.load(), 1200, 700);
         historyScene = new Scene(historyWindowLoader.load(), 1200, 700);
         warehouseScene = new Scene(warehouseWindwoLoader.load(), 1200, 700);
@@ -52,6 +54,7 @@ public class GeneralWindowSet {
         historyScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         warehouseScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         productsScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        orderScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
     }
 
     //Switch between options in main Window
@@ -91,6 +94,10 @@ public class GeneralWindowSet {
 
     protected void setHistoryScene() throws IOException {
         setActualWindow(historyScene);
+    }
+
+    protected void setOrderScene() throws IOException {
+        setActualWindow(orderScene);
     }
 
 }

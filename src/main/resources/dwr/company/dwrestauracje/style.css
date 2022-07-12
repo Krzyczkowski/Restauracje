@@ -48,6 +48,20 @@
     -fx-border-radius: 3;
 }
 
+#menuButton0 {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: #032475;
+    -fx-border-width: 1;
+}
+
+#menuButton0:hover {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+}
+
 #menuButton1 {
     -fx-background-color: #032475;
     -fx-text-fill: white;
@@ -165,6 +179,118 @@
 }
 
 #findEmployee:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#findProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#findProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#addProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#addProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#editProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#editProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deletProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deletProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#addComponent{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#addComponent:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#editAmount{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#editAmount:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deletComponent{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deletComponent:hover{
     -fx-background-radius: 20;
     -fx-background-color: white;
     -fx-text-fill: #032475;

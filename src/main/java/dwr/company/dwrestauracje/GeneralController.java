@@ -91,6 +91,12 @@ public class GeneralController {
     }
 
     @FXML
+    protected void orderSection() throws IOException {
+        actualWindow = new GeneralWindowSet();
+        actualWindow.setOrderScene();
+    }
+
+    @FXML
     protected void logOut() throws IOException {
         Stage stage = new Stage();
         logSet againLog = new logSet(stage);
