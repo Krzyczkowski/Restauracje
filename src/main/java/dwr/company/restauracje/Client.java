@@ -99,8 +99,19 @@ class Client {
             return true;
         }
     }
-
-    protected static void getAllUsers() throws IOException {
+    private static void printEmployee(JSONObject message){
+        JSONObject joE = new JSONObject();
+        List<Employee> employeeList = new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++){
+            joE = (JSONObject) message.get(i.toString());
+            employeeList.add(new Employee(joE));
+        }
+        System.out.println(employeeList.size());
+        for (Integer j = 0; j<employeeList.size();j++) {
+            System.out.println(employeeList.get(j).getId()+" "+employeeList.get(j).getName()+" "+employeeList.get(j).getLastname());
+        }
+    }
+    protected static void getAllEmployees() throws IOException {
             JSONObject message = new JSONObject();
             String str;
             message.put("command","getAllEmployees");
@@ -108,18 +119,10 @@ class Client {
             out.writeUTF(message.toString());
             str = in.readUTF();
             message = (JSONObject) JSONValue.parse(str);
-            JSONObject joE = new JSONObject(); // JO for every Employee
-            List<Employee> employeeList = new ArrayList<>();
-            for(Integer i = 0; i<message.size();i++){
-                joE = (JSONObject) message.get(i.toString());
-                employeeList.add(new Employee(joE));
-            }
-            System.out.println(employeeList.size());
-        for (Integer j = 0; j<employeeList.size();j++) {
-            System.out.println(employeeList.get(j).getId()+" "+employeeList.get(j).getName()+" "+employeeList.get(j).getLastname());
-        }
+            // JO for every Employee
+            printEmployee(message);
     }
-    protected static void getEmployeeById(int id) throws IOException {
+    protected static void getEmployeeById(Integer id) throws IOException {
         JSONObject message = new JSONObject();
         String str;
         message.put("command","getEmployeeById");
@@ -131,9 +134,13 @@ class Client {
     }
     protected static void getEmployeeByName(String Name) throws IOException {
         JSONObject message = new JSONObject();
-        message.put("command","getUser");
-        message.put("params",userName); // params puste bo nie potrzebuje ale gdyby bylo getUser("Wiktor") wtedy params bedzie "Wiktor"
+        String str;
+        message.put("command","getEmployeeByName");
+        message.put("params",Name);
         out.writeUTF(message.toString());
+        str = in.readUTF();
+        message = (JSONObject) JSONValue.parse(str);
+        printEmployee(message);
     }
     protected static void insertEmployee(String name, String lastName) throws IOException {
         JSONObject message = new JSONObject();
@@ -164,12 +171,11 @@ class Client {
         out.writeUTF(message.toString());
     }
 
-    private static JSONObject getQuery() throws IOException {
-        String str;
-        JSONObject message;
-        str = in.readUTF();
-        message = (JSONObject) JSONValue.parse(str);
-        return message;
+    protected static void getEmployeesFullInfo() throws IOException {
+        JSONObject message = new JSONObject();
+        message.put("command","getEmployeesFullInfo");
+        message.put("params","");
+        out.writeUTF(message.toString());
     }
 
 

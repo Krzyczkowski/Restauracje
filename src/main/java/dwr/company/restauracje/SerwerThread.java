@@ -1,5 +1,6 @@
 package dwr.company.restauracje;
 
+import entity.Employee;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -13,6 +14,10 @@ class SerwerThread implements Runnable {
     private final Socket clientSocket;
     private String name;
     private int accesLevel;
+    private static JSONObject JSON;
+    private static DataOutputStream out;
+    private static DataInputStream in;
+    private static databaseAPI db; // class for database communication
     // Constructor
     public SerwerThread(Socket socket) {
         this.clientSocket = socket;
@@ -20,12 +25,10 @@ class SerwerThread implements Runnable {
 
     public void run() {
         String message;
-        JSONObject JSON;
-        DataOutputStream out;
-        DataInputStream in;
         try {
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(clientSocket.getInputStream());
+            db = new databaseAPI();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -62,18 +65,6 @@ class SerwerThread implements Runnable {
     }
     private void communication() throws IOException {
         String message;
-        //komentarz
-        JSONObject JSON;
-        DataOutputStream out;
-        DataInputStream in;
-        DatabaseAPI db; // class for database communication
-        try {
-            out = new DataOutputStream(clientSocket.getOutputStream());
-            in = new DataInputStream(clientSocket.getInputStream());
-            db = new DatabaseAPI();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         while (true) {
             message = in.readUTF();
             JSON = (JSONObject) JSONValue.parse(message);
@@ -81,15 +72,30 @@ class SerwerThread implements Runnable {
             if (message.equals("break"))
                 break;
             switch (message) {
-                case "getAllUsers":
-                    System.out.println("dostalem funkcje getAllUsers() od klienta");
-                    JSON.clear();
-                    JSON = db.getAllUsers();
-                    System.out.println(JSON.toString());
-                    out.writeUTF(JSON.toString());
+                case "getAllEmployees":
+                    getAllEmployees();
                     break;
                 case "getEmployeeById":
                     getEmployeeById( (int)(long) JSON.get("params"));
+                    break;
+                case "getEmployeeByName":
+                    getEmployeeByName( (String) JSON.get("params"));
+                    break;
+                case "insertEmployee":
+                    System.out.println(JSON.get("params"));
+                    insertEmployee(new Employee((JSONObject) JSON.get("params")) );
+                    break;
+                case "deleteEmployee":
+                    System.out.println(JSON.get("params"));
+                    deleteEmployee((int) (long) JSON.get("params"));
+                    break;
+                case "updateEmployee":
+                    System.out.println(JSON.get("params"));
+                    updateEmployee(new Employee((JSONObject) JSON.get("params")) );
+                    break;
+                case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
+                    System.out.println(JSON.get("params"));
+                    getEmployeesFullInfo();
                     break;
             }
         }
@@ -117,6 +123,52 @@ class SerwerThread implements Runnable {
 //            }
 //        }
 //        return false;
+    }
+    static private void getAllEmployees() throws IOException {
+        System.out.println("dostalem funkcje getAllUsers() od klienta");
+        JSON.clear();
+        JSON = db.getAllEmployee();
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+    static private void getEmployeeById(Integer id) throws IOException {
+        System.out.println("dostalem funkcje getEmplyeeById(id) od klienta");
+        System.out.println("id: "+id);
+        JSON.clear();
+        JSON = db.getEmployeeById(id);
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+    static private void getEmployeeByName(String name) throws IOException{
+        System.out.println("dostalem funkcje getEmplyeeByName(name) od klienta");
+        JSON.clear();
+        JSON = db.getEmployeeByName(name);
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+    static private void insertEmployee(Employee e) throws IOException{
+        System.out.println("dostalem funkcje insertEmployee od klienta");
+        JSON.clear();
+        db.insertEmployee(e);
+        //System.out.println(JSON.toString());
+        //out.writeUTF(JSON.toString());
+    }
+    static private void deleteEmployee(Integer id) throws IOException{
+        System.out.println("dostalem funkcje deleteEmployee od klienta");
+        JSON.clear();
+        db.deleteEmployee(id);
+    }
+    static private void updateEmployee(Employee e) throws IOException{
+        System.out.println("dostalem funkcje updateEmployee od klienta");
+        JSON.clear();
+        db.updateEmployee(e);
+    }
+    static private void getEmployeesFullInfo() throws IOException {
+        System.out.println("dostalem funkcje getEmployeesFullInfo od klienta");
+        JSON.clear();
+        JSON = db.getAllEmployeesFullInfo();
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
     }
 
 }
