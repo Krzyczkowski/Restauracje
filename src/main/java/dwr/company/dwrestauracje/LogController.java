@@ -1,9 +1,9 @@
 package dwr.company.dwrestauracje;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class LogController {
@@ -32,9 +32,14 @@ public class LogController {
 
     @FXML
     protected void authorization() {
-        //Miejsce na autoryzacje u góry klasy już zadeklarowane pola z zmiennymi...
+        //Active srever
         try {
             mainWindow = new GeneralWindowSet();
+            mainWindow.lodaFxmls();
+            mainWindow.firstUsage();
+
+            Stage stage = (Stage) exitButton.getScene().getWindow();
+            stage.close();
 
           /*  if (Client.connect("localhost", 1234, login.getText(), password.getText(), place.getValue().toString())) {
                 Warning.setText("");
@@ -48,19 +53,12 @@ public class LogController {
                 Warning.setText("Niepoprawny login lub hasło...");
                 //Dziala jak natura chciala
             }*/
-
+        //Srver shouted down
         } catch (Exception e) {
             Warning.setText("Brak połączenia z serwerem.");
             System.out.println("Serwer wyłączony");
 
-            try {
-                mainWindow = new GeneralWindowSet();
-                Stage stage = (Stage) exitButton.getScene().getWindow();
-                stage.close();
 
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
         }
     }
 
@@ -74,6 +72,8 @@ public class LogController {
     protected void onMinimalizationButton() {
         ((Stage) minimalizeButton.getParent().getScene().getWindow()).setIconified(true);
     }
+
+
 
 }
 

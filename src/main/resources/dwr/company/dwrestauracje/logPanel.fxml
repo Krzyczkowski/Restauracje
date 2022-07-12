@@ -83,7 +83,7 @@
                   <Font name="Calibri Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="logInbutton" alignment="CENTER" mnemonicParsing="false" onAction="#authorization" prefHeight="25.0" prefWidth="133.0" text="Zaloguj">
+            <Button fx:id="logInbutton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#authorization" prefHeight="25.0" prefWidth="133.0" text="Zaloguj">
                <VBox.margin>
                   <Insets left="50.0" />
                </VBox.margin>
