@@ -45,6 +45,7 @@ class SerwerThread implements Runnable {
              * AUTORYZACJA
              */
             user = authorization(JSON.get("UserName").toString(),JSON.get("UserPass").toString(),JSON.get("DBName").toString());
+            System.out.println(user.getId());
             if(user.getId()>0)
             {
                 accessLevel = user.getLevelaccess();

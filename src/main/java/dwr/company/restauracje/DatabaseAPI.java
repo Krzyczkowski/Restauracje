@@ -84,6 +84,7 @@ public class DatabaseAPI {
         }
         // logins.
         em.getTransaction().commit();
+
         return new JSONObject();
     }
 

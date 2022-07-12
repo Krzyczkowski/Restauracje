@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 
 @Entity
@@ -128,5 +130,19 @@ public class Logins {
         result = 31 * result + (pesel != null ? pesel.hashCode() : 0);
         result = 31 * result + (salary != +0.0f ? Float.floatToIntBits(salary) : 0);
         return result;
+    }
+    public JSONObject toJSON() {
+
+        JSONObject jo = new JSONObject();
+        jo.put("id", id);
+        jo.put("name", emp.getName());
+        jo.put("lastname", emp.getLastname());
+        jo.put("login",login);
+        jo.put("password", password);
+        jo.put("pesel", pesel);
+        jo.put("levelaccess", levelaccess);
+        jo.put("salary", salary);
+        jo.put("salary", salary);
+        return jo;
     }
 }

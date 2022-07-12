@@ -69,7 +69,6 @@ public class Employee  {
     }
     public JSONObject toJSON() {
 
-        JSONObject jo2 = new JSONObject();
         JSONObject jo = new JSONObject();
         jo.put("id", id);
         jo.put("name", name);
