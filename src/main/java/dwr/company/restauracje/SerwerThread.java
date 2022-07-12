@@ -15,7 +15,8 @@ class SerwerThread implements Runnable {
     private final Socket clientSocket;
     private final Configuration privileges;
     private String name;
-    private int accesLevel;
+    private static Logins user;
+    private int accessLevel;
     private static JSONObject JSON;
     private static DataOutputStream out;
     private static DataInputStream in;
@@ -46,6 +47,7 @@ class SerwerThread implements Runnable {
             user = authorization(JSON.get("UserName").toString(),JSON.get("UserPass").toString(),JSON.get("DBName").toString());
             if(user.getId()>0)
             {
+                accessLevel = user.getLevelaccess();
                 JSON=new JSONObject();
                 JSON.put("result","true");
                 System.out.println(JSON.get("result"));

@@ -1,6 +1,5 @@
 package dwr.company.restauracje;
 
-
 import entity.Employee;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -36,7 +35,7 @@ class Client {
     protected static boolean connect(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
         // establish a connection by providing host and port
         // number
-        //debugowanie
+        // debugowanie
         //System.out.println(host+" "+port+" "+userName+" "+userPass+" "+DBName);
 
         try (Socket socket = new Socket(host, port)) {

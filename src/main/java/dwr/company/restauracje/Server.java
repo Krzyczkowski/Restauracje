@@ -1,6 +1,8 @@
 package dwr.company.restauracje;
 
 
+import sun.security.krb5.Config;
+
 import java.io.*;
 import java.net.*;
 
@@ -9,8 +11,13 @@ class Server {
 
      public static void main(String[] args) {
          ServerSocket server = null;
-
-        try {
+         Configuration privileges;
+         try {
+             privileges = new Configuration();
+         } catch (FileNotFoundException e) {
+             throw new RuntimeException(e);
+         }
+         try {
             // server is listening on port 1234
             server = new ServerSocket(1235);
             server.setReuseAddress(true);

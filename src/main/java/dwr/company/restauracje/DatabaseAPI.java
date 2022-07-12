@@ -1,7 +1,5 @@
 package dwr.company.restauracje;
 
-
-
 import entity.Employee;
 import entity.Logins;
 import entity.Restaurants;
