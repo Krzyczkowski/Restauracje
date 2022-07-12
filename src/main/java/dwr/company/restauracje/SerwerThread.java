@@ -1,6 +1,7 @@
 package dwr.company.restauracje;
 
 import entity.Employee;
+import entity.Logins;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,15 +13,17 @@ import java.net.Socket;
  */
 class SerwerThread implements Runnable {
     private final Socket clientSocket;
+    private final Configuration privileges;
     private String name;
     private int accesLevel;
     private static JSONObject JSON;
     private static DataOutputStream out;
     private static DataInputStream in;
-    private static databaseAPI db; // class for database communication
+    private static DatabaseAPI db; // class for database communication
     // Constructor
-    public SerwerThread(Socket socket) {
+    public SerwerThread(Socket socket, Configuration conf) {
         this.clientSocket = socket;
+        this.privileges = conf;
     }
 
     public void run() {
@@ -28,7 +31,7 @@ class SerwerThread implements Runnable {
         try {
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(clientSocket.getInputStream());
-            db = new databaseAPI();
+            db = new DatabaseAPI();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +40,11 @@ class SerwerThread implements Runnable {
             // get the outputstream of client
             message=in.readUTF();
             JSON=(JSONObject) JSONValue.parse(message);
-            if(authorization(JSON.get("UserName").toString(),JSON.get("UserPass").toString(),JSON.get("DBName").toString()))
+            /**
+             * AUTORYZACJA
+             */
+            user = authorization(JSON.get("UserName").toString(),JSON.get("UserPass").toString(),JSON.get("DBName").toString());
+            if(user.getId()>0)
             {
                 JSON=new JSONObject();
                 JSON.put("result","true");
@@ -101,28 +108,8 @@ class SerwerThread implements Runnable {
         }
         db.close();
     }
-    private boolean authorization(String userName, String password,String DBname) throws FileNotFoundException {
-        /// NA RAZIE JEST OD RAZU RETURN TRUE !!!!!! potem poprawic o sprawdzenie
-        // w bazie danych poprawnosci dannych logowania
-        return true;
-//        String s;
-//
-//        Scanner odczyt = new Scanner(new File(DBname));
-//        while(odczyt.hasNext())
-//        {
-//            s=odczyt.nextLine();
-//            System.out.println(s.substring(0,s.lastIndexOf(";")));
-//            if(s.substring(0,s.lastIndexOf(";")).length()==userName.length()+password.length()+1)
-//            {
-//                if (s.substring(0,s.lastIndexOf(";")).equals(userName+";"+password)) // true jeśli jest w bazie)
-//                {
-//                    name = userName;
-//                    accesLevel=Integer.parseInt(s.substring(s.lastIndexOf(";")+1));
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
+    private Logins authorization(String userName, String password, String DBname) throws FileNotFoundException {
+        return db.authorization(userName,password,db.getDatebaseIdByName(DBname));
     }
     static private void getAllEmployees() throws IOException {
         System.out.println("dostalem funkcje getAllUsers() od klienta");

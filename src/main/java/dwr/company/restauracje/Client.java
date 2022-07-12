@@ -20,7 +20,7 @@ import java.util.List;
 class Client {
     private static DataOutputStream out; // writing to server
     private static DataInputStream in; // reading from server     // scanner for input
-    private static final JSONObject message = new JSONObject();
+    private static JSONObject message = new JSONObject();
 
     /**
      * Polaczenie z serwerem obslugujacym baze danych
@@ -80,7 +80,10 @@ class Client {
             // reading from server
             String str;
             str = in.readUTF();
+            message = (JSONObject) JSONValue.parse(str);
+            str = "true";
 
+            if (str.equals(message.get("result"))){
             /**
              *
              *
@@ -92,9 +95,12 @@ class Client {
             //getAllEmployees();
             getEmployeesFullInfo();
             getEmployeesFullInfo();
-            // wylaczenie
-            message.put("command", "break");
-            out.writeUTF(message.toString());
+            message.clear();
+                // wylaczenie
+                message.put("command", "break");
+                out.writeUTF(message.toString());
+            }
+
 
             return true;
         }

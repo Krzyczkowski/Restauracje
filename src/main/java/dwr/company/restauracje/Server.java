@@ -24,7 +24,7 @@ class Server {
                 // to server
                 System.out.println("NEW CLIENT:" + client.getInetAddress().getHostAddress());
                 // create a new thread object
-                SerwerThread clientSock = new SerwerThread(client);
+                SerwerThread clientSock = new SerwerThread(client,privileges);
                 // This thread will handle the client
                 // separately
                 new Thread(clientSock).start();

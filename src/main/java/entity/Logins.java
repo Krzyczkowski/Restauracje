@@ -27,7 +27,9 @@ public class Logins {
     @Basic
     @Column(name = "salary")
     private float salary;
-
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Employee emp;
 
 
 
@@ -87,6 +89,13 @@ public class Logins {
         this.salary = salary;
     }
 
+    public Employee getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Employee emp) {
+        this.emp = emp;
+    }
 
 
 

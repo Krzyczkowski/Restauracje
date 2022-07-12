@@ -54,9 +54,8 @@
             <ComboBox fx:id="place" prefHeight="25.0" prefWidth="236.0" visibleRowCount="3">
                <items>
                   <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="lok1" />
-                     <String fx:value="lok2" />
-                     <String fx:value="lok3" />
+                     <String fx:value="TelePizza" />
+                     <String fx:value="PizzaHut" />
                   </FXCollections>
                </items>
             </ComboBox>

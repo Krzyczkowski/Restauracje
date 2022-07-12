@@ -4,6 +4,7 @@ package dwr.company.restauracje;
 
 import entity.Employee;
 import entity.Logins;
+import entity.Restaurants;
 import org.json.simple.JSONObject;
 
 import javax.persistence.EntityManager;
@@ -13,10 +14,10 @@ import javax.persistence.Query;
 import java.util.List;
 import java.util.logging.Level;
 
-public class databaseAPI {
+public class DatabaseAPI {
     static EntityManagerFactory emf;
     static EntityManager em;
-    public databaseAPI(){
+    public DatabaseAPI(){
         org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.INFO);//OFF
         emf = Persistence.createEntityManagerFactory("default");
@@ -42,14 +43,14 @@ public class databaseAPI {
     }
     public JSONObject getEmployeeById(int id){
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.id = ?").setParameter(1, id);
+        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.id = ?1").setParameter(1, id);
         List<Employee> list = query.getResultList();
         em.getTransaction().commit();
         return (prepareJSON(list));
     }
     public JSONObject getEmployeeByName(String name){
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.name like ?").setParameter(1, name + "%");
+        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.name like ?1").setParameter(1, name + "%");
         List<Employee> list = query.getResultList();
         em.getTransaction().commit();
         return (prepareJSON(list));
@@ -77,14 +78,36 @@ public class databaseAPI {
     public JSONObject getAllEmployeesFullInfo()
     {
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT log.login,log.password,log.idrestaurant,emp.name,emp.lastname FROM Logins log  join Employee emp on log.id = emp.id");
-        List<Object[]> list = query.getResultList();
-        for (Object[] result : list) {
-            System.out.println(result[0].toString() + " " + result[1].toString()+" " + result[2]+" " + result[3]);
+        Query query = em.createQuery("SELECT log FROM Logins log");
+        List<Logins> list = query.getResultList();
+        for (Logins result : list) {
+            em.persist(result);
+            System.out.println(result.getEmp().getName()+result.getEmp().getLastname()+result.getLogin()+result.getPassword());
         }
-
+        // logins.
         em.getTransaction().commit();
         return new JSONObject();
+    }
+
+    public int getDatebaseIdByName(String name){
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
+        List<Restaurants> list = query.getResultList();
+        em.getTransaction().commit();
+        if (list.size()==1)
+            return list.get(0).getId();
+        return 0;
+    }
+    public Logins authorization(String userName, String password,int id){
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT log FROM Logins log where log.login = ?1 and log.password = ?2 and log.idrestaurant = ?3").setParameter(1, userName).setParameter(2,password).setParameter(3,id);
+        List<Logins> list = query.getResultList();
+        em.getTransaction().commit();
+        if(list.size()==1) return list.get(0);
+
+        Logins bad_login = new Logins();
+        bad_login.setId(-1);
+        return bad_login;
     }
 }
 
