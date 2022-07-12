@@ -58,7 +58,7 @@ public class DatabaseAPI {
         em.merge(e);
         em.getTransaction().commit();
     }
-        public void deleteEmployee (Integer id){
+    public void deleteEmployee (Integer id){
         em.getTransaction().begin();
         //deleteLogin(id);
         em.remove(em.find(Employee.class, id));
@@ -107,6 +107,7 @@ public class DatabaseAPI {
         bad_login.setId(-1);
         return bad_login;
     }
+
 }
 
 

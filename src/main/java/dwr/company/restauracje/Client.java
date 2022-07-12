@@ -104,6 +104,11 @@ class Client {
             return true;
         }
     }
+//    private static boolean login(){
+//
+//    }
+
+
     private static void printEmployee(JSONObject message){
         JSONObject joE = new JSONObject();
         List<Employee> employeeList = new ArrayList<>();

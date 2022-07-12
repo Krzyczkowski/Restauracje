@@ -13,7 +13,7 @@ import java.net.Socket;
  */
 class SerwerThread implements Runnable {
     private final Socket clientSocket;
-    private final Configuration privileges;
+    //private final Configuration privileges;
     private String name;
     private static Logins user;
     private int accessLevel;
@@ -22,9 +22,9 @@ class SerwerThread implements Runnable {
     private static DataInputStream in;
     private static DatabaseAPI db; // class for database communication
     // Constructor
-    public SerwerThread(Socket socket, Configuration conf) {
+    public SerwerThread(Socket socket) {
         this.clientSocket = socket;
-        this.privileges = conf;
+        //this.privileges = conf;
     }
 
     public void run() {
