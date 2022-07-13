@@ -21,6 +21,10 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class GeneralController {
+    //Mouse click cordinates
+    private double xCordinates = 0;
+    private double yCordinates = 0;
+
     //Scene holder
     GeneralWindowSet actualWindow;
 
@@ -102,4 +106,68 @@ public class GeneralController {
         logSet againLog = new logSet(stage);
         actualWindow.getWindow().close();
     }
+
+    //Popups to edit employes
+    @FXML
+    protected void openPopupEmploye() throws IOException {
+        FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
+        Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
+        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        Stage popup = new Stage();
+        popup.initStyle(StageStyle.UNDECORATED);
+
+        popup.setScene(popupScene);
+        moveWindow(popupScene, popup);
+        popup.show();
+    }
+
+    @FXML
+    protected void openPopupProduct() throws IOException {
+        FXMLLoader loader= new FXMLLoader(App.class.getResource("editProduct.fxml"));
+        Scene popupScene = new Scene(loader.load(), 333.0, 348.0);
+        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        Stage popup = new Stage();
+        popup.initStyle(StageStyle.UNDECORATED);
+
+        popup.setScene(popupScene);
+        moveWindow(popupScene, popup);
+        popup.show();
+    }
+
+    @FXML
+    protected void openPopupComponent() throws IOException {
+        FXMLLoader loader= new FXMLLoader(App.class.getResource("editComponent.fxml"));
+        Scene popupScene = new Scene(loader.load(), 333.0, 267.0);
+        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        Stage popup = new Stage();
+        popup.initStyle(StageStyle.UNDECORATED);
+
+        popup.setScene(popupScene);
+        moveWindow(popupScene, popup);
+        popup.show();
+    }
+
+
+
+    protected void moveWindow(Scene scene, Stage stage){
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                xCordinates = mouseEvent.getSceneX();
+                yCordinates = mouseEvent.getSceneY();
+            }
+        });
+
+        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.setX(mouseEvent.getScreenX() - xCordinates);
+                stage.setY(mouseEvent.getScreenY() - yCordinates);
+            }
+        });
+    }
+
 }

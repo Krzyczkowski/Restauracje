@@ -361,3 +361,51 @@
     -fx-border-color: #032475;
     -fx-border-radius: 20;
 }
+
+#saveEmploye{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-radius: 30;
+    -fx-border-color: white;
+}
+
+#saveEmploye:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+}
+
+#saveProduct{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-radius: 30;
+    -fx-border-color: white;
+}
+
+#saveProduct:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+}
+
+#saveComponent{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-radius: 30;
+    -fx-border-color: white;
+}
+
+#saveComponent:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+}

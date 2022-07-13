@@ -107,7 +107,7 @@
                   <Font name="Calibri Bold" size="25.0" />
                </font>
             </Label>
-            <Button fx:id="addComponent" layoutX="539.0" layoutY="69.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Dodaj nowy">
+            <Button fx:id="addComponent" onMouseClicked="#openPopupComponent" layoutX="539.0" layoutY="69.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Dodaj nowy">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>

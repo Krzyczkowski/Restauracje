@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="333.0" style="-fx-background-color: #032475;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwr.company.dwrestauracje.popupWindowsControler">
+   <children>
+      <HBox alignment="TOP_RIGHT" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="333.0">
+         <children>
+            <Button fx:id="minimalizeButton" mnemonicParsing="false" onMouseClicked="#onMinimalizationButton" prefHeight="32.0" prefWidth="63.0" text="_">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#onExitbutton" prefHeight="34.0" prefWidth="61.0" text="X">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="34.0" layoutY="30.0" prefHeight="17.0" prefWidth="213.0" text="Imie" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newName" layoutX="34.0" layoutY="69.0" prefHeight="28.0" prefWidth="267.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="34.0" layoutY="108.0" prefHeight="17.0" prefWidth="213.0" text="Nazwisko" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newSecondName" layoutX="34.0" layoutY="147.0" prefHeight="28.0" prefWidth="267.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="34.0" layoutY="262.0" prefHeight="17.0" prefWidth="213.0" text="Stanowisko" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newPesel" layoutX="33.0" layoutY="223.0" prefHeight="28.0" prefWidth="267.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="34.0" layoutY="184.0" prefHeight="17.0" prefWidth="213.0" text="Pesel" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newLevel" layoutX="33.0" layoutY="301.0" prefHeight="28.0" prefWidth="267.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="34.0" layoutY="337.0" prefHeight="17.0" prefWidth="213.0" text="Płaca" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newSalary" layoutX="33.0" layoutY="376.0" prefHeight="28.0" prefWidth="267.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="34.0" layoutY="414.0" prefHeight="17.0" prefWidth="213.0" text="Login" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newLogin" layoutX="33.0" layoutY="453.0" prefHeight="28.0" prefWidth="267.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="34.0" layoutY="489.0" prefHeight="17.0" prefWidth="213.0" text="Hasło" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="newPassword" layoutX="33.0" layoutY="528.0" prefHeight="25.0" prefWidth="267.0">
+         <font>
+            <Font name="Calibri Bold" size="16.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="saveEmploye" onMouseClicked="#saveEmployeInfo" layoutX="114.0" layoutY="580.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="109.0" text="Zatwierdź">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

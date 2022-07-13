@@ -162,12 +162,12 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <Button fx:id="editEmployee" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="Edytuj">
+                  <Button fx:id="editEmployee" onMouseClicked="#openPopupEmploye" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="Edytuj">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addEmployee" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Dodaj">
+                  <Button fx:id="addEmployee"  onMouseClicked="#openPopupEmploye" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Dodaj">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
