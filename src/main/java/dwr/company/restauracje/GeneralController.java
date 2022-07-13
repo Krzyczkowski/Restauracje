@@ -1,5 +1,7 @@
 package dwr.company.restauracje;
 
+import entity.Employee;
+import entity.Logins;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,9 +38,9 @@ public class GeneralController {
     @FXML
     private Label welcomeText;
     @FXML
-    private TableView<Object> employeeTable;
+    private TableView<Employee> employeeTable;
     @FXML
-    private TableView<Object> logHistory;
+    private TableView<Logins> logHistory;
     @FXML
     private TextField searchEmployee;
 
@@ -53,6 +55,8 @@ public class GeneralController {
     //Elements dependent on data base
     @FXML
     public void initialize() throws IOException {
+
+
         Image iconImage = new Image("/person.png", false);
         userIcon.setFill(new ImagePattern(iconImage));
         userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
@@ -151,7 +155,7 @@ public class GeneralController {
     }
 
 
-
+    //Moveing popup's
     protected void moveWindow(Scene scene, Stage stage){
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -168,6 +172,11 @@ public class GeneralController {
                 stage.setY(mouseEvent.getScreenY() - yCordinates);
             }
         });
+    }
+
+    //Deal with data froma database
+    protected void loadEmployesToTable(){
+
     }
 
 }
