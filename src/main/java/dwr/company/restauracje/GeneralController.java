@@ -23,6 +23,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GeneralController implements Initializable {
@@ -62,7 +63,7 @@ public class GeneralController implements Initializable {
     private Button findEmployee, editEmployee, addEmployee;
 
     //Elements dependent on data base
-    private final ObservableList<Employee> employeesList = FXCollections.observableArrayList();
+    private ObservableList<Employee> employeesList = FXCollections.observableArrayList();
 
 
     @Override
@@ -165,10 +166,8 @@ public class GeneralController implements Initializable {
         FXMLLoader loader= new FXMLLoader(App.class.getResource("editComponent.fxml"));
         Scene popupScene = new Scene(loader.load(), 333.0, 267.0);
         popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
         Stage popup = new Stage();
         popup.initStyle(StageStyle.UNDECORATED);
-
         popup.setScene(popupScene);
         moveWindow(popupScene, popup);
         popup.show();
@@ -195,19 +194,14 @@ public class GeneralController implements Initializable {
     }
 
     //Deal with data froma database
-    protected void loadEmployesToTable(){
+    protected void loadEmployesToTable() throws Exception {
         nr.setCellValueFactory(new PropertyValueFactory<Employee, String>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
         secondName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastname"));
 
         //polacznie z baza i wydobycie obiektow lub stringow ale lepiej obiektow w tym miejscu musi byc zimplementowane
         //Example przerzucenia do tabel view na podstawie dodanych danych nie z bazy
-
-        employeesList.add(new Employee("Kowalski", "Dan"));
-        employeesList.add(new Employee("Kowal", "Jarek"));
-        employeesList.add(new Employee("Miłosław", "Pszeniczne"));
-
+        employeesList.addAll(Client.connecttemp("localhost", 1235, "d", "c", "PizzaHut"));
         employeeTable.setItems(employeesList);
-
     }
 }

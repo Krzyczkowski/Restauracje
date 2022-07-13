@@ -42,6 +42,7 @@ public class logSet {
 
         stage.setResizable(false);
         stage.setScene(scene);
+        //Client.restaurantName();
         stage.show();
     }
 }
