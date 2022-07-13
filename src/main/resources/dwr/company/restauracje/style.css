@@ -1,0 +1,411 @@
+
+#minimalizeButton {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}
+
+#minimalizeButton:hover {
+    -fx-text-alignment: center;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+}
+
+#exitButton {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}
+
+#exitButton:hover {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.combo-box {
+    -fx-text-fill: #032475;
+    -fx-focus-color: #032475;
+    -fx-faint-focus-color:  #03247515;
+}
+
+.text-field {
+    -fx-text-fill: #032475;
+    -fx-focus-color: #032475;
+    -fx-faint-focus-color:  #03247515;
+}
+
+#logInbutton {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 3;
+    -fx-border-color: #032475;
+}
+
+#logInbutton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 3;
+}
+
+#menuButton0 {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: #032475;
+    -fx-border-width: 1;
+}
+
+#menuButton0:hover {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+}
+
+#menuButton1 {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: #032475;
+    -fx-border-width: 1;
+}
+
+#menuButton1:hover {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+}
+
+#menuButton2 {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: #032475;
+    -fx-border-width: 1;
+}
+
+#menuButton2:hover {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+}
+
+#menuButton3 {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: #032475;
+    -fx-border-width: 1;
+}
+
+#menuButton3:hover {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+}
+
+#menuButton4 {
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: #032475;
+    -fx-border-width: 1;
+}
+
+#menuButton4:hover {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+    -fx-pref-height: 30;
+}
+
+#logOut {
+    -fx-background-radius: 20;
+    -fx-border-color: white;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+}
+
+#logOut:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-rotate: 10;
+}
+
+#reportBug:hover {
+    -fx-text-fill: green;
+}
+
+#addEmployee{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#addEmployee:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#editEmployee{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#editEmployee:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#findEmployee{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#findEmployee:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#findProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#findProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#addProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#addProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#editProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#editProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deletProduct{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deletProduct:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#addComponent{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#addComponent:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#editAmount{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#editAmount:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deletComponent{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deletComponent:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#findProducts{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#findProducts:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deleteFromOrder{
+    -fx-background-radius: 50;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 50;
+    -fx-border-color: #032475;
+}
+
+#deleteFromOrder:hover{
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 50;
+}
+
+#addToOrder{
+    -fx-background-radius: 50;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 50;
+    -fx-border-color: #032475;
+}
+
+#addToOrder:hover{
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 50;
+}
+
+#newOrderSave{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#newOrderSave:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#saveEmploye{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-radius: 30;
+    -fx-border-color: white;
+}
+
+#saveEmploye:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+}
+
+#saveProduct{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-radius: 30;
+    -fx-border-color: white;
+}
+
+#saveProduct:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+}
+
+#saveComponent{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-radius: 30;
+    -fx-border-color: white;
+}
+
+#saveComponent:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+}
