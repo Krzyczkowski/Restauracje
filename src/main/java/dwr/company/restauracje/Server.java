@@ -1,7 +1,6 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 
-import java.io.*;
 import java.net.*;
 
 // Server class

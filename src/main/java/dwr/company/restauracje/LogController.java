@@ -1,10 +1,9 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class LogController {
 

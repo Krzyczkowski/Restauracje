@@ -1,4 +1,4 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 
 import org.json.simple.JSONObject;

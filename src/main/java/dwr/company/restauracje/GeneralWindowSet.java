@@ -1,4 +1,4 @@
-package dwr.company.dwrestauracje;
+package dwr.company.restauracje;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
