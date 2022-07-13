@@ -74,7 +74,7 @@
                 </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="108.0" prefWidth="350.0">
                <children>
-                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #032475;" text="Zgłoś błąd" textFill="#adadad">
+                  <Button fx:id="reportBug" onMouseClicked="#report" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #032475;" text="Zgłoś błąd" textFill="#adadad">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -130,11 +130,9 @@
             </Label>
             <TableView fx:id="employeeTable" prefHeight="214.0" prefWidth="809.0" style="-fx-background-color: bec5eb;" GridPane.rowIndex="4">
               <columns>
-                <TableColumn prefWidth="78.0" text="Nr" />
-                <TableColumn prefWidth="179.0" text="Imie" />
-                  <TableColumn prefWidth="196.0" text="Nazwisko" />
-                  <TableColumn prefWidth="175.0" text="Stanowisko" />
-                  <TableColumn prefWidth="179.0" text="Pensja" />
+                <TableColumn fx:id="nr" prefWidth="78.0" text="Nr" />
+                <TableColumn fx:id="name" prefWidth="341.0" text="Imie" />
+                  <TableColumn fx:id="secondName" prefWidth="389.0" text="Nazwisko" />
               </columns>
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />

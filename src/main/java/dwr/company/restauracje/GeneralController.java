@@ -3,14 +3,15 @@ package dwr.company.restauracje;
 import entity.Employee;
 import entity.Logins;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -21,8 +22,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class GeneralController {
+public class GeneralController implements Initializable {
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -42,6 +45,12 @@ public class GeneralController {
     @FXML
     private TableView<Logins> logHistory;
     @FXML
+    private TableColumn nr;
+    @FXML
+    private TableColumn name;
+    @FXML
+    private TableColumn secondName;
+    @FXML
     private TextField searchEmployee;
 
     //Buttons
@@ -53,15 +62,21 @@ public class GeneralController {
     private Button findEmployee, editEmployee, addEmployee;
 
     //Elements dependent on data base
-    @FXML
-    public void initialize() throws IOException {
+    private final ObservableList<Employee> employeesList = FXCollections.observableArrayList();
 
 
-        Image iconImage = new Image("/person.png", false);
-        userIcon.setFill(new ImagePattern(iconImage));
-        userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            Image iconImage = new Image("/person.png", false);
+            userIcon.setFill(new ImagePattern(iconImage));
+            userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
+            loadEmployesToTable();
+
+        } catch (Exception er) {
+          //  er.printStackTrace();         Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+        }
     }
-
 
     //Deal with some actions int window
     @FXML
@@ -72,6 +87,11 @@ public class GeneralController {
     @FXML
     protected void onMinimalization() {
         ((Stage) minimalizeButton.getParent().getScene().getWindow()).setIconified(true);
+    }
+
+    @FXML
+    protected void report(){
+   //     loadEmployesToTable();
     }
 
     @FXML
@@ -176,7 +196,18 @@ public class GeneralController {
 
     //Deal with data froma database
     protected void loadEmployesToTable(){
+        nr.setCellValueFactory(new PropertyValueFactory<Employee, String>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
+        secondName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastname"));
+
+        //polacznie z baza i wydobycie obiektow lub stringow ale lepiej obiektow w tym miejscu musi byc zimplementowane
+        //Example przerzucenia do tabel view na podstawie dodanych danych nie z bazy
+
+        employeesList.add(new Employee("Kowalski", "Dan"));
+        employeesList.add(new Employee("Kowal", "Jarek"));
+        employeesList.add(new Employee("Miłosław", "Pszeniczne"));
+
+        employeeTable.setItems(employeesList);
 
     }
-
 }

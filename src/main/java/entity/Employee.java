@@ -88,4 +88,10 @@ public class Employee  {
     }
     public Employee() {
     }
+
+    public Employee(String n, String s){
+        this.id = 11;
+        this.name = n;
+        this.lastname = s;
+    }
 }

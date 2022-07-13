@@ -54,9 +54,9 @@ public class LogController {
             }*/
         //Srver shouted down
         } catch (Exception e) {
-            Warning.setText("Brak połączenia z serwerem.");
-            System.out.println("Serwer wyłączony");
-
+            //Warning.setText("Brak połączenia z serwerem.");
+            //System.out.println("Serwer wyłączony");
+            e.getStackTrace();
 
         }
     }
