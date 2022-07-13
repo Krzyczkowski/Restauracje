@@ -297,3 +297,67 @@
     -fx-border-color: #032475;
     -fx-border-radius: 20;
 }
+
+#findProducts{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#findProducts:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deleteFromOrder{
+    -fx-background-radius: 50;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 50;
+    -fx-border-color: #032475;
+}
+
+#deleteFromOrder:hover{
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 50;
+}
+
+#addToOrder{
+    -fx-background-radius: 50;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 50;
+    -fx-border-color: #032475;
+}
+
+#addToOrder:hover{
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 50;
+}
+
+#newOrderSave{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#newOrderSave:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}

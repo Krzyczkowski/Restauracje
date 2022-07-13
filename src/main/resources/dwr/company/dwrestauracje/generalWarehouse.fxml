@@ -107,24 +107,24 @@
                   <Font name="Calibri Bold" size="25.0" />
                </font>
             </Label>
-            <Button fx:id="addComponent" layoutX="521.0" layoutY="69.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="145.0" text="Dodaj nowy">
+            <Button fx:id="addComponent" layoutX="539.0" layoutY="69.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Dodaj nowy">
                <font>
-                  <Font name="Calibri" size="21.0" />
+                  <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="editAmount" layoutX="521.0" layoutY="159.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="145.0" text="Edytuj ilość">
+            <Button fx:id="editAmount" layoutX="543.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="Edytuj ilość">
                <font>
-                  <Font name="Calibri" size="21.0" />
+                  <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="deletComponent" layoutX="521.0" layoutY="254.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="145.0" text="Usuń">
+            <Button fx:id="deletComponent" layoutX="543.0" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Usuń">
                <font>
-                  <Font name="Calibri" size="21.0" />
+                  <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <TextField fx:id="amountOfComponent" layoutX="718.0" layoutY="159.0" prefHeight="49.0" prefWidth="72.0">
+            <TextField fx:id="amountOfComponent" layoutX="718.0" layoutY="159.0" prefHeight="34.0" prefWidth="72.0">
                <font>
-                  <Font name="Calibri" size="27.0" />
+                  <Font name="Calibri" size="19.0" />
                </font>
             </TextField>
          </children>

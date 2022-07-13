@@ -39,7 +39,7 @@
                 </Label>
                 <VBox prefHeight="317.0" prefWidth="350.0">
                     <children>
-                  <Button fx:id="menuButton0" onMouseClicked="#orderSection" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="menuButton0" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#orderSection" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri Bold" size="27.0" />
                      </font>
@@ -103,7 +103,7 @@
             <ComboBox fx:id="choseCategory" layoutX="464.0" layoutY="73.0" prefHeight="32.0" prefWidth="226.0" />
             <Button fx:id="findProduct" layoutX="709.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" text="Szukaj">
                <font>
-                  <Font name="Calibri Bold" size="18.0" />
+                  <Font name="Calibri" size="18.0" />
                </font>
             </Button>
             <TableView fx:id="tableWithProducts" layoutX="33.0" layoutY="129.0" prefHeight="479.0" prefWidth="788.0" style="-fx-background-color: bec5eb;">
@@ -113,19 +113,19 @@
                   <TableColumn minWidth="0.0" prefWidth="156.0" text="Cena" />
               </columns>
             </TableView>
-            <Button fx:id="addProduct" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="165.0" text="Dodaj">
+            <Button fx:id="addProduct" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="173.0" text="Dodaj">
                <font>
-                  <Font name="Calibri" size="22.0" />
+                  <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="editProduct" layoutX="338.0" layoutY="630.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="165.0" text="Edytuj">
+            <Button fx:id="editProduct" layoutX="357.0" layoutY="630.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="173.0" text="Edytuj">
                <font>
-                  <Font name="Calibri" size="22.0" />
+                  <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="deletProduct" layoutX="644.0" layoutY="630.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="173.0" text="Usuń">
+            <Button fx:id="deletProduct" layoutX="644.0" layoutY="630.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="173.0" text="Usuń">
                <font>
-                  <Font name="Calibri" size="22.0" />
+                  <Font name="Calibri" size="19.0" />
                </font>
             </Button>
          </children>
