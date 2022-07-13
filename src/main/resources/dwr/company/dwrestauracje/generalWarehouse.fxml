@@ -72,7 +72,7 @@
                 </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="108.0" prefWidth="350.0">
                <children>
-                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: menuButton1;" text="Zgłoś błąd" textFill="#adadad">
+                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #032475;" text="Zgłoś błąd" textFill="#adadad">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -107,7 +107,7 @@
                   <Font name="Calibri Bold" size="25.0" />
                </font>
             </Label>
-            <Button fx:id="addComponent" onMouseClicked="#openPopupComponent" layoutX="539.0" layoutY="69.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Dodaj nowy">
+            <Button fx:id="addComponent" layoutX="539.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#openPopupComponent" prefHeight="34.0" prefWidth="246.0" text="Dodaj nowy">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>

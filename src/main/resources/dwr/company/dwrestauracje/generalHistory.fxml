@@ -73,7 +73,7 @@
                 </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="108.0" prefWidth="350.0">
                <children>
-                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: menuButton1;" text="Zgłoś błąd" textFill="#adadad">
+                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #032475;" text="Zgłoś błąd" textFill="#adadad">
                      <font>
                         <Font size="17.0" />
                      </font>

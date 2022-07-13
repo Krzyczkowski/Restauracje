@@ -41,27 +41,27 @@
                 </Label>
                 <VBox prefHeight="317.0" prefWidth="350.0">
                     <children>
-                        <Button fx:id="menuButton0" onMouseClicked="#orderSection" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="menuButton0" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#orderSection" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                        <Button fx:id="menuButton1" onMouseClicked="#employesSection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="38.0" prefWidth="350.0" text="Pracownicy" textFill="WHITE">
+                        <Button fx:id="menuButton1" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#employesSection" prefHeight="38.0" prefWidth="350.0" text="Pracownicy" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                        <Button fx:id="menuButton2" onMouseClicked="#productSection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="22.0" prefWidth="350.0" text="Produkty" textFill="WHITE">
+                        <Button fx:id="menuButton2" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#productSection" prefHeight="22.0" prefWidth="350.0" text="Produkty" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                        <Button fx:id="menuButton3" onMouseClicked="#warehouseSection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="14.0" prefWidth="350.0" text="Magazyn" textFill="WHITE">
+                        <Button fx:id="menuButton3" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#warehouseSection" prefHeight="14.0" prefWidth="350.0" text="Magazyn" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                        <Button fx:id="menuButton4" onMouseClicked="#historySection" alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="32.0" prefWidth="350.0" text="Historia Zamówień" textFill="WHITE">
+                        <Button fx:id="menuButton4" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#historySection" prefHeight="32.0" prefWidth="350.0" text="Historia Zamówień" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
@@ -74,12 +74,12 @@
                 </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="108.0" prefWidth="350.0">
                <children>
-                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: menuButton1;" text="Zgłoś błąd" textFill="#adadad">
+                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #032475;" text="Zgłoś błąd" textFill="#adadad">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="logOut" onMouseClicked="#logOut" mnemonicParsing="false" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
+                  <Button fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -162,12 +162,12 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <Button fx:id="editEmployee" onMouseClicked="#openPopupEmploye" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="Edytuj">
+                  <Button fx:id="editEmployee" mnemonicParsing="false" onMouseClicked="#openPopupEmploye" prefHeight="25.0" prefWidth="145.0" text="Edytuj">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addEmployee"  onMouseClicked="#openPopupEmploye" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Dodaj">
+                  <Button fx:id="addEmployee" mnemonicParsing="false" onMouseClicked="#openPopupEmploye" prefHeight="25.0" prefWidth="141.0" text="Dodaj">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
