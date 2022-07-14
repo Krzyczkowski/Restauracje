@@ -13,7 +13,8 @@ import java.net.Socket;
  */
 class SerwerThread implements Runnable {
     private final Socket clientSocket;
-    //private final Configuration privileges;
+    //
+    // private final Configuration privileges;
     private String name;
     private static Logins user;
     private int accessLevel;
@@ -39,28 +40,35 @@ class SerwerThread implements Runnable {
         try {
 
             // get the outputstream of client
-            message=in.readUTF();
-            JSON=(JSONObject) JSONValue.parse(message);
+            message = in.readUTF();
+            JSON = (JSONObject) JSONValue.parse(message);
+
+            // here We operate with client who is not logged and only wants a list of all Restaurants
+            if (JSON.get("command".toString()).equals("getAllRestaurantsOnly")) {
+                JSON = new JSONObject();
+                JSON = db.getAllRestaurants();
+                out.writeUTF(JSON.toString());
+            }
+            else{
             /**
-             * AUTORYZACJA
+             * AUTORISTAION
              */
-            user = authorization(JSON.get("UserName").toString(),JSON.get("UserPass").toString(),JSON.get("DBName").toString());
+            user = authorization(JSON.get("UserName").toString(), JSON.get("UserPass").toString(), JSON.get("DBName").toString());
             System.out.println(user.getId());
-            if(user.getId()>0)
-            {
+            if (user.getId() > 0) {
                 accessLevel = user.getLevelaccess();
-                JSON=new JSONObject();
-                JSON.put("result","true");
+                JSON = new JSONObject();
+                JSON.put("result", "true");
                 System.out.println(JSON.get("result"));
                 out.writeUTF(JSON.toString());
                 communication();
-            }
-            else{
-                JSON=new JSONObject();
-                JSON.put("result","false");
+            } else {
+                JSON = new JSONObject();
+                JSON.put("result", "false");
                 System.out.println(JSON.get("result"));
                 out.writeUTF(JSON.toString());
             }
+        }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -72,6 +80,7 @@ class SerwerThread implements Runnable {
                 e.printStackTrace();
             }
         }
+
     }
     private void communication() throws IOException {
         String message;
@@ -157,6 +166,13 @@ class SerwerThread implements Runnable {
         System.out.println("dostalem funkcje getEmployeesFullInfo od klienta");
         JSON.clear();
         JSON = db.getAllEmployeesFullInfo();
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+    static private void getAllRestaurants() throws IOException {
+        System.out.println("dostalem funkcje getAllRestaurants od klienta");
+        JSON.clear();
+        JSON = db.getAllRestaurants();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }

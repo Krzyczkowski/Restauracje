@@ -96,6 +96,17 @@ public class DatabaseAPI {
             return list.get(0).getId();
         return 0;
     }
+    public JSONObject getAllRestaurants(){
+        JSONObject jo = new JSONObject();
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT res FROM Restaurants res");
+        List<Restaurants> list = query.getResultList();
+        em.getTransaction().commit();
+        for(Integer i=0; i<list.size();i++){
+            jo.put(i.toString(),list.get(i).toJSON());
+        }
+        return jo;
+    }
     public Logins authorization(String userName, String password,int id){
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT log FROM Logins log where log.login = ?1 and log.password = ?2 and log.idrestaurant = ?3").setParameter(1, userName).setParameter(2,password).setParameter(3,id);

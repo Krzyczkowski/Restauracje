@@ -1,6 +1,8 @@
 package dwr.company.restauracje;
 
 import entity.Employee;
+import entity.Logins;
+import entity.Restaurants;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -23,8 +25,6 @@ class Client {
 
     /**
      * Polaczenie z serwerem obslugujacym baze danych
-     * @param host nazwa hosta serwer API
-     * @param port numer portu serwera API
      * @param userName nazwa użytkownika API
      * @param userPass hasło użytkownika API
      * @param DBName nazwa bazdy danych (restauracji) do zalogowania
@@ -32,38 +32,37 @@ class Client {
                false - gdy użytkownik nieistnieje
      * @throws Exception gdy serwer jest nie aktywny
      */
-    protected static boolean connect(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
-        // establish a connection by providing host and port
-        // number
-        // debugowanie
-        //System.out.println(host+" "+port+" "+userName+" "+userPass+" "+DBName);
 
+    private static boolean login(String userName, String userPass, String DBName) throws IOException {
+
+
+        JSONObject message = new JSONObject();
+        message.put("UserName", userName);
+        message.put("UserPass", userPass);
+        message.put("DBName", DBName);
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return message.get("result").toString().equals("true");
+    }
+    protected static boolean connect(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
         try (Socket socket = new Socket(host, port)) {
-            JSONObject message = new JSONObject();
-            String str;
             out = new DataOutputStream(socket.getOutputStream());
-            in = new DataInputStream(socket.getInputStream());
-            //wysyłanie do serwera danych
-            message.clear();
-            message.put("UserName", userName);
-            message.put("UserPass", userPass);
-            message.put("DBName", DBName);
-            out.writeUTF(message.toString());
-            // reading from server
-            str = in.readUTF();
-            message = (JSONObject) JSONValue.parse(str);
-            return message.get("result").toString().equals("true");
+            in = new DataInputStream(socket.getInputStream());;
+            return login(userName,userPass,DBName);
         }
     }
 
     protected static boolean connectConsole(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
-        // establish a connection by providing host and port
-        // number
-        // debugowanie
-        // System.out.println(host+" "+port+" "+userName+" "+userPass+" "+DBName);
+
         try (Socket socket = new Socket(host, port)) {
             out = new DataOutputStream(socket.getOutputStream());
             in = new DataInputStream(socket.getInputStream());
+            List<Restaurants> rest;
+            rest = InitGetRestaurantNames(host,port);
+            System.out.println(rest);
+            for(Restaurants r : rest){
+                System.out.println(r);
+            }
             //wysyłanie do serwera danych
             message.clear();
             message.put("UserName", userName);
@@ -86,10 +85,6 @@ class Client {
              *
              *
              **/
-            //updateEmployee("Wiktor","K",2);
-            //getAllEmployees();
-            getEmployeesFullInfo();
-
             message.clear();
                 // wylaczenie
                 message.put("command", "break");
@@ -100,24 +95,38 @@ class Client {
             return true;
         }
     }
-//    private static boolean login(){
-//
-//    }
-
-
-    private static List<Employee> printEmployee(JSONObject message){
+    private static List<Restaurants>printRestaurants(JSONObject jo){
         JSONObject joE = new JSONObject();
-        List<Employee> employeeList = new ArrayList<>();
+        List<Restaurants> list = new ArrayList<>();
+        for(Integer i = 0; i<jo.size();i++){
+            joE = (JSONObject) jo.get(i.toString());
+            list.add(new Restaurants(joE));
+        }
+
+        return list;
+
+    }
+    private  static List<Employee> printEmployee(JSONObject message){
+        JSONObject joE = new JSONObject();
+        List<Employee> list = new ArrayList<>();
         for(Integer i = 0; i<message.size();i++){
             joE = (JSONObject) message.get(i.toString());
-            employeeList.add(new Employee(joE));
+            list.add(new Employee(joE));
         }
-        System.out.println(employeeList.size());
-        for (Integer j = 0; j<employeeList.size();j++) {
-            System.out.println(employeeList.get(j).getId()+" "+employeeList.get(j).getName()+" "+employeeList.get(j).getLastname());
-        }
-        return employeeList;
+        return list;
     }
+    private  static List<Logins> printLogins(JSONObject message){
+        JSONObject joE = new JSONObject();
+        List<Logins> list= new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++){
+            joE = (JSONObject) message.get(i.toString());
+            System.out.println(joE.toString());
+            list.add(new Logins(joE));
+        }
+        message.clear();
+        return list;
+    }
+
     protected static List<Employee> getAllEmployees() throws IOException {
             JSONObject message = new JSONObject();
             String str;
@@ -129,7 +138,8 @@ class Client {
             // JO for every Employee
             return printEmployee(message);
     }
-    protected static void getEmployeeById(Integer id) throws IOException {
+
+    protected static List<Employee> getEmployeeById(Integer id) throws IOException {
         JSONObject message = new JSONObject();
         String str;
         message.put("command","getEmployeeById");
@@ -137,9 +147,9 @@ class Client {
         out.writeUTF(message.toString());
         str = in.readUTF();
         message = (JSONObject) JSONValue.parse(str);
-        printEmployee(message);
+        return printEmployee(message);
     }
-    protected static void getEmployeeByName(String Name) throws IOException {
+    protected static List<Employee> getEmployeeByName(String Name) throws IOException {
         JSONObject message = new JSONObject();
         String str;
         message.put("command","getEmployeeByName");
@@ -147,7 +157,7 @@ class Client {
         out.writeUTF(message.toString());
         str = in.readUTF();
         message = (JSONObject) JSONValue.parse(str);
-        printEmployee(message);
+       return printEmployee(message);
     }
     protected static void insertEmployee(String name, String lastName) throws IOException {
         JSONObject message = new JSONObject();
@@ -158,7 +168,6 @@ class Client {
         message.put("command","insertEmployee");
         message.put("params",emp.toJSON());
         out.writeUTF(message.toString());
-
     }
 
     protected static void deleteEmployee(Integer id) throws IOException {
@@ -175,51 +184,37 @@ class Client {
         emp.setId(id);
         message.put("command","updateEmployee");
         message.put("params",emp.toJSON());
-        out.writeUTF(message.toString());    }
+        out.writeUTF(message.toString());
+    }
 
-    protected static void getEmployeesFullInfo() throws IOException {
+    protected static List<Logins> getEmployeesFullInfo() throws IOException {
         JSONObject message = new JSONObject();
         message.put("command","getEmployeesFullInfo");
         message.put("params","");
         out.writeUTF(message.toString());
         String str = in.readUTF();
+        message = (JSONObject) JSONValue.parse(str);
+        return printLogins(message);
     }
 
 
-    public static void restaurantName() {
+   //DLA DARKA: DZIALANIE PONIZSZEJ FUNKCJI SPRAWDZONE NA LOGPANELCONSOLE (connectConsole)!!!!
+    public static List<Restaurants> InitGetRestaurantNames(String host, Integer port) throws IOException {
+        Socket socket = new Socket(host, port);
+        message.clear();
+        message.put("command", "getAllRestaurantsOnly");
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+    return printRestaurants(message);
     }
     protected static List<Employee> connecttemp(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
-        // establish a connection by providing host and port
-        // number
-        // debugowanie
-        // System.out.println(host+" "+port+" "+userName+" "+userPass+" "+DBName);
         try (Socket socket = new Socket(host, port)) {
-            out = new DataOutputStream(socket.getOutputStream());
-            in = new DataInputStream(socket.getInputStream());
-            //wysyłanie do serwera danych
-            message.clear();
-            message.put("UserName", userName);
-            message.put("UserPass", userPass);
-            message.put("DBName", DBName);
-            out.writeUTF(message.toString());
-            message.clear();
 
-            // reading from server
-            String str;
-            str = in.readUTF();
-            message = (JSONObject) JSONValue.parse(str);
-            str = "true";
-
-            if (str.equals(message.get("result"))){
+            //POPRAWNE ZALOGOWANIE
+            if (login(userName,userPass,DBName)){
                 /**
-                 *
-                 *
                  * PONIZEJ KOD DO URUCHAMIANIA ZAPYTAN
-                 *
-                 *
                  **/
-                //updateEmployee("Wiktor","K",2);
-                //getAllEmployees();
                 List<Employee> e = getAllEmployees();
 
                 message.clear();
@@ -227,6 +222,9 @@ class Client {
                 message.put("command", "break");
                 out.writeUTF(message.toString());
                 return e;
+            }
+            else{
+                System.out.println("nie poprawne logowanie!!");
             }
 
 

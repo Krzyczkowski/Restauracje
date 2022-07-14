@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,17 @@ public class Restaurants {
     @Column(name = "name")
     private String name;
 
+public Restaurants(){}
+    public Restaurants(JSONObject jo){
+        this.id = (int) (long) jo.get("id");
+        this.name = (String) jo.get("name");
+    }
+    public JSONObject toJSON (){
+        JSONObject jo = new JSONObject();
+        jo.put("id", id);
+        jo.put("name", name);
+        return jo;
+    }
     public int getId() {
         return id;
     }

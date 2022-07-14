@@ -34,6 +34,20 @@ public class Logins {
     private Employee emp;
 
 
+    public Logins(){}
+
+    public Logins(JSONObject jo) {
+        this.id =  (int) (long) jo.get("id");
+        this.login = (String) jo.get("login");
+        this.password = (String) jo.get("password");
+        this.levelaccess = (int) (long) jo.get("levelaccess");
+        this.idrestaurant = (int)(long) jo.get("idrestaurant");
+        this.pesel  = (int) (long) jo.get("pesel");
+        this.salary  = (int) (long) jo.get("salary");
+        this.emp.setId(this.id);
+        this.emp.setLastname((String) jo.get("lastname"));
+        this.emp.setName((String) jo.get("name"));
+    }
 
     public int getId() {
         return id;
@@ -145,4 +159,8 @@ public class Logins {
         jo.put("idrestaurant", idrestaurant);
         return jo;
     }
+
+
+
+
 }
