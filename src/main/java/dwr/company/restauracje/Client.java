@@ -34,8 +34,6 @@ class Client {
      */
 
     public static boolean login(String userName, String userPass, String DBName) throws IOException {
-
-
         JSONObject message = new JSONObject();
         message.put("UserName", userName);
         message.put("UserPass", userPass);
@@ -43,13 +41,6 @@ class Client {
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
         return message.get("result").toString().equals("true");
-    }
-    protected static boolean connect(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
-        try (Socket socket = new Socket(host, port)) {
-            out = new DataOutputStream(socket.getOutputStream());
-            in = new DataInputStream(socket.getInputStream());;
-            return login(userName,userPass,DBName);
-        }
     }
 
     protected static boolean connectConsole(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
@@ -90,40 +81,25 @@ class Client {
                 message.put("command", "break");
                 out.writeUTF(message.toString());
             }
-
-
             return true;
         }
     }
-    private static List<String>printRestaurants(JSONObject jo){
-        JSONObject joE = new JSONObject();
+    private static List<String>printRestaurants(JSONObject message){
         List<String> list = new ArrayList<>();
-        for(Integer i = 0; i<jo.size();i++){
-            joE = (JSONObject) jo.get(i.toString());
-            list.add(new Restaurants(joE).getName());
-        }
-
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Restaurants((JSONObject) message.get(i.toString())).getName());
         return list;
-
     }
     private  static List<Employee> printEmployee(JSONObject message){
-        JSONObject joE = new JSONObject();
-        List<Employee> list = new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++){
-            joE = (JSONObject) message.get(i.toString());
-            list.add(new Employee(joE));
-        }
+        ArrayList<Employee> list = new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Employee((JSONObject) message.get(i.toString())));
         return list;
     }
     private  static List<Logins> printLogins(JSONObject message){
-        JSONObject joE = new JSONObject();
         List<Logins> list= new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++){
-            joE = (JSONObject) message.get(i.toString());
-            System.out.println(joE.toString());
-            list.add(new Logins(joE));
-        }
-        message.clear();
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Logins((JSONObject) message.get(i.toString())));
         return list;
     }
 
@@ -208,29 +184,5 @@ class Client {
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
     return printRestaurants(message);
-    }
-    protected static List<Employee> connecttemp(String host, Integer port, String userName, String userPass, String DBName) throws Exception {
-        try (Socket socket = new Socket(host, port)) {
-
-            //POPRAWNE ZALOGOWANIE
-            if (login(userName,userPass,DBName)){
-                /**
-                 * PONIZEJ KOD DO URUCHAMIANIA ZAPYTAN
-                 **/
-                List<Employee> e = getAllEmployees();
-
-                message.clear();
-                // wylaczenie
-                message.put("command", "break");
-                out.writeUTF(message.toString());
-                return e;
-            }
-            else{
-                System.out.println("nie poprawne logowanie!!");
-            }
-
-
-            return new ArrayList<Employee>();
-        }
     }
 }
