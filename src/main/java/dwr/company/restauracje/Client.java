@@ -30,7 +30,7 @@ class Client {
      * @param DBName nazwa bazdy danych (restauracji) do zalogowania
      * @return true - gdy użytkownik istnieje i ma dostep do BD
                false - gdy użytkownik nieistnieje
-     * @throws Exception gdy serwer jest nie aktywny
+     * @throws IOException gdy serwer jest nie aktywny
      */
 
     public static boolean login(String userName, String userPass, String DBName) throws IOException {
@@ -76,13 +76,17 @@ class Client {
              *
              *
              **/
-            message.clear();
-                // wylaczenie
-                message.put("command", "break");
-                out.writeUTF(message.toString());
+            logout();
             }
             return true;
         }
+    }
+    public static void logout() throws IOException {
+        message.clear();
+        // wylaczenie
+        message.put("command", "break");
+        out.writeUTF(message.toString());
+
     }
     private static List<String>printRestaurants(JSONObject message){
         List<String> list = new ArrayList<>();

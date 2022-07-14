@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static dwr.company.restauracje.Client.logout;
+
 public class LogController implements Initializable {
 
     //Fields with data
@@ -61,7 +63,8 @@ public class LogController implements Initializable {
 
     //Deal with some actions int window
     @FXML
-    protected void onExitbutton() {
+    protected void onExitbutton() throws IOException {
+        logout();
         Platform.exit();
     }
 
@@ -77,7 +80,7 @@ public class LogController implements Initializable {
         try {
             place.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Warning.setText("brak polaczenia z serwerem");
         }
     }
 }

@@ -19,6 +19,7 @@ class SerwerThread implements Runnable {
     private static Logins user;
     private int accessLevel;
     private static JSONObject JSON;
+    private String message;
     private static DataOutputStream out;
     private static DataInputStream in;
     private static DatabaseAPI db; // class for database communication
@@ -27,68 +28,61 @@ class SerwerThread implements Runnable {
         this.clientSocket = socket;
         //this.privileges = conf;
     }
-
     public void run() {
-        String message;
         try {
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(clientSocket.getInputStream());
             db = new DatabaseAPI();
+            connect();
+            out.close();
+            in.close();
+            clientSocket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        try {
-
-            // get the outputstream of client
-            message = in.readUTF();
-            JSON = (JSONObject) JSONValue.parse(message);
-            System.out.printf(message);
-            // here We operate with client who is not logged and only wants a list of all Restaurants
-            if (JSON.get("command".toString()).equals("getAllRestaurantsOnly")) {
-                JSON = new JSONObject();
-                JSON = db.getAllRestaurants();
-                out.writeUTF(JSON.toString());
-            /**
-             * AUTORISTAION
-             */
-            message = in.readUTF();
-                System.out.printf(message);
-            JSON = (JSONObject) JSONValue.parse(message);
-            user = authorization(JSON.get("UserName").toString(), JSON.get("UserPass").toString(), JSON.get("DBName").toString());
-            System.out.println(user.getId());
-            if (user.getId() > 0) {
-                accessLevel = user.getLevelaccess();
-                JSON = new JSONObject();
-                JSON.put("result", "true");
-                System.out.println(JSON.get("result"));
-                out.writeUTF(JSON.toString());
-                communication();
-            } else {
-                JSON = new JSONObject();
-                JSON.put("result", "false");
-                System.out.println(JSON.get("result"));
-                out.writeUTF(JSON.toString());
-            }
+    }
+    private void connect() throws IOException {
+        message = in.readUTF();
+        JSON = (JSONObject) JSONValue.parse(message);
+        System.out.printf(message);
+        // here We operate with client who is not logged and only wants a list of all Restaurants
+        if (JSON.get("command".toString()).equals("getAllRestaurantsOnly")) {
+            JSON = new JSONObject();
+            JSON = db.getAllRestaurants();
+            out.writeUTF(JSON.toString());
+            authorization();
         }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-                in.close();
-                clientSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+    }
+    private void authorization() throws IOException {
+        message = in.readUTF();
+        System.out.printf(message);
+        JSON = (JSONObject) JSONValue.parse(message);
+        try{if(JSON.get("command").equals("break")){
+            return;
+        }}catch (Exception e ){}
+        try{
+        user = authorization(JSON.get("UserName").toString(), JSON.get("UserPass").toString(), JSON.get("DBName").toString());
+        System.out.println(user.getId());
+        if (user.getId() > 0) {
+            accessLevel = user.getLevelaccess();
+            JSON = new JSONObject();
+            JSON.put("result", "true");
+            System.out.println(JSON.get("result"));
+            out.writeUTF(JSON.toString());
+            communication();
+        } else {
+            JSON = new JSONObject();
+            JSON.put("result", "false");
+            System.out.println(JSON.get("result"));
+            out.writeUTF(JSON.toString());
+        }}catch (Exception e){};
     }
     private void communication() throws IOException {
-        String message;
         while (true) {
             message = in.readUTF();
             JSON = (JSONObject) JSONValue.parse(message);
             message = JSON.get("command").toString();
+            System.out.println("Serwer otrzymał polecenie:"+message+" od klienta");
             if (message.equals("break"))
                 break;
             switch (message) {
@@ -125,14 +119,12 @@ class SerwerThread implements Runnable {
         return db.authorization(userName,password,db.getDatebaseIdByName(DBname));
     }
     static private void getAllEmployees() throws IOException {
-        System.out.println("dostalem funkcje getAllUsers() od klienta");
         JSON.clear();
         JSON = db.getAllEmployee();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
     static private void getEmployeeById(Integer id) throws IOException {
-        System.out.println("dostalem funkcje getEmplyeeById(id) od klienta");
         System.out.println("id: "+id);
         JSON.clear();
         JSON = db.getEmployeeById(id);
@@ -140,38 +132,32 @@ class SerwerThread implements Runnable {
         out.writeUTF(JSON.toString());
     }
     static private void getEmployeeByName(String name) throws IOException{
-        System.out.println("dostalem funkcje getEmplyeeByName(name) od klienta");
         JSON.clear();
         JSON = db.getEmployeeByName(name);
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
     static private void insertEmployee(Employee e) throws IOException{
-        System.out.println("dostalem funkcje insertEmployee od klienta");
         JSON.clear();
         db.insertEmployee(e);
         //System.out.println(JSON.toString());
         //out.writeUTF(JSON.toString());
     }
     static private void deleteEmployee(Integer id) throws IOException{
-        System.out.println("dostalem funkcje deleteEmployee od klienta");
         JSON.clear();
         db.deleteEmployee(id);
     }
     static private void updateEmployee(Employee e) throws IOException{
-        System.out.println("dostalem funkcje updateEmployee od klienta");
         JSON.clear();
         db.updateEmployee(e);
     }
     static private void getEmployeesFullInfo() throws IOException {
-        System.out.println("dostalem funkcje getEmployeesFullInfo od klienta");
         JSON.clear();
         JSON = db.getAllEmployeesFullInfo();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
     static private void getAllRestaurants() throws IOException {
-        System.out.println("dostalem funkcje getAllRestaurants od klienta");
         JSON.clear();
         JSON = db.getAllRestaurants();
         System.out.println(JSON.toString());

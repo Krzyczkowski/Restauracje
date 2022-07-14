@@ -81,7 +81,8 @@ public class GeneralController implements Initializable {
 
     //Deal with some actions int window
     @FXML
-    protected void onExitbutton() {
+    protected void onExitbutton() throws IOException {
+        Client.logout();
         Platform.exit();
     }
 
@@ -127,6 +128,7 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void logOut() throws IOException {
+        Client.logout();
         Stage stage = new Stage();
         logSet againLog = new logSet(stage);
         actualWindow.getWindow().close();
