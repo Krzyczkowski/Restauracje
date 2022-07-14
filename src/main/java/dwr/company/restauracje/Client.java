@@ -33,7 +33,7 @@ class Client {
      * @throws Exception gdy serwer jest nie aktywny
      */
 
-    private static boolean login(String userName, String userPass, String DBName) throws IOException {
+    public static boolean login(String userName, String userPass, String DBName) throws IOException {
 
 
         JSONObject message = new JSONObject();
@@ -58,11 +58,11 @@ class Client {
             out = new DataOutputStream(socket.getOutputStream());
             in = new DataInputStream(socket.getInputStream());
             List<Restaurants> rest;
-            rest = InitGetRestaurantNames(host,port);
-            System.out.println(rest);
-            for(Restaurants r : rest){
-                System.out.println(r);
-            }
+//            rest = InitGetRestaurantNames(host,port);
+//            System.out.println(rest);
+//            for(Restaurants r : rest){
+//                System.out.println(r);
+//            }
             //wysyłanie do serwera danych
             message.clear();
             message.put("UserName", userName);
@@ -95,12 +95,12 @@ class Client {
             return true;
         }
     }
-    private static List<Restaurants>printRestaurants(JSONObject jo){
+    private static List<String>printRestaurants(JSONObject jo){
         JSONObject joE = new JSONObject();
-        List<Restaurants> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for(Integer i = 0; i<jo.size();i++){
             joE = (JSONObject) jo.get(i.toString());
-            list.add(new Restaurants(joE));
+            list.add(new Restaurants(joE).getName());
         }
 
         return list;
@@ -199,8 +199,10 @@ class Client {
 
 
    //DLA DARKA: DZIALANIE PONIZSZEJ FUNKCJI SPRAWDZONE NA LOGPANELCONSOLE (connectConsole)!!!!
-    public static List<Restaurants> InitGetRestaurantNames(String host, Integer port) throws IOException {
+    public static List<String> InitGetRestaurantNames(String host, Integer port) throws IOException {
         Socket socket = new Socket(host, port);
+        out = new DataOutputStream(socket.getOutputStream());
+        in = new DataInputStream(socket.getInputStream());
         message.clear();
         message.put("command", "getAllRestaurantsOnly");
         out.writeUTF(message.toString());

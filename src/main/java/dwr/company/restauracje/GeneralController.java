@@ -201,7 +201,7 @@ public class GeneralController implements Initializable {
 
         //polacznie z baza i wydobycie obiektow lub stringow ale lepiej obiektow w tym miejscu musi byc zimplementowane
         //Example przerzucenia do tabel view na podstawie dodanych danych nie z bazy
-        employeesList.addAll(Client.connecttemp("localhost", 1235, "d", "c", "PizzaHut"));
+        employeesList.addAll(Client.getAllEmployees());
         employeeTable.setItems(employeesList);
     }
 }

@@ -42,17 +42,18 @@ class SerwerThread implements Runnable {
             // get the outputstream of client
             message = in.readUTF();
             JSON = (JSONObject) JSONValue.parse(message);
-
+            System.out.printf(message);
             // here We operate with client who is not logged and only wants a list of all Restaurants
             if (JSON.get("command".toString()).equals("getAllRestaurantsOnly")) {
                 JSON = new JSONObject();
                 JSON = db.getAllRestaurants();
                 out.writeUTF(JSON.toString());
-            }
-            else{
             /**
              * AUTORISTAION
              */
+            message = in.readUTF();
+                System.out.printf(message);
+            JSON = (JSONObject) JSONValue.parse(message);
             user = authorization(JSON.get("UserName").toString(), JSON.get("UserPass").toString(), JSON.get("DBName").toString());
             System.out.println(user.getId());
             if (user.getId() > 0) {

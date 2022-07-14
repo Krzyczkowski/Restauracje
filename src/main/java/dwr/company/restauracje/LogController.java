@@ -1,11 +1,18 @@
 package dwr.company.restauracje;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class LogController {
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class LogController implements Initializable {
 
     //Fields with data
     @FXML
@@ -33,25 +40,16 @@ public class LogController {
     protected void authorization() {
         //Active srever
         try {
-            mainWindow = new GeneralWindowSet();
-            mainWindow.lodaFxmls();
-            mainWindow.firstUsage();
-
-            Stage stage = (Stage) exitButton.getScene().getWindow();
-            stage.close();
-
-          /*  if (Client.connect("localhost", 1234, login.getText(), password.getText(), place.getValue().toString())) {
-                Warning.setText("");
+            if (Client.login(login.getText(),password.getText(),(String) place.getValue())) {
                 //okienko poprawne dane
-                try {
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                mainWindow = new GeneralWindowSet();
+                mainWindow.lodaFxmls();
+                mainWindow.firstUsage();
 
             } else {
                 Warning.setText("Niepoprawny login lub hasło...");
                 //Dziala jak natura chciala
-            }*/
+            }
         //Srver shouted down
         } catch (Exception e) {
             //Warning.setText("Brak połączenia z serwerem.");
@@ -74,6 +72,14 @@ public class LogController {
 
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            place.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 
