@@ -1,2 +1,7 @@
-getAllEmployees:1
-xxxabc:2
+getAllEmployees:1110
+getEmployeeById:0
+getEmployeeByName:0
+insertEmployee:1000
+deleteEmployee:0
+updateEmployee:0
+getEmployeesFullInfo:0

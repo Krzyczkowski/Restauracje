@@ -17,16 +17,17 @@ class SerwerThread implements Runnable {
     // private final Configuration privileges;
     private String name;
     private static Logins user;
-    private int accessLevel;
+    private static Configuration conf;
+    private int clientAccessLevel;
     private static JSONObject JSON;
     private String message;
     private static DataOutputStream out;
     private static DataInputStream in;
     private static DatabaseAPI db; // class for database communication
     // Constructor
-    public SerwerThread(Socket socket) {
+    public SerwerThread(Socket socket, Configuration privileges) {
         this.clientSocket = socket;
-        //this.privileges = conf;
+        this.conf = privileges;
     }
     public void run() {
         try {
@@ -64,7 +65,7 @@ class SerwerThread implements Runnable {
         user = authorization(JSON.get("UserName").toString(), JSON.get("UserPass").toString(), JSON.get("DBName").toString());
         System.out.println(user.getId());
         if (user.getId() > 0) {
-            accessLevel = user.getLevelaccess();
+            clientAccessLevel = user.getLevelaccess();
             JSON = new JSONObject();
             JSON.put("result", "true");
             System.out.println(JSON.get("result"));
@@ -82,11 +83,17 @@ class SerwerThread implements Runnable {
             message = in.readUTF();
             JSON = (JSONObject) JSONValue.parse(message);
             message = JSON.get("command").toString();
+
             System.out.println("Serwer otrzymał polecenie:"+message+" od klienta");
+
             if (message.equals("break"))
                 break;
+
+            // sprawdzenie czy w pliku privileges znajduje sie dana funkcja
+            if(conf.privileges.containsKey(message) && clientAccessLevel>= conf.privileges.get(message))
             switch (message) {
                 case "getAllEmployees":
+                    if(clientAccessLevel>= conf.privileges.get("getAllEmployees"))
                     getAllEmployees();
                     break;
                 case "getEmployeeById":
@@ -96,21 +103,20 @@ class SerwerThread implements Runnable {
                     getEmployeeByName( (String) JSON.get("params"));
                     break;
                 case "insertEmployee":
-                    System.out.println(JSON.get("params"));
                     insertEmployee(new Employee((JSONObject) JSON.get("params")) );
                     break;
                 case "deleteEmployee":
-                    System.out.println(JSON.get("params"));
                     deleteEmployee((int) (long) JSON.get("params"));
                     break;
                 case "updateEmployee":
-                    System.out.println(JSON.get("params"));
                     updateEmployee(new Employee((JSONObject) JSON.get("params")) );
                     break;
                 case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
-                    System.out.println(JSON.get("params"));
                     getEmployeesFullInfo();
                     break;
+            }else{
+                System.out.println("brak takich uprawnien!!");
+                out.writeUTF("brak takich uprawnien!!");
             }
         }
         db.close();
@@ -140,8 +146,6 @@ class SerwerThread implements Runnable {
     static private void insertEmployee(Employee e) throws IOException{
         JSON.clear();
         db.insertEmployee(e);
-        //System.out.println(JSON.toString());
-        //out.writeUTF(JSON.toString());
     }
     static private void deleteEmployee(Integer id) throws IOException{
         JSON.clear();

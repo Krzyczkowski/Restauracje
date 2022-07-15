@@ -76,6 +76,9 @@ class Client {
              *
              *
              **/
+            getAllEmployees();
+
+
             logout();
             }
             return true;
