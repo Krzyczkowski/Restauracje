@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -13,9 +15,19 @@ public class Earnings {
     @Column(name = "earning")
     private float earning;
 
-    public Date getDates() {
-        return dates;
+    public Earnings(){}
+    public Earnings (JSONObject jo){
+        this.dates = (Date) jo.get("dates");
+        this.earning = (float) jo.get("earning");
     }
+    public JSONObject toJSON (){
+        JSONObject jo = new JSONObject();
+        jo.put("dates",dates);
+        jo.put("earning",earning);
+        return jo;
+    }
+
+    public Date getDates() { return dates; }
 
     public void setDates(Date dates) {
         this.dates = dates;

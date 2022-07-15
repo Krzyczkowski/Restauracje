@@ -146,7 +146,6 @@ public class Logins {
         return result;
     }
     public JSONObject toJSON() {
-
         JSONObject jo = new JSONObject();
         jo.put("id", id);
         jo.put("name", emp.getName());

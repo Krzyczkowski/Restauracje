@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,17 @@ public class Clients {
     @Column(name = "address")
     private String address;
 
+    public Clients(){}
+    public Clients(JSONObject jo){
+        this.phone = (String) jo.get("phone");
+        this.address = (String) jo.get("address");
+    }
+    public JSONObject toJSON (){
+        JSONObject jo = new JSONObject();
+        jo.put("phone", phone);
+        jo.put("name", address);
+        return jo;
+    }
     public String getPhone() {
         return phone;
     }
