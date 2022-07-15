@@ -76,6 +76,7 @@ class SerwerThread implements Runnable {
             JSON.put("result", "false");
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
+            authorization();
         }}catch (Exception e){};
     }
     private void communication() throws IOException {

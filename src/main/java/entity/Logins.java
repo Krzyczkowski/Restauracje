@@ -36,6 +36,11 @@ public class Logins {
 
     public Logins(){}
 
+    public Logins(int p, float s){
+        this.pesel = p;
+        this.salary = s;
+    }
+
     public Logins(JSONObject jo) {
         this.id =  (int) (long) jo.get("id");
         this.login = (String) jo.get("login");
@@ -48,6 +53,7 @@ public class Logins {
         this.emp.setLastname((String) jo.get("lastname"));
         this.emp.setName((String) jo.get("name"));
     }
+
 
     public int getId() {
         return id;

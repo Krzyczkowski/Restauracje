@@ -48,6 +48,8 @@ public class LogController implements Initializable {
                 mainWindow.lodaFxmls();
                 mainWindow.firstUsage();
 
+                Stage stage = (Stage) exitButton.getScene().getWindow();
+                stage.close();
             } else {
                 Warning.setText("Niepoprawny login lub hasło...");
                 //Dziala jak natura chciala
@@ -64,8 +66,14 @@ public class LogController implements Initializable {
     //Deal with some actions int window
     @FXML
     protected void onExitbutton() throws IOException {
-        logout();
-        Platform.exit();
+        if(Warning.getText().equals("Brak polaczenia z serwerem!") ||
+                Warning.getText().equals("Niepoprawny login lub hasło..."))
+        {
+            Platform.exit();
+        } else {
+            logout();
+            Platform.exit();
+        }
     }
 
     @FXML
@@ -80,7 +88,7 @@ public class LogController implements Initializable {
         try {
             place.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
         } catch (IOException e) {
-            Warning.setText("brak polaczenia z serwerem");
+            Warning.setText("Brak polaczenia z serwerem!");
         }
     }
 }

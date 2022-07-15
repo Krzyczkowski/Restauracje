@@ -5,6 +5,7 @@ import entity.Logins;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +53,10 @@ public class GeneralController implements Initializable {
     @FXML
     private TableColumn secondName;
     @FXML
+    private TableColumn pesel;
+    @FXML
+    private TableColumn salary;
+    @FXML
     private TextField searchEmployee;
 
     //Buttons
@@ -65,6 +70,9 @@ public class GeneralController implements Initializable {
     //Elements dependent on data base
     private ObservableList<Employee> employeesList = FXCollections.observableArrayList();
 
+    public static boolean option;
+
+    public static Employee toEditPopUp;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -136,7 +144,7 @@ public class GeneralController implements Initializable {
 
     //Popups to edit employes
     @FXML
-    protected void openPopupEmploye() throws IOException {
+    protected void openPopupEmploye(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
         Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
         popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -146,6 +154,12 @@ public class GeneralController implements Initializable {
 
         popup.setScene(popupScene);
         moveWindow(popupScene, popup);
+        if(true){
+            option = true;
+            toEditPopUp = employeeTable.getSelectionModel().getSelectedItem();
+        } else {
+            option= false;
+        }
         popup.show();
     }
 
@@ -201,9 +215,11 @@ public class GeneralController implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
         secondName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastname"));
 
-        //polacznie z baza i wydobycie obiektow lub stringow ale lepiej obiektow w tym miejscu musi byc zimplementowane
-        //Example przerzucenia do tabel view na podstawie dodanych danych nie z bazy
-        employeesList.addAll(Client.getAllEmployees());
+        employeesList.add(new Employee("nax", "wariacik"));
+        employeesList.add(new Employee("wuja", "benio"));
+        employeesList.add(new Employee("Kasztelan", "Niepasteryzpowane"));
+
+        //employeesList.addAll(Client.getAllEmployees());
         employeeTable.setItems(employeesList);
     }
 }

@@ -1,18 +1,26 @@
 package dwr.company.restauracje;
 
+import entity.Employee;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
-public class popupWindowsControler {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class popupWindowsControler implements Initializable {
     //Fields with data
     @FXML
     protected TextField newSecondName, newPesel, newLevel, newSalary, newLogin, newName;
     @FXML
     private PasswordField newPassword;
-
 
     //Buttons
     @FXML
@@ -24,6 +32,19 @@ public class popupWindowsControler {
 
     //Other declarations
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            if(GeneralController.option){
+                Employee employee = GeneralController.toEditPopUp;
+                newName.setText(employee.getName());
+                newSecondName.setText(employee.getLastname());
+            }
+        } catch (Exception er) {
+            //  er.printStackTrace();
+        }
+    }
 
 
     //Deal with some actions int window
