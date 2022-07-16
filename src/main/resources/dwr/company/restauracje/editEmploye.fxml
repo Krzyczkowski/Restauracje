@@ -47,7 +47,7 @@
             <Font name="Calibri Bold Italic" size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="34.0" layoutY="262.0" prefHeight="17.0" prefWidth="213.0" text="Stanowisko" textFill="WHITE">
+      <Label layoutX="34.0" layoutY="262.0" prefHeight="17.0" prefWidth="213.0" text="Uprawnienia" textFill="WHITE">
          <font>
             <Font name="Calibri Bold Italic" size="33.0" />
          </font>
