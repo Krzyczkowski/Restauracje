@@ -41,6 +41,11 @@ public class popupWindowsControler implements Initializable{
         if(GeneralController.toEditPopUp != null){
             newName.setText(GeneralController.toEditPopUp.getEmp().getName());
             newSecondName.setText((GeneralController.toEditPopUp.getEmp().getLastname()));
+            newPesel.setText((GeneralController.toEditPopUp.getPesel().toString()));
+            newLevel.setText((GeneralController.toEditPopUp.getLevelaccess().toString()));
+            newSalary.setText(String.valueOf(GeneralController.toEditPopUp.getSalary()));
+            newLogin.setText((GeneralController.toEditPopUp.getLogin()));
+            newPassword.setText((GeneralController.toEditPopUp.getPassword()));
             id=GeneralController.toEditPopUp.getId();
             command = "update";
         } else {
@@ -65,7 +70,7 @@ public class popupWindowsControler implements Initializable{
     protected void saveEmployeInfo() throws IOException {
         if (command.equals("update")){
             Client.updateEmployee(newName.getText(),newSecondName.getText(),
-                    id,newLogin.toString(),newPassword.toString(),Integer.parseInt(newLevel.toString()),
+                    id,newLogin.getText(),newPassword.getText(),Integer.parseInt(newLevel.getText()),
                         GeneralController.toEditPopUp.getIdrestaurant(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
         }
         else if (command.equals("insert")) {

@@ -93,7 +93,7 @@ public class Logins {
         this.password = password;
     }
 
-    public int getLevelaccess() {
+    public Integer getLevelaccess() {
         return levelaccess;
     }
 

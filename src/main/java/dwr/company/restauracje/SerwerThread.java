@@ -110,7 +110,7 @@ class SerwerThread implements Runnable {
                     deleteEmployee((int) (long) JSON.get("params"));
                     break;
                 case "updateEmployee":
-                    updateEmployee(new Employee((JSONObject) JSON.get("params")) );
+                    updateEmployee(new Logins((JSONObject) JSON.get("params")) );
                     break;
                 case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
                     if (JSON.get("params").equals(""))
@@ -155,7 +155,7 @@ class SerwerThread implements Runnable {
         JSON.clear();
         db.deleteEmployee(id);
     }
-    static private void updateEmployee(Employee e) throws IOException{
+    static private void updateEmployee(Logins e) throws IOException{
         JSON.clear();
         db.updateEmployee(e);
     }
