@@ -41,6 +41,7 @@ public class Logins {
         this.idrestaurant = idrestaurant;
         this.pesel = pesel;
         this.salary = salary;
+        emp=new Employee();
         this.emp.setId(id);
         this.emp.setLastname(lastName);
         this.emp.setName(name);

@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,7 +24,7 @@ public class popupWindowsControler implements Initializable{
     private PasswordField newPassword;
     private String command;
     private int id;
-    //Buttons
+    //Button
     @FXML
     private Button exitButton;
     @FXML
@@ -61,12 +62,16 @@ public class popupWindowsControler implements Initializable{
     }
 
     @FXML
-    protected void saveEmployeInfo(){
+    protected void saveEmployeInfo() throws IOException {
         if (command.equals("update")){
-            //Client.insertEmployee(newName,newSecondName,id,newLevel,newid);
+            Client.updateEmployee(newName.getText(),newSecondName.getText(),
+                    id,newLogin.toString(),newPassword.toString(),Integer.parseInt(newLevel.toString()),
+                        GeneralController.toEditPopUp.getIdrestaurant(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
         }
         else if (command.equals("insert")) {
-
+            Client.insertEmployee(newName.getText(),newSecondName.getText(),
+                    0,newLogin.toString(),newPassword.toString(),2,
+                        2,Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
         }
         GeneralController.toEditPopUp = null;
         Stage stage = (Stage) exitButton.getScene().getWindow();
