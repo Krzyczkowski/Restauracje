@@ -1,8 +1,6 @@
 package dwr.company.restauracje;
 
-import entity.Employee;
-import entity.Logins;
-import entity.Restaurants;
+import entity.*;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -219,5 +217,36 @@ class Client {
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
     return printRestaurants(message);
+    }
+
+    public static List<Products> getProducts() throws IOException {
+        message.clear();
+        message.put("command", "getProducts");
+        message.put("params", "");
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printProducts(message);
+    }
+
+    private static List<Products> printProducts(JSONObject message) {
+        List<Products> list= new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Products((JSONObject) message.get(i.toString())));
+        return list;
+    }
+
+    public static List<String> getCategories() throws IOException {
+        message.clear();
+        message.put("command", "getAllCategories");
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printCategories(message);
+    }
+
+    private static List<String> printCategories(JSONObject message) {
+        List<String> list= new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Categories((JSONObject) message.get(i.toString())).getId());
+        return list;
     }
 }
