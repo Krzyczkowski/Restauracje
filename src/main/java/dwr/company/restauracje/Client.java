@@ -106,7 +106,13 @@ class Client {
     private  static List<Logins> printLogins(JSONObject message){
         List<Logins> list= new ArrayList<>();
         for(Integer i = 0; i<message.size();i++)
+        {
+            System.out.println(message.get(i.toString()));
             list.add(new Logins((JSONObject) message.get(i.toString())));
+        }
+
+        for(Integer i = 0; i<message.size();i++)
+            System.out.println(list.get(i).toJSON());
         return list;
     }
 

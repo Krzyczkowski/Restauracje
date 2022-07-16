@@ -83,7 +83,7 @@ public class GeneralController implements Initializable {
             loadEmployesToTable();
 
         } catch (Exception er) {
-          //  er.printStackTrace();         Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+           //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
     }
 

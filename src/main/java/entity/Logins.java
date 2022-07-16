@@ -48,10 +48,15 @@ public class Logins {
         this.levelaccess = (int) (long) jo.get("levelaccess");
         this.idrestaurant = (int)(long) jo.get("idrestaurant");
         this.pesel  = (int) (long) jo.get("pesel");
-        this.salary  = (int) (long) jo.get("salary");
-        this.emp.setId(this.id);
+        this.salary  = (float)(double) jo.get("salary");
+        emp=new Employee();
+        this.emp.setId(id);
+        System.out.println("git");
         this.emp.setLastname((String) jo.get("lastname"));
+        System.out.println("git");
         this.emp.setName((String) jo.get("name"));
+        System.out.println("git");
+
     }
 
 
@@ -119,7 +124,8 @@ public class Logins {
         this.emp = emp;
     }
 
-
+    public String getName(){return emp.getName();}
+    public String getLastname(){return emp.getLastname();}
 
 
     @Override
