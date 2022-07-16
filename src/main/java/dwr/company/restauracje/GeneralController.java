@@ -43,7 +43,7 @@ public class GeneralController implements Initializable {
     @FXML
     private Label welcomeText;
     @FXML
-    private TableView<Employee> employeeTable;
+    private TableView<Logins> employeeTable;
     @FXML
     private TableView<Logins> logHistory;
     @FXML
@@ -71,8 +71,8 @@ public class GeneralController implements Initializable {
     private Button findEmployee, editEmployee, addEmployee;
 
     //Elements dependent on data base
-    private ObservableList<Employee> employeesList = FXCollections.observableArrayList();
-    public static Employee toEditPopUp;
+    private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
+    public static Logins toEditPopUp;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -227,10 +227,13 @@ public class GeneralController implements Initializable {
 
     //Deal with data froma database
     protected void loadEmployesToTable() throws Exception {
-        nr.setCellValueFactory(new PropertyValueFactory<Employee, String>("id"));
-        name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
-        secondName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastname"));
-        employeesList.addAll(Client.getAllEmployees());
+        nr.setCellValueFactory(new PropertyValueFactory<Logins, String>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<Logins, Employee >("name"));
+        secondName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
+        pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
+        salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
+
+        employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
     }
 }

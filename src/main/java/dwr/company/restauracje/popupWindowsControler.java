@@ -37,8 +37,8 @@ public class popupWindowsControler implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(GeneralController.toEditPopUp != null){
-            newName.setText(GeneralController.toEditPopUp.getName());
-            newSecondName.setText((GeneralController.toEditPopUp.getLastname()));
+            newName.setText(GeneralController.toEditPopUp.getEmp().getName());
+            newSecondName.setText((GeneralController.toEditPopUp.getEmp().getLastname()));
         } else {
 
         }
