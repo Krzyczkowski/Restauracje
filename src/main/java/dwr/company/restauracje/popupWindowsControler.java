@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class popupWindowsControler implements Initializable {
+public class popupWindowsControler implements Initializable{
     //Fields with data
     @FXML
     protected TextField newSecondName, newPesel, newLevel, newSalary, newLogin, newName;
@@ -33,16 +33,14 @@ public class popupWindowsControler implements Initializable {
     //Other declarations
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            if(GeneralController.option){
-                Employee employee = GeneralController.toEditPopUp;
-                newName.setText(employee.getName());
-                newSecondName.setText(employee.getLastname());
-            }
-        } catch (Exception er) {
-            //  er.printStackTrace();
+        if(GeneralController.toEditPopUp != null){
+            newName.setText(GeneralController.toEditPopUp.getName());
+            newSecondName.setText((GeneralController.toEditPopUp.getLastname()));
+        } else {
+
         }
     }
 
@@ -61,6 +59,8 @@ public class popupWindowsControler implements Initializable {
 
     @FXML
     protected void saveEmployeInfo(){
+
+        GeneralController.toEditPopUp = null;
 
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();

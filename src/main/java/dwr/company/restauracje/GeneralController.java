@@ -59,6 +59,9 @@ public class GeneralController implements Initializable {
     @FXML
     private TextField searchEmployee;
 
+    @FXML
+    public TextField editWarnigLabel;
+
     //Buttons
     @FXML
     private Button minimalizeButton;
@@ -69,9 +72,6 @@ public class GeneralController implements Initializable {
 
     //Elements dependent on data base
     private ObservableList<Employee> employeesList = FXCollections.observableArrayList();
-
-    public static boolean option;
-
     public static Employee toEditPopUp;
 
     @Override
@@ -145,22 +145,38 @@ public class GeneralController implements Initializable {
     //Popups to edit employes
     @FXML
     protected void openPopupEmploye(ActionEvent event) throws IOException {
-        FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
-        Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
-        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
-        Stage popup = new Stage();
-        popup.initStyle(StageStyle.UNDECORATED);
-
-        popup.setScene(popupScene);
-        moveWindow(popupScene, popup);
-        if(true){
-            option = true;
+        if(event.getTarget().equals(editEmployee)
+                && !employeeTable.getSelectionModel().isEmpty()) {
+            editWarnigLabel.clear();
             toEditPopUp = employeeTable.getSelectionModel().getSelectedItem();
+
+            FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
+            Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
+            popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+            Stage popup = new Stage();
+            popup.initStyle(StageStyle.UNDECORATED);
+
+            popup.setScene(popupScene);
+            moveWindow(popupScene, popup);
+            popup.show();
+
+        } else if(event.getTarget().equals(addEmployee)) {
+            editWarnigLabel.clear();
+            FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
+            Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
+            popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+            Stage popup = new Stage();
+            popup.initStyle(StageStyle.UNDECORATED);
+
+            popup.setScene(popupScene);
+            moveWindow(popupScene, popup);
+            popup.show();
+
         } else {
-            option= false;
+            editWarnigLabel.setText("Nie wybrano żadnego elemantu!");
         }
-        popup.show();
     }
 
     @FXML
@@ -214,12 +230,7 @@ public class GeneralController implements Initializable {
         nr.setCellValueFactory(new PropertyValueFactory<Employee, String>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
         secondName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastname"));
-
-        employeesList.add(new Employee("nax", "wariacik"));
-        employeesList.add(new Employee("wuja", "benio"));
-        employeesList.add(new Employee("Kasztelan", "Niepasteryzpowane"));
-
-        //employeesList.addAll(Client.getAllEmployees());
+        employeesList.addAll(Client.getAllEmployees());
         employeeTable.setItems(employeesList);
     }
 }
