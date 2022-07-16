@@ -13,10 +13,10 @@ public class Products {
     private String name;
     @Basic
     @Column(name = "category")
-    private int category;
+    private String category;
     @Basic
     @Column(name = "price")
-    private int price;
+    private float price;
 
     public int getId() {
         return id;
@@ -34,19 +34,19 @@ public class Products {
         this.name = name;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -69,8 +69,7 @@ public class Products {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + category;
-        result = 31 * result + price;
+        result = 31 * result + (category !=null ? category.hashCode():0);
         return result;
     }
 }

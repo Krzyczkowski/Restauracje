@@ -130,9 +130,9 @@
             </Label>
             <TableView fx:id="employeeTable" prefHeight="214.0" prefWidth="809.0" style="-fx-background-color: bec5eb;" GridPane.rowIndex="4">
               <columns>
-                <TableColumn fx:id="nr" prefWidth="78.0" text="Nr" />
-                <TableColumn fx:id="name" prefWidth="177.0" text="Imie" />
-                  <TableColumn fx:id="secondName" prefWidth="164.0" text="Nazwisko" />
+                  <TableColumn fx:id="nr" prefWidth="78.0" text="Nr" />
+                  <TableColumn fx:id="name" prefWidth="177.0" text="Imie" />
+                  <TableColumn fx:id="lastName" prefWidth="164.0" text="Nazwisko" />
                   <TableColumn fx:id="pesel" prefWidth="203.0" text="Pesel" />
                   <TableColumn fx:id="salary" prefWidth="186.0" text="Pensja" />
               </columns>

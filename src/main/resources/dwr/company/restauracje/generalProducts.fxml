@@ -101,16 +101,16 @@
                </font>
             </TextField>
             <ComboBox fx:id="choseCategory" layoutX="464.0" layoutY="73.0" prefHeight="32.0" prefWidth="226.0" />
-            <Button fx:id="findProduct" layoutX="709.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" text="Szukaj">
+            <Button   fx:id="findProduct" layoutX="709.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" text="Szukaj">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
             </Button>
             <TableView fx:id="tableWithProducts" layoutX="33.0" layoutY="129.0" prefHeight="479.0" prefWidth="788.0" style="-fx-background-color: bec5eb;">
               <columns>
-                <TableColumn prefWidth="317.0" text="Nazwa" />
-                <TableColumn minWidth="0.0" prefWidth="313.0" text="Kategoria" />
-                  <TableColumn minWidth="0.0" prefWidth="156.0" text="Cena" />
+                  <TableColumn fx:id="productName"     prefWidth="317.0" text="Nazwa" />
+                  <TableColumn fx:id="productCategory" minWidth="0.0" prefWidth="313.0" text="Kategoria" />
+                  <TableColumn fx:id="productPrice"    minWidth="0.0" prefWidth="156.0" text="Cena" />
               </columns>
             </TableView>
             <Button fx:id="addProduct" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#openPopupProduct" prefHeight="34.0" prefWidth="173.0" text="Dodaj">

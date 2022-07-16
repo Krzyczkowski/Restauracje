@@ -2,6 +2,7 @@ package dwr.company.restauracje;
 
 import entity.Employee;
 import entity.Logins;
+import entity.Products;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.spec.ECField;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,17 +47,14 @@ public class GeneralController implements Initializable {
     @FXML
     private TableView<Logins> employeeTable;
     @FXML
+    private TableView<Products> tableWithProducts;
+    @FXML
     private TableView<Logins> logHistory;
     @FXML
-    private TableColumn nr;
+    private TableColumn nr,name,lastName,pesel,salary;
+
     @FXML
-    private TableColumn name;
-    @FXML
-    private TableColumn secondName;
-    @FXML
-    private TableColumn pesel;
-    @FXML
-    private TableColumn salary;
+    private TableColumn productName,productCategory,productPrice;
     @FXML
     private TextField searchEmployee;
 
@@ -72,6 +71,7 @@ public class GeneralController implements Initializable {
 
     //Elements dependent on data base
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
+    private ObservableList<Products> productList = FXCollections.observableArrayList();
     public static Logins toEditPopUp;
 
     @Override
@@ -81,7 +81,7 @@ public class GeneralController implements Initializable {
             userIcon.setFill(new ImagePattern(iconImage));
             userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
             loadEmployesToTable();
-
+            //loadProductToTable();
         } catch (Exception er) {
            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
@@ -105,15 +105,26 @@ public class GeneralController implements Initializable {
     }
 
     @FXML
-    protected void employesSection() throws IOException {
+    protected void employesSection() throws Exception {
         actualWindow = new GeneralWindowSet();
         actualWindow.setEmployesScene();
+        try{
+            loadEmployesToTable();
+        }catch (Exception er) {
+            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+        }
+
     }
 
     @FXML
-    protected void productSection() throws IOException {
+    protected void productSection() throws Exception {
         actualWindow = new GeneralWindowSet();
         actualWindow.setProductsScene();
+        try{
+        loadProductToTable();
+        }catch (Exception er) {
+            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+        }
     }
 
     @FXML
@@ -144,7 +155,7 @@ public class GeneralController implements Initializable {
 
     //Popups to edit employes
     @FXML
-    protected void openPopupEmploye(ActionEvent event) throws IOException {
+    protected void openPopupEmploye(ActionEvent event) throws Exception {
         toEditPopUp=null;
         if(event.getTarget().equals(editEmployee)
                 && !employeeTable.getSelectionModel().isEmpty()) {
@@ -178,6 +189,7 @@ public class GeneralController implements Initializable {
             editWarnigLabel = new TextField();
             editWarnigLabel.setText("Nie wybrano żadnego elemantu!");
         }
+        loadEmployesToTable();
     }
 
     @FXML
@@ -229,7 +241,7 @@ public class GeneralController implements Initializable {
     protected void loadEmployesToTable() throws Exception {
         nr.setCellValueFactory(new PropertyValueFactory<Logins, String>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Logins, Employee >("name"));
-        secondName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
+        lastName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
         pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
         salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
         employeesList.clear();
@@ -238,5 +250,18 @@ public class GeneralController implements Initializable {
         else
             employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
+    }
+    protected void loadProductToTable()throws Exception {
+
+        productName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
+        productCategory.setCellValueFactory(new PropertyValueFactory<Products, String>("category"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
+        productList.clear();
+        Products p = new Products();
+        p.setCategory("cos");
+        p.setName("2cosie");
+        p.setPrice(2.5f);
+        productList.add(p);
+        tableWithProducts.setItems(productList);
     }
 }
