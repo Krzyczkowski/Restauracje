@@ -1,13 +1,22 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 
 @Entity
 public class Categories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     private String id;
+
+    public Categories(JSONObject jo) {
+        id = jo.get("id").toString();
+    }
+
+    public Categories() {
+    }
 
     public String getId() {
         return id;
@@ -32,5 +41,10 @@ public class Categories {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+    public JSONObject toJSON(){
+        JSONObject jo = new JSONObject();
+        jo.put("id",id);
+        return jo;
     }
 }

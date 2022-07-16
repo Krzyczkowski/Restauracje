@@ -220,5 +220,4 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
     return printRestaurants(message);
     }
-
 }

@@ -1,8 +1,6 @@
 package dwr.company.restauracje;
 
-import entity.Employee;
-import entity.Logins;
-import entity.Restaurants;
+import entity.*;
 import org.json.simple.JSONObject;
 
 import javax.persistence.EntityManager;
@@ -156,6 +154,42 @@ public class DatabaseAPI {
         return 0;
     }
 
+    public JSONObject getProducts() {
+        JSONObject jo = new JSONObject();
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT prod FROM Products prod ");
+        List<Products> list = query.getResultList();
+        em.getTransaction().commit();
+        for(Integer i=0; i<list.size();i++){
+            jo.put(i.toString(),list.get(i).toJSON());
+        }
+        return jo;
+    }
+
+    public JSONObject getProducts(String name,String category) {
+        JSONObject jo = new JSONObject();
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 and prod.category = ?2 ").setParameter(1,name+"%").setParameter(2,category);
+        List<Products> list = query.getResultList();
+        em.getTransaction().commit();
+        for(Integer i=0; i<list.size();i++){
+            jo.put(i.toString(),list.get(i).toJSON());
+        }
+        return jo;
+    }
+
+
+    public JSONObject getCategories() {
+        JSONObject jo = new JSONObject();
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT cat FROM Categories cat");
+        List<Categories> list = query.getResultList();
+        em.getTransaction().commit();
+        for(Integer i=0; i<list.size();i++){
+            jo.put(i.toString(),list.get(i).toJSON());
+        }
+        return jo;
+    }
 }
 
 

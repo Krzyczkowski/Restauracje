@@ -127,6 +127,15 @@ class SerwerThread implements Runnable {
                     else
                         getEmployeesFullInfo(JSON.get("params").toString());
                     break;
+                case "getProducts":
+                    if (JSON.get("params").equals(""))
+                        getProducts();
+                    else
+                        getProducts(JSON.get("params").toString());
+                    break;
+                case "getAllCategories":
+                    getCategories();
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 out.writeUTF("brak takich uprawnien!!");
@@ -134,7 +143,32 @@ class SerwerThread implements Runnable {
         }
         db.close();
     }
-    private Logins authorization(String userName, String password, String DBname){
+
+
+
+    private void getCategories() throws IOException {
+        JSON.clear();
+        JSON = db.getCategories();
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+
+    private void getProducts(String params) throws IOException {
+        JSON.clear();
+        JSONObject jo = (JSONObject) JSONValue.parse(params);
+        JSON = db.getProducts(jo.get("name").toString(),jo.get("category").toString());
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+
+    private void getProducts() throws IOException {
+        JSON.clear();
+        JSON = db.getProducts();
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+
+    private Logins authorization(String userName, String password, String DBname) throws FileNotFoundException {
         return db.authorization(userName,password,db.getDatebaseIdByName(DBname));
     }
     static private void getAllEmployees() throws IOException {

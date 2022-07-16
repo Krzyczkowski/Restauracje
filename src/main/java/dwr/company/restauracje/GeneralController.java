@@ -68,7 +68,8 @@ public class GeneralController implements Initializable {
     private Button menuButton1, menuButton2, menuButton3, menuButton4;
     @FXML
     private Button findEmployee, editEmployee, addEmployee;
-
+    @FXML
+    private ComboBox choseCategory;
     //Elements dependent on data base
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private ObservableList<Products> productList = FXCollections.observableArrayList();
@@ -261,11 +262,11 @@ public class GeneralController implements Initializable {
         productCategory.setCellValueFactory(new PropertyValueFactory<Products, String>("category"));
         productPrice.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
         productList.clear();
-        Products p = new Products();
-        p.setCategory("cos");
-        p.setName("2cosie");
-        p.setPrice(2.5f);
-        productList.add(p);
+//        if(search.getText().length()>0)
+//            productList.addAll(Client.getProducts(searchEmployee.getText()));
+//        else
+            productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
+        choseCategory.getItems().addAll(Client.getCategories());
     }
 }

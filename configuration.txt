@@ -5,5 +5,7 @@ insertEmployee:0
 deleteEmployee:0
 updateEmployee:0
 getEmployeesFullInfo:0
+getProducts:0
+getAllCategories:0
 getAllRestaurants:0
 getIdRestaurantByName:0

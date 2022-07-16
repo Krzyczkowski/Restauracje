@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,7 +19,21 @@ public class Products {
     @Basic
     @Column(name = "price")
     private float price;
-
+    public Products(){}
+    public Products(JSONObject jo) {
+        id = (int) (long) jo.get("id");
+        name = jo.get("name").toString();
+        category = jo.get("category").toString();
+        price = (float) (double) jo.get("price");
+    }
+    public JSONObject toJSON(){
+        JSONObject jo = new JSONObject();
+        jo.put("id",id);
+        jo.put("category",category);
+        jo.put("price",price);
+        jo.put("name",name);
+        return jo;
+    }
     public int getId() {
         return id;
     }
