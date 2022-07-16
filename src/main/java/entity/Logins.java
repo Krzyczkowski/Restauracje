@@ -33,6 +33,18 @@ public class Logins {
     @JoinColumn(name = "id")
     private Employee emp;
 
+    public Logins(int id, String login, String password, int levelaccess, int idrestaurant, Integer pesel, float salary,String name, String lastName) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.levelaccess = levelaccess;
+        this.idrestaurant = idrestaurant;
+        this.pesel = pesel;
+        this.salary = salary;
+        this.emp.setId(id);
+        this.emp.setLastname(lastName);
+        this.emp.setName(name);
+    }
 
     public Logins(){}
 

@@ -145,24 +145,23 @@ public class GeneralController implements Initializable {
     //Popups to edit employes
     @FXML
     protected void openPopupEmploye(ActionEvent event) throws IOException {
+        toEditPopUp=null;
         if(event.getTarget().equals(editEmployee)
                 && !employeeTable.getSelectionModel().isEmpty()) {
             editWarnigLabel = new TextField();
             editWarnigLabel.clear();
             toEditPopUp = employeeTable.getSelectionModel().getSelectedItem();
-
             FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
             Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
             popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
             Stage popup = new Stage();
             popup.initStyle(StageStyle.UNDECORATED);
-
             popup.setScene(popupScene);
             moveWindow(popupScene, popup);
             popup.show();
 
         } else if(event.getTarget().equals(addEmployee)) {
+            editWarnigLabel = new TextField();
             editWarnigLabel.clear();
             FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
             Scene popupScene = new Scene(loader.load(), 333.0, 637.0);

@@ -72,7 +72,6 @@ public class DatabaseAPI {
             jo.put(i.toString(),list1.get(i).toJSON());
         }
         return jo;
-
     }
     public void insertEmployee (Employee e){
         em.getTransaction().begin();

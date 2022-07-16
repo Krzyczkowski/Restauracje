@@ -143,14 +143,11 @@ class Client {
         message = (JSONObject) JSONValue.parse(str);
        return printEmployee(message);
     }
-    protected static void insertEmployee(String name, String lastName) throws IOException {
+    protected static void insertEmployee(String name, String lastName,int id, String login, String password, int levelacces, int idrestaurant,float salary,int pesel) throws IOException {
         JSONObject message = new JSONObject();
-        Employee emp = new Employee();
-        emp.setLastname(lastName);
-        emp.setName(name);
-        emp.setId(0);
+        Logins log = new Logins(id,login,password,levelacces,idrestaurant,pesel,salary,name,lastName);
         message.put("command","insertEmployee");
-        message.put("params",emp.toJSON());
+        message.put("params",log.toJSON());
         out.writeUTF(message.toString());
     }
 
@@ -160,14 +157,11 @@ class Client {
         message.put("params",id);
         out.writeUTF(message.toString());
     }
-    protected static void updateEmployee(String name, String lastName,int id) throws IOException {
+    protected static void updateEmployee(String name, String lastName,int id, String login, String password, int levelacces, int idrestaurant,float salary,int pesel) throws IOException {
         JSONObject message = new JSONObject();
-        Employee emp = new Employee();
-        emp.setLastname(lastName);
-        emp.setName(name);
-        emp.setId(id);
+        Logins log = new Logins(id,login,password,levelacces,idrestaurant,pesel,salary,name,lastName);
         message.put("command","updateEmployee");
-        message.put("params",emp.toJSON());
+        message.put("params",log.toJSON());
         out.writeUTF(message.toString());
     }
 

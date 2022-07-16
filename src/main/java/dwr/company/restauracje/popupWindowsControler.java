@@ -21,7 +21,8 @@ public class popupWindowsControler implements Initializable{
     protected TextField newSecondName, newPesel, newLevel, newSalary, newLogin, newName;
     @FXML
     private PasswordField newPassword;
-
+    private String command;
+    private int id;
     //Buttons
     @FXML
     private Button exitButton;
@@ -39,8 +40,10 @@ public class popupWindowsControler implements Initializable{
         if(GeneralController.toEditPopUp != null){
             newName.setText(GeneralController.toEditPopUp.getEmp().getName());
             newSecondName.setText((GeneralController.toEditPopUp.getEmp().getLastname()));
+            id=GeneralController.toEditPopUp.getId();
+            command = "update";
         } else {
-
+            command = "insert";
         }
     }
 
@@ -59,9 +62,13 @@ public class popupWindowsControler implements Initializable{
 
     @FXML
     protected void saveEmployeInfo(){
+        if (command.equals("update")){
+            //Client.insertEmployee(newName,newSecondName,id,newLevel,newid);
+        }
+        else if (command.equals("insert")) {
 
+        }
         GeneralController.toEditPopUp = null;
-
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
 
