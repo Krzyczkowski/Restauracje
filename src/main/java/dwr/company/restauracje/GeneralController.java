@@ -184,10 +184,8 @@ public class GeneralController implements Initializable {
         FXMLLoader loader= new FXMLLoader(App.class.getResource("editProduct.fxml"));
         Scene popupScene = new Scene(loader.load(), 333.0, 348.0);
         popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
         Stage popup = new Stage();
         popup.initStyle(StageStyle.UNDECORATED);
-
         popup.setScene(popupScene);
         moveWindow(popupScene, popup);
         popup.show();
@@ -232,7 +230,6 @@ public class GeneralController implements Initializable {
         secondName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
         pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
         salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
-
         employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
     }

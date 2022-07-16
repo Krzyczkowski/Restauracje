@@ -51,12 +51,8 @@ public class Logins {
         this.salary  = (float)(double) jo.get("salary");
         emp=new Employee();
         this.emp.setId(id);
-        System.out.println("git");
         this.emp.setLastname((String) jo.get("lastname"));
-        System.out.println("git");
         this.emp.setName((String) jo.get("name"));
-        System.out.println("git");
-
     }
 
 

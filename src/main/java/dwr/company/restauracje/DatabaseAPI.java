@@ -53,6 +53,13 @@ public class DatabaseAPI {
         em.getTransaction().commit();
         return (prepareJSON(list));
     }
+    public JSONObject getEmployeeBySearch(String name){
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.name like ?1 or emp.lastname like ?1 ").setParameter(1, name + "%");
+        List<Employee> list = query.getResultList();
+        em.getTransaction().commit();
+        return (prepareJSON(list));
+    }
     public void insertEmployee (Employee e){
         em.getTransaction().begin();
         em.merge(e);
