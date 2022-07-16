@@ -141,29 +141,27 @@ class Client {
         message = (JSONObject) JSONValue.parse(str);
        return printEmployee(message);
     }
-    protected static void insertEmployee(String name, String lastName,int id, String login, String password, int levelacces, int idrestaurant,float salary,int pesel) throws IOException {
+    protected static void           insertEmployee(String name, String lastName,int id, String login, String password, int levelacces, int idrestaurant,float salary,int pesel) throws IOException {
         JSONObject message = new JSONObject();
         Logins log = new Logins(id,login,password,levelacces,idrestaurant,pesel,salary,name,lastName);
         message.put("command","insertEmployee");
         message.put("params",log.toJSON());
         out.writeUTF(message.toString());
     }
-
-    protected static void deleteEmployee(Integer id) throws IOException {
+    protected static void           deleteEmployee(Integer id) throws IOException {
         JSONObject message = new JSONObject();
         message.put("command","deleteEmployee");
         message.put("params",id);
         out.writeUTF(message.toString());
     }
-    protected static void updateEmployee(String name, String lastName,int id, String login, String password, int levelacces, int idrestaurant,float salary,int pesel) throws IOException {
+    protected static void           updateEmployee(String name, String lastName,int id, String login, String password, int levelacces, int idrestaurant,float salary,int pesel) throws IOException {
         JSONObject message = new JSONObject();
         Logins log = new Logins(id,login,password,levelacces,idrestaurant,pesel,salary,name,lastName);
         message.put("command","updateEmployee");
         message.put("params",log.toJSON());
         out.writeUTF(message.toString());
     }
-
-    protected static List<Logins> getEmployeesFullInfo() throws IOException {
+    protected static List<Logins>   getEmployeesFullInfo() throws IOException {
         JSONObject message = new JSONObject();
         message.put("command","getEmployeesFullInfo");
         message.put("params","");
@@ -172,7 +170,7 @@ class Client {
         message = (JSONObject) JSONValue.parse(str);
         return printLogins(message);
     }
-    protected static List<Logins> getEmployeesFullInfo(String s) throws IOException {
+    protected static List<Logins>   getEmployeesFullInfo(String s) throws IOException {
         System.out.println("Client.getEmployeesFullInfo( " +s +" )");
         JSONObject message = new JSONObject();
         message.put("command","getEmployeesFullInfo");
@@ -182,8 +180,7 @@ class Client {
         message = (JSONObject) JSONValue.parse(str);
         return printLogins(message);
     }
-
-    public static List<String> getAllRestaurants() throws IOException {
+    public static List<String>      getAllRestaurants() throws IOException {
         JSONObject message = new JSONObject();
         String str;
         message.put("command","getAllRestaurants");
@@ -194,7 +191,7 @@ class Client {
         // JO for every Employee
         return printRestaurants(message);
     }
-    public static Integer getIdRestaurantByName(String name) throws IOException {
+    public static Integer           getIdRestaurantByName(String name) throws IOException {
         JSONObject message = new JSONObject();
         String str;
         message.put("command","getIdRestaurantByName");
@@ -205,10 +202,7 @@ class Client {
         // JO for every Employee
         return Integer.valueOf(str);
     }
-
-
-
-    public static List<String> InitGetRestaurantNames(String host, Integer port) throws IOException {
+    public static List<String>      InitGetRestaurantNames(String host, Integer port) throws IOException {
         Socket socket = new Socket(host, port);
         out = new DataOutputStream(socket.getOutputStream());
         in = new DataInputStream(socket.getInputStream());
@@ -218,13 +212,16 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
     return printRestaurants(message);
     }
-
     public static List<Products> getProducts() throws IOException {
         message.clear();
         message.put("command", "getProducts");
         message.put("params", "");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printProducts(message);
+    }
+    public static List<Products> getProducts(String name,String category) throws IOException{
+        message.clear();
         return printProducts(message);
     }
 
@@ -243,10 +240,12 @@ class Client {
         return printCategories(message);
     }
 
+
     private static List<String> printCategories(JSONObject message) {
         List<String> list= new ArrayList<>();
         for(Integer i = 0; i<message.size();i++)
             list.add(new Categories((JSONObject) message.get(i.toString())).getId());
         return list;
     }
+
 }
