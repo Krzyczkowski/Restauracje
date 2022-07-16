@@ -56,8 +56,9 @@ public class DatabaseAPI {
     }
     public JSONObject getAllEmployeesFullInfo(String name){
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.name like ?1 or emp.lastname like ?1 ").setParameter(1, name + "%");
+        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.name like ?1 or emp.lastname like ?1 ").setParameter(1, "%"+name + "%");
         List<Employee> list = query.getResultList();
+        System.out.println(list.size());
         List<Logins> list1 = new ArrayList<>();
         for (int i =0; i<list.size();i++)
         {
@@ -144,6 +145,15 @@ public class DatabaseAPI {
         Logins bad_login = new Logins();
         bad_login.setId(-1);
         return bad_login;
+    }
+    public Integer getIdRestaurantByName(String name){
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
+        List<Restaurants> list = query.getResultList();
+        em.getTransaction().commit();
+        if (list.size()==1)
+            return list.get(0).getId();
+        return 0;
     }
 
 }

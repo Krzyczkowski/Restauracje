@@ -9,7 +9,9 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="333.0" style="-fx-background-color: #032475;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwr.company.restauracje.popupWindowsControler">
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="333.0" style="-fx-background-color: #032475;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwr.company.restauracje.popupWindowsControler">
    <children>
       <HBox alignment="TOP_RIGHT" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="333.0">
          <children>
@@ -95,7 +97,18 @@
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </PasswordField>
-      <Button fx:id="saveEmploye" onMouseClicked="#saveEmployeInfo" layoutX="114.0" layoutY="580.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="109.0" text="Zatwierdź">
+      <Label layoutX="34.0" layoutY="567.0" prefHeight="17.0" prefWidth="213.0" text="Restauracja" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="33.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="newPlace" layoutX="33.0"  layoutY="610.0" prefHeight="28.0" prefWidth="267.0" visibleRowCount="3">
+         <items>
+            <FXCollections fx:factory="observableArrayList" >
+            </FXCollections>
+         </items>
+      </ComboBox>
+      <Button fx:id="saveEmploye" onMouseClicked="#saveEmployeInfo"  layoutX="114.0" layoutY="695.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="109.0" text="Zatwierdź">
          <font>
             <Font name="Calibri Bold" size="18.0" />
          </font>

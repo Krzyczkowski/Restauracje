@@ -163,7 +163,7 @@ public class GeneralController implements Initializable {
             editWarnigLabel.clear();
             toEditPopUp = employeeTable.getSelectionModel().getSelectedItem();
             FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
-            Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
+            Scene popupScene = new Scene(loader.load(), 333.0, 765.0);
             popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
             Stage popup = new Stage();
             popup.initStyle(StageStyle.UNDECORATED);
@@ -175,7 +175,7 @@ public class GeneralController implements Initializable {
             editWarnigLabel = new TextField();
             editWarnigLabel.clear();
             FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
-            Scene popupScene = new Scene(loader.load(), 333.0, 637.0);
+            Scene popupScene = new Scene(loader.load(), 333.0, 780.0);
             popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
             Stage popup = new Stage();
@@ -244,6 +244,10 @@ public class GeneralController implements Initializable {
         lastName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
         pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
         salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
+        //TODO:
+        //trzebba bedzie zmienic zamiast id restaurant na nazwe restauracji - trzeba wykonac zapytanie ze zlaczeniem
+        //restaurantID.setCellValueFactory(new PropertyValueFactory<Logins, String>("idrestaurant"));
+
         employeesList.clear();
         if(searchEmployee.getText().length()>0)
             employeesList.addAll(Client.getEmployeesFullInfo(searchEmployee.getText()));

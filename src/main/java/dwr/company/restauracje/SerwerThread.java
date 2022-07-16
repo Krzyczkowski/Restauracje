@@ -7,6 +7,7 @@ import org.json.simple.JSONValue;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLOutput;
 
 /**
  * Klasa odpowiedzialna za obsługe 1 klienta
@@ -112,7 +113,15 @@ class SerwerThread implements Runnable {
                 case "updateEmployee":
                     updateEmployee(new Logins((JSONObject) JSON.get("params")) );
                     break;
+                case "getAllRestaurants":
+                    getAllRestaurants();
+                    break;
+                case "getIdRestaurantByName":
+                    getIdRestaurantByName(JSON.get("params").toString());
+                    break;
+
                 case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
+                    System.out.println("SerwerThread.communication.getEmployeesFullInfo : params: "+JSON.get("params").toString());
                     if (JSON.get("params").equals(""))
                         getEmployeesFullInfo();
                     else
@@ -125,7 +134,7 @@ class SerwerThread implements Runnable {
         }
         db.close();
     }
-    private Logins authorization(String userName, String password, String DBname) throws FileNotFoundException {
+    private Logins authorization(String userName, String password, String DBname){
         return db.authorization(userName,password,db.getDatebaseIdByName(DBname));
     }
     static private void getAllEmployees() throws IOException {
@@ -147,15 +156,15 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void insertEmployee(Employee e) throws IOException{
+    static private void insertEmployee(Employee e) {
         JSON.clear();
         db.insertEmployee(e);
     }
-    static private void deleteEmployee(Integer id) throws IOException{
+    static private void deleteEmployee(Integer id) {
         JSON.clear();
         db.deleteEmployee(id);
     }
-    static private void updateEmployee(Logins e) throws IOException{
+    static private void updateEmployee(Logins e) {
         JSON.clear();
         db.updateEmployee(e);
     }
@@ -177,5 +186,11 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
+    static private void getIdRestaurantByName(String name) throws IOException {
+        Integer i = db.getIdRestaurantByName(name);
+        System.out.println(i.toString());
+        out.writeUTF(i.toString());
+    }
+
 }
 

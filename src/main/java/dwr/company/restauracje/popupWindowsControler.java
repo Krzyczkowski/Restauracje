@@ -4,6 +4,7 @@ import entity.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
@@ -31,6 +32,8 @@ public class popupWindowsControler implements Initializable{
     private Button minimalizeButton;
     @FXML
     private Button saveEmploye;
+    @FXML
+    private ComboBox newPlace;
 
     //Other declarations
 
@@ -47,6 +50,12 @@ public class popupWindowsControler implements Initializable{
             newLogin.setText((GeneralController.toEditPopUp.getLogin()));
             newPassword.setText((GeneralController.toEditPopUp.getPassword()));
             id=GeneralController.toEditPopUp.getId();
+
+            try {
+                newPlace.getItems().addAll(Client.getAllRestaurants());
+            } catch (IOException e) {
+                System.out.println(e);
+            }
             command = "update";
         } else {
             command = "insert";
@@ -68,10 +77,12 @@ public class popupWindowsControler implements Initializable{
 
     @FXML
     protected void saveEmployeInfo() throws IOException {
+        ;
         if (command.equals("update")){
             Client.updateEmployee(newName.getText(),newSecondName.getText(),
                     id,newLogin.getText(),newPassword.getText(),Integer.parseInt(newLevel.getText()),
-                        GeneralController.toEditPopUp.getIdrestaurant(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
+                    Client.getIdRestaurantByName((String)newPlace.getValue()),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
+
         }
         else if (command.equals("insert")) {
             Client.insertEmployee(newName.getText(),newSecondName.getText(),

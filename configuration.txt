@@ -1,7 +1,9 @@
-getAllEmployees:1110
+getAllEmployees:0
 getEmployeeById:0
 getEmployeeByName:0
 insertEmployee:0
 deleteEmployee:0
 updateEmployee:0
 getEmployeesFullInfo:0
+getAllRestaurants:0
+getIdRestaurantByName:0

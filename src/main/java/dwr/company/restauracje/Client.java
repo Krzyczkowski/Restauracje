@@ -175,6 +175,7 @@ class Client {
         return printLogins(message);
     }
     protected static List<Logins> getEmployeesFullInfo(String s) throws IOException {
+        System.out.println("Client.getEmployeesFullInfo( " +s +" )");
         JSONObject message = new JSONObject();
         message.put("command","getEmployeesFullInfo");
         message.put("params",s);
@@ -184,8 +185,31 @@ class Client {
         return printLogins(message);
     }
 
+    public static List<String> getAllRestaurants() throws IOException {
+        JSONObject message = new JSONObject();
+        String str;
+        message.put("command","getAllRestaurants");
+        message.put("params","");
+        out.writeUTF(message.toString());
+        str = in.readUTF();
+        message = (JSONObject) JSONValue.parse(str);
+        // JO for every Employee
+        return printRestaurants(message);
+    }
+    public static Integer getIdRestaurantByName(String name) throws IOException {
+        JSONObject message = new JSONObject();
+        String str;
+        message.put("command","getIdRestaurantByName");
+        message.put("params",name);
+        out.writeUTF(message.toString());
+        str = in.readUTF();
+       // message = (JSONObject) JSONValue.parse(str);
+        // JO for every Employee
+        return Integer.valueOf(str);
+    }
 
-   //DLA DARKA: DZIALANIE PONIZSZEJ FUNKCJI SPRAWDZONE NA LOGPANELCONSOLE (connectConsole)!!!!
+
+
     public static List<String> InitGetRestaurantNames(String host, Integer port) throws IOException {
         Socket socket = new Socket(host, port);
         out = new DataOutputStream(socket.getOutputStream());
@@ -196,4 +220,5 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
     return printRestaurants(message);
     }
+
 }
