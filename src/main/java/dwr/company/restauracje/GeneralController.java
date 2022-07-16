@@ -176,6 +176,7 @@ public class GeneralController implements Initializable {
             popup.show();
 
         } else {
+            editWarnigLabel = new TextField();
             editWarnigLabel.setText("Nie wybrano żadnego elemantu!");
         }
     }
