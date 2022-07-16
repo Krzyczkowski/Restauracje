@@ -180,6 +180,15 @@ class Client {
         message = (JSONObject) JSONValue.parse(str);
         return printLogins(message);
     }
+    protected static List<Logins> getEmployeesFullInfo(String s) throws IOException {
+        JSONObject message = new JSONObject();
+        message.put("command","getEmployeesFullInfo");
+        message.put("params",s);
+        out.writeUTF(message.toString());
+        String str = in.readUTF();
+        message = (JSONObject) JSONValue.parse(str);
+        return printLogins(message);
+    }
 
 
    //DLA DARKA: DZIALANIE PONIZSZEJ FUNKCJI SPRAWDZONE NA LOGPANELCONSOLE (connectConsole)!!!!

@@ -147,7 +147,7 @@
                         <Font name="Calibri" size="19.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="findEmployee" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Wyszukaj">
+                  <Button fx:id="findEmployee" onAction="#loadEmployesToTable" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Wyszukaj">
                      <font>
                         <Font size="16.0" />
                      </font>

@@ -113,7 +113,10 @@ class SerwerThread implements Runnable {
                     updateEmployee(new Employee((JSONObject) JSON.get("params")) );
                     break;
                 case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
-                    getEmployeesFullInfo();
+                    if (JSON.get("params").equals(""))
+                        getEmployeesFullInfo();
+                    else
+                        getEmployeesFullInfo(JSON.get("params").toString());
                     break;
             }else{
                 System.out.println("brak takich uprawnien!!");
@@ -159,6 +162,12 @@ class SerwerThread implements Runnable {
     static private void getEmployeesFullInfo() throws IOException {
         JSON.clear();
         JSON = db.getAllEmployeesFullInfo();
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+    static private void getEmployeesFullInfo(String s) throws IOException {
+        JSON.clear();
+        JSON = db.getAllEmployeesFullInfo(s);
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }

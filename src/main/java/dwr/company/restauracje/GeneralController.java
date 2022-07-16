@@ -226,13 +226,18 @@ public class GeneralController implements Initializable {
     }
 
     //Deal with data froma database
+    @FXML
     protected void loadEmployesToTable() throws Exception {
         nr.setCellValueFactory(new PropertyValueFactory<Logins, String>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Logins, Employee >("name"));
         secondName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
         pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
         salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
-        employeesList.addAll(Client.getEmployeesFullInfo());
+        employeesList.clear();
+        if(searchEmployee.getText().length()>0)
+            employeesList.addAll(Client.getEmployeesFullInfo(searchEmployee.getText()));
+        else
+            employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
     }
 }
