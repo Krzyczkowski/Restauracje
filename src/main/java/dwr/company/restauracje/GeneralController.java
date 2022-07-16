@@ -147,6 +147,7 @@ public class GeneralController implements Initializable {
     protected void openPopupEmploye(ActionEvent event) throws IOException {
         if(event.getTarget().equals(editEmployee)
                 && !employeeTable.getSelectionModel().isEmpty()) {
+            editWarnigLabel = new TextField();
             editWarnigLabel.clear();
             toEditPopUp = employeeTable.getSelectionModel().getSelectedItem();
 
