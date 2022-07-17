@@ -388,13 +388,25 @@ public class GeneralController implements Initializable {
             tempOrder.clear();
             tempOrder.add(pos);
             positionList.addAll(tempOrder);
-            float f=0;
+
             tableWithPositions.setItems(positionList);
-            for(int i = 0; i<positionList.size();i++)
-                f+=tableWithPositions.getItems().get(i).getProductPrice();
-            orderPrice.setText(String.valueOf(f)) ;
+           loadAllPrice();
             amountOfProductsInOrder.setText("1");
         }
 
+    }
+    public void deleteProductFromOrder(MouseEvent mouseEvent){
+        if( !tableWithPositions.getSelectionModel().isEmpty()) {
+            selectedPostion = tableWithPositions.getSelectionModel().getSelectedItem();
+            tableWithPositions.getItems().remove(selectedPostion);
+            loadAllPrice();
+
+        }
+    }
+    private void loadAllPrice(){
+        float f=0;
+        for(int i = 0; i<positionList.size();i++)
+            f+=tableWithPositions.getItems().get(i).getProductPrice();
+        orderPrice.setText(String.valueOf(f)) ;
     }
 }

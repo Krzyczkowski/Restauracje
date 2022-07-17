@@ -101,7 +101,7 @@
                   <Font name="Calibri Bold" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="deleteFromOrder" layoutX="354.0" layoutY="338.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="44.0" text="-">
+            <Button fx:id="deleteFromOrder" onMouseClicked="#deleteProductFromOrder" layoutX="354.0" layoutY="338.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="44.0" text="-">
                <font>
                   <Font name="Calibri Bold" size="22.0" />
                </font>
