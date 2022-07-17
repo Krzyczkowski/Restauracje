@@ -193,13 +193,18 @@ public class DatabaseAPI {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT st FROM Storage st");
-        List<Categories> list = query.getResultList();
+        List<Storage> list = query.getResultList();
         em.getTransaction().commit();
         for(Integer i=0; i<list.size();i++){
             jo.put(i.toString(),list.get(i).toJSON());
         }
         return jo;
-        //
+    }
+    public void insertStorageItem(Storage s) {
+        em.getTransaction().begin();
+        em.merge(s);
+        em.getTransaction().commit();
+
     }
 }
 

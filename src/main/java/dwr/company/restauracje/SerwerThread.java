@@ -2,6 +2,7 @@ package dwr.company.restauracje;
 
 import entity.Employee;
 import entity.Logins;
+import entity.Storage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -141,6 +142,9 @@ class SerwerThread implements Runnable {
                 case "getStorage":
                     getStorage();
                     break;
+                case "insertStorageItem":
+                    insertStorageItem(new Storage((JSONObject) JSON.get("params")));
+                    break;
 
             }else{
                 System.out.println("brak takich uprawnien!!");
@@ -233,7 +237,10 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-
+    static private void insertStorageItem(Storage s) throws IOException {
+        System.out.println("serwerThread.insertStorageItem: "+s);
+        db.insertStorageItem(s);
+    }
 //    static private void getIdRestaurantByName(String name) throws IOException {
 //        Integer i = db.getIdRestaurantByName(name);
 //        System.out.println(i.toString());

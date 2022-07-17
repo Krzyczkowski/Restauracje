@@ -86,6 +86,7 @@ public class GeneralController implements Initializable {
             userIcon.setFill(new ImagePattern(iconImage));
             userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
             loadEmployesToTable();
+            loadStorageToTable();
             //loadProductToTable();
         } catch (Exception er) {
            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
@@ -137,14 +138,15 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void warehouseSection() throws Exception {
+        actualWindow = new GeneralWindowSet();
+        actualWindow.setWarehouseScene();
         try {
             loadStorageToTable();
         }catch (Exception er) {
-        //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+            System.out.println(er);      // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
     }
 
-        actualWindow = new GeneralWindowSet();
-        actualWindow.setWarehouseScene();
+
     }
 
     @FXML

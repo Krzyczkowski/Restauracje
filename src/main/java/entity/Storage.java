@@ -1,12 +1,14 @@
 package entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 
 @Entity
 public class Storage {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Id
     @Column(name = "id")
     private int id;
@@ -18,6 +20,7 @@ public class Storage {
     private String name;
 
     public Storage(){}
+    public Storage(String name, int amount){this.name=name;this.amount=amount;}
     public Storage(JSONObject jo) {
         id =(int)(long) jo.get("id");
         amount =(int)(long) jo.get("amount");

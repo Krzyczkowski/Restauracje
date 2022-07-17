@@ -1,6 +1,7 @@
 package dwr.company.restauracje;
 
 import entity.Employee;
+import entity.Storage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,6 +22,8 @@ public class popupWindowsControler implements Initializable{
     //Fields with data
     @FXML
     protected TextField newSecondName, newPesel, newLevel, newSalary, newLogin, newName;
+    @FXML
+    protected TextField newComponentName,newAmount;
     @FXML
     private PasswordField newPassword;
     private String command;
@@ -111,10 +114,11 @@ public class popupWindowsControler implements Initializable{
     }
 
     @FXML
-    protected void saveComponentInfo(){
-
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+    protected void saveComponentInfo()throws IOException {
+            Storage s = new Storage(newComponentName.getText(),Integer.valueOf(newAmount.getText()));
+            Client.insertStorageItem(s);
+            Stage stage = (Stage) exitButton.getScene().getWindow();
+            stage.close();
 
     }
 

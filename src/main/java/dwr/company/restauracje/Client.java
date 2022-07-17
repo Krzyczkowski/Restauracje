@@ -271,5 +271,13 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
         return printStorage(message);
     }
+    public static void insertStorageItem(Storage s) throws IOException {
+        message.clear();
+        JSONObject jo = s.toJSON();
+        System.out.println(s.getId()+s.getAmount()+s.getName());
+        message.put("command", "insertStorageItem");
+        message.put("params", jo.toString());
+        out.writeUTF(message.toString());
+    }
 
 }
