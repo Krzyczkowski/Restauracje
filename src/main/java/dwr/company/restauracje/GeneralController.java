@@ -3,6 +3,7 @@ package dwr.company.restauracje;
 import entity.Employee;
 import entity.Logins;
 import entity.Products;
+import entity.Restaurants;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,12 +52,13 @@ public class GeneralController implements Initializable {
     @FXML
     private TableView<Logins> logHistory;
     @FXML
-    private TableColumn nr,name,lastName,pesel,salary;
-
+    private TableColumn nr,name,lastName,pesel,salary,restuarant;
+    @FXML
+    private TextField searchEmployee;
     @FXML
     private TableColumn productName,productCategory,productPrice;
     @FXML
-    private TextField searchEmployee;
+    private TextField searchProduct;
 
     @FXML
     public TextField editWarnigLabel;
@@ -122,7 +124,10 @@ public class GeneralController implements Initializable {
         actualWindow = new GeneralWindowSet();
         actualWindow.setProductsScene();
         try{
-        loadProductToTable();
+            choseCategory.getItems().clear();
+            choseCategory.getItems().addAll(Client.getCategories());
+            choseCategory.getItems().add(null);
+            loadProductToTable();
         }catch (Exception er) {
             //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
@@ -245,6 +250,7 @@ public class GeneralController implements Initializable {
         lastName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
         pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
         salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
+        restuarant.setCellValueFactory(new PropertyValueFactory<Logins,String>("restaurantname"));
         //TODO:
         //trzebba bedzie zmienic zamiast id restaurant na nazwe restauracji - trzeba wykonac zapytanie ze zlaczeniem
         //restaurantID.setCellValueFactory(new PropertyValueFactory<Logins, String>("idrestaurant"));
@@ -256,17 +262,23 @@ public class GeneralController implements Initializable {
             employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
     }
+    @FXML
     protected void loadProductToTable()throws Exception {
-
         productName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
         productCategory.setCellValueFactory(new PropertyValueFactory<Products, String>("category"));
         productPrice.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
         productList.clear();
-//        if(search.getText().length()>0)
-//            productList.addAll(Client.getProducts(searchEmployee.getText()));
-//        else
+
+        if(searchProduct.getText().length()>0 || choseCategory.getValue() != null){
+            if(choseCategory.getValue() != null){
+                productList.addAll(Client.getProducts(searchProduct.getText(),choseCategory.getValue().toString()));
+            }
+            else
+                productList.addAll(Client.getProducts(searchProduct.getText(),""));
+        }
+        else
             productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
-        choseCategory.getItems().addAll(Client.getCategories());
+
     }
 }

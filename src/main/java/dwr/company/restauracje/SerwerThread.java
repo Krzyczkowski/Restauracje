@@ -116,9 +116,9 @@ class SerwerThread implements Runnable {
                 case "getAllRestaurants":
                     getAllRestaurants();
                     break;
-                case "getIdRestaurantByName":
-                    getIdRestaurantByName(JSON.get("params").toString());
-                    break;
+//                case "getIdRestaurantByName":
+//                    getIdRestaurantByName(JSON.get("params").toString());
+//                    break;
 
                 case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
                     System.out.println("SerwerThread.communication.getEmployeesFullInfo : params: "+JSON.get("params").toString());
@@ -169,7 +169,7 @@ class SerwerThread implements Runnable {
     }
 
     private Logins authorization(String userName, String password, String DBname) throws FileNotFoundException {
-        return db.authorization(userName,password,db.getDatebaseIdByName(DBname));
+        return db.authorization(userName,password,DBname);
     }
     static private void getAllEmployees() throws IOException {
         JSON.clear();
@@ -220,11 +220,11 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void getIdRestaurantByName(String name) throws IOException {
-        Integer i = db.getIdRestaurantByName(name);
-        System.out.println(i.toString());
-        out.writeUTF(i.toString());
-    }
+//    static private void getIdRestaurantByName(String name) throws IOException {
+//        Integer i = db.getIdRestaurantByName(name);
+//        System.out.println(i.toString());
+//        out.writeUTF(i.toString());
+//    }
 
 }
 

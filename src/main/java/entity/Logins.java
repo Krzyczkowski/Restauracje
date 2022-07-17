@@ -21,8 +21,8 @@ public class Logins {
     @Column(name = "levelaccess")
     private int levelaccess;
     @Basic
-    @Column(name = "idrestaurant")
-    private int idrestaurant;
+    @Column(name = "restaurantname")
+    private String restaurantname;
     @Basic
     @Column(name = "pesel")
     private Integer pesel;
@@ -32,13 +32,12 @@ public class Logins {
     @OneToOne
     @JoinColumn(name = "id")
     private Employee emp;
-
-    public Logins(int id, String login, String password, int levelaccess, int idrestaurant, Integer pesel, float salary,String name, String lastName) {
+    public Logins(int id, String login, String password, int levelaccess, String restaurantname, Integer pesel, float salary,String name, String lastName) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.levelaccess = levelaccess;
-        this.idrestaurant = idrestaurant;
+        this.restaurantname = restaurantname;
         this.pesel = pesel;
         this.salary = salary;
         emp=new Employee();
@@ -59,7 +58,7 @@ public class Logins {
         this.login = (String) jo.get("login");
         this.password = (String) jo.get("password");
         this.levelaccess = (int) (long) jo.get("levelaccess");
-        this.idrestaurant = (int)(long) jo.get("idrestaurant");
+        this.restaurantname = jo.get("restaurantname").toString();
         this.pesel  = (int) (long) jo.get("pesel");
         this.salary  = (float)(double) jo.get("salary");
         emp=new Employee();
@@ -101,12 +100,12 @@ public class Logins {
         this.levelaccess = levelaccess;
     }
 
-    public int getIdrestaurant() {
-        return idrestaurant;
+    public String getRestaurantname() {
+        return restaurantname;
     }
 
-    public void setIdrestaurant(int idrestaurant) {
-        this.idrestaurant = idrestaurant;
+    public void setRestaurantname(String restaurantname) {
+        this.restaurantname = restaurantname;
     }
 
     public Integer getPesel() {
@@ -146,7 +145,7 @@ public class Logins {
 
         if (id != logins.id) return false;
         if (levelaccess != logins.levelaccess) return false;
-        if (idrestaurant != logins.idrestaurant) return false;
+        if (restaurantname != null ? !restaurantname.equals(logins.restaurantname) : logins.restaurantname != null) return false;
         if (Float.compare(logins.salary, salary) != 0) return false;
         if (login != null ? !login.equals(logins.login) : logins.login != null) return false;
         if (password != null ? !password.equals(logins.password) : logins.password != null) return false;
@@ -161,7 +160,7 @@ public class Logins {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + levelaccess;
-        result = 31 * result + idrestaurant;
+        result = 31 * result +  (restaurantname != null ? restaurantname.hashCode() : 0);
         result = 31 * result + (pesel != null ? pesel.hashCode() : 0);
         result = 31 * result + (salary != +0.0f ? Float.floatToIntBits(salary) : 0);
         return result;
@@ -176,7 +175,7 @@ public class Logins {
         jo.put("pesel", pesel);
         jo.put("levelaccess", levelaccess);
         jo.put("salary", salary);
-        jo.put("idrestaurant", idrestaurant);
+        jo.put("restaurantname", restaurantname);
         return jo;
     }
 

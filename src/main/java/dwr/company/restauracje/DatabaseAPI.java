@@ -92,7 +92,7 @@ public class DatabaseAPI {
         emp.setLastname(e.getLastname());
         Logins l = em.find(Logins.class,e.getId());
         l.setId(e.getId());
-        l.setIdrestaurant(e.getIdrestaurant());
+        l.setRestaurantname(e.getRestaurantname());
         l.setLevelaccess(e.getLevelaccess());
         l.setLogin(e.getLogin());
         l.setPassword(e.getPassword());
@@ -113,15 +113,15 @@ public class DatabaseAPI {
         return jo;
     }
 
-    public int getDatebaseIdByName(String name){
-        em.getTransaction().begin();
-        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
-        List<Restaurants> list = query.getResultList();
-        em.getTransaction().commit();
-        if (list.size()==1)
-            return list.get(0).getId();
-        return 0;
-    }
+//    public int getDatebaseIdByName(String name){
+//        em.getTransaction().begin();
+//        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
+//        List<Restaurants> list = query.getResultList();
+//        em.getTransaction().commit();
+//        if (list.size()==1)
+//            return list.get(0).getId();
+//        return 0;
+//    }
     public JSONObject getAllRestaurants(){
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
@@ -133,9 +133,9 @@ public class DatabaseAPI {
         }
         return jo;
     }
-    public Logins authorization(String userName, String password,int id){
+    public Logins authorization(String userName, String password,String restaurant){
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT log FROM Logins log where log.login = ?1 and log.password = ?2 and log.idrestaurant = ?3").setParameter(1, userName).setParameter(2,password).setParameter(3,id);
+        Query query = em.createQuery("SELECT log FROM Logins log where log.login = ?1 and log.password = ?2 and log.restaurantname = ?3").setParameter(1, userName).setParameter(2,password).setParameter(3,restaurant);
         List<Logins> list = query.getResultList();
         em.getTransaction().commit();
         if(list.size()==1) return list.get(0);
@@ -144,15 +144,15 @@ public class DatabaseAPI {
         bad_login.setId(-1);
         return bad_login;
     }
-    public Integer getIdRestaurantByName(String name){
-        em.getTransaction().begin();
-        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
-        List<Restaurants> list = query.getResultList();
-        em.getTransaction().commit();
-        if (list.size()==1)
-            return list.get(0).getId();
-        return 0;
-    }
+//    public Integer getIdRestaurantByName(String name){
+//        em.getTransaction().begin();
+//        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
+//        List<Restaurants> list = query.getResultList();
+//        em.getTransaction().commit();
+//        if (list.size()==1)
+//            return list.get(0).getId();
+//        return 0;
+//    }
 
     public JSONObject getProducts() {
         JSONObject jo = new JSONObject();
@@ -169,7 +169,13 @@ public class DatabaseAPI {
     public JSONObject getProducts(String name,String category) {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 and prod.category = ?2 ").setParameter(1,name+"%").setParameter(2,category);
+        Query query;
+        if (category.equals(""))
+        {
+            query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 ").setParameter(1,name+"%");
+        }
+        else
+            query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 and prod.category = ?2 ").setParameter(1,name+"%").setParameter(2,category);
         List<Products> list = query.getResultList();
         em.getTransaction().commit();
         for(Integer i=0; i<list.size();i++){

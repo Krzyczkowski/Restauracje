@@ -81,13 +81,13 @@ public class popupWindowsControler implements Initializable{
         if (command.equals("update")){
             Client.updateEmployee(newName.getText(),newSecondName.getText(),
                     id,newLogin.getText(),newPassword.getText(),Integer.parseInt(newLevel.getText()),
-                    Client.getIdRestaurantByName((String)newPlace.getValue()),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
+                    (String)newPlace.getValue(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
 
         }
         else if (command.equals("insert")) {
             Client.insertEmployee(newName.getText(),newSecondName.getText(),
                     0,newLogin.toString(),newPassword.toString(),2,
-                        2,Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
+                        "macdonald",Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
         }
         GeneralController.toEditPopUp = null;
         Stage stage = (Stage) exitButton.getScene().getWindow();
