@@ -90,7 +90,7 @@
         </VBox>
       <AnchorPane layoutX="1.0" layoutY="-1.0" prefHeight="700.0" prefWidth="850.0">
          <children>
-            <TableView fx:id="tableWithProducts" layoutX="22.0" layoutY="92.0" prefHeight="229.0" prefWidth="789.0" style="-fx-background-color: bec5eb;">
+            <TableView fx:id="tableWithProducts" layoutX="22.0" layoutY="92.0" prefHeight="229.0" prefWidth="500" style="-fx-background-color: bec5eb;">
               <columns>
                 <TableColumn prefWidth="378.0" text="Produkt" />
                 <TableColumn prefWidth="410.0" text="Cena" />
@@ -117,19 +117,41 @@
                 <TableColumn prefWidth="75.0" text="C2" />
               </columns>
             </TableView>
-            <TextField fx:id="searchProduct" layoutX="23.0" layoutY="57.0" prefHeight="25.0" prefWidth="399.0" />
-            <ComboBox fx:id="categoreis" layoutX="443.0" layoutY="57.0" prefHeight="25.0" prefWidth="203.0" />
-            <Button fx:id="findProducts" layoutX="661.0" layoutY="57.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Szukaj">
+            <TextField fx:id="searchProduct" layoutX="23.0" layoutY="57.0" prefHeight="25.0" prefWidth="310.0" />
+            <ComboBox fx:id="categoreis" layoutX="363.0" layoutY="57.0" prefHeight="25.0" prefWidth="160.0" />
+            <Button fx:id="findProducts" layoutX="545.0" layoutY="54.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Szukaj">
                <font>
                   <Font name="Calibri" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="addToOrder" layoutX="422.0" layoutY="338.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="44.0" text="+">
+
+
+             <Label layoutX="545.0" layoutY="144.0" prefHeight="43.0" prefWidth="319.0" text="Klient" textFill="#032475">
+                 <font>
+                     <Font name="Calibri Bold" size="30.0" />
+                 </font>
+             </Label>
+             <Label layoutX="545.0" layoutY="180.0" prefHeight="43.0" prefWidth="319.0" text="Numer Telefonu" textFill="#032475">
+                 <font>
+                     <Font name="Calibri Bold" size="15.0" />
+                 </font>
+             </Label>
+             <TextField fx:id="clientPhone" layoutX="545.0" layoutY="210.0" prefHeight="25.0" prefWidth="260.0" />
+             <Label layoutX="545.0" layoutY="230.0" prefHeight="43.0" prefWidth="319.0" text="Adres" textFill="#032475">
+                 <font>
+                     <Font name="Calibri Bold" size="15.0" />
+                 </font>
+             </Label>
+             <TextField fx:id="clientAddress" layoutX="545.0" layoutY="260.0" prefHeight="25.0" prefWidth="260.0" />
+
+
+
+            <Button fx:id="addToOrder" layoutX="422.0" layoutY="338.0" onMouseClicked="#addOrder" mnemonicParsing="false" prefHeight="41.0" prefWidth="44.0" text="+">
                <font>
                   <Font name="Calibri" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="newOrderSave" layoutX="23.0" layoutY="652.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Zaywierdź">
+            <Button fx:id="newOrderSave" layoutX="23.0" layoutY="652.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Zatwierdź">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>

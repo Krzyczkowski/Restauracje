@@ -327,4 +327,8 @@ public class GeneralController implements Initializable {
             Client.deleteStorage(toEditStoragePopUp);
         }
     }
+
+    public void addOrder(MouseEvent mouseEvent) {
+
+    }
 }

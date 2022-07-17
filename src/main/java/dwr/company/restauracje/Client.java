@@ -284,7 +284,7 @@ class Client {
         message.clear();
         JSONObject jo = s.toJSON();
         System.out.println(jo.toString());
-        message.put("command", "updateStorageItem");
+        message.put("command", "updateStorageAmount");
         message.put("params", jo);
         out.writeUTF(message.toString());
     }
