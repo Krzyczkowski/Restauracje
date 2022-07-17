@@ -57,6 +57,8 @@ public class GeneralController implements Initializable {
     @FXML
     private TableColumn productName,productCategory,productPrice;
     @FXML
+    private TableColumn itemName,itemAmount;
+    @FXML
     private TextField searchProduct;
 
     @FXML
@@ -74,6 +76,7 @@ public class GeneralController implements Initializable {
     //Elements dependent on data base
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private ObservableList<Products> productList = FXCollections.observableArrayList();
+    private ObservableList<Storage> itemList = FXCollections.observableArrayList();
     public static Logins toEditPopUp;
 
     @Override
@@ -133,7 +136,13 @@ public class GeneralController implements Initializable {
     }
 
     @FXML
-    protected void warehouseSection() throws IOException {
+    protected void warehouseSection() throws Exception {
+        try {
+            loadStorageToTable();
+        }catch (Exception er) {
+        //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+    }
+
         actualWindow = new GeneralWindowSet();
         actualWindow.setWarehouseScene();
     }

@@ -97,8 +97,8 @@
             </Label>
             <TableView fx:id="tabelWithComponents" layoutX="39.0" layoutY="69.0" prefHeight="598.0" prefWidth="417.0" style="-fx-background-color: bec5eb;">
               <columns>
-                <TableColumn prefWidth="202.0" text="Nazwa" />
-                <TableColumn prefWidth="214.0" text="Ilość" />
+                <TableColumn fx:id="itemName" prefWidth="202.0" text="Nazwa" />
+                <TableColumn fx:id="itemAmount" prefWidth="214.0" text="Ilość" />
               </columns>
             </TableView>
             <ListView fx:id="listWithNeed" layoutX="521.0" layoutY="379.0" prefHeight="287.0" prefWidth="273.0" style="-fx-background-color: #e88956;" />
@@ -117,7 +117,7 @@
                   <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="deletComponent" layoutX="543.0" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Usuń">
+            <Button fx:id="deleteComponent" layoutX="543.0" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Usuń">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>

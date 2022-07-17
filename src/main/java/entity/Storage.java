@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,13 @@ public class Storage {
     @Basic
     @Column(name = "name")
     private String name;
+
+    public Storage(){}
+    public Storage(JSONObject jo) {
+        id =(int)(long) jo.get("id");
+        amount =(int)(long) jo.get("amount");
+        name =jo.get("name").toString();
+    }
 
     public int getId() {
         return id;
@@ -59,5 +68,12 @@ public class Storage {
         result = 31 * result + amount;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+    public JSONObject toJSON(){
+        JSONObject jo = new JSONObject();
+        jo.put("id",id);
+        jo.put("name",name);
+        jo.put("amount",amount);
+        return jo;
     }
 }
