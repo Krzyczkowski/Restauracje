@@ -15,10 +15,22 @@ public class Earnings {
     @Column(name = "earning")
     private float earning;
 
+    public String getRestuarant() {
+        return restuarant;
+    }
+
+    public void setRestuarant(String restuarant) {
+        this.restuarant = restuarant;
+    }
+
+    @Basic
+    @Column(name = "restaurant")
+    private String restuarant;
     public Earnings(){}
     public Earnings (JSONObject jo){
         this.dates = (Date) jo.get("dates");
         this.earning = (float) jo.get("earning");
+        this.restuarant = jo.get("restaurant").toString();
     }
     public JSONObject toJSON (){
         JSONObject jo = new JSONObject();
