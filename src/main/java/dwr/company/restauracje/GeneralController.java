@@ -84,7 +84,7 @@ public class GeneralController implements Initializable {
     @FXML
     private Button minimalizeButton;
     @FXML
-    private Button menuButton1, menuButton2, menuButton3, menuButton4;
+    private Button menuButton0, menuButton1, menuButton2, menuButton3, menuButton4;
     @FXML
     private Button findEmployee, editEmployee, addEmployee;
     @FXML
@@ -116,12 +116,22 @@ public class GeneralController implements Initializable {
             userIcon.setFill(new ImagePattern(iconImage));
             userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
             loadEmployesToTable();
-            //loadStorageToTable();
             tempOrder = new ArrayList<>();
-
+            acces();
             //loadProductToTable();
         } catch (Exception er) {
            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+        }
+    }
+
+    private void acces() {
+        if (Client.getLevelacces()<3)
+        {
+            if(Client.getLevelacces()<2){
+                menuButton1.setDisable(true);
+                menuButton2.setDisable(true);
+                menuButton3.setDisable(true);
+            }
         }
     }
 
@@ -144,6 +154,7 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void employesSection() throws Exception {
+        acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setEmployesScene();
         try{
@@ -156,6 +167,7 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void productSection() throws Exception {
+        acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setProductsScene();
         try{
@@ -170,6 +182,7 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void warehouseSection() throws Exception {
+        acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setWarehouseScene();
         try {
@@ -181,12 +194,14 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void historySection() throws IOException {
+        acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setHistoryScene();
     }
 
     @FXML
     protected void orderSection() throws IOException {
+        acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setOrderScene();
         try{

@@ -21,6 +21,11 @@ class Client {
     private static DataInputStream in; // reading from server     // scanner for input
     private static JSONObject message = new JSONObject();
 
+    public static int getLevelacces() {
+        return levelacces;
+    }
+
+    private static int levelacces;
     /**
      * Polaczenie z serwerem obslugujacym baze danych
      * @param userName nazwa użytkownika API
@@ -38,7 +43,9 @@ class Client {
         message.put("DBName", DBName);
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return message.get("result").toString().equals("true");
+        levelacces = (int) (long) message.get("result");
+        System.out.println(levelacces);
+        return levelacces>0;
     }
 
     protected static boolean connectConsole(String host, Integer port, String userName, String userPass, String DBName) throws Exception {

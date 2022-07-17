@@ -69,13 +69,13 @@ class SerwerThread implements Runnable {
         if (user.getId() > 0) {
             clientAccessLevel = user.getLevelaccess();
             JSON = new JSONObject();
-            JSON.put("result", "true");
+            JSON.put("result", user.getLevelaccess());
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
             communication();
         } else {
             JSON = new JSONObject();
-            JSON.put("result", "false");
+            JSON.put("result", 0);
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
             authorization();
