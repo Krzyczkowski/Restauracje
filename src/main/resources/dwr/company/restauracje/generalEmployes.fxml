@@ -182,6 +182,5 @@
             </HBox>
          </children>
       </GridPane>
-      <Label text="Label" />
     </children>
 </AnchorPane>

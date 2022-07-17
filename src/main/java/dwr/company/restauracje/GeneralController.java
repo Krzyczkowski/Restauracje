@@ -47,11 +47,16 @@ public class GeneralController implements Initializable {
     @FXML
     private TableView<Products> tableWithProducts;
     @FXML
+    private TableView<Products> tableWithProductsOrders;
+    @FXML
     private TableView<Storage>tabelWithComponents;
     @FXML
     private TableView<Logins> logHistory;
     @FXML
     private TableColumn nr,name,lastName,pesel,salary,restuarant,amount;
+
+    @FXML
+    private TableColumn priceProductOrder,nameProductOrder;
     @FXML
     private TextField searchEmployee;
     @FXML
@@ -64,6 +69,8 @@ public class GeneralController implements Initializable {
     @FXML
     public TextField editWarnigLabel;
     @FXML
+    public TextField searchProductOrders;
+    @FXML
     public TextField amountOfComponent;
 
     //Buttons
@@ -75,6 +82,8 @@ public class GeneralController implements Initializable {
     private Button findEmployee, editEmployee, addEmployee;
     @FXML
     private ComboBox choseCategory;
+    @FXML
+    private ComboBox categoriesOrders;
     //Elements dependent on data base
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private ObservableList<Products> productList = FXCollections.observableArrayList();
@@ -146,7 +155,7 @@ public class GeneralController implements Initializable {
         try {
             loadStorageToTable();
         }catch (Exception er) {
-            System.out.println(er);      // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+            //System.out.println(er);      // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
     }
 
 
@@ -162,6 +171,15 @@ public class GeneralController implements Initializable {
     protected void orderSection() throws IOException {
         actualWindow = new GeneralWindowSet();
         actualWindow.setOrderScene();
+        System.out.println("orders");
+        try{
+            categoriesOrders.getItems().clear();
+            categoriesOrders.getItems().addAll(Client.getCategories());
+            categoriesOrders.getItems().add(null);
+            loadProductToTableOrders();
+        }catch (Exception er) {
+            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+        }
     }
 
     @FXML
@@ -292,6 +310,23 @@ public class GeneralController implements Initializable {
         else
             productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
+
+    }
+    @FXML
+    protected void loadProductToTableOrders()throws Exception {
+        nameProductOrder.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
+        priceProductOrder.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
+        productList.clear();
+        if(searchProductOrders.getText().length()>0 || categoriesOrders.getValue() != null){
+            if(categoriesOrders.getValue() != null){
+                productList.addAll(Client.getProducts(searchProductOrders.getText(),categoriesOrders.getValue().toString()));
+            }
+            else
+                productList.addAll(Client.getProducts(searchProductOrders.getText(),""));
+        }
+        else
+            productList.addAll(Client.getProducts());
+        tableWithProductsOrders.setItems(productList);
 
     }
     @FXML
