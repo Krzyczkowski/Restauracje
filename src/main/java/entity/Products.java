@@ -19,12 +19,25 @@ public class Products {
     @Basic
     @Column(name = "price")
     private float price;
+
+    public String getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    @Basic
+    @Column(name = "restaurant")
+    private String restaurant ;
     public Products(){}
     public Products(JSONObject jo) {
         id = (int) (long) jo.get("id");
         name = jo.get("name").toString();
         category = jo.get("category").toString();
         price = (float) (double) jo.get("price");
+        restaurant = jo.get("restaurant").toString();
     }
     public JSONObject toJSON(){
         JSONObject jo = new JSONObject();
@@ -32,6 +45,7 @@ public class Products {
         jo.put("category",category);
         jo.put("price",price);
         jo.put("name",name);
+        jo.put("restaurant",restaurant);
         return jo;
     }
     public int getId() {

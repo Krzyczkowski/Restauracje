@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -22,6 +24,47 @@ public class Orders {
     @Column(name = "dates")
     private Date dates;
 
+    public Orders(int id, int idemployee, String idclient, float totalprice, Date dates, String restaurant) {
+        this.id = id;
+        this.idemployee = idemployee;
+        this.idclient = idclient;
+        this.totalprice = totalprice;
+        this.dates = dates;
+        this.restaurant = restaurant;
+    }
+
+    public String getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
+    public Orders(){}
+
+    public Orders(JSONObject jo) {
+        id = (int) (long) jo.get("id");
+        idemployee =(int) (long) jo.get("idemployee");
+        idclient = jo.get("idclient" ).toString();
+        totalprice = (float) (double) jo.get("totalprice");
+        dates =(Date) jo.get("dates");
+        restaurant=jo.get("restaurant").toString();
+    }
+    public JSONObject toJSON(){
+        JSONObject jo = new JSONObject();
+        jo.put("id",id);
+        jo.put("idemployee",idemployee);
+        jo.put("idclient",idclient);
+        jo.put("totalprice",totalprice);
+        jo.put("dates",dates);
+        jo.put("restaurant",restaurant);
+
+        return jo;
+    }
+
+    @Basic
+    @Column(name = "restaurant")
+    private String restaurant ;
 
 
     public int getId() {
