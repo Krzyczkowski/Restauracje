@@ -56,7 +56,6 @@ public class popupWindowsControler implements Initializable{
             try {
                 newPlace.getItems().addAll(Client.getAllRestaurants());
                 for (int i = 0; i<newPlace.getItems().size();i++){
-                    System.out.println(newPlace.getItems().get(i));
                     if (newPlace.getItems().get(i).toString().equals( GeneralController.toEditPopUp.getRestaurantname()))
                     {
                         newPlace.getSelectionModel().select(i);

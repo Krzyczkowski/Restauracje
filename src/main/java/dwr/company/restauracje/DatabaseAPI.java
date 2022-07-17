@@ -86,7 +86,6 @@ public class DatabaseAPI {
 
     public void updateEmployee(Logins e){
         em.getTransaction().begin();
-        System.out.println(e);
         em.merge(e);
         em.getTransaction().commit();
     }
@@ -193,7 +192,7 @@ public class DatabaseAPI {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT st FROM Storage st");
-        List<Categories> list = query.getResultList();
+        List<Storage> list = query.getResultList();
         em.getTransaction().commit();
         for(Integer i=0; i<list.size();i++){
             jo.put(i.toString(),list.get(i).toJSON());
