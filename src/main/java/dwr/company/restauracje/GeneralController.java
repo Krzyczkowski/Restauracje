@@ -90,6 +90,8 @@ public class GeneralController implements Initializable {
     @FXML
     private ComboBox choseCategory;
     @FXML
+    private TextField clientPhone,clientAddress;
+    @FXML
     private ComboBox categoriesOrders;
     //Elements dependent on data base
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
@@ -413,5 +415,12 @@ public class GeneralController implements Initializable {
         for(int i = 0; i<positionList.size();i++)
             f+=tableWithPositions.getItems().get(i).getProductPrice();
         orderPrice.setText(String.valueOf(f)) ;
+    }
+
+    private Clients getClientInfo(){
+        Clients c = new Clients();
+        c.setAddress(clientAddress.getText());
+        c.setPhone(clientPhone.getText());
+        return c;
     }
 }
