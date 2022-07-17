@@ -27,7 +27,7 @@ public class Storage {
     }
     public Storage(String name, int amount){this.id=0;this.name=name;this.amount=amount;}
     public Storage(JSONObject jo) {
-        id =0;
+        id =(int)(long) jo.get("id");
         amount =(int)(long) jo.get("amount");
         name =jo.get("name").toString();
     }
@@ -84,7 +84,7 @@ public class Storage {
     }
     public JSONObject toJSON(){
         JSONObject jo = new JSONObject();
-        jo.put("id","0");
+        jo.put("id",id);
         jo.put("name",name);
         jo.put("amount",amount);
         return jo;

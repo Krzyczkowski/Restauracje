@@ -209,7 +209,9 @@ public class DatabaseAPI {
 
     public void updateStorageAmount(Storage st) {
         em.getTransaction().begin();
-        em.merge(st);
+        Storage s = em.find(Storage.class,st.getId());
+        s.setAmount(st.getAmount());
+        em.merge(s);
         em.getTransaction().commit();
     }
 }

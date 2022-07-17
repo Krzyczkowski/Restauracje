@@ -57,7 +57,7 @@ public class GeneralController implements Initializable {
     @FXML
     private TableColumn productName,productCategory,productPrice;
     @FXML
-    private TableColumn itemName,itemAmount;
+    private TableColumn itemName,itemAmount,itemId;
     @FXML
     private TextField searchProduct;
 
@@ -296,19 +296,21 @@ public class GeneralController implements Initializable {
     }
     @FXML
     protected void loadStorageToTable()throws Exception {
+        itemId.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("id"));
         itemName.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
         itemAmount.setCellValueFactory(new PropertyValueFactory<Storage, String>("amount"));
         itemList.clear();
-
         itemList.addAll(Client.getStorage());
         tabelWithComponents.setItems(itemList);
 
     }
 
-    public void editAmountStorage(MouseEvent mouseEvent) {
+    public void editAmountStorage(MouseEvent mouseEvent) throws IOException {
         if(Integer.valueOf(amountOfComponent.getText())>=-99999999){
-            Integer v = Integer.valueOf(amountOfComponent.getText());
-            Client.updateStorageItem();
+            toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
+            toEditStoragePopUp.setAmount(Integer.valueOf(amountOfComponent.getText()));
+            System.out.println(toEditStoragePopUp.getId());
+            Client.updateStorageItem(toEditStoragePopUp);
         }
 
 

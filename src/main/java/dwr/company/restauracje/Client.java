@@ -282,7 +282,7 @@ class Client {
     }
     public static void updateStorageItem(Storage s) throws IOException {
         message.clear();
-        JSONObject jo = s.toJSONI();
+        JSONObject jo = s.toJSON();
         System.out.println(jo.toString());
         message.put("command", "updateStorageItem");
         message.put("params", jo);
