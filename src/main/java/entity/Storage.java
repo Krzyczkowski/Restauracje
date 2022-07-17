@@ -31,6 +31,11 @@ public class Storage {
         amount =(int)(long) jo.get("amount");
         name =jo.get("name").toString();
     }
+    public Storage(JSONObject jo,String s) {
+        id=
+        amount =(int)(long) jo.get("amount");
+        name =jo.get("name").toString();
+    }
 
     public int getId() {
         return id;
@@ -80,6 +85,12 @@ public class Storage {
     public JSONObject toJSON(){
         JSONObject jo = new JSONObject();
         jo.put("id","0");
+        jo.put("name",name);
+        jo.put("amount",amount);
+        return jo;
+    }
+    public JSONObject toJSONI(){
+        JSONObject jo = new JSONObject();
         jo.put("name",name);
         jo.put("amount",amount);
         return jo;

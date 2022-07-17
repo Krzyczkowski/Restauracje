@@ -142,7 +142,10 @@ class SerwerThread implements Runnable {
                     getStorage();
                     break;
                 case "insertStorageItem":
-                    insertStorageItem(new Storage((JSONObject) JSON.get("params")) );
+                    insertStorageItem(new Storage((JSONObject) JSON.get("params")));
+                    break;
+                case "updateStorageAmount":
+                    updateStorageAmount(new Storage((JSONObject) JSON.get("params")));
                     break;
 
             }else{
@@ -153,6 +156,10 @@ class SerwerThread implements Runnable {
         db.close();
     }
 
+    private void updateStorageAmount(Storage st) {
+        JSON.clear();
+        db.updateStorageAmount(st);
+    }
 
 
     private void getCategories() throws IOException {
@@ -208,7 +215,7 @@ class SerwerThread implements Runnable {
         db.deleteEmployee(id);
     }
     static private void updateEmployee(Logins e) {
-        //JSON.clear();
+        JSON.clear();
         db.updateEmployee(e);
     }
     static private void getEmployeesFullInfo() throws IOException {

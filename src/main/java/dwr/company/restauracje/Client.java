@@ -274,8 +274,8 @@ class Client {
     public static void insertStorageItem(Storage s) throws IOException {
         message.clear();
         s.setId(0);
-        JSONObject jo = s.toJSON();
-        System.out.println(s.getId()+s.getAmount()+s.getName());
+        JSONObject jo = s.toJSONI();
+        System.out.println(jo.toString());
         message.put("command", "insertStorageItem");
         message.put("params", jo);
         out.writeUTF(message.toString());

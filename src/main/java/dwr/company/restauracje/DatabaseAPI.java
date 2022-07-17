@@ -206,6 +206,12 @@ public class DatabaseAPI {
         em.getTransaction().commit();
 
     }
+
+    public void updateStorageAmount(Storage st) {
+        em.getTransaction().begin();
+        em.merge(st);
+        em.getTransaction().commit();
+    }
 }
 
 
