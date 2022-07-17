@@ -113,7 +113,6 @@ class SerwerThread implements Runnable {
                     deleteEmployee((int) (long) JSON.get("params"));
                     break;
                 case "updateEmployee":
-                    System.out.println("git");
                     updateEmployee(new Logins((JSONObject) JSON.get("params")) );
                     break;
                 case "getAllRestaurants":
@@ -210,7 +209,6 @@ class SerwerThread implements Runnable {
     }
     static private void updateEmployee(Logins e) {
         //JSON.clear();
-        System.out.println("git2");
         db.updateEmployee(e);
     }
     static private void getEmployeesFullInfo() throws IOException {
@@ -233,6 +231,7 @@ class SerwerThread implements Runnable {
     }
     static private void getStorage() throws IOException {
         JSON.clear();
+        System.out.println("git");
         JSON = db.getStorage();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());

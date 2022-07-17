@@ -86,7 +86,6 @@ public class DatabaseAPI {
 
     public void updateEmployee(Logins e){
         em.getTransaction().begin();
-        System.out.println(e);
         em.merge(e);
         em.getTransaction().commit();
     }
