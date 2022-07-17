@@ -424,4 +424,8 @@ public class GeneralController implements Initializable {
         c.setPhone(clientPhone.getText());
         return c;
     }
+    public void  setClientLocal(){
+        clientAddress.setText("LOKAL");
+        clientPhone.setText("000000000");
+    }
 }

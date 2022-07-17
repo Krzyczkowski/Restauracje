@@ -133,6 +133,11 @@
                      <Font name="Calibri Bold" size="30.0" />
                  </font>
              </Label>
+             <Button  layoutX="630.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#setClientLocal" prefHeight="32.0" prefWidth="130.0" text="LOKAL">
+                 <font>
+                     <Font name="Calibri" size="19.0" />
+                 </font>
+             </Button>
              <Label layoutX="545.0" layoutY="180.0" prefHeight="43.0" prefWidth="319.0" text="Numer Telefonu" textFill="#032475">
                  <font>
                      <Font name="Calibri Bold" size="15.0" />
@@ -145,7 +150,6 @@
                  </font>
              </Label>
              <TextField fx:id="clientAddress" layoutX="545.0" layoutY="260.0" prefHeight="25.0" prefWidth="260.0" />
-
 
 
             <Button fx:id="addToOrder" layoutX="422.0" layoutY="338.0" onMouseClicked="#addProductToOrder" mnemonicParsing="false" prefHeight="41.0" prefWidth="44.0" text="+">
