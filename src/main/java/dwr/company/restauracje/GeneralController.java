@@ -316,14 +316,14 @@ public class GeneralController implements Initializable {
         productCategory.setCellValueFactory(new PropertyValueFactory<Products, String>("category"));
         productPrice.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
         productList.clear();
-        if(searchProduct.getText().length()>0 || choseCategory.getValue() != null){
-            if(choseCategory.getValue() != null){
-                productList.addAll(Client.getProducts(searchProduct.getText(),choseCategory.getValue().toString()));
-            }
-            else
-                productList.addAll(Client.getProducts(searchProduct.getText(),""));
-        }
-        else
+//        if(searchProduct.getText().length()>0 || choseCategory.getValue() != null){
+//            if(choseCategory.getValue() != null){
+//                productList.addAll(Client.getProducts(searchProduct.getText(),choseCategory.getValue().toString()));
+//            }
+//            else
+//                productList.addAll(Client.getProducts(searchProduct.getText(),""));
+//        }
+//        else
             productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
     }

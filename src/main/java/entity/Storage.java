@@ -19,6 +19,11 @@ public class Storage {
     @Column(name = "name")
     private String name;
 
+
+
+    @Basic
+    @Column(name = "restaurant")
+    private String restaurant;
     public Storage(){
 
         amount = 0;
@@ -30,12 +35,19 @@ public class Storage {
         id =    (int)(long) jo.get("id");
         amount =(int)(long) jo.get("amount");
         name =jo.get("name").toString();
+        restaurant = jo.get("restaurant").toString();
     }
     public Storage(JSONObject jo,String s) {
         amount =(int)(long) jo.get("amount");
         name =jo.get("name").toString();
     }
+    public String getRestaurant() {
+        return restaurant;
+    }
 
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
     public int getId() {
         return id;
     }
@@ -86,6 +98,7 @@ public class Storage {
         jo.put("id",id);
         jo.put("name",name);
         jo.put("amount",amount);
+        jo.put("restaurant",restaurant);
         return jo;
     }
     public JSONObject toJSONI(){

@@ -193,10 +193,13 @@ public class DatabaseAPI {
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT st FROM Storage st");
         List<Storage> list = query.getResultList();
+        System.out.println("git");
         em.getTransaction().commit();
+        System.out.println(list.size());
         for(Integer i=0; i<list.size();i++){
             jo.put(i.toString(),list.get(i).toJSON());
         }
+        System.out.println("git");
         return jo;
     }
     public void insertStorageItem(Storage s) {
