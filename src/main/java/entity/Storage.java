@@ -29,6 +29,7 @@ public class Storage {
         amount = 0;
         name = "brak";
         id = 0;
+        restaurant="0";
     }
     public Storage(String name, int amount){this.id=0;this.name=name;this.amount=amount;}
     public Storage(JSONObject jo) {
