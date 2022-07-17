@@ -280,5 +280,13 @@ class Client {
         message.put("params", jo);
         out.writeUTF(message.toString());
     }
+    public static void updateStorageItem(Storage s) throws IOException {
+        message.clear();
+        JSONObject jo = s.toJSONI();
+        System.out.println(jo.toString());
+        message.put("command", "updateStorageItem");
+        message.put("params", jo);
+        out.writeUTF(message.toString());
+    }
 
 }
