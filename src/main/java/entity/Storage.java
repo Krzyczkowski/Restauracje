@@ -27,12 +27,11 @@ public class Storage {
     }
     public Storage(String name, int amount){this.id=0;this.name=name;this.amount=amount;}
     public Storage(JSONObject jo) {
-        id =(int)(long) jo.get("id");
+        id =    (int)(long) jo.get("id");
         amount =(int)(long) jo.get("amount");
         name =jo.get("name").toString();
     }
     public Storage(JSONObject jo,String s) {
-        id=
         amount =(int)(long) jo.get("amount");
         name =jo.get("name").toString();
     }

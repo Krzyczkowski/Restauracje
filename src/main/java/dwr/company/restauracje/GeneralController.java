@@ -306,7 +306,7 @@ public class GeneralController implements Initializable {
     }
 
     public void editAmountStorage(MouseEvent mouseEvent) throws IOException {
-        if(Integer.valueOf(amountOfComponent.getText())>=-99999999){
+        if(Integer.valueOf(amountOfComponent.getText())>=-99999999 && !tabelWithComponents.getSelectionModel().isEmpty()){
             toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
             toEditStoragePopUp.setAmount(Integer.valueOf(amountOfComponent.getText()));
             System.out.println(toEditStoragePopUp.getId());
@@ -319,5 +319,12 @@ public class GeneralController implements Initializable {
     public void selectComponent(MouseEvent mouseEvent) {
         toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
         amountOfComponent.setText(String.valueOf(toEditStoragePopUp.getAmount()));
+    }
+
+    public void deleteStorage(MouseEvent mouseEvent) throws IOException {
+        if( !tabelWithComponents.getSelectionModel().isEmpty()) {
+            toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
+            Client.deleteStorage(toEditStoragePopUp);
+        }
     }
 }

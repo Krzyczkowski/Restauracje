@@ -289,4 +289,12 @@ class Client {
         out.writeUTF(message.toString());
     }
 
+    public static void deleteStorage(Storage s) throws IOException {
+        message.clear();
+        JSONObject jo = s.toJSON();
+        System.out.println(jo.toString());
+        message.put("command", "deleteStorageItem");
+        message.put("params", jo.toString());
+        out.writeUTF(message.toString());
+    }
 }

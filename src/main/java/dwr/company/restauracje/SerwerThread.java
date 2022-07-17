@@ -147,13 +147,26 @@ class SerwerThread implements Runnable {
                 case "updateStorageItem":
                     updateStorageAmount(new Storage((JSONObject) JSON.get("params")));
                     break;
-
+                case "deleteStorageItem":
+                    //System.out.println(JSON.get("params"));
+                    JSONObject jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                    System.out.println(jo);
+                    Storage st = new Storage(jo);
+                    System.out.println("git");
+                    deleteStorageItem(st);
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 out.writeUTF("brak takich uprawnien!!");
             }
         }
         db.close();
+    }
+
+    private void deleteStorageItem(Storage st) {
+        JSON.clear();
+        System.out.println("git");
+        db.deleteItem(st);
     }
 
     private void updateStorageAmount(Storage st) {

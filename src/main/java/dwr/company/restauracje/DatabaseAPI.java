@@ -214,6 +214,13 @@ public class DatabaseAPI {
         em.merge(s);
         em.getTransaction().commit();
     }
+
+    public void deleteItem(Storage st) {
+        em.getTransaction().begin();
+        Storage s = em.find(Storage.class, st.getId());
+        em.remove(s);
+        em.getTransaction().commit();
+    }
 }
 
 

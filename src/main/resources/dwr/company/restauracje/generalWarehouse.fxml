@@ -118,7 +118,7 @@
                   <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="deleteComponent" layoutX="543.0" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Usuń">
+            <Button fx:id="deleteComponent" layoutX="543.0" onMouseClicked="#deleteStorage" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="246.0" text="Usuń">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
