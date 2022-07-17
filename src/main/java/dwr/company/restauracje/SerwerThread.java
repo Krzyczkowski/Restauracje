@@ -160,7 +160,7 @@ class SerwerThread implements Runnable {
                     break;
             }else{
                 System.out.println("brak takich uprawnien!!");
-                out.writeUTF("brak takich uprawnien!!");
+                //out.writeUTF("brak takich uprawnien!!");
             }
         }
         db.close();

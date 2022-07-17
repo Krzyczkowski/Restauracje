@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class GeneralController implements Initializable {
+    public Label orderPrice;
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -113,7 +114,7 @@ public class GeneralController implements Initializable {
             userIcon.setFill(new ImagePattern(iconImage));
             userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
             loadEmployesToTable();
-            loadStorageToTable();
+            //loadStorageToTable();
             tempOrder = new ArrayList<>();
             //loadProductToTable();
         } catch (Exception er) {
@@ -172,9 +173,7 @@ public class GeneralController implements Initializable {
             loadStorageToTable();
         }catch (Exception er) {
             //System.out.println(er);      // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
-    }
-
-
+        }
     }
 
     @FXML
@@ -298,10 +297,6 @@ public class GeneralController implements Initializable {
         pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
         salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
         restuarant.setCellValueFactory(new PropertyValueFactory<Logins,String>("restaurantname"));
-        //TODO:
-        //trzebba bedzie zmienic zamiast id restaurant na nazwe restauracji - trzeba wykonac zapytanie ze zlaczeniem
-        //restaurantID.setCellValueFactory(new PropertyValueFactory<Logins, String>("idrestaurant"));
-
         employeesList.clear();
         if(searchEmployee.getText().length()>0)
             employeesList.addAll(Client.getEmployeesFullInfo(searchEmployee.getText()));
@@ -310,12 +305,11 @@ public class GeneralController implements Initializable {
         employeeTable.setItems(employeesList);
     }
     @FXML
-    protected void loadProductToTable()throws Exception {
+    public  void loadProductToTable()throws Exception {
         productName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
         productCategory.setCellValueFactory(new PropertyValueFactory<Products, String>("category"));
         productPrice.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
         productList.clear();
-
         if(searchProduct.getText().length()>0 || choseCategory.getValue() != null){
             if(choseCategory.getValue() != null){
                 productList.addAll(Client.getProducts(searchProduct.getText(),choseCategory.getValue().toString()));
@@ -326,7 +320,6 @@ public class GeneralController implements Initializable {
         else
             productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
-
     }
     @FXML
     protected void loadProductToTableOrders()throws Exception {
@@ -366,15 +359,13 @@ public class GeneralController implements Initializable {
 
     }
 
-    public void editAmountStorage(MouseEvent mouseEvent) throws IOException {
+    public void editAmountStorage(MouseEvent mouseEvent) throws Exception {
         if(Integer.valueOf(amountOfComponent.getText())>=-99999999 && !tabelWithComponents.getSelectionModel().isEmpty()){
             toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
             toEditStoragePopUp.setAmount(Integer.valueOf(amountOfComponent.getText()));
             System.out.println(toEditStoragePopUp.getId());
             Client.updateStorageItem(toEditStoragePopUp);
         }
-
-
     }
 
     public void selectComponent(MouseEvent mouseEvent) {
@@ -397,7 +388,12 @@ public class GeneralController implements Initializable {
             tempOrder.clear();
             tempOrder.add(pos);
             positionList.addAll(tempOrder);
+            float f=0;
             tableWithPositions.setItems(positionList);
+            for(int i = 0; i<positionList.size();i++)
+                f+=tableWithPositions.getItems().get(i).getProductPrice();
+            orderPrice.setText(String.valueOf(f)) ;
+            amountOfProductsInOrder.setText("1");
         }
 
     }
