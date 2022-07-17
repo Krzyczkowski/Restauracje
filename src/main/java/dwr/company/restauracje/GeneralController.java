@@ -305,10 +305,11 @@ public class GeneralController implements Initializable {
 
     }
 
-    public void editAmountStorage(MouseEvent mouseEvent) {
+    public void editAmountStorage(MouseEvent mouseEvent) throws IOException {
         if(Integer.valueOf(amountOfComponent.getText())>=-99999999){
             Integer v = Integer.valueOf(amountOfComponent.getText());
-            Client.updateStorageItem();
+            toEditStoragePopUp.setAmount(v);
+            Client.updateStorageItem(toEditStoragePopUp);
         }
 
 
