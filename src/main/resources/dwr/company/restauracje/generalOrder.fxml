@@ -111,10 +111,11 @@
                   <Font name="Calibri Bold" size="32.0" />
                </font>
             </Label>
-            <TableView fx:id="tableWithOrder" layoutX="22.0" layoutY="413.0" prefHeight="216.0" prefWidth="789.0" style="-fx-background-color: #59e397;">
+            <TableView fx:id="tableWithPositions" layoutX="22.0" layoutY="413.0" prefHeight="216.0" prefWidth="789.0" style="-fx-background-color: #59e397;">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="PositionsProduct" prefWidth="75.0" text="Produkt" />
+                <TableColumn fx:id="PositionsAmount" prefWidth="75.0" text="Ilość" />
+                  <TableColumn fx:id="PositionsCost" prefWidth="75.0" text="Cena" />
               </columns>
             </TableView>
             <TextField fx:id="searchProductOrders" layoutX="23.0" layoutY="57.0" prefHeight="25.0" prefWidth="310.0" />
@@ -146,11 +147,19 @@
 
 
 
-            <Button fx:id="addToOrder" layoutX="422.0" layoutY="338.0" onMouseClicked="#addOrder" mnemonicParsing="false" prefHeight="41.0" prefWidth="44.0" text="+">
+            <Button fx:id="addToOrder" layoutX="422.0" layoutY="338.0" onMouseClicked="#addProductToOrder" mnemonicParsing="false" prefHeight="41.0" prefWidth="44.0" text="+">
                <font>
                   <Font name="Calibri" size="22.0" />
                </font>
             </Button>
+             <Label layoutX="500.0" layoutY="315.0"  prefHeight="43.0" prefWidth="319.0" text="Ilość" textFill="#032475">
+                 <font>
+                     <Font name="Calibri Bold" size="15.0" />
+                 </font>
+             </Label>
+             <TextField fx:id="amountOfProductsInOrder" text="1" layoutX="500.0" layoutY="350.0" prefHeight="25.0" prefWidth="80.0" />
+
+
             <Button fx:id="newOrderSave" layoutX="23.0" layoutY="652.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Zatwierdź">
                <font>
                   <Font name="Calibri" size="19.0" />

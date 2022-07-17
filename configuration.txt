@@ -13,3 +13,4 @@ getStorage:0
 insertStorageItem:0
 updateStorageItem:0
 deleteStorageItem:0
+getProduct:0

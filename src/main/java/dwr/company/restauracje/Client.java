@@ -297,4 +297,15 @@ class Client {
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
     }
+
+    public static String getProductName(Integer id) throws IOException {
+        message.clear();
+        JSONObject jo = new JSONObject();
+        jo.put("id",id);
+        message.put("command", "deleteStorageItem");
+        message.put("params", jo.toString());
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return message.toString();
+    }
 }

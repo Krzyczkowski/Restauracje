@@ -24,6 +24,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.security.spec.ECField;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,6 +51,9 @@ public class GeneralController implements Initializable {
     private TableView<Products> tableWithProductsOrders;
     @FXML
     private TableView<Storage>tabelWithComponents;
+
+    @FXML
+    private TableView<Positions>tableWithPositions; // tabela z pozycjami w zamowieniu (ta na dole)
     @FXML
     private TableView<Logins> logHistory;
     @FXML
@@ -60,12 +64,14 @@ public class GeneralController implements Initializable {
     @FXML
     private TextField searchEmployee;
     @FXML
-    private TableColumn productName,productCategory,productPrice;
+    private TableColumn productName,productCategory,productPrice,PositionsProduct, PositionsAmount,PositionsCost;
+
     @FXML
     private TableColumn itemName,itemAmount,itemId;
     @FXML
     private TextField searchProduct;
-
+    @FXML
+    private TextField amountOfProductsInOrder;
     @FXML
     public TextField editWarnigLabel;
     @FXML
@@ -88,8 +94,17 @@ public class GeneralController implements Initializable {
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private ObservableList<Products> productList = FXCollections.observableArrayList();
     private ObservableList<Storage> itemList = FXCollections.observableArrayList();
+
+    private ObservableList<Positions> positionList = FXCollections.observableArrayList();
     public static Logins toEditPopUp;
     public static Storage toEditStoragePopUp;
+
+    public static Products selectedProduct;
+    public static Positions selectedPostion;
+
+    private List<Positions> tempOrder = new ArrayList<Positions>(); // temp variable which helps with order
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,6 +114,7 @@ public class GeneralController implements Initializable {
             userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
             loadEmployesToTable();
             loadStorageToTable();
+            tempOrder = new ArrayList<>();
             //loadProductToTable();
         } catch (Exception er) {
            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
@@ -171,12 +187,12 @@ public class GeneralController implements Initializable {
     protected void orderSection() throws IOException {
         actualWindow = new GeneralWindowSet();
         actualWindow.setOrderScene();
-        System.out.println("orders");
         try{
             categoriesOrders.getItems().clear();
             categoriesOrders.getItems().addAll(Client.getCategories());
             categoriesOrders.getItems().add(null);
             loadProductToTableOrders();
+            loadPositionsTable();
         }catch (Exception er) {
             //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
@@ -330,6 +346,16 @@ public class GeneralController implements Initializable {
 
     }
     @FXML
+    protected void loadPositionsTable()throws Exception {
+        PositionsProduct.setCellValueFactory(new PropertyValueFactory<Positions, String>("productName"));
+        PositionsAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
+        PositionsCost.setCellValueFactory(new PropertyValueFactory<Positions, Float>("productPrice"));
+        positionList.addAll(tempOrder);
+        tableWithPositions.setItems(positionList);
+    }
+
+
+    @FXML
     protected void loadStorageToTable()throws Exception {
         itemId.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("id"));
         itemName.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
@@ -363,7 +389,16 @@ public class GeneralController implements Initializable {
         }
     }
 
-    public void addOrder(MouseEvent mouseEvent) {
+    public void addProductToOrder(MouseEvent mouseEvent) {
+        if( !tableWithProductsOrders.getSelectionModel().isEmpty()) {
+            selectedProduct = tableWithProductsOrders.getSelectionModel().getSelectedItem();
+            Positions pos = new Positions(0,selectedProduct.getId(),Integer.valueOf(amountOfProductsInOrder.getText()),0,selectedProduct.getName(), selectedProduct.getPrice());
+            System.out.println("id:"+pos.getId()+"amount:"+pos.getAmount()+"idorder:"+pos.getIdorder()+"idproduct:"+pos.getIdproduct());
+            tempOrder.clear();
+            tempOrder.add(pos);
+            positionList.addAll(tempOrder);
+            tableWithPositions.setItems(positionList);
+        }
 
     }
 }

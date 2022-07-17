@@ -1,10 +1,13 @@
 package entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 public class Positions {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Id
     @Column(name = "id")
     private int id;
@@ -17,6 +20,43 @@ public class Positions {
     @Basic
     @Column(name = "amount")
     private int amount;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    private String productName;
+
+    public float getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(float productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    private float productPrice;
+
+    public Positions(){}
+
+    public Positions(Integer idorder, Integer idproduct, Integer amount, Integer id){
+        this.idorder=idorder;
+        this.idproduct=idproduct;
+        this.amount=amount;
+        this.id=id;
+    }
+    public Positions(Integer idorder, Integer idproduct, Integer amount, Integer id, String productName, Float productPrice){
+        this.idorder=idorder;
+        this.idproduct=idproduct;
+        this.amount=amount;
+        this.id=id;
+        this.productName=productName;
+        this.productPrice=productPrice*amount;
+    }
 
     public int getId() {
         return id;

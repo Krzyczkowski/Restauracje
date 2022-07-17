@@ -147,6 +147,9 @@ class SerwerThread implements Runnable {
                 case "updateStorageItem":
                     updateStorageAmount(new Storage((JSONObject) JSON.get("params")));
                     break;
+                case "getProductName":
+                    getProductName(Integer.valueOf(JSON.get("id").toString()));
+                    break;
                 case "deleteStorageItem":
                     //System.out.println(JSON.get("params"));
                     JSONObject jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
@@ -259,6 +262,10 @@ class SerwerThread implements Runnable {
     static private void insertStorageItem(Storage s) throws IOException {
         System.out.println("serwerThread.insertStorageItem: "+s);
         db.insertStorageItem(s);
+    }
+
+    static private void getProductName(Integer id)throws  IOException{
+        db.getProductName(id);
     }
 //    static private void getIdRestaurantByName(String name) throws IOException {
 //        Integer i = db.getIdRestaurantByName(name);

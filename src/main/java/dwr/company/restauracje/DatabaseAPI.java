@@ -221,6 +221,13 @@ public class DatabaseAPI {
         em.remove(s);
         em.getTransaction().commit();
     }
+
+    public String getProductName(Integer id) {
+        em.getTransaction().begin();
+        Products s = em.find(Products.class, id);
+        em.getTransaction().commit();
+        return s.getName();
+    }
 }
 
 
