@@ -198,7 +198,6 @@ public class GeneralController implements Initializable {
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
             valueFactory.setValue(1);
             amountOfProductsInOrder.setValueFactory(valueFactory);
-            amountOfProductsInOrder.setEditable(true);
         }catch (Exception er) {
             //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
@@ -391,7 +390,7 @@ public class GeneralController implements Initializable {
         if( !tableWithProductsOrders.getSelectionModel().isEmpty()) {
             selectedProduct = tableWithProductsOrders.getSelectionModel().getSelectedItem();
             Positions pos = new Positions(0,selectedProduct.getId(),amountOfProductsInOrder.getValue(),0,selectedProduct.getName(), selectedProduct.getPrice());
-            System.out.println("id:"+pos.getId()+"amount:"+pos.getAmount()+"idorder:"+pos.getIdorder()+"idproduct:"+pos.getIdproduct());
+            //System.out.println("id:"+pos.getId()+"amount:"+pos.getAmount()+"idorder:"+pos.getIdorder()+"idproduct:"+pos.getIdproduct());
             tempOrder.clear();
             tempOrder.add(pos);
             positionList.addAll(tempOrder);
