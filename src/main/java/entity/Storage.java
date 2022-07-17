@@ -7,8 +7,8 @@ import javax.persistence.*;
 
 @Entity
 public class Storage {
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
+    @GenericGenerator(name="agent" , strategy="increment")
+    @GeneratedValue(generator="agent")
     @Id
     @Column(name = "id")
     private int id;
@@ -19,10 +19,15 @@ public class Storage {
     @Column(name = "name")
     private String name;
 
-    public Storage(){}
-    public Storage(String name, int amount){this.name=name;this.amount=amount;}
+    public Storage(){
+
+        amount = 0;
+        name = "brak";
+        id = 0;
+    }
+    public Storage(String name, int amount){this.id=0;this.name=name;this.amount=amount;}
     public Storage(JSONObject jo) {
-        id =(int)(long) jo.get("id");
+        id =0;
         amount =(int)(long) jo.get("amount");
         name =jo.get("name").toString();
     }
@@ -74,7 +79,7 @@ public class Storage {
     }
     public JSONObject toJSON(){
         JSONObject jo = new JSONObject();
-        jo.put("id",id);
+        jo.put("id","0");
         jo.put("name",name);
         jo.put("amount",amount);
         return jo;

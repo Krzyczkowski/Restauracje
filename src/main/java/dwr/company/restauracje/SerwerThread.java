@@ -142,7 +142,7 @@ class SerwerThread implements Runnable {
                     getStorage();
                     break;
                 case "insertStorageItem":
-                    insertStorageItem(new Storage((JSONObject) JSON.get("params")));
+                    insertStorageItem(new Storage((JSONObject) JSON.get("params")) );
                     break;
 
             }else{

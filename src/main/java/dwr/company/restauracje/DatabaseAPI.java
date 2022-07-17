@@ -200,6 +200,7 @@ public class DatabaseAPI {
         return jo;
     }
     public void insertStorageItem(Storage s) {
+        System.out.println("id w db:"+s.getId());
         em.getTransaction().begin();
         em.merge(s);
         em.getTransaction().commit();
