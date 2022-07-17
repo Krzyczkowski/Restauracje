@@ -195,9 +195,10 @@ public class GeneralController implements Initializable {
             categoriesOrders.getItems().add(null);
             loadProductToTableOrders();
             loadPositionsTable();
-            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,10) ;
+            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
             valueFactory.setValue(1);
             amountOfProductsInOrder.setValueFactory(valueFactory);
+            amountOfProductsInOrder.setEditable(true);
         }catch (Exception er) {
             //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
