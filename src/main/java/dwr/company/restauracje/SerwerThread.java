@@ -155,7 +155,6 @@ class SerwerThread implements Runnable {
                     JSONObject jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
                     System.out.println(jo);
                     Storage st = new Storage(jo);
-                    System.out.println("git");
                     deleteStorageItem(st);
                     break;
             }else{
@@ -168,7 +167,6 @@ class SerwerThread implements Runnable {
 
     private void deleteStorageItem(Storage st) {
         JSON.clear();
-        System.out.println("git");
         db.deleteItem(st);
     }
 
@@ -254,7 +252,6 @@ class SerwerThread implements Runnable {
     }
     static private void getStorage() throws IOException {
         JSON.clear();
-        System.out.println("git");
         JSON = db.getStorage();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
