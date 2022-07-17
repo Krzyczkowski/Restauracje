@@ -55,7 +55,7 @@ public class Categories {
     public JSONObject toJSON(){
         JSONObject jo = new JSONObject();
         jo.put("id",id);
-        jo.put("restuarant",restaurant);
+        jo.put("restaurant",restaurant);
         return jo;
     }
 }
