@@ -51,8 +51,17 @@ public class popupWindowsControler implements Initializable{
             newPassword.setText((GeneralController.toEditPopUp.getPassword()));
             id=GeneralController.toEditPopUp.getId();
 
+
+
             try {
                 newPlace.getItems().addAll(Client.getAllRestaurants());
+                for (int i = 0; i<newPlace.getItems().size();i++){
+                    System.out.println(newPlace.getItems().get(i));
+                    if (newPlace.getItems().get(i).toString().equals( GeneralController.toEditPopUp.getRestaurantname()))
+                    {
+                        newPlace.getSelectionModel().select(i);
+                    }
+                }
             } catch (IOException e) {
                 System.out.println(e);
             }
@@ -77,7 +86,6 @@ public class popupWindowsControler implements Initializable{
 
     @FXML
     protected void saveEmployeInfo() throws IOException {
-        ;
         if (command.equals("update")){
             Client.updateEmployee(newName.getText(),newSecondName.getText(),
                     id,newLogin.getText(),newPassword.getText(),Integer.parseInt(newLevel.getText()),
@@ -92,7 +100,6 @@ public class popupWindowsControler implements Initializable{
         GeneralController.toEditPopUp = null;
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
-
     }
 
     @FXML

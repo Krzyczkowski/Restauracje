@@ -53,19 +53,7 @@ public class Logins {
         this.salary = s;
     }
 
-    public Logins(JSONObject jo) {
-        this.id =  (int) (long) jo.get("id");
-        this.login = (String) jo.get("login");
-        this.password = (String) jo.get("password");
-        this.levelaccess = (int) (long) jo.get("levelaccess");
-        this.restaurantname = jo.get("restaurantname").toString();
-        this.pesel  = (int) (long) jo.get("pesel");
-        this.salary  = (float)(double) jo.get("salary");
-        emp=new Employee();
-        this.emp.setId(id);
-        this.emp.setLastname((String) jo.get("lastname"));
-        this.emp.setName((String) jo.get("name"));
-    }
+
 
 
     public int getId() {
@@ -134,7 +122,12 @@ public class Logins {
 
     public String getName(){return emp.getName();}
     public String getLastname(){return emp.getLastname();}
-
+    public void setName(String s){
+        emp.setName(s);
+    }
+    public void setLastName(String s){
+        emp.setLastname(s);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -178,7 +171,19 @@ public class Logins {
         jo.put("restaurantname", restaurantname);
         return jo;
     }
-
+    public Logins(JSONObject jo) {
+        this.id =  (int) (long) jo.get("id");
+        this.login = (String) jo.get("login");
+        this.password = (String) jo.get("password");
+        this.levelaccess = (int) (long) jo.get("levelaccess");
+        this.restaurantname = jo.get("restaurantname").toString();
+        this.pesel  = (int) (long) jo.get("pesel");
+        this.salary  = (float)(double) jo.get("salary");
+        emp=new Employee();
+        this.emp.setId(id);
+        this.emp.setLastname((String) jo.get("lastname"));
+        this.emp.setName((String) jo.get("name"));
+    }
 
 
 

@@ -86,17 +86,8 @@ public class DatabaseAPI {
 
     public void updateEmployee(Logins e){
         em.getTransaction().begin();
-        Employee emp = em.find(Employee.class,e.getId());
-        emp.setId(e.getId());
-        emp.setName(e.getName());
-        emp.setLastname(e.getLastname());
-        Logins l = em.find(Logins.class,e.getId());
-        l.setId(e.getId());
-        l.setRestaurantname(e.getRestaurantname());
-        l.setLevelaccess(e.getLevelaccess());
-        l.setLogin(e.getLogin());
-        l.setPassword(e.getPassword());
-        l.setSalary(e.getSalary());
+        System.out.println(e);
+        em.merge(e);
         em.getTransaction().commit();
     }
     public JSONObject getAllEmployeesFullInfo()

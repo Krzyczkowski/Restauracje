@@ -158,6 +158,8 @@ class Client {
         JSONObject message = new JSONObject();
         Logins log = new Logins(id,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
         message.put("command","updateEmployee");
+        System.out.println(log.getName()+log.getId()+log.getLogin()+log.getPassword()+log.getLevelaccess()+log.getRestaurantname()+log.getPesel()+log.getSalary()
+                +log.getLastname());
         message.put("params",log.toJSON());
         out.writeUTF(message.toString());
     }

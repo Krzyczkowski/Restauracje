@@ -83,6 +83,7 @@ class SerwerThread implements Runnable {
     private void communication() throws IOException {
         while (true) {
             message = in.readUTF();
+            JSON.clear();
             JSON = (JSONObject) JSONValue.parse(message);
             message = JSON.get("command").toString();
 
@@ -111,6 +112,7 @@ class SerwerThread implements Runnable {
                     deleteEmployee((int) (long) JSON.get("params"));
                     break;
                 case "updateEmployee":
+                    System.out.println("git");
                     updateEmployee(new Logins((JSONObject) JSON.get("params")) );
                     break;
                 case "getAllRestaurants":
@@ -199,7 +201,8 @@ class SerwerThread implements Runnable {
         db.deleteEmployee(id);
     }
     static private void updateEmployee(Logins e) {
-        JSON.clear();
+        //JSON.clear();
+        System.out.println("git2");
         db.updateEmployee(e);
     }
     static private void getEmployeesFullInfo() throws IOException {
