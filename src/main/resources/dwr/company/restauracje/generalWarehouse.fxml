@@ -95,7 +95,7 @@
                   <Font name="Calibri Bold" size="33.0" />
                </font>
             </Label>
-            <TableView fx:id="tabelWithComponents" layoutX="39.0" layoutY="69.0" prefHeight="598.0" prefWidth="417.0" style="-fx-background-color: bec5eb;">
+            <TableView  onMouseClicked="#selectComponent" fx:id="tabelWithComponents" layoutX="39.0" layoutY="69.0" prefHeight="598.0" prefWidth="417.0" style="-fx-background-color: bec5eb;">
               <columns>
                 <TableColumn fx:id="itemName" prefWidth="202.0" text="Nazwa" />
                 <TableColumn fx:id="itemAmount" prefWidth="214.0" text="Ilość" />
@@ -112,7 +112,7 @@
                   <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="editAmount" layoutX="543.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="Edytuj ilość">
+            <Button fx:id="editAmount" layoutX="543.0" layoutY="159.0" onMouseClicked="#editAmountStorage" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="Edytuj ilość">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>

@@ -63,6 +63,8 @@ public class GeneralController implements Initializable {
 
     @FXML
     public TextField editWarnigLabel;
+    @FXML
+    public TextField amountOfComponent;
 
     //Buttons
     @FXML
@@ -78,6 +80,7 @@ public class GeneralController implements Initializable {
     private ObservableList<Products> productList = FXCollections.observableArrayList();
     private ObservableList<Storage> itemList = FXCollections.observableArrayList();
     public static Logins toEditPopUp;
+    public static Storage toEditStoragePopUp;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -300,5 +303,19 @@ public class GeneralController implements Initializable {
         itemList.addAll(Client.getStorage());
         tabelWithComponents.setItems(itemList);
 
+    }
+
+    public void editAmountStorage(MouseEvent mouseEvent) {
+        if(Integer.valueOf(amountOfComponent.getText())>=-99999999){
+            Integer v = Integer.valueOf(amountOfComponent.getText());
+            Client.updateStorageItem();
+        }
+
+
+    }
+
+    public void selectComponent(MouseEvent mouseEvent) {
+        toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
+        amountOfComponent.setText(String.valueOf(toEditStoragePopUp.getAmount()));
     }
 }
