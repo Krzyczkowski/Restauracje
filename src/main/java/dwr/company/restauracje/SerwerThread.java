@@ -138,6 +138,10 @@ class SerwerThread implements Runnable {
                 case "getAllCategories":
                     getCategories();
                     break;
+                case "getStorage":
+                    getStorage();
+                    break;
+
             }else{
                 System.out.println("brak takich uprawnien!!");
                 out.writeUTF("brak takich uprawnien!!");
@@ -223,6 +227,13 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
+    static private void getStorage() throws IOException {
+        JSON.clear();
+        JSON = db.getStorage();
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+
 //    static private void getIdRestaurantByName(String name) throws IOException {
 //        Integer i = db.getIdRestaurantByName(name);
 //        System.out.println(i.toString());

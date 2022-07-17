@@ -9,3 +9,4 @@ getProducts:0
 getAllCategories:0
 getAllRestaurants:0
 getIdRestaurantByName:0
+getStorage:0

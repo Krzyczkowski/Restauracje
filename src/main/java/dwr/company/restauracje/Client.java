@@ -157,6 +157,8 @@ class Client {
     protected static void           updateEmployee(String name, String lastName,int id, String login, String password, int levelacces, String restaurantname,float salary,int pesel) throws IOException {
         JSONObject message = new JSONObject();
         Logins log = new Logins(id,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
+        System.out.println(log.getName()+log.getId()+log.getLogin()+log.getPassword()+log.getLevelaccess()+log.getRestaurantname()+log.getPesel()+log.getSalary()
+        +log.getLastname());
         message.put("command","updateEmployee");
         System.out.println(log.getName()+log.getId()+log.getLogin()+log.getPassword()+log.getLevelaccess()+log.getRestaurantname()+log.getPesel()+log.getSalary()
                 +log.getLastname());
@@ -255,6 +257,19 @@ class Client {
         for(Integer i = 0; i<message.size();i++)
             list.add(new Categories((JSONObject) message.get(i.toString())).getId());
         return list;
+    }
+    private static List<Storage> printStorage(JSONObject message) {
+        List<Storage> list= new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Storage((JSONObject) message.get(i.toString())));
+        return list;
+    }
+    public static List<Storage> getStorage() throws IOException {
+        message.clear();
+        message.put("command", "getStorage");
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printStorage(message);
     }
 
 }

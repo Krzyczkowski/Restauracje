@@ -188,6 +188,19 @@ public class DatabaseAPI {
         return jo;
         //
     }
+
+    public JSONObject getStorage() {
+        JSONObject jo = new JSONObject();
+        em.getTransaction().begin();
+        Query query = em.createQuery("SELECT st FROM Storage st");
+        List<Categories> list = query.getResultList();
+        em.getTransaction().commit();
+        for(Integer i=0; i<list.size();i++){
+            jo.put(i.toString(),list.get(i).toJSON());
+        }
+        return jo;
+        //
+    }
 }
 
 

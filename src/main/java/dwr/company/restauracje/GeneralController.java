@@ -1,9 +1,6 @@
 package dwr.company.restauracje;
 
-import entity.Employee;
-import entity.Logins;
-import entity.Products;
-import entity.Restaurants;
+import entity.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,9 +47,11 @@ public class GeneralController implements Initializable {
     @FXML
     private TableView<Products> tableWithProducts;
     @FXML
+    private TableView<Storage>tabelWithComponents;
+    @FXML
     private TableView<Logins> logHistory;
     @FXML
-    private TableColumn nr,name,lastName,pesel,salary,restuarant;
+    private TableColumn nr,name,lastName,pesel,salary,restuarant,amount;
     @FXML
     private TextField searchEmployee;
     @FXML
@@ -279,6 +278,16 @@ public class GeneralController implements Initializable {
         else
             productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
+
+    }
+    @FXML
+    protected void loadStorageToTable()throws Exception {
+        itemName.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
+        itemAmount.setCellValueFactory(new PropertyValueFactory<Storage, String>("amount"));
+        itemList.clear();
+
+        itemList.addAll(Client.getStorage());
+        tabelWithComponents.setItems(itemList);
 
     }
 }
