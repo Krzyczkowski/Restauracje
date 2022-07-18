@@ -327,7 +327,7 @@ class Client {
         JSONObject jo = new JSONObject();
         jo.put("order",orderContainer.toJSON());
         message.put("command", "makeOrder");
-        message.put("params", jo);
+        message.put("params", jo.toString());
         System.out.println(message.toString());
         out.writeUTF(message.toString());
     }

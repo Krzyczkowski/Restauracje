@@ -134,6 +134,7 @@ public class GeneralController{
                     break;
                 case 4:
                     loadProductToTableOrders();
+                    loadPositionsTable();
                     categoriesOrders.getItems().clear();
                     categoriesOrders.getItems().addAll(Client.getCategories());
                     categoriesOrders.getItems().add(null);
@@ -416,7 +417,7 @@ public class GeneralController{
             tableWithPositions.setItems(positionList);
             loadAllPrice();
             amountOfProductsInOrder.getValueFactory().setValue(1);
-            ;
+
 
         }
 

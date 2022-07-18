@@ -1,6 +1,7 @@
 package entity;
 
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import java.util.List;
 
@@ -21,22 +22,27 @@ public class OrderContainer {
 
     public JSONObject toJSON(){
         JSONObject jo = new JSONObject();
-        jo.put("order",order.toJSON());
-        jo.put("client",client.toJSON());
+        jo.put("order",order.toJSON().toString());
+        jo.put("client",client.toJSON().toString());
         JSONObject pozycje = new JSONObject();
         for(int i=0;i<positions.size();i++){
-            pozycje.put("position"+i,positions.get(i).toJSON());
-
+            pozycje.put("position"+i,positions.get(i).toJSON().toString());
         }
         jo.put("positions",pozycje);
         return jo;
     }
-    public OrderContainer(JSONObject jo) {
-        this.order = (Orders) jo.get("order");
-        this.client = (Clients) jo.get("client");
+    public OrderContainer(JSONObject joe) {
+        System.out.println(joe);
+        JSONObject jo = (JSONObject) JSONValue.parse(joe.get("orders").toString());
+        System.out.println(jo);
+        this.order = new Orders((JSONObject) jo.get("order"));
+        System.out.println("1");
+        this.client = new Clients((JSONObject) jo.get("client"));
+        System.out.println("1");
         JSONObject positionsJO = (JSONObject) jo.get("positions");
+        System.out.println("1");
         for(int i=0;i< positionsJO.size();i++){
-            positions.add((Positions) positionsJO.get("positions"+i));
+            positions.add(new Positions((JSONObject) positionsJO.get("positions"+i)) );
         }
     }
 

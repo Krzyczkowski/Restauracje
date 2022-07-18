@@ -50,6 +50,12 @@ public class Positions {
         this.amount=amount;
         this.id=id;
     }
+    public Positions(JSONObject jo){
+        this.idorder=(int)(long) jo.get("idorder");
+        this.idproduct=(int)(long) jo.get("idproduct");
+        this.amount=(int)(long) jo.get("amount");
+        this.id=(int)(long) jo.get("id");
+    }
     public Positions(Integer idorder, Integer idproduct, Integer amount, Integer id, String productName, Float productPrice){
         this.idorder=idorder;
         this.idproduct=idproduct;

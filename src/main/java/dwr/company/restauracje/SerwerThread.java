@@ -123,7 +123,12 @@ class SerwerThread implements Runnable {
                     getAllRestaurants();
                     break;
                 case "makeOrder":
-                    OrderContainer orderContainer = (new OrderContainer((JSONObject)((JSONObject) JSON.get("params")).get("order")) );
+                    System.out.println(JSON.get("params"));
+                    JSONObject joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                    System.out.println(joe);
+                    System.out.println("joe");
+
+                    OrderContainer orderContainer = (new OrderContainer(joe) );
                     System.out.println(orderContainer);
                     break;
 //                case "getIdRestaurantByName":
