@@ -128,6 +128,7 @@ class SerwerThread implements Runnable {
                     JSONObject joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
                     OrderContainer orderContainer = (new OrderContainer(joe) );
                     System.out.println(orderContainer);
+                    makeOrder(orderContainer);
                     break;
 //                case "getIdRestaurantByName":
 //                    getIdRestaurantByName(JSON.get("params").toString());
@@ -174,6 +175,10 @@ class SerwerThread implements Runnable {
             }
         }
         db.close();
+    }
+
+    private void makeOrder(OrderContainer orderContainer) {
+        db.makeOrder(orderContainer);
     }
 
     private void deleteStorageItem(Storage st) {

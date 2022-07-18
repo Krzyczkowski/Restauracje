@@ -145,6 +145,7 @@ public class GeneralController{
                     SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
                     valueFactory.setValue(1);
                     amountOfProductsInOrder.setValueFactory(valueFactory);
+                    loadPositionsTable();
                     break;
                 default:
                     break;
@@ -472,8 +473,12 @@ public class GeneralController{
         Clients c = getClientInfo();
         Date date = new Date(System.currentTimeMillis());
         tempOrder.clear();
-        for (int i = 0; i < positionList.size(); i++)
-            tempOrder.add(tableWithPositions.getItems().get(i)) ;
+        for (int i = 0; i < positionList.size(); i++) {
+            tempOrder.add(tableWithPositions.getItems().get(i));
+            tempOrder.get(i).setProductName(tableWithPositions.getItems().get(i).getProductName());
+            tempOrder.get(i).setProductPrice(tempOrder.get(i).getAmount()*tableWithPositions.getItems().get(i).getProductPrice());
+        }
+
         Orders order = new Orders(0,Client.id,c.getPhone(),Float.valueOf(orderPrice.getText()),date,Client.restaurantName);
         OrderContainer orderContainer= new OrderContainer(order,tempOrder,c);
         Client.makeOrder(orderContainer);

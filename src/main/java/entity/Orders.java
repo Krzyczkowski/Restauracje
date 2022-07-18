@@ -1,5 +1,6 @@
 package entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
@@ -7,7 +8,8 @@ import java.sql.Date;
 
 @Entity
 public class Orders {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Id
     @Column(name = "id")
     private int id;

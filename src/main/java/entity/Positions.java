@@ -22,6 +22,13 @@ public class Positions {
     @Column(name = "amount")
     private int amount;
 
+    public Positions(int id, int idorder, int idproduct, int amount) {
+        this.id = id;
+        this.idorder = idorder;
+        this.idproduct = idproduct;
+        this.amount = amount;
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -30,6 +37,7 @@ public class Positions {
         this.productName = productName;
     }
 
+    @Transient
     private String productName;
 
     public float getProductPrice() {
@@ -40,6 +48,7 @@ public class Positions {
         this.productPrice = productPrice;
     }
 
+    @Transient
     private float productPrice;
 
     public Positions(){}
@@ -55,7 +64,10 @@ public class Positions {
         this.idproduct=(int)(long) jo.get("idproduct");
         this.amount=(int)(long) jo.get("amount");
         this.id=(int)(long) jo.get("id");
+        this.productPrice= (float) (double) jo.get("productPrice");
+        this.productName=jo.get("productName").toString();
     }
+
     public Positions(Integer idorder, Integer idproduct, Integer amount, Integer id, String productName, Float productPrice){
         this.idorder=idorder;
         this.idproduct=idproduct;
@@ -69,6 +81,8 @@ public class Positions {
         jo.put("idorder",idorder);
         jo.put("idproduct",idproduct);
         jo.put("amount",amount);
+        jo.put("productName",productName);
+        jo.put("productPrice",productPrice);
         jo.put("id",0);
         return jo;
     }

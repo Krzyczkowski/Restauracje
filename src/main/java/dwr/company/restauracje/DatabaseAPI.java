@@ -233,8 +233,21 @@ public class DatabaseAPI {
         em.getTransaction().commit();
         return s.getName();
     }
-    public void makeOrder(){
+    public void makeOrder(OrderContainer orderContainer){
+        em.getTransaction().begin();
+        List<Positions> lp = orderContainer.getPositions();
+        System.out.println(orderContainer.getClient());
+        em.merge(orderContainer.getClient());
+        Orders newOrder = em.merge(orderContainer.getOrder());
+        System.out.println(newOrder);
+        for(Positions p : lp){
+            p.setIdorder(newOrder.getId());
+            //em.createNativeQuery( "INSERT INTO Positions (idorder,idproduct,amount) values ( ?1 , ?2 , ?3 ) ").setParameter(1,p.getIdorder()).setParameter(2,p.getIdproduct()).setParameter(3,p.getAmount()).executeUpdate();
+            em.persist(p);
+            System.out.println(p);
+        }
 
+        em.getTransaction().commit();
     }
 
 
