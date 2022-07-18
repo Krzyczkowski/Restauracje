@@ -409,3 +409,23 @@
     -fx-border-color: white;
     -fx-border-radius: 30;
 }
+
+#refreshButton{
+    -fx-background-radius: 3;
+    -fx-background-color: #032475;
+    -fx-background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Reload_Icon_Red.svg/512px-Reload_Icon_Red.svg.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#refreshButton:hover{
+    -fx-background-radius: 3;
+    -fx-background-color: white;
+    -fx-background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Reload_Icon_Red.svg/512px-Reload_Icon_Red.svg.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-border-color: #032475;
+    -fx-border-radius: 3;
+}

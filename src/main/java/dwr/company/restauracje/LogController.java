@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,7 +16,7 @@ import java.util.ResourceBundle;
 
 import static dwr.company.restauracje.Client.logout;
 
-public class LogController implements Initializable {
+public class LogController{
 
     //Fields with data
     @FXML
@@ -33,17 +35,26 @@ public class LogController implements Initializable {
     private Button exitButton;
     @FXML
     private Button minimalizeButton;
+    @FXML
+    private Button refreshButton;
 
     //Other declarations
     private GeneralWindowSet mainWindow;
 
+    @FXML
+    public void initialize() {
+        try {
+            place.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
+        } catch (IOException e) {
+            Warning.setText("Brak polaczenia z serwerem!");
+        }
+    }
 
     @FXML
     protected void authorization() {
         //Active srever
         try {
             if (Client.login(login.getText(),password.getText(),(String) place.getValue())) {
-                //okienko poprawne dane
                 mainWindow = new GeneralWindowSet();
                 mainWindow.firstUsage();
 
@@ -51,14 +62,10 @@ public class LogController implements Initializable {
                 stage.close();
             } else {
                 Warning.setText("Niepoprawny login lub hasło...");
-                //Dziala jak natura chciala
             }
         //Srver shouted down
         } catch (Exception e) {
-            //Warning.setText("Brak połączenia z serwerem.");
-            //System.out.println("Serwer wyłączony");
             e.getStackTrace();
-
         }
     }
 
@@ -80,16 +87,16 @@ public class LogController implements Initializable {
         ((Stage) minimalizeButton.getParent().getScene().getWindow()).setIconified(true);
     }
 
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    protected void refresh(){
         try {
             place.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
+            Warning.setText("");
         } catch (IOException e) {
             Warning.setText("Brak polaczenia z serwerem!");
         }
     }
+
 }
 
 
