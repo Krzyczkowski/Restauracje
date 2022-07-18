@@ -36,7 +36,7 @@ public class GeneralController{
 
     //Scene holder
     GeneralWindowSet actualWindow;
-
+    public static int popup;
     //Data Fields
     //Labels
     @FXML
@@ -47,6 +47,8 @@ public class GeneralController{
     private Label userName;
     @FXML
     private Label welcomeText;
+    @FXML
+    private Label warnigLabel1 , warningLabel2;
 
     //Tabel Views and columns
     @FXML
@@ -100,6 +102,8 @@ public class GeneralController{
     private Button menuButton0, menuButton1, menuButton2, menuButton3, menuButton4;
     @FXML
     private Button findEmployee, editEmployee, addEmployee;
+    @FXML
+    private Button addComponent, editAmount, deleteComponent;
 
     //Elements dependent on data base
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
@@ -235,9 +239,8 @@ public class GeneralController{
         toEditPopUp = null;
         if (event.getTarget().equals(editEmployee)
                 && !employeeTable.getSelectionModel().isEmpty()) {
-            editWarnigLabel = new TextField();
-            editWarnigLabel.clear();
             toEditPopUp = employeeTable.getSelectionModel().getSelectedItem();
+            popup = 0;
             FXMLLoader loader = new FXMLLoader(App.class.getResource("editEmploye.fxml"));
             Scene popupScene = new Scene(loader.load(), 333.0, 765.0);
             popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -246,10 +249,10 @@ public class GeneralController{
             popup.setScene(popupScene);
             moveWindow(popupScene, popup);
             popup.show();
+            warnigLabel1.setText("");
 
         } else if (event.getTarget().equals(addEmployee)) {
-            editWarnigLabel = new TextField();
-            editWarnigLabel.clear();
+            popup = 0;
             FXMLLoader loader = new FXMLLoader(App.class.getResource("editEmploye.fxml"));
             Scene popupScene = new Scene(loader.load(), 333.0, 780.0);
             popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -260,16 +263,15 @@ public class GeneralController{
             popup.setScene(popupScene);
             moveWindow(popupScene, popup);
             popup.show();
-
+            warnigLabel1.setText("");
         } else {
-            editWarnigLabel = new TextField();
-            editWarnigLabel.setText("Nie wybrano żadnego elemantu!");
+            warnigLabel1.setText("Nie wybrano żadnego elemantu!");
         }
-        loadEmployesToTable();
     }
 
     @FXML
     protected void openPopupProduct() throws IOException {
+
         FXMLLoader loader = new FXMLLoader(App.class.getResource("editProduct.fxml"));
         Scene popupScene = new Scene(loader.load(), 333.0, 348.0);
         popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -281,15 +283,30 @@ public class GeneralController{
     }
 
     @FXML
-    protected void openPopupComponent() throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("editComponent.fxml"));
-        Scene popupScene = new Scene(loader.load(), 333.0, 267.0);
-        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        Stage popup = new Stage();
-        popup.initStyle(StageStyle.UNDECORATED);
-        popup.setScene(popupScene);
-        moveWindow(popupScene, popup);
-        popup.show();
+    protected void openPopupComponent(ActionEvent event) throws IOException {
+        if(event.getTarget().equals(addComponent)) {
+            popup = 1;
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("editComponent.fxml"));
+            Scene popupScene = new Scene(loader.load(), 333.0, 267.0);
+            popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            Stage popup = new Stage();
+            popup.initStyle(StageStyle.UNDECORATED);
+            popup.setScene(popupScene);
+            moveWindow(popupScene, popup);
+            popup.show();
+            warningLabel2.setText("");
+
+        } else if (event.getTarget().equals(editAmount)
+                && !tabelWithComponents.getSelectionModel().isEmpty()){
+            warningLabel2.setText("");
+
+        } else if (event.getTarget().equals(deleteComponent)
+                && !tabelWithComponents.getSelectionModel().isEmpty()){
+            warningLabel2.setText("");
+
+        } else {
+            warningLabel2.setText("Nie wybrano żadnego elemantu!");
+        }
     }
 
 
@@ -395,7 +412,7 @@ public class GeneralController{
 
     public void selectComponent(MouseEvent mouseEvent) {
         toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
-        amountOfComponent.setText(String.valueOf(toEditStoragePopUp.getAmount()));
+ //       amountOfComponent.setText(String.valueOf(toEditStoragePopUp.getAmount()));
     }
 
     public void deleteStorage(MouseEvent mouseEvent) throws IOException {

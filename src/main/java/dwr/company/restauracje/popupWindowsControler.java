@@ -45,29 +45,7 @@ public class popupWindowsControler implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(GeneralController.toEditPopUp != null){
-            newName.setText(GeneralController.toEditPopUp.getEmp().getName());
-            newSecondName.setText((GeneralController.toEditPopUp.getEmp().getLastname()));
-            newPesel.setText((GeneralController.toEditPopUp.getPesel().toString()));
-            newLevel.setText((GeneralController.toEditPopUp.getLevelaccess().toString()));
-            newSalary.setText(String.valueOf(GeneralController.toEditPopUp.getSalary()));
-            newLogin.setText((GeneralController.toEditPopUp.getLogin()));
-            newPassword.setText((GeneralController.toEditPopUp.getPassword()));
-            id=GeneralController.toEditPopUp.getId();
-
-
-
-            try {
-                newPlace.getItems().addAll(Client.getAllRestaurants());
-                for (int i = 0; i<newPlace.getItems().size();i++){
-                    if (newPlace.getItems().get(i).toString().equals( GeneralController.toEditPopUp.getRestaurantname()))
-                    {
-                        newPlace.getSelectionModel().select(i);
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-            command = "update";
+            loadWorkerData();
         } else {
             command = "insert";
         }
@@ -119,6 +97,30 @@ public class popupWindowsControler implements Initializable{
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
 
+    }
+
+    protected void loadWorkerData(){
+        newName.setText(GeneralController.toEditPopUp.getEmp().getName());
+        newSecondName.setText((GeneralController.toEditPopUp.getEmp().getLastname()));
+        newPesel.setText((GeneralController.toEditPopUp.getPesel().toString()));
+        newLevel.setText((GeneralController.toEditPopUp.getLevelaccess().toString()));
+        newSalary.setText(String.valueOf(GeneralController.toEditPopUp.getSalary()));
+        newLogin.setText((GeneralController.toEditPopUp.getLogin()));
+        newPassword.setText((GeneralController.toEditPopUp.getPassword()));
+        id=GeneralController.toEditPopUp.getId();
+
+        try {
+            newPlace.getItems().addAll(Client.getAllRestaurants());
+            for (int i = 0; i<newPlace.getItems().size();i++){
+                if (newPlace.getItems().get(i).toString().equals( GeneralController.toEditPopUp.getRestaurantname()))
+                {
+                    newPlace.getSelectionModel().select(i);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        command = "update";
     }
 
 }

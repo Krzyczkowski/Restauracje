@@ -163,7 +163,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <Label prefHeight="17.0" prefWidth="481.0" textFill="#ff0202">
+                  <Label fx:id="warnigLabel1" prefHeight="17.0" prefWidth="481.0" textFill="#ff0202">
                      <font>
                         <Font name="Calibri Bold" size="20.0" />
                      </font>

@@ -282,7 +282,7 @@
     -fx-border-radius: 20;
 }
 
-#deletComponent{
+#deleteComponent{
     -fx-background-radius: 20;
     -fx-background-color: #032475;
     -fx-text-fill: white;
@@ -290,7 +290,7 @@
     -fx-border-color: #032475;
 }
 
-#deletComponent:hover{
+#deleteComponent:hover{
     -fx-background-radius: 20;
     -fx-background-color: white;
     -fx-text-fill: #032475;
