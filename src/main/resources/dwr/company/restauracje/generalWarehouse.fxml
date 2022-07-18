@@ -32,7 +32,7 @@
                     </children>
                 </HBox>
                 <Circle fx:id="userIcon" fill="DODGERBLUE" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-                <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="246.0"  textAlignment="CENTER" textFill="WHITE">
+                <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="331.0"  textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="Calibri Bold" size="36.0" />
                     </font>

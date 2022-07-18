@@ -145,7 +145,7 @@ public class GeneralController{
                 default:
                     break;
             }
-
+            userName.setText(Client.usrName);
             Image iconImage = new Image("/person.png", false);
             userIcon.setFill(new ImagePattern(iconImage));
             userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));

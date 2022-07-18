@@ -34,7 +34,7 @@
                     </children>
                 </HBox>
                 <Circle fx:id="userIcon" fill="DODGERBLUE" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-                <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="246.0" text="User name" textAlignment="CENTER" textFill="WHITE">
+                <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="331.0" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="Calibri Bold" size="36.0" />
                     </font>
@@ -148,7 +148,7 @@
                         <Font name="Calibri" size="19.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="findEmployee" onAction="#loadEmployesToTable" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Wyszukaj">
+                  <Button fx:id="findEmployee" mnemonicParsing="false" onAction="#loadEmployesToTable" prefHeight="25.0" prefWidth="104.0" text="Wyszukaj">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -163,7 +163,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <Label  prefHeight="17.0" prefWidth="481.0" textFill="#ff0202">
+                  <Label prefHeight="17.0" prefWidth="481.0" textFill="#ff0202">
                      <font>
                         <Font name="Calibri Bold" size="20.0" />
                      </font>

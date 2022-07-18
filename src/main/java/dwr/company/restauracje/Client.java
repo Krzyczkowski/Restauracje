@@ -23,6 +23,8 @@ class Client {
 
     public static String restaurantName;
 
+    public static String usrName;
+
     public static int getLevelacces() {
         return levelacces;
     }
@@ -49,6 +51,8 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
         levelacces = (int) (long) message.get("result");
         id = (int) (long) message.get("empID");
+        usrName = message.get("name").toString();
+        System.out.println(usrName);
         System.out.println(levelacces);
         restaurantName = DBName;
         return levelacces>0;
