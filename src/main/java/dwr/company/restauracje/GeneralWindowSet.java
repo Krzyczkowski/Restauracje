@@ -19,7 +19,10 @@ public class GeneralWindowSet {
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
-
+    GeneralController g ;
+    GeneralWindowSet(GeneralController g) throws IOException {
+        this.g=g;
+    }
     GeneralWindowSet() throws IOException {
     }
 
@@ -78,6 +81,7 @@ public class GeneralWindowSet {
         });
 
         window.setScene(actual);
+
     }
 
     //Type of this window
@@ -97,7 +101,7 @@ public class GeneralWindowSet {
         setActualWindow(historyScene);
     }
 
-    protected void setOrderScene() throws IOException {
+    protected void setOrderScene( ) throws Exception {
         setActualWindow(orderScene);
     }
 

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 public class DatabaseAPI {
     static EntityManagerFactory emf;
     static EntityManager em;
+    String restaurant;
     public DatabaseAPI(){
         org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.INFO);//OFF
@@ -128,7 +129,10 @@ public class DatabaseAPI {
         Query query = em.createQuery("SELECT log FROM Logins log where log.login = ?1 and log.password = ?2 and log.restaurantname = ?3").setParameter(1, userName).setParameter(2,password).setParameter(3,restaurant);
         List<Logins> list = query.getResultList();
         em.getTransaction().commit();
-        if(list.size()==1) return list.get(0);
+        if(list.size()==1) {
+            restaurant=list.get(0).getRestaurantname();
+            return list.get(0);
+        }
 
         Logins bad_login = new Logins();
         bad_login.setId(-1);

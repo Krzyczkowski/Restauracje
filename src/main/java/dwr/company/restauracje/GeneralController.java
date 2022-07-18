@@ -51,24 +51,24 @@ public class GeneralController implements Initializable {
     @FXML
     private TableView<Products> tableWithProductsOrders;
     @FXML
-    private TableView<Storage>tabelWithComponents;
+    private TableView<Storage> tabelWithComponents;
 
     @FXML
-    private TableView<Positions>tableWithPositions; // tabela z pozycjami w zamowieniu (ta na dole)
+    private TableView<Positions> tableWithPositions; // tabela z pozycjami w zamowieniu (ta na dole)
     @FXML
     private TableView<Logins> logHistory;
     @FXML
-    private TableColumn nr,name,lastName,pesel,salary,restuarant,amount;
+    private TableColumn nr, name, lastName, pesel, salary, restuarant, amount;
 
     @FXML
-    private TableColumn priceProductOrder,nameProductOrder;
+    private TableColumn priceProductOrder, nameProductOrder;
     @FXML
     private TextField searchEmployee;
     @FXML
-    private TableColumn productName,productCategory,productPrice,PositionsProduct, PositionsAmount,PositionsCost;
+    private TableColumn productName, productCategory, productPrice, PositionsProduct, PositionsAmount, PositionsCost;
 
     @FXML
-    private TableColumn itemName,itemAmount,itemId;
+    private TableColumn itemName, itemAmount, itemId;
     @FXML
     private TextField searchProduct;
     @FXML
@@ -90,7 +90,7 @@ public class GeneralController implements Initializable {
     @FXML
     private ComboBox choseCategory;
     @FXML
-    private TextField clientPhone,clientAddress;
+    private TextField clientPhone, clientAddress;
     @FXML
     private ComboBox categoriesOrders;
     //Elements dependent on data base
@@ -108,9 +108,9 @@ public class GeneralController implements Initializable {
     private List<Positions> tempOrder = new ArrayList<Positions>(); // temp variable which helps with order
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("init");
         try {
             Image iconImage = new Image("/person.png", false);
             userIcon.setFill(new ImagePattern(iconImage));
@@ -120,14 +120,13 @@ public class GeneralController implements Initializable {
             acces();
             //loadProductToTable();
         } catch (Exception er) {
-           //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
     }
 
-    private void acces() {
-        if (Client.getLevelacces()<3)
-        {
-            if(Client.getLevelacces()<2){
+    public void acces() {
+        if (Client.getLevelacces() < 3) {
+            if (Client.getLevelacces() < 2) {
                 menuButton1.setDisable(true);
                 menuButton2.setDisable(true);
                 menuButton3.setDisable(true);
@@ -148,8 +147,8 @@ public class GeneralController implements Initializable {
     }
 
     @FXML
-    protected void report(){
-   //     loadEmployesToTable();
+    protected void report() {
+        //     loadEmployesToTable();
     }
 
     @FXML
@@ -157,9 +156,9 @@ public class GeneralController implements Initializable {
         acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setEmployesScene();
-        try{
+        try {
             loadEmployesToTable();
-        }catch (Exception er) {
+        } catch (Exception er) {
             //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
 
@@ -170,12 +169,12 @@ public class GeneralController implements Initializable {
         acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setProductsScene();
-        try{
+        try {
             choseCategory.getItems().clear();
             choseCategory.getItems().addAll(Client.getCategories());
             choseCategory.getItems().add(null);
             loadProductToTable();
-        }catch (Exception er) {
+        } catch (Exception er) {
             //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
     }
@@ -187,7 +186,7 @@ public class GeneralController implements Initializable {
         actualWindow.setWarehouseScene();
         try {
             loadStorageToTable();
-        }catch (Exception er) {
+        } catch (Exception er) {
             //System.out.println(er);      // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
     }
@@ -197,25 +196,29 @@ public class GeneralController implements Initializable {
         acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setHistoryScene();
+        menuButton4.fire();
     }
 
     @FXML
-    protected void orderSection() throws IOException {
-        acces();
+    protected void orderSection() throws Exception {
+        System.out.println("or");
+
         actualWindow = new GeneralWindowSet();
         actualWindow.setOrderScene();
-        try{
+        try {
             categoriesOrders.getItems().clear();
             categoriesOrders.getItems().addAll(Client.getCategories());
             categoriesOrders.getItems().add(null);
             loadProductToTableOrders();
             loadPositionsTable();
-            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
+            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
             valueFactory.setValue(1);
             amountOfProductsInOrder.setValueFactory(valueFactory);
-        }catch (Exception er) {
+        } catch (Exception er) {
             //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
         }
+        System.out.println("or");
+        acces();
     }
 
     @FXML
@@ -229,13 +232,13 @@ public class GeneralController implements Initializable {
     //Popups to edit employes
     @FXML
     protected void openPopupEmploye(ActionEvent event) throws Exception {
-        toEditPopUp=null;
-        if(event.getTarget().equals(editEmployee)
+        toEditPopUp = null;
+        if (event.getTarget().equals(editEmployee)
                 && !employeeTable.getSelectionModel().isEmpty()) {
             editWarnigLabel = new TextField();
             editWarnigLabel.clear();
             toEditPopUp = employeeTable.getSelectionModel().getSelectedItem();
-            FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("editEmploye.fxml"));
             Scene popupScene = new Scene(loader.load(), 333.0, 765.0);
             popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
             Stage popup = new Stage();
@@ -244,10 +247,10 @@ public class GeneralController implements Initializable {
             moveWindow(popupScene, popup);
             popup.show();
 
-        } else if(event.getTarget().equals(addEmployee)) {
+        } else if (event.getTarget().equals(addEmployee)) {
             editWarnigLabel = new TextField();
             editWarnigLabel.clear();
-            FXMLLoader loader= new FXMLLoader(App.class.getResource("editEmploye.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("editEmploye.fxml"));
             Scene popupScene = new Scene(loader.load(), 333.0, 780.0);
             popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
@@ -267,7 +270,7 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void openPopupProduct() throws IOException {
-        FXMLLoader loader= new FXMLLoader(App.class.getResource("editProduct.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("editProduct.fxml"));
         Scene popupScene = new Scene(loader.load(), 333.0, 348.0);
         popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         Stage popup = new Stage();
@@ -279,7 +282,7 @@ public class GeneralController implements Initializable {
 
     @FXML
     protected void openPopupComponent() throws IOException {
-        FXMLLoader loader= new FXMLLoader(App.class.getResource("editComponent.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("editComponent.fxml"));
         Scene popupScene = new Scene(loader.load(), 333.0, 267.0);
         popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         Stage popup = new Stage();
@@ -291,7 +294,7 @@ public class GeneralController implements Initializable {
 
 
     //Moveing popup's
-    protected void moveWindow(Scene scene, Stage stage){
+    protected void moveWindow(Scene scene, Stage stage) {
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -313,20 +316,21 @@ public class GeneralController implements Initializable {
     @FXML
     protected void loadEmployesToTable() throws Exception {
         nr.setCellValueFactory(new PropertyValueFactory<Logins, String>("id"));
-        name.setCellValueFactory(new PropertyValueFactory<Logins, Employee >("name"));
+        name.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("name"));
         lastName.setCellValueFactory(new PropertyValueFactory<Logins, Employee>("lastname"));
         pesel.setCellValueFactory(new PropertyValueFactory<Logins, String>("pesel"));
         salary.setCellValueFactory(new PropertyValueFactory<Logins, String>("salary"));
-        restuarant.setCellValueFactory(new PropertyValueFactory<Logins,String>("restaurantname"));
+        restuarant.setCellValueFactory(new PropertyValueFactory<Logins, String>("restaurantname"));
         employeesList.clear();
-        if(searchEmployee.getText().length()>0)
+        if (searchEmployee.getText().length() > 0)
             employeesList.addAll(Client.getEmployeesFullInfo(searchEmployee.getText()));
         else
             employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
     }
+
     @FXML
-    public  void loadProductToTable()throws Exception {
+    public void loadProductToTable() throws Exception {
         productName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
         productCategory.setCellValueFactory(new PropertyValueFactory<Products, String>("category"));
         productPrice.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
@@ -339,28 +343,28 @@ public class GeneralController implements Initializable {
 //                productList.addAll(Client.getProducts(searchProduct.getText(),""));
 //        }
 //        else
-            productList.addAll(Client.getProducts());
+        productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
     }
+
     @FXML
-    protected void loadProductToTableOrders()throws Exception {
+    protected void loadProductToTableOrders() throws Exception {
         nameProductOrder.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
         priceProductOrder.setCellValueFactory(new PropertyValueFactory<Products, Float>("price"));
         productList.clear();
-        if(searchProductOrders.getText().length()>0 || categoriesOrders.getValue() != null){
-            if(categoriesOrders.getValue() != null){
-                productList.addAll(Client.getProducts(searchProductOrders.getText(),categoriesOrders.getValue().toString()));
-            }
-            else
-                productList.addAll(Client.getProducts(searchProductOrders.getText(),""));
-        }
-        else
+        if (searchProductOrders.getText().length() > 0 || categoriesOrders.getValue() != null) {
+            if (categoriesOrders.getValue() != null) {
+                productList.addAll(Client.getProducts(searchProductOrders.getText(), categoriesOrders.getValue().toString()));
+            } else
+                productList.addAll(Client.getProducts(searchProductOrders.getText(), ""));
+        } else
             productList.addAll(Client.getProducts());
         tableWithProductsOrders.setItems(productList);
 
     }
+
     @FXML
-    protected void loadPositionsTable()throws Exception {
+    protected void loadPositionsTable() throws Exception {
         PositionsProduct.setCellValueFactory(new PropertyValueFactory<Positions, String>("productName"));
         PositionsAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
         PositionsCost.setCellValueFactory(new PropertyValueFactory<Positions, Float>("productPrice"));
@@ -370,7 +374,7 @@ public class GeneralController implements Initializable {
 
 
     @FXML
-    protected void loadStorageToTable()throws Exception {
+    protected void loadStorageToTable() throws Exception {
         itemId.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("id"));
         itemName.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
         itemAmount.setCellValueFactory(new PropertyValueFactory<Storage, String>("amount"));
@@ -381,7 +385,7 @@ public class GeneralController implements Initializable {
     }
 
     public void editAmountStorage(MouseEvent mouseEvent) throws Exception {
-        if(Integer.valueOf(amountOfComponent.getText())>=-99999999 && !tabelWithComponents.getSelectionModel().isEmpty()){
+        if (Integer.valueOf(amountOfComponent.getText()) >= -99999999 && !tabelWithComponents.getSelectionModel().isEmpty()) {
             toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
             toEditStoragePopUp.setAmount(Integer.valueOf(amountOfComponent.getText()));
             System.out.println(toEditStoragePopUp.getId());
@@ -395,50 +399,54 @@ public class GeneralController implements Initializable {
     }
 
     public void deleteStorage(MouseEvent mouseEvent) throws IOException {
-        if( !tabelWithComponents.getSelectionModel().isEmpty()) {
+        if (!tabelWithComponents.getSelectionModel().isEmpty()) {
             toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
             Client.deleteStorage(toEditStoragePopUp);
         }
     }
 
     public void addProductToOrder(MouseEvent mouseEvent) {
-        if( !tableWithProductsOrders.getSelectionModel().isEmpty()) {
+        if (!tableWithProductsOrders.getSelectionModel().isEmpty()) {
             selectedProduct = tableWithProductsOrders.getSelectionModel().getSelectedItem();
-            Positions pos = new Positions(0,selectedProduct.getId(),amountOfProductsInOrder.getValue(),0,selectedProduct.getName(), selectedProduct.getPrice());
+            Positions pos = new Positions(0, selectedProduct.getId(), amountOfProductsInOrder.getValue(), 0, selectedProduct.getName(), selectedProduct.getPrice());
             //System.out.println("id:"+pos.getId()+"amount:"+pos.getAmount()+"idorder:"+pos.getIdorder()+"idproduct:"+pos.getIdproduct());
             tempOrder.clear();
             tempOrder.add(pos);
             positionList.addAll(tempOrder);
 
             tableWithPositions.setItems(positionList);
-           loadAllPrice();
-            amountOfProductsInOrder.getValueFactory().setValue(1);;
+            loadAllPrice();
+            amountOfProductsInOrder.getValueFactory().setValue(1);
+            ;
 
         }
 
     }
-    public void deleteProductFromOrder(MouseEvent mouseEvent){
-        if( !tableWithPositions.getSelectionModel().isEmpty()) {
+
+    public void deleteProductFromOrder(MouseEvent mouseEvent) {
+        if (!tableWithPositions.getSelectionModel().isEmpty()) {
             selectedPostion = tableWithPositions.getSelectionModel().getSelectedItem();
             tableWithPositions.getItems().remove(selectedPostion);
             loadAllPrice();
 
         }
     }
-    private void loadAllPrice(){
-        float f=0;
-        for(int i = 0; i<positionList.size();i++)
-            f+=tableWithPositions.getItems().get(i).getProductPrice();
-        orderPrice.setText(String.valueOf(f)) ;
+
+    private void loadAllPrice() {
+        float f = 0;
+        for (int i = 0; i < positionList.size(); i++)
+            f += tableWithPositions.getItems().get(i).getProductPrice();
+        orderPrice.setText(String.valueOf(f));
     }
 
-    private Clients getClientInfo(){
+    private Clients getClientInfo() {
         Clients c = new Clients();
         c.setAddress(clientAddress.getText());
         c.setPhone(clientPhone.getText());
         return c;
     }
-    public void  setClientLocal(){
+
+    public void setClientLocal() {
         clientAddress.setText("LOKAL");
         clientPhone.setText("000000000");
     }

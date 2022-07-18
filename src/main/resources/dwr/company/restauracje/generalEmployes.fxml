@@ -41,7 +41,7 @@
                 </Label>
                 <VBox prefHeight="317.0" prefWidth="350.0">
                     <children>
-                        <Button fx:id="menuButton0" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#orderSection" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="menuButton0" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#orderSection" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
