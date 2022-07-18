@@ -36,7 +36,7 @@ public class GeneralWindowSet {
         window.initStyle(StageStyle.UNDECORATED);
         window.setTitle("Menagero");
 
-        setEmployesScene();
+        setOrderScene();
         window.show();
     }
 
