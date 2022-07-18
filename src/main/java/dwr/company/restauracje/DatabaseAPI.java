@@ -130,7 +130,7 @@ public class DatabaseAPI {
         List<Logins> list = query.getResultList();
         em.getTransaction().commit();
         if(list.size()==1) {
-            restaurant=list.get(0).getRestaurantname();
+            this.restaurant=list.get(0).getRestaurantname();
             return list.get(0);
         }
 
@@ -151,7 +151,7 @@ public class DatabaseAPI {
     public JSONObject getProducts() {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT prod FROM Products prod ");
+        Query query = em.createQuery("SELECT prod FROM Products prod where prod.restaurant=?1").setParameter(1,restaurant);
         List<Products> list = query.getResultList();
         em.getTransaction().commit();
         for(Integer i=0; i<list.size();i++){
@@ -166,10 +166,10 @@ public class DatabaseAPI {
         Query query;
         if (category.equals(""))
         {
-            query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 ").setParameter(1,name+"%");
+            query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 and prod.restaurant=?2 ").setParameter(1,name+"%").setParameter(2,restaurant);
         }
         else
-            query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 and prod.category = ?2 ").setParameter(1,name+"%").setParameter(2,category);
+            query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 and prod.category = ?2 and prod.restaurant=?3 ").setParameter(1,name+"%").setParameter(2,category).setParameter(3,restaurant);
         List<Products> list = query.getResultList();
         em.getTransaction().commit();
         for(Integer i=0; i<list.size();i++){
@@ -182,7 +182,7 @@ public class DatabaseAPI {
     public JSONObject getCategories() {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT cat FROM Categories cat");
+        Query query = em.createQuery("SELECT cat FROM Categories cat where cat.restaurant=?1").setParameter(1,restaurant);
         List<Categories> list = query.getResultList();
         em.getTransaction().commit();
         for(Integer i=0; i<list.size();i++){
@@ -195,7 +195,7 @@ public class DatabaseAPI {
     public JSONObject getStorage() {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT st FROM Storage st");
+        Query query = em.createQuery( "SELECT st FROM Storage st where st.restaurant = ?1 ").setParameter(1,restaurant);
         List<Storage> list = query.getResultList();
         em.getTransaction().commit();
         System.out.println(list.size());
@@ -233,6 +233,8 @@ public class DatabaseAPI {
         em.getTransaction().commit();
         return s.getName();
     }
+
+
 }
 
 
