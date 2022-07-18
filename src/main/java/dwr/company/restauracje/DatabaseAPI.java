@@ -233,6 +233,9 @@ public class DatabaseAPI {
         em.getTransaction().commit();
         return s.getName();
     }
+    public void makeOrder(){
+
+    }
 
 
 }

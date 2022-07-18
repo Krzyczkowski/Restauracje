@@ -132,4 +132,16 @@ public class Orders {
         result = 31 * result + (dates != null ? dates.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id=" + id +
+                ", idemployee=" + idemployee +
+                ", idclient='" + idclient + '\'' +
+                ", totalprice=" + totalprice +
+                ", dates=" + dates +
+                ", restaurant='" + restaurant + '\'' +
+                '}';
+    }
 }

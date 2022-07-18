@@ -60,4 +60,12 @@ public class Clients {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Clients{" +
+                "phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

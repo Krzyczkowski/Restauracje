@@ -24,6 +24,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.security.spec.ECField;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -449,5 +450,17 @@ public class GeneralController implements Initializable {
     public void setClientLocal() {
         clientAddress.setText("LOKAL");
         clientPhone.setText("000000000");
+    }
+
+    public void makeOrder(MouseEvent mouseEvent) throws IOException {
+        Clients c = getClientInfo();
+        Date date = new Date(System.currentTimeMillis());
+        tempOrder.clear();
+        for (int i = 0; i < positionList.size(); i++)
+            tempOrder.add(tableWithPositions.getItems().get(i)) ;
+        Orders order = new Orders(0,Client.id,c.getPhone(),Float.valueOf(orderPrice.getText()),date,Client.restaurantName);
+        OrderContainer orderContainer= new OrderContainer(order,tempOrder,c);
+        Client.makeOrder(orderContainer);
+
     }
 }

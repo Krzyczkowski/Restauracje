@@ -2,7 +2,9 @@ package dwr.company.restauracje;
 
 import entity.Employee;
 import entity.Logins;
+import entity.OrderContainer;
 import entity.Storage;
+import org.hibernate.criterion.Order;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -70,12 +72,14 @@ class SerwerThread implements Runnable {
             clientAccessLevel = user.getLevelaccess();
             JSON = new JSONObject();
             JSON.put("result", user.getLevelaccess());
+            JSON.put("empID", user.getId());
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
             communication();
         } else {
             JSON = new JSONObject();
             JSON.put("result", 0);
+            JSON.put("empID", -1);
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
             authorization();
@@ -117,6 +121,10 @@ class SerwerThread implements Runnable {
                     break;
                 case "getAllRestaurants":
                     getAllRestaurants();
+                    break;
+                case "makeOrder":
+                    OrderContainer orderContainer = (new OrderContainer((JSONObject)((JSONObject) JSON.get("params")).get("order")) );
+                    System.out.println(orderContainer);
                     break;
 //                case "getIdRestaurantByName":
 //                    getIdRestaurantByName(JSON.get("params").toString());

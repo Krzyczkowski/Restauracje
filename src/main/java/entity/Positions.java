@@ -1,6 +1,7 @@
 package entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 
@@ -57,6 +58,14 @@ public class Positions {
         this.productName=productName;
         this.productPrice=productPrice*amount;
     }
+    public JSONObject toJSON(){
+        JSONObject jo = new JSONObject();
+        jo.put("idorder",idorder);
+        jo.put("idproduct",idproduct);
+        jo.put("amount",amount);
+        jo.put("id",0);
+        return jo;
+    }
 
     public int getId() {
         return id;
@@ -112,5 +121,17 @@ public class Positions {
         result = 31 * result + idproduct;
         result = 31 * result + amount;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Positions{" +
+                "id=" + id +
+                ", idorder=" + idorder +
+                ", idproduct=" + idproduct +
+                ", amount=" + amount +
+                ", productName='" + productName + '\'' +
+                ", productPrice=" + productPrice +
+                '}';
     }
 }

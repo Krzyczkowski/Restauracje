@@ -21,11 +21,15 @@ class Client {
     private static DataInputStream in; // reading from server     // scanner for input
     private static JSONObject message = new JSONObject();
 
+    public static String restaurantName;
+
     public static int getLevelacces() {
         return levelacces;
     }
 
     private static int levelacces;
+
+    public static int id;
     /**
      * Polaczenie z serwerem obslugujacym baze danych
      * @param userName nazwa użytkownika API
@@ -44,7 +48,9 @@ class Client {
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
         levelacces = (int) (long) message.get("result");
+        id = (int) (long) message.get("empID");
         System.out.println(levelacces);
+        restaurantName = DBName;
         return levelacces>0;
     }
 
@@ -314,6 +320,15 @@ class Client {
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
         return message.toString();
+    }
+    public static void makeOrder(OrderContainer orderContainer) throws IOException {
+        message.clear();
+        JSONObject jo = new JSONObject();
+        jo.put("order",orderContainer.toJSON());
+        message.put("command", "makeOrder");
+        message.put("params", jo);
+        System.out.println(message.toString());
+        out.writeUTF(message.toString());
     }
 
 
