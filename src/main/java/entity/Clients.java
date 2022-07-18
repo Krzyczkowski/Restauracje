@@ -22,7 +22,7 @@ public class Clients {
     public JSONObject toJSON (){
         JSONObject jo = new JSONObject();
         jo.put("phone", phone);
-        jo.put("name", address);
+        jo.put("address", address);
         return jo;
     }
     public String getPhone() {

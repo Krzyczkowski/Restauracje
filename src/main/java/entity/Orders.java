@@ -47,7 +47,7 @@ public class Orders {
         idemployee =(int) (long) jo.get("idemployee");
         idclient = jo.get("idclient" ).toString();
         totalprice = (float) (double) jo.get("totalprice");
-        dates =(Date) jo.get("dates");
+        dates =Date.valueOf(jo.get("dates").toString()) ;
         restaurant=jo.get("restaurant").toString();
     }
     public JSONObject toJSON(){
@@ -56,7 +56,7 @@ public class Orders {
         jo.put("idemployee",idemployee);
         jo.put("idclient",idclient);
         jo.put("totalprice",totalprice);
-        jo.put("dates",dates);
+        jo.put("dates",dates.toString());
         jo.put("restaurant",restaurant);
 
         return jo;

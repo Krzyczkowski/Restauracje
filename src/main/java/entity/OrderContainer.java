@@ -3,11 +3,12 @@ package entity;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderContainer {
     private Orders order ;
-    private List<Positions> positions;
+    private List<Positions> positions =new ArrayList<>();
     private Clients client;
 
     public OrderContainer(Orders order, List<Positions> positions, Clients client) {
@@ -34,15 +35,20 @@ public class OrderContainer {
     public OrderContainer(JSONObject joe) {
         //System.out.println(joe);
         JSONObject jo = (JSONObject) JSONValue.parse(joe.get("order").toString());
-        System.out.println(jo);
-        this.order = new Orders((JSONObject) jo.get("order"));
-        System.out.println("1");
-        this.client = new Clients((JSONObject) jo.get("client"));
-        System.out.println("1");
-        JSONObject positionsJO = (JSONObject) jo.get("positions");
-        System.out.println("1");
+        joe.clear();
+        joe = (JSONObject) JSONValue.parse(jo.get("order").toString()) ;
+        this.order = new Orders(joe);
+        joe.clear();
+        joe = (JSONObject) JSONValue.parse(jo.get("client").toString()) ;
+        //System.out.println(joe);
+        this.client = new Clients(joe);
+        JSONObject positionsJO = (JSONObject) JSONValue.parse(jo.get("positions").toString()) ;
+        System.out.println(positionsJO);
         for(int i=0;i< positionsJO.size();i++){
-            positions.add(new Positions((JSONObject) positionsJO.get("positions"+i)) );
+            joe.clear();
+            joe = (JSONObject) JSONValue.parse(positionsJO.get("position"+i).toString()) ;
+            Positions pos = new Positions(joe);
+            positions.add(pos);
         }
     }
 
