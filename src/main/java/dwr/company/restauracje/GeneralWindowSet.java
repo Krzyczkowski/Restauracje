@@ -16,13 +16,13 @@ public class GeneralWindowSet {
     protected static Scene employesScene, productsScene, warehouseScene, historyScene, orderScene;
     protected FXMLLoader employesWindowLoader, historyWindowLoader, productsWindowLoader, warehouseWindwoLoader, orderWindowLoader;
 
+    //Information about which window should be loaded
+    public static int layout;
+
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
-    GeneralController g ;
-    GeneralWindowSet(GeneralController g) throws IOException {
-        this.g=g;
-    }
+
     GeneralWindowSet() throws IOException {
     }
 
@@ -36,29 +36,8 @@ public class GeneralWindowSet {
         window.initStyle(StageStyle.UNDECORATED);
         window.setTitle("Menagero");
 
-        setActualWindow(employesScene);
+        setEmployesScene();
         window.show();
-    }
-
-    //All fxmls included in general Window
-    protected void lodaFxmls() throws IOException {
-        employesWindowLoader = new FXMLLoader(App.class.getResource("generalEmployes.fxml"));
-        historyWindowLoader = new FXMLLoader(App.class.getResource("generalHistory.fxml"));
-        productsWindowLoader = new FXMLLoader(App.class.getResource("generalProducts.fxml"));
-        warehouseWindwoLoader = new FXMLLoader(App.class.getResource("generalWarehouse.fxml"));
-        orderWindowLoader = new FXMLLoader(App.class.getResource("generalOrder.fxml"));
-
-        orderScene = new Scene(orderWindowLoader.load(), 1200, 700);
-        employesScene = new Scene(employesWindowLoader.load(), 1200, 700);
-        historyScene = new Scene(historyWindowLoader.load(), 1200, 700);
-        warehouseScene = new Scene(warehouseWindwoLoader.load(), 1200, 700);
-        productsScene = new Scene(productsWindowLoader.load(), 1200, 700);
-
-        employesScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        historyScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        warehouseScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        productsScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        orderScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
     }
 
     //Switch between options in main Window
@@ -81,27 +60,51 @@ public class GeneralWindowSet {
         });
 
         window.setScene(actual);
-
     }
 
     //Type of this window
     protected void setEmployesScene() throws IOException {
+        layout = 0;
+        employesWindowLoader = new FXMLLoader(App.class.getResource("generalEmployes.fxml"));
+        employesScene = new Scene(employesWindowLoader.load(), 1200, 700);
+        employesScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         setActualWindow(employesScene);
     }
 
     protected void  setProductsScene() throws IOException {
+        layout = 1;
+        productsWindowLoader = new FXMLLoader(App.class.getResource("generalProducts.fxml"));
+        productsScene = new Scene(productsWindowLoader.load(), 1200, 700);
+        productsScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         setActualWindow(productsScene);
     }
 
     protected void setWarehouseScene() throws IOException {
+        layout = 2;
+        warehouseWindwoLoader = new FXMLLoader(App.class.getResource("generalWarehouse.fxml"));
+        warehouseScene = new Scene(warehouseWindwoLoader.load(), 1200, 700);
+        warehouseScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         setActualWindow(warehouseScene);
     }
 
     protected void setHistoryScene() throws IOException {
+        layout = 3;
+        historyWindowLoader = new FXMLLoader(App.class.getResource("generalHistory.fxml"));
+        historyScene = new Scene(historyWindowLoader.load(), 1200, 700);
+        historyScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         setActualWindow(historyScene);
     }
 
-    protected void setOrderScene( ) throws Exception {
+    protected void setOrderScene() throws IOException {
+        layout = 4;
+        orderWindowLoader = new FXMLLoader(App.class.getResource("generalOrder.fxml"));
+        orderScene = new Scene(orderWindowLoader.load(), 1200, 700);
+        orderScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         setActualWindow(orderScene);
     }
 

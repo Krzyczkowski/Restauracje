@@ -29,8 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GeneralController implements Initializable {
-    public Label orderPrice;
+public class GeneralController{
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -39,12 +38,17 @@ public class GeneralController implements Initializable {
     GeneralWindowSet actualWindow;
 
     //Data Fields
+    //Labels
     @FXML
     private Circle userIcon;
+    @FXML
+    public Label orderPrice;
     @FXML
     private Label userName;
     @FXML
     private Label welcomeText;
+
+    //Tabel Views and columns
     @FXML
     private TableView<Logins> employeeTable;
     @FXML
@@ -52,34 +56,42 @@ public class GeneralController implements Initializable {
     @FXML
     private TableView<Products> tableWithProductsOrders;
     @FXML
-    private TableView<Storage> tabelWithComponents;
-
+    private TableView<Storage>tabelWithComponents;
     @FXML
     private TableView<Positions> tableWithPositions; // tabela z pozycjami w zamowieniu (ta na dole)
     @FXML
-    private TableView<Logins> logHistory;
+    private TableView<Logins>logHistory;
     @FXML
-    private TableColumn nr, name, lastName, pesel, salary, restuarant, amount;
-
+    private TableColumn nr,name,lastName,pesel,salary,restuarant,amount;
     @FXML
     private TableColumn priceProductOrder, nameProductOrder;
     @FXML
-    private TextField searchEmployee;
-    @FXML
-    private TableColumn productName, productCategory, productPrice, PositionsProduct, PositionsAmount, PositionsCost;
+    private TableColumn productName,productCategory,productPrice,PositionsProduct, PositionsAmount,PositionsCost;
 
     @FXML
-    private TableColumn itemName, itemAmount, itemId;
+    private TableColumn itemName,itemAmount,itemId;
+
+    //Spiners, comboboxes
+    @FXML
+    private Spinner<Integer> amountOfProductsInOrder; //= new Spinner<>(1,20,1);
+    @FXML
+    private ComboBox choseCategory;
+    @FXML
+    private ComboBox categoriesOrders;
+
+    //Text Fields
     @FXML
     private TextField searchProduct;
     @FXML
-    private Spinner<Integer> amountOfProductsInOrder; //= new Spinner<>(1,20,1);
+    private TextField searchEmployee;
     @FXML
     public TextField editWarnigLabel;
     @FXML
     public TextField searchProductOrders;
     @FXML
     public TextField amountOfComponent;
+    @FXML
+    private TextField clientPhone,clientAddress;
 
     //Buttons
     @FXML
@@ -88,12 +100,7 @@ public class GeneralController implements Initializable {
     private Button menuButton0, menuButton1, menuButton2, menuButton3, menuButton4;
     @FXML
     private Button findEmployee, editEmployee, addEmployee;
-    @FXML
-    private ComboBox choseCategory;
-    @FXML
-    private TextField clientPhone, clientAddress;
-    @FXML
-    private ComboBox categoriesOrders;
+
     //Elements dependent on data base
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private ObservableList<Products> productList = FXCollections.observableArrayList();
@@ -109,19 +116,43 @@ public class GeneralController implements Initializable {
     private List<Positions> tempOrder = new ArrayList<Positions>(); // temp variable which helps with order
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("init");
-        try {
+
+    @FXML
+    public void initialize(){
+        try {//Loading correct screen
+            switch (GeneralWindowSet.layout){
+                case 0:
+                    loadEmployesToTable();
+                    break;
+                case 1:
+                    loadProductToTable();
+                    break;
+                case 2:
+                    loadStorageToTable();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    loadProductToTableOrders();
+                    categoriesOrders.getItems().clear();
+                    categoriesOrders.getItems().addAll(Client.getCategories());
+                    categoriesOrders.getItems().add(null);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
+                    valueFactory.setValue(1);
+                    amountOfProductsInOrder.setValueFactory(valueFactory);
+                    break;
+                default:
+                    break;
+            }
+
             Image iconImage = new Image("/person.png", false);
             userIcon.setFill(new ImagePattern(iconImage));
             userIcon.setEffect(new DropShadow(20, Color.WHITESMOKE));
-            loadEmployesToTable();
-            tempOrder = new ArrayList<>();
             acces();
-            //loadProductToTable();
+
+            tempOrder = new ArrayList<>();
         } catch (Exception er) {
-            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
+            //er.printStackTrace();
         }
     }
 
@@ -148,8 +179,8 @@ public class GeneralController implements Initializable {
     }
 
     @FXML
-    protected void report() {
-        //     loadEmployesToTable();
+    protected void report(){
+   //     loadEmployesToTable();
     }
 
     @FXML
@@ -157,27 +188,14 @@ public class GeneralController implements Initializable {
         acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setEmployesScene();
-        try {
-            loadEmployesToTable();
-        } catch (Exception er) {
-            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
-        }
-
     }
 
     @FXML
-    protected void productSection() throws Exception {
+    protected void productSection() throws IOException {
         acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setProductsScene();
-        try {
-            choseCategory.getItems().clear();
-            choseCategory.getItems().addAll(Client.getCategories());
-            choseCategory.getItems().add(null);
-            loadProductToTable();
-        } catch (Exception er) {
-            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
-        }
+
     }
 
     @FXML
@@ -185,11 +203,6 @@ public class GeneralController implements Initializable {
         acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setWarehouseScene();
-        try {
-            loadStorageToTable();
-        } catch (Exception er) {
-            //System.out.println(er);      // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
-        }
     }
 
     @FXML
@@ -197,7 +210,6 @@ public class GeneralController implements Initializable {
         acces();
         actualWindow = new GeneralWindowSet();
         actualWindow.setHistoryScene();
-        menuButton4.fire();
     }
 
     @FXML
@@ -206,20 +218,6 @@ public class GeneralController implements Initializable {
 
         actualWindow = new GeneralWindowSet();
         actualWindow.setOrderScene();
-        try {
-            categoriesOrders.getItems().clear();
-            categoriesOrders.getItems().addAll(Client.getCategories());
-            categoriesOrders.getItems().add(null);
-            loadProductToTableOrders();
-            loadPositionsTable();
-            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
-            valueFactory.setValue(1);
-            amountOfProductsInOrder.setValueFactory(valueFactory);
-        } catch (Exception er) {
-            //er.printStackTrace();        // Bug between Fxml and initialize do not uncomend it bc consol will be red, everythnk work without it.
-        }
-        System.out.println("or");
-        acces();
     }
 
     @FXML

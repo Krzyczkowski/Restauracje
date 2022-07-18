@@ -251,8 +251,9 @@ class Client {
 
     private static List<Products> printProducts(JSONObject message) {
         List<Products> list= new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++)
+        for(Integer i = 0; i<message.size();i++) {
             list.add(new Products((JSONObject) message.get(i.toString())));
+        }
         return list;
     }
 

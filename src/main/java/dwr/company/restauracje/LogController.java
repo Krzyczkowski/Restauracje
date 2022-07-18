@@ -45,7 +45,6 @@ public class LogController implements Initializable {
             if (Client.login(login.getText(),password.getText(),(String) place.getValue())) {
                 //okienko poprawne dane
                 mainWindow = new GeneralWindowSet();
-                mainWindow.lodaFxmls();
                 mainWindow.firstUsage();
 
                 Stage stage = (Stage) exitButton.getScene().getWindow();
