@@ -73,6 +73,7 @@ class SerwerThread implements Runnable {
             JSON = new JSONObject();
             JSON.put("result", user.getLevelaccess());
             JSON.put("empID", user.getId());
+            JSON.put("name",user.getName()+" "+user.getLastname());
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
             communication();
