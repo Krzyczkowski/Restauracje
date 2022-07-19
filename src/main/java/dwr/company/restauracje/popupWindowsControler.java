@@ -237,6 +237,26 @@ public class popupWindowsControler implements Initializable{
         else
             warningLabel4.setText("wybierz składnik do usunięcia");
     }
+
+    public void onSaveProduct(MouseEvent mouseEvent) {
+        if(newProductName.getText().equals("")|| newProductCategory.getSelectionModel().isEmpty()|| newProductComponentsTable.getItems().size()==0 ){
+            String s ="Należy wypełnić: ";
+            if(newProductName.getText().equals(""))
+                s+="nazwe, ";
+            if( newProductCategory.getSelectionModel().isEmpty())
+                s+="kategorie, ";
+            if(newProductComponentsTable.getItems().size()==0)
+                s+="składniki, ";
+            warningLabel4.setText(s);
+        }
+        else{
+            //wysłanie zapytania
+            warningLabel4.setText("");
+            newProductName.setText("");
+            newProductComponentsTable.getItems().clear();
+        }
+
+    }
 }
 
 
