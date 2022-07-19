@@ -9,27 +9,35 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class popupWindowsControler implements Initializable{
     //Fields with data
     @FXML
-    private TableColumn IngId, IngName, IngAmount;
+    private TableColumn IngId, IngName, IngAmount,newProductIngId,newProductIngName,newProductIngAmount;
     @FXML
     protected TextField newSecondName, newPesel, newLevel, newSalary, newLogin, newName;
     @FXML
     protected TextField newComponentName,newAmount;
     @FXML
     private TableView<Storage>componentsTable; // tabela ze wszystkimi skladnikami (lewa w dodaj produkt)
-
+    @FXML
+    private TableView<Storage>newProductComponentsTable;
     private ObservableList<Storage> storageList = FXCollections.observableArrayList();
+    private Storage selectedIngridient;
+
+    private ObservableList<Storage> componentProductList = FXCollections.observableArrayList();
+
+    private List <Storage> ingridients = new ArrayList<>();
     @FXML
     private TextField newProductName, newCategoryName;
     @FXML
@@ -191,7 +199,34 @@ public class popupWindowsControler implements Initializable{
         command = "update";
     }
 
+
+    public void addIngridientToProduct(MouseEvent mouseEvent) throws IOException {
+        if (!componentsTable.getSelectionModel().isEmpty()) {
+            selectedIngridient = componentsTable.getSelectionModel().getSelectedItem();
+            ingridients.add(selectedIngridient);
+            loadNewProductIngridientsTable(ingridients);
+        }
+    }
+    private void loadNewProductIngridientsTable(List<Storage> ingridients) throws IOException {
+        newProductCategory.getItems().addAll(Client.getCategories());
+        newProductIngId.setCellValueFactory(new PropertyValueFactory<Positions, String>("id"));
+        newProductIngName.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("name"));
+        newProductIngAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
+        componentProductList.clear();
+        componentProductList.addAll(ingridients);
+        newProductComponentsTable.setItems(componentProductList);
+    }
+
+    public void removeIngridientFromProduct(MouseEvent mouseEvent) throws IOException {
+        selectedIngridient = newProductComponentsTable.getSelectionModel().getSelectedItem();
+        if (!newProductComponentsTable.getSelectionModel().isEmpty()) {
+            selectedIngridient = newProductComponentsTable.getSelectionModel().getSelectedItem();
+            ingridients.remove(selectedIngridient);
+            loadNewProductIngridientsTable(ingridients);
+        }
+    }
 }
+
 
 
 

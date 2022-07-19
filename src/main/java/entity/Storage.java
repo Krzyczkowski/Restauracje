@@ -1,5 +1,7 @@
 package entity;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
@@ -19,6 +21,17 @@ public class Storage {
     @Column(name = "name")
     private String name;
 
+    public TextField getAmountOfIngridientInProduct() {
+        return amountOfIngridientInProduct;
+    }
+
+    public void setAmountOfIngridientInProduct(TextField amountOfIngridientInProduct) {
+        this.amountOfIngridientInProduct = amountOfIngridientInProduct;
+    }
+
+    @Transient
+    @FXML
+    TextField amountOfIngridientInProduct; // for fxml table in creation of product
 
 
     @Basic
