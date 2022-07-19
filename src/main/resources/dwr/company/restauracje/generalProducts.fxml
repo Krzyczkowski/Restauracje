@@ -113,12 +113,12 @@
                   <TableColumn fx:id="productPrice"    minWidth="0.0" prefWidth="156.0" text="Cena" />
               </columns>
             </TableView>
-            <Button fx:id="addProduct" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#openPopupProduct" prefHeight="34.0" prefWidth="173.0" text="Dodaj">
+            <Button fx:id="addProduct" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" onAction="#openPopupProduct" prefHeight="34.0" prefWidth="173.0" text="Dodaj">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="editProduct" layoutX="357.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#openPopupProduct" prefHeight="35.0" prefWidth="173.0" text="Edytuj">
+            <Button fx:id="editProduct" layoutX="357.0" layoutY="630.0" mnemonicParsing="false" onAction="#openPopupProduct" prefHeight="35.0" prefWidth="173.0" text="Edytuj">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>

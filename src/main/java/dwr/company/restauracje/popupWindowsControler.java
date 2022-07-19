@@ -4,10 +4,7 @@ import entity.Employee;
 import entity.Storage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -25,6 +22,8 @@ public class popupWindowsControler implements Initializable{
     @FXML
     protected TextField newComponentName,newAmount;
     @FXML
+    private TextField newProductName, newCategoryName;
+    @FXML
     private PasswordField newPassword;
     private String command;
     private int id;
@@ -36,6 +35,14 @@ public class popupWindowsControler implements Initializable{
     @FXML
     private Button saveEmploye;
     @FXML
+    private Button addToProductComponents;
+    @FXML
+    private Button deleteFromProductComponents;
+    @FXML
+    private Button saveNewProduct;
+    @FXML
+    private Button saveNewCategory;
+    @FXML
     private ComboBox newPlace;
 
     //Other declarations
@@ -44,10 +51,20 @@ public class popupWindowsControler implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(GeneralController.toEditPopUp != null){
-            loadWorkerData();
-        } else {
-            command = "insert";
+        switch (GeneralController.popup){
+            case 0:
+                if(GeneralController.toEditPopUp != null){
+                    loadWorkerData();
+                } else {
+                    command = "insert";
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            default:
+                break;
         }
     }
 

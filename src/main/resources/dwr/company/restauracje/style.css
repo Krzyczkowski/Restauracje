@@ -443,3 +443,67 @@
     -fx-border-color: #032475;
     -fx-border-radius: 20;
 }
+
+#addToProductComponents{
+    -fx-background-radius: 50;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 50;
+    -fx-border-color: #032475;
+}
+
+#addToProductComponents:hover{
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 50;
+}
+
+#deleteFromProductComponents{
+    -fx-background-radius: 50;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 50;
+    -fx-border-color: #032475;
+}
+
+#deleteFromProductComponents:hover{
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 50;
+}
+
+#saveNewProduct{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;;
+    -fx-text-fill: white;
+    -fx-border-radius: 30;
+    -fx-border-color: #032475;;
+}
+
+#saveNewProduct:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 30;
+}
+
+#saveNewCategory{
+    -fx-background-radius: 30;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 30;
+    -fx-border-color: #032475;
+}
+
+#saveNewCategory:hover{
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 30;
+}
