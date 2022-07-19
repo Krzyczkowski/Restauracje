@@ -94,6 +94,7 @@ public class popupWindowsControler implements Initializable{
     }
 
     private void loadPopupIngridients() throws IOException {
+        newProductCategory.getItems().clear();
         newProductCategory.getItems().addAll(Client.getCategories());
         List<Storage> sl = Client.getStorage();
         IngId.setCellValueFactory(new PropertyValueFactory<Positions, String>("id"));
