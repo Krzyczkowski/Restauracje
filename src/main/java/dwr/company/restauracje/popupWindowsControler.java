@@ -67,6 +67,8 @@ public class popupWindowsControler implements Initializable{
 
     //Other declarations
 
+    @FXML
+    private Label warningLabel4;
 
 
     @Override
