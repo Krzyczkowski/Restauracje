@@ -175,7 +175,10 @@ public class GeneralController{
     //Deal with some actions int window
     @FXML
     protected void onExitbutton() throws IOException {
-        Client.logout();
+        try {
+            Client.logout();
+        }catch (Exception e){}
+
         Platform.exit();
     }
 
@@ -470,18 +473,29 @@ public class GeneralController{
     }
 
     public void makeOrder(MouseEvent mouseEvent) throws IOException {
-        Clients c = getClientInfo();
+
         Date date = new Date(System.currentTimeMillis());
         tempOrder.clear();
-        for (int i = 0; i < positionList.size(); i++) {
-            tempOrder.add(tableWithPositions.getItems().get(i));
-            tempOrder.get(i).setProductName(tableWithPositions.getItems().get(i).getProductName());
-            tempOrder.get(i).setProductPrice(tempOrder.get(i).getAmount()*tableWithPositions.getItems().get(i).getProductPrice());
+        if(positionList.size()>0) {
+            for (int i = 0; i < positionList.size(); i++) {
+                tempOrder.add(tableWithPositions.getItems().get(i));
+                tempOrder.get(i).setProductName(tableWithPositions.getItems().get(i).getProductName());
+                tempOrder.get(i).setProductPrice(tempOrder.get(i).getAmount() * tableWithPositions.getItems().get(i).getProductPrice());
+            }
+            Clients c = getClientInfo();
+            if (c.getPhone().equals("")||c.getAddress().equals(""))
+            {
+                warningLabel3.setText("brak danych klienta");
+                return;
+            }
+            Orders order = new Orders(0,Client.id,c.getPhone(),Float.valueOf(orderPrice.getText()),date,Client.restaurantName);
+            OrderContainer orderContainer= new OrderContainer(order,tempOrder,c);
+            Client.makeOrder(orderContainer);
+            tableWithPositions.getItems().clear();
+            orderPrice.setText("0.0");
+            warningLabel3.setText("");
         }
-
-        Orders order = new Orders(0,Client.id,c.getPhone(),Float.valueOf(orderPrice.getText()),date,Client.restaurantName);
-        OrderContainer orderContainer= new OrderContainer(order,tempOrder,c);
-        Client.makeOrder(orderContainer);
-
+        else
+            warningLabel3.setText("brak wybranych produktów");
     }
 }
