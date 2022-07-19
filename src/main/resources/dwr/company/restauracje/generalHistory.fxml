@@ -99,7 +99,7 @@
 
 
 
-             <TableView fx:id="PositionsEditionTable" layoutX="35.0" layoutY="388.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
+             <TableView fx:id="PositionsEditionTable"  layoutX="35.0" layoutY="388.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
                  <columns>
                      <TableColumn fx:id="PositionsEditionProductName" prefWidth="100.0" text="Nazwa produktu" />
                      <TableColumn fx:id="PositionsEditionProductAmount" prefWidth="274.0" text=" Ilość " />
@@ -111,7 +111,7 @@
 
 
 
-            <TableView fx:id="tableWithHistory" layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
+            <TableView fx:id="tableWithHistory" onMouseClicked="#selectOrderToEdit"  layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
               <columns>
                 <TableColumn fx:id="historyorder" prefWidth="100.0" text="nr zamówienia" />
                 <TableColumn fx:id="historyid" prefWidth="100.0" text="nr Klienta" />

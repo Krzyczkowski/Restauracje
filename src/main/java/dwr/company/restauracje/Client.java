@@ -362,7 +362,7 @@ class Client {
         System.out.println(2);
         return list;
     }
-    private static List<Positions> getPositions(int idOrder) throws IOException {
+    public static List<Positions> getPositions(int idOrder) throws IOException {
         message.clear();
         message.put("command", "getPositions");
         message.put("params", idOrder);
