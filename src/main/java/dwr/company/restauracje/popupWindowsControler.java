@@ -110,7 +110,9 @@ public class popupWindowsControler implements Initializable{
                 Client.insertCategory(newCategoryName.getText());
                 newProductCategory.getItems().clear();
                 newProductCategory.getItems().addAll(Client.getCategories());
-            }
+                newProductCategory.getSelectionModel().selectLast();
+                newCategoryName.setText("");
+                }
             else{
                 //warning jest taka kategoria
             }
