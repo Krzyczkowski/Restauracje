@@ -106,8 +106,9 @@
             </BarChart>
             <TableView fx:id="tableWithHistory" layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
               <columns>
-                <TableColumn prefWidth="374.0" text="Data Zamówienia" />
-                <TableColumn prefWidth="394.0" text="Przychód" />
+                <TableColumn fx:id="historyid" prefWidth="100.0" text="nr Klienta" />
+                <TableColumn fx:id="historydate" prefWidth="274.0" text="Data Zamówienia" />
+                <TableColumn fx:id="historyprice" prefWidth="394.0" text="Przychód" />
               </columns>
             </TableView>
             <Label layoutX="112.0" layoutY="359.0" prefHeight="41.0" prefWidth="297.0" text="Przychody" textFill="#032475">

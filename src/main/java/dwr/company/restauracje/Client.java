@@ -337,4 +337,22 @@ class Client {
     }
 
 
+    public static List<Orders> getOrders(String  date) throws IOException {
+        message.clear();
+        message.put("command", "getOrders");
+        message.put("params", date);
+        out.writeUTF(message.toString());
+        message.clear();
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        System.out.println(message.toString());
+        return printOrders(message);
+    }
+
+    private static List<Orders> printOrders(JSONObject jo) {
+        List<Orders> list= new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Orders((JSONObject) message.get(i.toString())));
+        System.out.println(2);
+        return list;
+    }
 }

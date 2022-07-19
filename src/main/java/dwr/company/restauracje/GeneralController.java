@@ -60,6 +60,8 @@ public class GeneralController{
     @FXML
     private TableView<Storage>tabelWithComponents;
     @FXML
+    private TableView<Orders>tableWithHistory;
+    @FXML
     private TableView<Positions> tableWithPositions; // tabela z pozycjami w zamowieniu (ta na dole)
     @FXML
     private TableView<Logins>logHistory;
@@ -69,6 +71,8 @@ public class GeneralController{
     private TableColumn priceProductOrder, nameProductOrder;
     @FXML
     private TableColumn productName,productCategory,productPrice,PositionsProduct, PositionsAmount,PositionsCost;
+    @FXML
+    private TableColumn historyid,historydate,historyprice;
 
     @FXML
     private TableColumn itemName,itemAmount,itemId;
@@ -109,8 +113,8 @@ public class GeneralController{
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private ObservableList<Products> productList = FXCollections.observableArrayList();
     private ObservableList<Storage> itemList = FXCollections.observableArrayList();
-
     private ObservableList<Positions> positionList = FXCollections.observableArrayList();
+    private ObservableList<Orders> historyOrders = FXCollections.observableArrayList();
     public static Logins toEditPopUp;
     public static Storage toEditStoragePopUp;
 
@@ -135,6 +139,7 @@ public class GeneralController{
                     loadStorageToTable();
                     break;
                 case 3:
+                    loadHistoryToTable();
                     break;
                 case 4:
                     loadProductToTableOrders();
@@ -161,6 +166,8 @@ public class GeneralController{
             //er.printStackTrace();
         }
     }
+
+
 
     public void acces() {
         if (Client.getLevelacces() < 3) {
@@ -349,7 +356,15 @@ public class GeneralController{
             employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
     }
+    private void loadHistoryToTable() throws IOException {
+        historyid.setCellValueFactory(new PropertyValueFactory<Logins, Integer>("idclient"));
+        historyprice.setCellValueFactory(new PropertyValueFactory<Logins, Float>("totalprice"));
+        historydate.setCellValueFactory(new PropertyValueFactory<Logins, Date>("dates"));
+        historyOrders.clear();
+        historyOrders.addAll(Client.getOrders( new Date(System.currentTimeMillis()).toString()));
+        tableWithHistory.setItems(historyOrders);
 
+    }
     @FXML
     public void loadProductToTable() throws Exception {
         productName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
