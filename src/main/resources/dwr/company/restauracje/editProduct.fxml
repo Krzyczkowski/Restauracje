@@ -31,9 +31,9 @@
       <ComboBox fx:id="newProductCategory" layoutX="231.0" layoutY="129.0" prefHeight="25.0" prefWidth="418.0" />
       <TableView fx:id="componentsTable" layoutX="44.0" layoutY="195.0" prefHeight="346.0" prefWidth="297.0" style="-fx-background-color: bec5eb;">
         <columns>
-          <TableColumn prefWidth="35.0" text="Id" />
-          <TableColumn prefWidth="161.0" text="Nazwa" />
-            <TableColumn prefWidth="100.0" text="Ilość" />
+          <TableColumn fx:id= "IngId" prefWidth="35.0" text="Id" />
+          <TableColumn fx:id="IngName" prefWidth="161.0" text="Nazwa" />
+            <TableColumn fx:id= "IngAmount" prefWidth="100.0" text="Ilość" />
         </columns>
       </TableView>
       <Label layoutX="44.0" layoutY="163.0" prefHeight="32.0" prefWidth="183.0" text="Wszystkie składniki" textFill="#032475">
@@ -43,7 +43,7 @@
       </Label>
       <TableView fx:id="newProductComponentsTable" layoutX="426.0" layoutY="195.0" prefHeight="346.0" prefWidth="297.0" style="-fx-background-color: #59e397;">
          <columns>
-            <TableColumn prefWidth="35.0" text="Id" />
+            <TableColumn fx:id="" prefWidth="35.0" text="Id" />
             <TableColumn prefWidth="161.0" text="Nazwa" />
             <TableColumn prefWidth="100.0" text="Ilość" />
          </columns>

@@ -539,6 +539,7 @@ public class GeneralController{
 
     public void LoadPositionsEditionTable(Orders order) throws IOException {
         List<Positions> pl = Client.getPositions(order.getId());
+        System.out.println(order);
         PositionsEditionProductName.setCellValueFactory(new PropertyValueFactory<Positions, String>("productName"));
         PositionsEditionProductAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
         PositionsEditionProductPrice.setCellValueFactory(new PropertyValueFactory<Positions, Float>("productPrice"));

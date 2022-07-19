@@ -1,10 +1,12 @@
 package dwr.company.restauracje;
 
-import entity.Employee;
-import entity.Storage;
+import entity.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -13,14 +15,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class popupWindowsControler implements Initializable{
     //Fields with data
     @FXML
+    private TableColumn IngId, IngName, IngAmount;
+    @FXML
     protected TextField newSecondName, newPesel, newLevel, newSalary, newLogin, newName;
     @FXML
     protected TextField newComponentName,newAmount;
+    @FXML
+    private TableView<Storage>componentsTable; // tabela ze wszystkimi skladnikami (lewa w dodaj produkt)
+
+    private ObservableList<Storage> storageList = FXCollections.observableArrayList();
     @FXML
     private TextField newProductName, newCategoryName;
     @FXML
@@ -66,7 +75,7 @@ public class popupWindowsControler implements Initializable{
                 break;
             case 2:
                 try {
-                    loadPopupProduct();
+                    loadPopupIngridients();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -76,8 +85,16 @@ public class popupWindowsControler implements Initializable{
         }
     }
 
-    private void loadPopupProduct() throws IOException {
+    private void loadPopupIngridients() throws IOException {
         newProductCategory.getItems().addAll(Client.getCategories());
+        List<Storage> sl = Client.getStorage();
+        IngId.setCellValueFactory(new PropertyValueFactory<Positions, String>("id"));
+        IngName.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("name"));
+        IngAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
+        storageList.clear();
+        storageList.addAll(sl);
+        componentsTable.setItems(storageList);
+
     }
 
 
