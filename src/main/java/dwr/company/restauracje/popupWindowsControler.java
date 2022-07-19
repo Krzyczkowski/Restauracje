@@ -44,6 +44,9 @@ public class popupWindowsControler implements Initializable{
     private Button saveNewCategory;
     @FXML
     private ComboBox newPlace;
+    @FXML
+    private ComboBox newProductCategory;
+
 
     //Other declarations
 
@@ -62,10 +65,19 @@ public class popupWindowsControler implements Initializable{
             case 1:
                 break;
             case 2:
+                try {
+                    loadPopupProduct();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 break;
         }
+    }
+
+    private void loadPopupProduct() throws IOException {
+        newProductCategory.getItems().addAll(Client.getCategories());
     }
 
 

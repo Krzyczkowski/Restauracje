@@ -235,7 +235,6 @@ public class GeneralController{
 
     @FXML
     protected void orderSection() throws Exception {
-        System.out.println("or");
 
         actualWindow = new GeneralWindowSet();
         actualWindow.setOrderScene();
@@ -444,7 +443,6 @@ public class GeneralController{
         if (Integer.valueOf(amountOfComponent.getText()) >= -99999999 && !tabelWithComponents.getSelectionModel().isEmpty()) {
             toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
             toEditStoragePopUp.setAmount(Integer.valueOf(amountOfComponent.getText()));
-            System.out.println(toEditStoragePopUp.getId());
             Client.updateStorageItem(toEditStoragePopUp);
         }
     }
