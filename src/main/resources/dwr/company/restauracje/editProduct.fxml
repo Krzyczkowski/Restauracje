@@ -29,7 +29,7 @@
             <Font name="Calibri Bold" size="22.0" />
          </font>
       </Label>
-      <ComboBox fx:id="newProductCategory" layoutX="231.0" layoutY="129.0" prefHeight="25.0" prefWidth="418.0" />
+      <ComboBox fx:id="newProductCategory" layoutX="231.0" layoutY="129.0" prefHeight="25.0" prefWidth="261.0" />
       <TableView fx:id="componentsTable" layoutX="44.0" layoutY="195.0" prefHeight="346.0" prefWidth="297.0" style="-fx-background-color: bec5eb;">
         <columns>
           <TableColumn fx:id="IngId" prefWidth="35.0" text="Id" />
@@ -103,5 +103,10 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="deleteCategory" onAction="#warningWindow" layoutX="510.0" layoutY="129.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Usuń wybrną kategorie">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

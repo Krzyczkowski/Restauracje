@@ -3,8 +3,12 @@ package dwr.company.restauracje;
 import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
@@ -13,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +26,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class popupWindowsControler implements Initializable{
+    //Mouse click cordinates
+    private double xCordinates = 0;
+    private double yCordinates = 0;
+
     //Fields with data
     @FXML
     private TableColumn IngId, IngName, IngAmount,newProductIngId,newProductIngName,newProductIngAmount;
@@ -60,9 +69,15 @@ public class popupWindowsControler implements Initializable{
     @FXML
     private Button saveNewCategory;
     @FXML
+    private Button deleteCategory;
+    @FXML
+    private Button yesButton, noButton;
+    @FXML
     private ComboBox newPlace;
     @FXML
     private ComboBox newProductCategory;
+    @FXML
+    private Spinner<Integer> amountToAdd;
 
 
     //Other declarations
@@ -85,10 +100,15 @@ public class popupWindowsControler implements Initializable{
                 break;
             case 2:
                 try {
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
+                    valueFactory.setValue(1);
+                    amountToAdd.setValueFactory(valueFactory);
                     loadPopupIngridients();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                break;
+            case 3:
                 break;
             default:
                 break;
@@ -178,6 +198,50 @@ public class popupWindowsControler implements Initializable{
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
 
+    }
+
+    @FXML
+    protected void warningWindow() throws IOException {
+        GeneralController.popup = 3;
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteCatgory.fxml"));
+        Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
+        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        Stage popup = new Stage();
+        popup.initStyle(StageStyle.UNDECORATED);
+        popup.setScene(popupScene);
+        moveWindow(popupScene, popup);
+        popup.show();
+    }
+
+    @FXML
+    protected void decision(ActionEvent event){
+        if(event.getTarget().equals(yesButton)){
+
+            Stage stage = (Stage) yesButton.getScene().getWindow();
+            stage.close();
+        }else if (event.getTarget().equals(noButton)){
+
+            Stage stage = (Stage) noButton.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    protected void moveWindow(Scene scene, Stage stage) {
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                xCordinates = mouseEvent.getSceneX();
+                yCordinates = mouseEvent.getSceneY();
+            }
+        });
+
+        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.setX(mouseEvent.getScreenX() - xCordinates);
+                stage.setY(mouseEvent.getScreenY() - yCordinates);
+            }
+        });
     }
 
     protected void loadWorkerData(){
