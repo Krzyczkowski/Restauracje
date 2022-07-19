@@ -169,12 +169,25 @@ class SerwerThread implements Runnable {
                     Storage st = new Storage(jo);
                     deleteStorageItem(st);
                     break;
+                case"getOrders":
+                    getOrders(JSON.get("params").toString());
+                    break;
+                case"getPositions":
+                    getPositions(Integer.parseInt(JSON.get("params").toString()));
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
             }
         }
         db.close();
+    }
+
+    private void getOrders(String date) throws IOException {
+        JSON.clear();
+        JSON = db.getOrders(date);
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
     }
 
     private void makeOrder(OrderContainer orderContainer) {
@@ -217,69 +230,77 @@ class SerwerThread implements Runnable {
     private Logins authorization(String userName, String password, String DBname) throws FileNotFoundException {
         return db.authorization(userName,password,DBname);
     }
-    static private void getAllEmployees() throws IOException {
+    private void getAllEmployees() throws IOException {
         JSON.clear();
         JSON = db.getAllEmployee();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void getEmployeeById(Integer id) throws IOException {
+    private void getEmployeeById(Integer id) throws IOException {
         System.out.println("id: "+id);
         JSON.clear();
         JSON = db.getEmployeeById(id);
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void getEmployeeByName(String name) throws IOException{
+    private void getEmployeeByName(String name) throws IOException{
         JSON.clear();
         JSON = db.getEmployeeByName(name);
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void insertEmployee(Employee e) {
+    private void insertEmployee(Employee e) {
         JSON.clear();
         db.insertEmployee(e);
     }
-    static private void deleteEmployee(Integer id) {
+    private void deleteEmployee(Integer id) {
         JSON.clear();
         db.deleteEmployee(id);
     }
-    static private void updateEmployee(Logins e) {
+    private void updateEmployee(Logins e) {
         JSON.clear();
         db.updateEmployee(e);
     }
-    static private void getEmployeesFullInfo() throws IOException {
+    private void getEmployeesFullInfo() throws IOException {
         JSON.clear();
         JSON = db.getAllEmployeesFullInfo();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void getEmployeesFullInfo(String s) throws IOException {
+    private void getEmployeesFullInfo(String s) throws IOException {
         JSON.clear();
         JSON = db.getAllEmployeesFullInfo(s);
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void getAllRestaurants() throws IOException {
+    private void getAllRestaurants() throws IOException {
         JSON.clear();
         JSON = db.getAllRestaurants();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void getStorage() throws IOException {
+    private void getStorage() throws IOException {
         JSON.clear();
         JSON = db.getStorage();
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    static private void insertStorageItem(Storage s) throws IOException {
+    private void insertStorageItem(Storage s) throws IOException {
         System.out.println("serwerThread.insertStorageItem: "+s);
         db.insertStorageItem(s);
     }
 
-    static private void getProductName(Integer id)throws  IOException{
+    private void getProductName(Integer id)throws  IOException{
         db.getProductName(id);
     }
+    private void getPositions(Integer id)throws  IOException{
+        JSON.clear();
+        JSON = db.getPositions(id);
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
+
+
 //    static private void getIdRestaurantByName(String name) throws IOException {
 //        Integer i = db.getIdRestaurantByName(name);
 //        System.out.println(i.toString());

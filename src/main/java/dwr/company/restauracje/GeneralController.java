@@ -21,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.swing.text.Position;
 import java.io.IOException;
 import java.net.URL;
 import java.security.spec.ECField;
@@ -60,15 +61,19 @@ public class GeneralController{
     @FXML
     private TableView<Storage>tabelWithComponents;
     @FXML
-    private TableView<Positions> tableWithPositions; // tabela z pozycjami w zamowieniu (ta na dole)
+    private TableView<Orders>tableWithHistory;
+    @FXML
+    private TableView<Positions> tableWithPositions,PositionsEditionTable; // tabela z pozycjami w zamowieniu (ta na dole)
     @FXML
     private TableView<Logins>logHistory;
     @FXML
     private TableColumn nr,name,lastName,pesel,salary,restuarant,amount;
     @FXML
-    private TableColumn priceProductOrder, nameProductOrder;
+    private TableColumn priceProductOrder, nameProductOrder,PositionsEditionProductName,PositionsEditionProductAmount,PositionsEditionProductPrice;
     @FXML
     private TableColumn productName,productCategory,productPrice,PositionsProduct, PositionsAmount,PositionsCost;
+    @FXML
+    private TableColumn historyid,historydate,historyprice,historyorder;
 
     @FXML
     private TableColumn itemName,itemAmount,itemId;
@@ -111,13 +116,15 @@ public class GeneralController{
     private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private ObservableList<Products> productList = FXCollections.observableArrayList();
     private ObservableList<Storage> itemList = FXCollections.observableArrayList();
-
     private ObservableList<Positions> positionList = FXCollections.observableArrayList();
+    private ObservableList<Orders> historyOrders = FXCollections.observableArrayList();
+
     public static Logins toEditPopUp;
     public static Storage toEditStoragePopUp;
 
     public static Products selectedProduct;
     public static Positions selectedPostion;
+    public static Orders selectedOrder;
 
     private List<Positions> tempOrder = new ArrayList<Positions>(); // temp variable which helps with order
 
@@ -137,6 +144,7 @@ public class GeneralController{
                     loadStorageToTable();
                     break;
                 case 3:
+                    loadHistoryToTable();
                     break;
                 case 4:
                     loadProductToTableOrders();
@@ -164,6 +172,8 @@ public class GeneralController{
         }
     }
 
+
+
     public void acces() {
         if (Client.getLevelacces() < 3) {
             if (Client.getLevelacces() < 2) {
@@ -177,7 +187,10 @@ public class GeneralController{
     //Deal with some actions int window
     @FXML
     protected void onExitbutton() throws IOException {
-        Client.logout();
+        try {
+            Client.logout();
+        }catch (Exception e){}
+
         Platform.exit();
     }
 
@@ -362,7 +375,16 @@ public class GeneralController{
             employeesList.addAll(Client.getEmployeesFullInfo());
         employeeTable.setItems(employeesList);
     }
+    private void loadHistoryToTable() throws IOException {
+        historyid.setCellValueFactory(new PropertyValueFactory<Logins, Integer>("idclient"));
+        historyorder.setCellValueFactory(new PropertyValueFactory<Logins, Integer>("id"));
+        historyprice.setCellValueFactory(new PropertyValueFactory<Logins, Float>("totalprice"));
+        historydate.setCellValueFactory(new PropertyValueFactory<Logins, Date>("dates"));
+        historyOrders.clear();
+        historyOrders.addAll(Client.getOrders( new Date(System.currentTimeMillis()).toString()));
+        tableWithHistory.setItems(historyOrders);
 
+    }
     @FXML
     public void loadProductToTable() throws Exception {
         productName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
@@ -486,18 +508,44 @@ public class GeneralController{
     }
 
     public void makeOrder(MouseEvent mouseEvent) throws IOException {
-        Clients c = getClientInfo();
+
         Date date = new Date(System.currentTimeMillis());
         tempOrder.clear();
-        for (int i = 0; i < positionList.size(); i++) {
-            tempOrder.add(tableWithPositions.getItems().get(i));
-            tempOrder.get(i).setProductName(tableWithPositions.getItems().get(i).getProductName());
-            tempOrder.get(i).setProductPrice(tempOrder.get(i).getAmount()*tableWithPositions.getItems().get(i).getProductPrice());
+        if(positionList.size()>0) {
+            for (int i = 0; i < positionList.size(); i++) {
+                tempOrder.add(tableWithPositions.getItems().get(i));
+                tempOrder.get(i).setProductName(tableWithPositions.getItems().get(i).getProductName());
+                tempOrder.get(i).setProductPrice(tempOrder.get(i).getAmount() * tableWithPositions.getItems().get(i).getProductPrice());
+            }
+            Clients c = getClientInfo();
+            if (c.getPhone().equals("")||c.getAddress().equals(""))
+            {
+                warningLabel3.setText("brak danych klienta");
+                return;
+            }
+            Orders order = new Orders(0,Client.id,c.getPhone(),Float.valueOf(orderPrice.getText()),date,Client.restaurantName);
+            OrderContainer orderContainer= new OrderContainer(order,tempOrder,c);
+            Client.makeOrder(orderContainer);
+            tableWithPositions.getItems().clear();
+            orderPrice.setText("0.0");
+            warningLabel3.setText("");
         }
+        else
+            warningLabel3.setText("brak wybranych produktów");
+    }
 
-        Orders order = new Orders(0,Client.id,c.getPhone(),Float.valueOf(orderPrice.getText()),date,Client.restaurantName);
-        OrderContainer orderContainer= new OrderContainer(order,tempOrder,c);
-        Client.makeOrder(orderContainer);
+    public void selectOrderToEdit(MouseEvent mouseEvent) throws IOException {
+        selectedOrder = tableWithHistory.getSelectionModel().getSelectedItem();
+        LoadPositionsEditionTable(selectedOrder);
+    }
 
+    public void LoadPositionsEditionTable(Orders order) throws IOException {
+        List<Positions> pl = Client.getPositions(order.getId());
+        PositionsEditionProductName.setCellValueFactory(new PropertyValueFactory<Positions, String>("productName"));
+        PositionsEditionProductAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
+        PositionsEditionProductPrice.setCellValueFactory(new PropertyValueFactory<Positions, Float>("productPrice"));
+        positionList.clear();
+        positionList.addAll(pl);
+        PositionsEditionTable.setItems(positionList);
     }
 }
