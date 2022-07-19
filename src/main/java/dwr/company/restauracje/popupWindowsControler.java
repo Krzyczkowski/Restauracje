@@ -211,7 +211,6 @@ public class popupWindowsControler implements Initializable{
         }
     }
     private void loadNewProductIngridientsTable(List<Storage> ingridients) throws IOException {
-        newProductCategory.getItems().addAll(Client.getCategories());
         newProductIngId.setCellValueFactory(new PropertyValueFactory<Positions, String>("id"));
         newProductIngName.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("name"));
         newProductIngAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
