@@ -11,3 +11,12 @@ public class App extends Application {
         logSet firstLog = new logSet(stage);
     }
 }
+//fxml : barchart dla zarobkow
+//<BarChart fx:id="chartWithIncome" layoutX="41.0" layoutY="422.0" prefHeight="246.0" prefWidth="769.0">
+//<xAxis>
+//<CategoryAxis side="BOTTOM" />
+//</xAxis>
+//<yAxis>
+//<NumberAxis side="LEFT" />
+//</yAxis>
+//</BarChart>

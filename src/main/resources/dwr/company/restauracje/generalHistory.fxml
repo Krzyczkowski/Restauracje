@@ -96,14 +96,21 @@
                   <Font name="Calibri Bold" size="33.0" />
                </font>
             </Label>
-            <BarChart fx:id="chartWithIncome" layoutX="41.0" layoutY="422.0" prefHeight="246.0" prefWidth="769.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </BarChart>
+
+
+
+             <TableView fx:id="PositionsEditionTable" layoutX="35.0" layoutY="388.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
+                 <columns>
+                     <TableColumn fx:id="PositionsEditionProductName" prefWidth="100.0" text="Nazwa produktu" />
+                     <TableColumn fx:id="PositionsEditionProductAmount" prefWidth="274.0" text=" Ilość " />
+                     <TableColumn fx:id="PositionsEditionProductPrice" prefWidth="394.0" text="Cena (amount*product.price)" />
+                 </columns>
+             </TableView>
+
+
+
+
+
             <TableView fx:id="tableWithHistory" layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
               <columns>
                 <TableColumn fx:id="historyid" prefWidth="100.0" text="nr Klienta" />
@@ -111,7 +118,8 @@
                 <TableColumn fx:id="historyprice" prefWidth="394.0" text="Przychód" />
               </columns>
             </TableView>
-            <Label layoutX="112.0" layoutY="359.0" prefHeight="41.0" prefWidth="297.0" text="Przychody" textFill="#032475">
+
+            <Label layoutX="112.0" layoutY="344.0" prefHeight="41.0" prefWidth="297.0" text="Pozycje w zamówieniu" textFill="#032475">
                <font>
                   <Font name="Calibri Bold" size="33.0" />
                </font>
