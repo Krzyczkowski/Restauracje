@@ -355,4 +355,22 @@ class Client {
         System.out.println(2);
         return list;
     }
+    private static List<Positions> printPositions(JSONObject jo) {
+        List<Positions> list= new ArrayList<>();
+        for(Integer i = 0; i<message.size();i++)
+            list.add(new Positions((JSONObject) message.get(i.toString())));
+        System.out.println(2);
+        return list;
+    }
+    private static List<Positions> getPositions(int idOrder) throws IOException {
+        message.clear();
+        message.put("command", "getPositions");
+        message.put("params", idOrder);
+        out.writeUTF(message.toString());
+        message.clear();
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printPositions(message);
+
+
+    }
 }
