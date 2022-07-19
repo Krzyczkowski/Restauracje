@@ -16,3 +16,4 @@ updateEmployee:0
 deleteStorageItem:0
 deleteEmployee:0
 makeOrder:0
+getPositions:0

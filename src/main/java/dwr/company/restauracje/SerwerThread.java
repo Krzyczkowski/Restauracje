@@ -172,6 +172,9 @@ class SerwerThread implements Runnable {
                 case"getOrders":
                     getOrders(JSON.get("params").toString());
                     break;
+                case"getPositions":
+                    getPositions(JSON.get("params"));
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
@@ -289,6 +292,9 @@ class SerwerThread implements Runnable {
 
     private void getProductName(Integer id)throws  IOException{
         db.getProductName(id);
+    }
+    private void getPositions(Integer id)throws  IOException{
+        db.getPositions(id);
     }
 
 //    static private void getIdRestaurantByName(String name) throws IOException {
