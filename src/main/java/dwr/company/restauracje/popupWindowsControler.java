@@ -106,7 +106,7 @@ public class popupWindowsControler implements Initializable{
                     break;
                 }
             }
-            if(j==1){
+            if(j==0){
                 Client.insertCategory(newCategoryName.getText());
                 newProductCategory.getItems().clear();
                 newProductCategory.getItems().addAll(Client.getCategories());
