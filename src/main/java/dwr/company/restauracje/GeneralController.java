@@ -48,7 +48,7 @@ public class GeneralController{
     @FXML
     private Label welcomeText;
     @FXML
-    private Label warnigLabel1 , warningLabel2;
+    private Label warnigLabel1 , warningLabel2, warningLabel3;
 
     //Tabel Views and columns
     @FXML
