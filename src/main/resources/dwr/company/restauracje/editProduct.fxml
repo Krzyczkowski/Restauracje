@@ -78,7 +78,7 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="saveNewProduct" layoutX="302.0" layoutY="552.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="169.0" text="Zapisz nowy produkt" />
+      <Button fx:id="saveNewProduct" onMouseClicked="#onSaveProduct" layoutX="302.0" layoutY="552.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="169.0" text="Zapisz nowy produkt" />
       <Label layoutX="44.0" layoutY="597.0" prefHeight="35.0" prefWidth="214.0" text="Nowa Kategoria" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="30.0" />

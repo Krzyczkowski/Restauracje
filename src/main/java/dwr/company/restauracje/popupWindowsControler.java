@@ -129,10 +129,10 @@ public class popupWindowsControler implements Initializable{
     }
     @FXML
     protected void createCategory() throws IOException {
-        if(!newCategoryName.equals("")){
+        if(!newCategoryName.getText().equals("")){
             int j = 0;
             for(int i = 0; i<newProductCategory.getItems().size();i++){
-                if(newProductCategory.getItems().get(i).toString().equals(newCategoryName)){
+                if(newProductCategory.getItems().get(i).toString().equals(newCategoryName.getText())){
                     j=1;
                     break;
                 }
@@ -143,13 +143,15 @@ public class popupWindowsControler implements Initializable{
                 newProductCategory.getItems().addAll(Client.getCategories());
                 newProductCategory.getSelectionModel().selectLast();
                 newCategoryName.setText("");
+                warningLabel4.setText("");
                 }
             else{
                 //warning jest taka kategoria
+                warningLabel4.setText("Taka kategoria już istnieje");
             }
         }
         else{
-            //warning nic nie wpisane
+            warningLabel4.setText("Podaj nazwe kategorii");
         }
     }
 
@@ -274,7 +276,10 @@ public class popupWindowsControler implements Initializable{
             selectedIngridient = componentsTable.getSelectionModel().getSelectedItem();
             ingridients.add(selectedIngridient);
             loadNewProductIngridientsTable(ingridients);
+            warningLabel4.setText("");
         }
+        else
+            warningLabel4.setText("wybierz składnik do dodania");
     }
     private void loadNewProductIngridientsTable(List<Storage> ingridients) throws IOException {
         newProductIngId.setCellValueFactory(new PropertyValueFactory<Positions, String>("id"));
@@ -291,7 +296,30 @@ public class popupWindowsControler implements Initializable{
             selectedIngridient = newProductComponentsTable.getSelectionModel().getSelectedItem();
             ingridients.remove(selectedIngridient);
             loadNewProductIngridientsTable(ingridients);
+            warningLabel4.setText("");
         }
+        else
+            warningLabel4.setText("wybierz składnik do usunięcia");
+    }
+
+    public void onSaveProduct(MouseEvent mouseEvent) {
+        if(newProductName.getText().equals("")|| newProductCategory.getSelectionModel().isEmpty()|| newProductComponentsTable.getItems().size()==0 ){
+            String s ="Należy wypełnić: ";
+            if(newProductName.getText().equals(""))
+                s+="nazwe, ";
+            if( newProductCategory.getSelectionModel().isEmpty())
+                s+="kategorie, ";
+            if(newProductComponentsTable.getItems().size()==0)
+                s+="składniki, ";
+            warningLabel4.setText(s);
+        }
+        else{
+            //wysłanie zapytania
+            warningLabel4.setText("");
+            newProductName.setText("");
+            newProductComponentsTable.getItems().clear();
+        }
+
     }
 }
 
