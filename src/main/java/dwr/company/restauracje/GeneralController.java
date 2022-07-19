@@ -401,6 +401,7 @@ public class GeneralController{
         else
         productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
+
     }
 
     @FXML
