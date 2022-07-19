@@ -262,6 +262,30 @@ public class DatabaseAPI {
         }
         return jo;
     }
+    public JSONObject getPositions(int id){
+        JSONObject jo = new JSONObject();
+        em.getTransaction().begin();
+            Query query = em.createQuery( "SELECT st FROM Positions st where st.idorder = ?1 ").setParameter(1,id);
+        List<Positions> list = query.getResultList();
+            query=em.createQuery( "SELECT st FROM Products st where st.restaurant = ?1 ").setParameter(1,restaurant);
+        List<Products> listP = query.getResultList();
+        em.getTransaction().commit();
+        for(int i = 0; i< list.size();i++)
+        {
+            for(int j=0;j< listP.size();j++){
+                if(list.get(i).getIdproduct()== listP.get(j).getId()){
+                    list.get(i).setProductName(listP.get(j).getName());
+                    list.get(i).setProductPrice(listP.get(j).getPrice()*list.get(i).getAmount());
+                    break;
+                }
+            }
+        }
+        for(Integer i=0; i<list.size();i++){
+            jo.put(i.toString(),list.get(i).toJSONU());
+        }
+        return jo;
+    }
+
 }
 
 

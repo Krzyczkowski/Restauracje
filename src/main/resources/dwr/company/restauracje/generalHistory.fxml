@@ -113,9 +113,10 @@
 
             <TableView fx:id="tableWithHistory" layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
               <columns>
+                <TableColumn fx:id="historyorder" prefWidth="100.0" text="nr zamówienia" />
                 <TableColumn fx:id="historyid" prefWidth="100.0" text="nr Klienta" />
                 <TableColumn fx:id="historydate" prefWidth="274.0" text="Data Zamówienia" />
-                <TableColumn fx:id="historyprice" prefWidth="394.0" text="Przychód" />
+                <TableColumn fx:id="historyprice" prefWidth="294.0" text="Przychód" />
               </columns>
             </TableView>
 

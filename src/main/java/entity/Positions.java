@@ -86,6 +86,16 @@ public class Positions {
         jo.put("id",0);
         return jo;
     }
+    public JSONObject toJSONU(){
+        JSONObject jo = new JSONObject();
+        jo.put("idorder",idorder);
+        jo.put("idproduct",idproduct);
+        jo.put("amount",amount);
+        jo.put("productName",productName);
+        jo.put("productPrice",productPrice);
+        jo.put("id",id);
+        return jo;
+    }
 
     public int getId() {
         return id;

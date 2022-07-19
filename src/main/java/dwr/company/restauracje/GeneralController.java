@@ -72,7 +72,7 @@ public class GeneralController{
     @FXML
     private TableColumn productName,productCategory,productPrice,PositionsProduct, PositionsAmount,PositionsCost;
     @FXML
-    private TableColumn historyid,historydate,historyprice;
+    private TableColumn historyid,historydate,historyprice,historyorder;
 
     @FXML
     private TableColumn itemName,itemAmount,itemId;
@@ -358,6 +358,7 @@ public class GeneralController{
     }
     private void loadHistoryToTable() throws IOException {
         historyid.setCellValueFactory(new PropertyValueFactory<Logins, Integer>("idclient"));
+        historyorder.setCellValueFactory(new PropertyValueFactory<Logins, Integer>("id"));
         historyprice.setCellValueFactory(new PropertyValueFactory<Logins, Float>("totalprice"));
         historydate.setCellValueFactory(new PropertyValueFactory<Logins, Date>("dates"));
         historyOrders.clear();
