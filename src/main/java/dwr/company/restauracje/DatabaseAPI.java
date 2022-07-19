@@ -286,6 +286,14 @@ public class DatabaseAPI {
         return jo;
     }
 
+    public void insertCategory(String name) {
+        Categories cat = new Categories();
+        cat.setId(name);
+        cat.setRestaurant(restaurant);
+        em.getTransaction().begin();
+        em.merge(cat);
+        em.getTransaction().commit();
+    }
 }
 
 

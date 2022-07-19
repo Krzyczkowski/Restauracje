@@ -297,4 +297,12 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
         return printPositions(message);
     }
+
+    public static void insertCategory(String name) throws IOException {
+        message.clear();
+        message.put("command", "insertCategory");
+        message.put("params",name );
+        out.writeUTF(message.toString());
+        message.clear();
+    }
 }

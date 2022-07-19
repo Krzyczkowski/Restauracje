@@ -9,11 +9,12 @@ getProducts:0
 getStorage:0
 getProduct:0
 getOrders:0
+getPositions:0
 insertStorageItem:0
 insertEmployee:0
+insertCategory:0
 updateStorageItem:0
 updateEmployee:0
 deleteStorageItem:0
 deleteEmployee:0
 makeOrder:0
-getPositions:0

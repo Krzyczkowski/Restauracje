@@ -96,7 +96,29 @@ public class popupWindowsControler implements Initializable{
         componentsTable.setItems(storageList);
 
     }
-
+    @FXML
+    protected void createCategory() throws IOException {
+        if(!newCategoryName.equals("")){
+            int j = 0;
+            for(int i = 0; i<newProductCategory.getItems().size();i++){
+                if(newProductCategory.getItems().get(i).toString().equals(newCategoryName)){
+                    j=1;
+                    break;
+                }
+            }
+            if(j==1){
+                Client.insertCategory(newCategoryName.getText());
+                newProductCategory.getItems().clear();
+                newProductCategory.getItems().addAll(Client.getCategories());
+            }
+            else{
+                //warning jest taka kategoria
+            }
+        }
+        else{
+            //warning nic nie wpisane
+        }
+    }
 
     //Deal with some actions int window
     @FXML

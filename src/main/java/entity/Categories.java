@@ -3,14 +3,15 @@ package entity;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
+@IdClass(Categories.class)
 @Entity
-public class Categories {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Categories implements Serializable {
     @Id
     @Column(name = "id")
     private String id;
-    @Basic
+    @Id
     @Column(name = "restaurant")
     private String restaurant;
     public Categories(JSONObject jo) {

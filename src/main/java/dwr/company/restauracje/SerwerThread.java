@@ -175,12 +175,19 @@ class SerwerThread implements Runnable {
                 case"getPositions":
                     getPositions(Integer.parseInt(JSON.get("params").toString()));
                     break;
+                case"insertCategory":
+                    insertCategory(JSON.get("params").toString());
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
             }
         }
         db.close();
+    }
+
+    private void insertCategory(String name) {
+        db.insertCategory(name);
     }
 
     private void getOrders(String date) throws IOException {
