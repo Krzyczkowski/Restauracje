@@ -319,14 +319,12 @@ public class popupWindowsControler implements Initializable{
             warningLabel4.setText(s);
         }
         else{
-            float f;
             try{
                 Float.parseFloat(newProductPrice.getText());
             }catch (NumberFormatException e){
                 warningLabel4.setText("Podaj liczbe np. 2.5");
                 return;
             }
-
             //wysłanie zapytania
             List<Storage> listOfIngridientsInNewProduct;
             listOfIngridientsInNewProduct=componentProductList;
@@ -343,7 +341,6 @@ public class popupWindowsControler implements Initializable{
             newProductName.setText("");
             newProductComponentsTable.getItems().clear();
         }
-
     }
 }
 
