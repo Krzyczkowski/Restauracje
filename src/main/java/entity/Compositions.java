@@ -73,9 +73,7 @@ public class Compositions {
         if (id != that.id) return false;
         if (idproduct != that.idproduct) return false;
         if (iditem != that.iditem) return false;
-        if (amount != that.amount) return false;
-
-        return true;
+        return amount == that.amount;
     }
 
     @Override

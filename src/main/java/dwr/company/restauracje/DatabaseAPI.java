@@ -11,20 +11,21 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+@SuppressWarnings("unchecked")
 public class DatabaseAPI {
     static EntityManagerFactory emf;
     static EntityManager em;
     String restaurant;
     public DatabaseAPI(){
-        org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
+        //org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.INFO);//OFF
         emf = Persistence.createEntityManagerFactory("default");
         em = emf.createEntityManager();
     }
     private JSONObject prepareJSON(List<Employee> list){
         JSONObject jo = new JSONObject();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
     }
@@ -59,17 +60,16 @@ public class DatabaseAPI {
         List<Employee> list = query.getResultList();
         System.out.println(list.size());
         List<Logins> list1 = new ArrayList<>();
-        for (int i =0; i<list.size();i++)
-        {
-            query = em.createQuery("select log from Logins log where log.id = ?1").setParameter(1,list.get(i).getId());
-            Logins log =(Logins) query.getSingleResult();
+        for (Employee employee : list) {
+            query = em.createQuery("select log from Logins log where log.id = ?1").setParameter(1, employee.getId());
+            Logins log = (Logins) query.getSingleResult();
             em.merge(log);
             list1.add(log);
         }
         em.getTransaction().commit();
         JSONObject jo = new JSONObject();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list1.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list1.get(i).toJSON());
         }
         return jo;
     }
@@ -98,29 +98,21 @@ public class DatabaseAPI {
         List<Logins> list = query.getResultList();
 
         em.getTransaction().commit();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
     }
 
-//    public int getDatebaseIdByName(String name){
-//        em.getTransaction().begin();
-//        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
-//        List<Restaurants> list = query.getResultList();
-//        em.getTransaction().commit();
-//        if (list.size()==1)
-//            return list.get(0).getId();
-//        return 0;
-//    }
+
     public JSONObject getAllRestaurants(){
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT res FROM Restaurants res");
         List<Restaurants> list = query.getResultList();
         em.getTransaction().commit();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
     }
@@ -138,26 +130,13 @@ public class DatabaseAPI {
         bad_login.setId(-1);
         return bad_login;
     }
-//    public Integer getIdRestaurantByName(String name){
-//        em.getTransaction().begin();
-//        Query query = em.createQuery("SELECT rest FROM Restaurants rest where rest.name like ?1").setParameter(1, name);
-//        List<Restaurants> list = query.getResultList();
-//        em.getTransaction().commit();
-//        if (list.size()==1)
-//            return list.get(0).getId();
-//        return 0;
-//    }
+
 
     public JSONObject getProducts() {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT prod FROM Products prod where prod.restaurant=?1").setParameter(1,restaurant);
-        List<Products> list = query.getResultList();
-        em.getTransaction().commit();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
-        }
-        return jo;
+        return printProduct(jo, query);
     }
 
     public JSONObject getProducts(String name,String category) {
@@ -170,10 +149,14 @@ public class DatabaseAPI {
         }
         else
             query = em.createQuery("SELECT prod FROM Products prod where prod.name like ?1 and prod.category = ?2 and prod.restaurant=?3 ").setParameter(1,name+"%").setParameter(2,category).setParameter(3,restaurant);
+        return printProduct(jo, query);
+    }
+
+    private JSONObject printProduct(JSONObject jo, Query query) {
         List<Products> list = query.getResultList();
         em.getTransaction().commit();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
     }
@@ -185,8 +168,8 @@ public class DatabaseAPI {
         Query query = em.createQuery("SELECT cat FROM Categories cat where cat.restaurant=?1").setParameter(1,restaurant);
         List<Categories> list = query.getResultList();
         em.getTransaction().commit();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
         //
@@ -199,8 +182,8 @@ public class DatabaseAPI {
         List<Storage> list = query.getResultList();
         em.getTransaction().commit();
         System.out.println(list.size());
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
     }
@@ -227,12 +210,7 @@ public class DatabaseAPI {
         em.getTransaction().commit();
     }
 
-    public String getProductName(Integer id) {
-        em.getTransaction().begin();
-        Products s = em.find(Products.class, id);
-        em.getTransaction().commit();
-        return s.getName();
-    }
+
     public void makeOrder(OrderContainer orderContainer){
         em.getTransaction().begin();
         List<Positions> lp = orderContainer.getPositions();
@@ -257,8 +235,8 @@ public class DatabaseAPI {
         Query query = em.createQuery( "SELECT st FROM Orders st where st.restaurant = ?1 and st.dates =?2 ").setParameter(1,restaurant).setParameter(2, Date.valueOf(date));
         List<Orders> list = query.getResultList();
         em.getTransaction().commit();
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSON());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
     }
@@ -270,18 +248,17 @@ public class DatabaseAPI {
             query=em.createQuery( "SELECT st FROM Products st where st.restaurant = ?1 ").setParameter(1,restaurant);
         List<Products> listP = query.getResultList();
         em.getTransaction().commit();
-        for(int i = 0; i< list.size();i++)
-        {
-            for(int j=0;j< listP.size();j++){
-                if(list.get(i).getIdproduct()== listP.get(j).getId()){
-                    list.get(i).setProductName(listP.get(j).getName());
-                    list.get(i).setProductPrice(listP.get(j).getPrice()*list.get(i).getAmount());
+        for (Positions positions : list) {
+            for (Products products : listP) {
+                if (positions.getIdproduct() == products.getId()) {
+                    positions.setProductName(products.getName());
+                    positions.setProductPrice(products.getPrice() * positions.getAmount());
                     break;
                 }
             }
         }
-        for(Integer i=0; i<list.size();i++){
-            jo.put(i.toString(),list.get(i).toJSONU());
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSONU());
         }
         return jo;
     }
@@ -303,8 +280,8 @@ public class DatabaseAPI {
         em.getTransaction().begin();
         Products newCreatedProduct = em.merge(p);
         int idOfNewCreatedProduct = newCreatedProduct.getId();
-        for(int i =0; i<ingList.size();i++){
-            Compositions c = new Compositions(0,idOfNewCreatedProduct,ingList.get(i).getId(),ingList.get(i).getAmount());
+        for (Storage storage : ingList) {
+            Compositions c = new Compositions(0, idOfNewCreatedProduct, storage.getId(), storage.getAmount());
             em.merge(c);
         }
         em.getTransaction().commit();

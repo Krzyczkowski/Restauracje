@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Configuration {
-    public static Map<String,Integer> privileges = new HashMap<String,Integer>();
+    public static Map<String,Integer> privileges = new HashMap<>();
     public Configuration() throws FileNotFoundException {
         Scanner in = new Scanner(new File("configuration.txt"));
         String line;

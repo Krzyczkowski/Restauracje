@@ -5,7 +5,9 @@ import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 @Entity
 public class Orders {
     @GenericGenerator(name="kaugen" , strategy="increment")
@@ -119,10 +121,8 @@ public class Orders {
         if (id != orders.id) return false;
         if (idemployee != orders.idemployee) return false;
         if (Float.compare(orders.totalprice, totalprice) != 0) return false;
-        if (idclient != null ? !idclient.equals(orders.idclient) : orders.idclient != null) return false;
-        if (dates != null ? !dates.equals(orders.dates) : orders.dates != null) return false;
-
-        return true;
+        if (!Objects.equals(idclient, orders.idclient)) return false;
+        return Objects.equals(dates, orders.dates);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class Orders {
         int result = id;
         result = 31 * result + idemployee;
         result = 31 * result + (idclient != null ? idclient.hashCode() : 0);
-        result = 31 * result + (totalprice != +0.0f ? Float.floatToIntBits(totalprice) : 0);
+        result = 31 * result + (totalprice != 0.0f ? Float.floatToIntBits(totalprice) : 0);
         result = 31 * result + (dates != null ? dates.hashCode() : 0);
         return result;
     }

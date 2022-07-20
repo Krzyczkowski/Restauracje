@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
-
+@SuppressWarnings("unchecked")
 @Entity
 public class Positions {
     @GenericGenerator(name="kaugen" , strategy="increment")
@@ -22,12 +22,12 @@ public class Positions {
     @Column(name = "amount")
     private int amount;
 
-    public Positions(int id, int idorder, int idproduct, int amount) {
-        this.id = id;
-        this.idorder = idorder;
-        this.idproduct = idproduct;
-        this.amount = amount;
-    }
+///    public Positions(int id, int idorder, int idproduct, int amount) {
+//        this.id = id;
+//        this.idorder = idorder;
+//        this.idproduct = idproduct;
+//        this.amount = amount;
+//    }
 
     public String getProductName() {
         return productName;
@@ -53,12 +53,12 @@ public class Positions {
 
     public Positions(){}
 
-    public Positions(Integer idorder, Integer idproduct, Integer amount, Integer id){
-        this.idorder=idorder;
-        this.idproduct=idproduct;
-        this.amount=amount;
-        this.id=id;
-    }
+///    public Positions(Integer idorder, Integer idproduct, Integer amount, Integer id){
+//        this.idorder=idorder;
+//        this.idproduct=idproduct;
+//        this.amount=amount;
+//        this.id=id;
+//    }
     public Positions(JSONObject jo){
         this.idorder=(int)(long) jo.get("idorder");
         this.idproduct=(int)(long) jo.get("idproduct");
@@ -139,9 +139,7 @@ public class Positions {
         if (id != positions.id) return false;
         if (idorder != positions.idorder) return false;
         if (idproduct != positions.idproduct) return false;
-        if (amount != positions.amount) return false;
-
-        return true;
+        return amount == positions.amount;
     }
 
     @Override

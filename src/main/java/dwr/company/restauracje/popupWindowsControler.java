@@ -4,27 +4,22 @@ import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("ALL")
 public class popupWindowsControler implements Initializable{
     //Mouse click cordinates
     private double xCordinates = 0;
@@ -43,12 +38,12 @@ public class popupWindowsControler implements Initializable{
     private TableView<Storage>newProductComponentsTable;
     @FXML
     private Spinner amountToAdd;
-    private ObservableList<Storage> storageList = FXCollections.observableArrayList();
+    private final ObservableList<Storage> storageList = FXCollections.observableArrayList();
     private Storage selectedIngridient;
 
-    private ObservableList<Storage> componentProductList = FXCollections.observableArrayList();
+    private final ObservableList<Storage> componentProductList = FXCollections.observableArrayList();
 
-    private List <Storage> ingridients = new ArrayList<>();
+    private final List <Storage> ingridients = new ArrayList<>();
     @FXML
     private TextField newProductName, newCategoryName;
     @FXML
@@ -201,7 +196,7 @@ public class popupWindowsControler implements Initializable{
             }
             else if (command.equals("insert")) {
                 Client.insertEmployee(newName.getText(),newSecondName.getText(),
-                        0,newLogin.toString(),newPassword.toString(),Integer.parseInt(newLevel.getText()),
+                        newLogin.toString(),newPassword.toString(),Integer.parseInt(newLevel.getText()),
                         newPlace.getValue().toString(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
             }
             GeneralController.toEditPopUp = null;
@@ -221,7 +216,7 @@ public class popupWindowsControler implements Initializable{
 
     @FXML
     protected void saveComponentInfo()throws IOException {
-            Storage s = new Storage(newComponentName.getText(),Integer.valueOf(newAmount.getText()));
+            Storage s = new Storage(newComponentName.getText(),Integer.parseInt(newAmount.getText()));
             Client.insertStorageItem(s);
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
@@ -233,7 +228,8 @@ public class popupWindowsControler implements Initializable{
         GeneralController.popup = 3;
         FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteCatgory.fxml"));
         Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
-        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        //popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        popupScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
         Stage popup = new Stage();
         popup.initStyle(StageStyle.UNDECORATED);
         popup.setScene(popupScene);
@@ -255,20 +251,14 @@ public class popupWindowsControler implements Initializable{
     }
 
     protected void moveWindow(Scene scene, Stage stage) {
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                xCordinates = mouseEvent.getSceneX();
-                yCordinates = mouseEvent.getSceneY();
-            }
+        scene.setOnMousePressed(mouseEvent -> {
+            xCordinates = mouseEvent.getSceneX();
+            yCordinates = mouseEvent.getSceneY();
         });
 
-        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getScreenX() - xCordinates);
-                stage.setY(mouseEvent.getScreenY() - yCordinates);
-            }
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xCordinates);
+            stage.setY(mouseEvent.getScreenY() - yCordinates);
         });
     }
 
@@ -291,16 +281,16 @@ public class popupWindowsControler implements Initializable{
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);
+            //System.out.println(e);
         }
         command = "update";
     }
 
 
-    public void addIngridientToProduct(MouseEvent mouseEvent) throws IOException {
+    public void addIngridientToProduct(){
         if (!componentsTable.getSelectionModel().isEmpty()) {
             selectedIngridient = componentsTable.getSelectionModel().getSelectedItem();
-            selectedIngridient.setAmount(Integer.valueOf(amountToAdd.getValue().toString()) );
+            selectedIngridient.setAmount(Integer.parseInt(amountToAdd.getValue().toString()) );
             ingridients.add(selectedIngridient);
             loadNewProductIngridientsTable(ingridients);
             warningLabel4.setText("");
@@ -309,7 +299,7 @@ public class popupWindowsControler implements Initializable{
         else
             warningLabel4.setText("wybierz składnik do dodania");
     }
-    private void loadNewProductIngridientsTable(List<Storage> ingridients) throws IOException {
+    private void loadNewProductIngridientsTable(List<Storage> ingridients) {
         newProductIngId.setCellValueFactory(new PropertyValueFactory<Positions, String>("id"));
         newProductIngName.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("name"));
         newProductIngAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
@@ -318,7 +308,7 @@ public class popupWindowsControler implements Initializable{
         newProductComponentsTable.setItems(componentProductList);
     }
 
-    public void removeIngridientFromProduct(MouseEvent mouseEvent) throws IOException {
+    public void removeIngridientFromProduct() {
         selectedIngridient = newProductComponentsTable.getSelectionModel().getSelectedItem();
         if (!newProductComponentsTable.getSelectionModel().isEmpty()) {
             selectedIngridient = newProductComponentsTable.getSelectionModel().getSelectedItem();
@@ -330,7 +320,7 @@ public class popupWindowsControler implements Initializable{
             warningLabel4.setText("wybierz składnik do usunięcia");
     }
 
-    public void onSaveProduct(MouseEvent mouseEvent) throws IOException {
+    public void onSaveProduct() throws IOException {
         if(newProductName.getText().equals("")|| newProductCategory.getSelectionModel().isEmpty()|| newProductComponentsTable.getItems().size()==0 || newProductPrice.getText().equals("") ){
             String s ="Należy wypełnić: ";
             if(newProductName.getText().equals(""))
@@ -358,7 +348,7 @@ public class popupWindowsControler implements Initializable{
             p.setCategory(newProductCategory.getValue().toString());
             p.setName(newProductName.getText());
             p.setRestaurant(Client.restaurantName);
-            p.setPrice(Float.valueOf(newProductPrice.getText()));
+            p.setPrice(Float.parseFloat(newProductPrice.getText()));
             ingridients.clear();
             newProductPrice.setText("");
             Client.makeProduct(p,listOfIngridientsInNewProduct);

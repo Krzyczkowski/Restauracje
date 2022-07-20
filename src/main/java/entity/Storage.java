@@ -6,7 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 @Entity
 public class Storage {
     @GenericGenerator(name="agent" , strategy="increment")
@@ -62,10 +64,10 @@ public class Storage {
         name =jo.get("name").toString();
         restaurant = jo.get("restaurant").toString();
     }
-    public Storage(JSONObject jo,String s) {
-        amount =(int)(long) jo.get("amount");
-        name =jo.get("name").toString();
-    }
+///    public Storage(JSONObject jo,String s) {
+//        amount =(int)(long) jo.get("amount");
+//        name =jo.get("name").toString();
+//    }
     public String getRestaurant() {
         return restaurant;
     }
@@ -106,9 +108,7 @@ public class Storage {
 
         if (id != storage.id) return false;
         if (amount != storage.amount) return false;
-        if (name != null ? !name.equals(storage.name) : storage.name != null) return false;
-
-        return true;
+        return Objects.equals(name, storage.name);
     }
 
     @Override

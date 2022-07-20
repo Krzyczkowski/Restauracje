@@ -3,7 +3,9 @@ package entity;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 @Entity
 public class Restaurants {
 
@@ -34,14 +36,11 @@ public Restaurants(){}
         if (o == null || getClass() != o.getClass()) return false;
 
         Restaurants that = (Restaurants) o;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        int result = (name != null ? name.hashCode() : 0);
-        return result;
+        return (name != null ? name.hashCode() : 0);
     }
 }

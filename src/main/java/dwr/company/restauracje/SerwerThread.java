@@ -1,25 +1,20 @@
 package dwr.company.restauracje;
 
 import entity.*;
-import org.hibernate.criterion.Order;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import java.io.*;
 import java.net.Socket;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Klasa odpowiedzialna za obsługe 1 klienta
  */
+@SuppressWarnings("unchecked")
 class SerwerThread implements Runnable {
     private final Socket clientSocket;
-    //
-    // private final Configuration privileges;
-    private String name;
-    private static Logins user;
     private static Configuration conf;
     private int clientAccessLevel;
     private static JSONObject JSON;
@@ -30,7 +25,7 @@ class SerwerThread implements Runnable {
     // Constructor
     public SerwerThread(Socket socket, Configuration privileges) {
         this.clientSocket = socket;
-        this.conf = privileges;
+        conf = privileges;
     }
     public void run() {
         try {
@@ -50,7 +45,7 @@ class SerwerThread implements Runnable {
         JSON = (JSONObject) JSONValue.parse(message);
         System.out.printf(message);
         // here We operate with client who is not logged and only wants a list of all Restaurants
-        if (JSON.get("command".toString()).equals("getAllRestaurantsOnly")) {
+        if (JSON.get("command").toString().equals("getAllRestaurantsOnly")) {
             JSON = new JSONObject();
             JSON = db.getAllRestaurants();
             out.writeUTF(JSON.toString());
@@ -65,14 +60,16 @@ class SerwerThread implements Runnable {
             return;
         }}catch (Exception e ){}
         try{
-        user = authorization(JSON.get("UserName").toString(), JSON.get("UserPass").toString(), JSON.get("DBName").toString());
+            /// private final Configuration privileges;
+            //private String name;
+            Logins user = authorization(JSON.get("UserName").toString(), JSON.get("UserPass").toString(), JSON.get("DBName").toString());
         System.out.println(user.getId());
         if (user.getId() > 0) {
             clientAccessLevel = user.getLevelaccess();
             JSON = new JSONObject();
             JSON.put("result", user.getLevelaccess());
             JSON.put("empID", user.getId());
-            JSON.put("name",user.getName()+" "+user.getLastname());
+            JSON.put("name", user.getName()+" "+ user.getLastname());
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
             communication();
@@ -83,7 +80,7 @@ class SerwerThread implements Runnable {
             System.out.println(JSON.get("result"));
             out.writeUTF(JSON.toString());
             authorization();
-        }}catch (Exception e){};
+        }}catch (Exception e){}
     }
     private void communication() throws IOException {
         while (true) {
@@ -98,11 +95,11 @@ class SerwerThread implements Runnable {
                 break;
 
             // sprawdzenie czy w pliku privileges znajduje sie dana funkcja
-            if(conf.privileges.containsKey(message) && clientAccessLevel>= conf.privileges.get(message))
+            if(Configuration.privileges.containsKey(message) && clientAccessLevel>= Configuration.privileges.get(message))
             switch (message) {
                 case "getAllEmployees":
-                    if(clientAccessLevel>= conf.privileges.get("getAllEmployees"))
-                    getAllEmployees();
+                    if(clientAccessLevel>= Configuration.privileges.get("getAllEmployees"))
+                        getAllEmployees();
                     break;
                 case "getEmployeeById":
                     getEmployeeById( (int)(long) JSON.get("params"));
@@ -167,9 +164,9 @@ class SerwerThread implements Runnable {
                 case "updateStorageItem":
                     updateStorageAmount(new Storage((JSONObject) JSON.get("params")));
                     break;
-                case "getProductName":
-                    getProductName(Integer.valueOf(JSON.get("id").toString()));
-                    break;
+///                case "getProductName":
+///                    getProductName(Integer.valueOf(JSON.get("id").toString()));
+//                    break;
                 case "deleteStorageItem":
                     //System.out.println(JSON.get("params"));
                     JSONObject jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
@@ -244,7 +241,7 @@ class SerwerThread implements Runnable {
         out.writeUTF(JSON.toString());
     }
 
-    private Logins authorization(String userName, String password, String DBname) throws FileNotFoundException {
+    private Logins authorization(String userName, String password, String DBname)  {
         return db.authorization(userName,password,DBname);
     }
     private void getAllEmployees() throws IOException {
@@ -302,14 +299,14 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-    private void insertStorageItem(Storage s) throws IOException {
+    private void insertStorageItem(Storage s)  {
         System.out.println("serwerThread.insertStorageItem: "+s);
         db.insertStorageItem(s);
     }
 
-    private void getProductName(Integer id)throws  IOException{
-        db.getProductName(id);
-    }
+///    private void getProductName(Integer id){
+//        db.getProductName(id);
+//    }
     private void getPositions(Integer id)throws  IOException{
         JSON.clear();
         JSON = db.getPositions(id);
@@ -319,7 +316,7 @@ class SerwerThread implements Runnable {
 
 
 
-//    static private void getIdRestaurantByName(String name) throws IOException {
+///    static private void getIdRestaurantByName(String name) throws IOException {
 //        Integer i = db.getIdRestaurantByName(name);
 //        System.out.println(i.toString());
 //        out.writeUTF(i.toString());

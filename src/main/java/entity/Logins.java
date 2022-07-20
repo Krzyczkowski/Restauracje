@@ -3,7 +3,9 @@ package entity;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 @Entity
 public class Logins {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +50,7 @@ public class Logins {
 
     public Logins(){}
 
-    public Logins(int p, float s){
-        this.pesel = p;
-        this.salary = s;
-    }
+
 
 
 
@@ -138,13 +137,11 @@ public class Logins {
 
         if (id != logins.id) return false;
         if (levelaccess != logins.levelaccess) return false;
-        if (restaurantname != null ? !restaurantname.equals(logins.restaurantname) : logins.restaurantname != null) return false;
+        if (!Objects.equals(restaurantname, logins.restaurantname)) return false;
         if (Float.compare(logins.salary, salary) != 0) return false;
-        if (login != null ? !login.equals(logins.login) : logins.login != null) return false;
-        if (password != null ? !password.equals(logins.password) : logins.password != null) return false;
-        if (pesel != null ? !pesel.equals(logins.pesel) : logins.pesel != null) return false;
-
-        return true;
+        if (!Objects.equals(login, logins.login)) return false;
+        if (!Objects.equals(password, logins.password)) return false;
+        return Objects.equals(pesel, logins.pesel);
     }
 
     @Override
@@ -155,7 +152,7 @@ public class Logins {
         result = 31 * result + levelaccess;
         result = 31 * result +  (restaurantname != null ? restaurantname.hashCode() : 0);
         result = 31 * result + (pesel != null ? pesel.hashCode() : 0);
-        result = 31 * result + (salary != +0.0f ? Float.floatToIntBits(salary) : 0);
+        result = 31 * result + (salary != 0.0f ? Float.floatToIntBits(salary) : 0);
         return result;
     }
     public JSONObject toJSON() {

@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+@SuppressWarnings("unchecked")
 @IdClass(Categories.class)
 @Entity
 public class Categories implements Serializable {
@@ -44,9 +44,7 @@ public class Categories implements Serializable {
 
         Categories that = (Categories) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
-        return true;
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override

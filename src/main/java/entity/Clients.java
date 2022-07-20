@@ -3,7 +3,9 @@ package entity;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 @Entity
 public class Clients {
 
@@ -48,10 +50,8 @@ public class Clients {
 
         Clients clients = (Clients) o;
 
-        if (phone != null ? !phone.equals(clients.phone) : clients.phone != null) return false;
-        if (address != null ? !address.equals(clients.address) : clients.address != null) return false;
-
-        return true;
+        if (!Objects.equals(phone, clients.phone)) return false;
+        return Objects.equals(address, clients.address);
     }
 
     @Override

@@ -9,10 +9,11 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 // Client class
+
 /**
  * Klasa odpowiedzialna za komunikacje z serwerem obsługującym BD
  */
-
+@SuppressWarnings("unchecked")
 class Client {
     private static DataOutputStream out; // writing to server
     private static DataInputStream in; // reading from server     // scanner for input
@@ -52,13 +53,14 @@ class Client {
     }
     public static List<String> InitGetRestaurantNames(String host, Integer port) throws IOException {
         Socket socket = new Socket(host, port);
-        out = new DataOutputStream(socket.getOutputStream());
-        in = new DataInputStream(socket.getInputStream());
-        message.clear();
-        message.put("command", "getAllRestaurantsOnly");
-        out.writeUTF(message.toString());
-        message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printRestaurants(message);
+            out = new DataOutputStream(socket.getOutputStream());
+            in = new DataInputStream(socket.getInputStream());
+            message.clear();
+            message.put("command", "getAllRestaurantsOnly");
+            out.writeUTF(message.toString());
+            message = (JSONObject) JSONValue.parse(in.readUTF());
+            return printRestaurants(message);
+
     }
     public static void logout() throws IOException {
         message.clear();
@@ -67,45 +69,45 @@ class Client {
     }
     private static List<String>printRestaurants(JSONObject message){
         List<String> list = new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++)
-            list.add(new Restaurants((JSONObject) message.get(i.toString())).getName());
+        for(int i = 0; i<message.size(); i++)
+            list.add(new Restaurants((JSONObject) message.get(Integer.toString(i))).getName());
         return list;
     }
     private  static List<Logins> printLogins(JSONObject message){
         List<Logins> list= new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++)
-            list.add(new Logins((JSONObject) message.get(i.toString())));
+        for(int i = 0; i<message.size(); i++)
+            list.add(new Logins((JSONObject) message.get(Integer.toString(i))));
         return list;
     }
     private static List<Products> printProducts(JSONObject message) {
         List<Products> list= new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++) {
-            list.add(new Products((JSONObject) message.get(i.toString())));
+        for(int i = 0; i<message.size(); i++) {
+            list.add(new Products((JSONObject) message.get(Integer.toString(i))));
         }
         return list;
     }
     private static List<String> printCategories(JSONObject message) {
         List<String> list= new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++)
-            list.add(new Categories((JSONObject) message.get(i.toString())).getId());
+        for(int i = 0; i<message.size(); i++)
+            list.add(new Categories((JSONObject) message.get(Integer.toString(i))).getId());
         return list;
     }
     private static List<Storage> printStorage(JSONObject message) {
         List<Storage> list= new ArrayList<>();
-        for(Integer i = 0; i<message.size();i++)
-            list.add(new Storage((JSONObject) message.get(i.toString())));
+        for(int i = 0; i<message.size(); i++)
+            list.add(new Storage((JSONObject) message.get(Integer.toString(i))));
         return list;
     }
     private static List<Orders> printOrders(JSONObject jo) {
         List<Orders> list= new ArrayList<>();
-        for(Integer i = 0; i<jo.size();i++)
-            list.add(new Orders((JSONObject) jo.get(i.toString())));
+        for(int i = 0; i<jo.size(); i++)
+            list.add(new Orders((JSONObject) jo.get(Integer.toString(i))));
         return list;
     }
     private static List<Positions> printPositions(JSONObject jo) {
         List<Positions> list= new ArrayList<>();
-        for(Integer i = 0; i<jo.size();i++)
-            list.add(new Positions((JSONObject) jo.get(i.toString())));
+        for(int i = 0; i<jo.size(); i++)
+            list.add(new Positions((JSONObject) jo.get(Integer.toString(i))));
         return list;
     }
     protected static List<Logins>   getEmployeesFullInfo() throws IOException {
@@ -185,9 +187,9 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
         return printPositions(message);
     }
-    protected static void insertEmployee(String name, String lastName,int id, String login, String password, int levelacces, String restaurantname,float salary,int pesel) throws IOException {
+    protected static void insertEmployee(String name, String lastName, String login, String password, int levelacces, String restaurantname, float salary, int pesel) throws IOException {
         JSONObject message = new JSONObject();
-        Logins log = new Logins(id,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
+        Logins log = new Logins(0,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
         message.put("command","insertEmployee");
         message.put("params",log.toJSON());
         out.writeUTF(message.toString());

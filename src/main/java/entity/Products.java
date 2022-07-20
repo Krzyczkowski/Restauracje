@@ -4,7 +4,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 @Entity
 public class Products {
     @GenericGenerator(name="kaugen" , strategy="increment")
@@ -90,11 +92,9 @@ public class Products {
         Products products = (Products) o;
 
         if (id != products.id) return false;
-        if (category != products.category) return false;
+        if (!Objects.equals(category, products.category)) return false;
         if (price != products.price) return false;
-        if (name != null ? !name.equals(products.name) : products.name != null) return false;
-
-        return true;
+        return Objects.equals(name, products.name);
     }
 
     @Override

@@ -4,7 +4,9 @@ import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 @Entity
 public class Earnings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,15 +63,13 @@ public class Earnings {
         Earnings earnings = (Earnings) o;
 
         if (Float.compare(earnings.earning, earning) != 0) return false;
-        if (dates != null ? !dates.equals(earnings.dates) : earnings.dates != null) return false;
-
-        return true;
+        return Objects.equals(dates, earnings.dates);
     }
 
     @Override
     public int hashCode() {
         int result = dates != null ? dates.hashCode() : 0;
-        result = 31 * result + (earning != +0.0f ? Float.floatToIntBits(earning) : 0);
+        result = 31 * result + (earning != 0.0f ? Float.floatToIntBits(earning) : 0);
         return result;
     }
 }

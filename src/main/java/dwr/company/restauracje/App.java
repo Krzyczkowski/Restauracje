@@ -8,10 +8,10 @@ import java.io.IOException;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        logSet firstLog = new logSet(stage);
+        new logSet(stage);
     }
 }
-//fxml : barchart dla zarobkow
+//fxml : barchart dla
 //<BarChart fx:id="chartWithIncome" layoutX="41.0" layoutY="422.0" prefHeight="246.0" prefWidth="769.0">
 //<xAxis>
 //<CategoryAxis side="BOTTOM" />

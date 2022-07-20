@@ -6,6 +6,7 @@ import java.net.*;
 // Server class
 class Server {
 
+     @SuppressWarnings("InstantiationOfUtilityClass")
      public static void main(String[] args) {
          ServerSocket server = null;
          Configuration config;

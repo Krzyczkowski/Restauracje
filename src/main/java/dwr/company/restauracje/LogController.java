@@ -1,21 +1,13 @@
 package dwr.company.restauracje;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import static dwr.company.restauracje.Client.logout;
 
+@SuppressWarnings("ALL")
 public class LogController{
 
     //Fields with data

@@ -5,7 +5,7 @@ import org.json.simple.JSONValue;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@SuppressWarnings("unchecked")
 public class OrderContainer {
     private Orders order ;
     private List<Positions> positions =new ArrayList<>();
@@ -18,7 +18,6 @@ public class OrderContainer {
     }
 
     public OrderContainer() {
-
     }
 
     public JSONObject toJSON(){

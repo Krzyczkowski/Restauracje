@@ -4,10 +4,10 @@ import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
-import static java.lang.Integer.parseInt;
-
+@SuppressWarnings("unchecked")
 @Entity
 public class Employee  {
     @GenericGenerator(name="kaugen" , strategy="increment")
@@ -54,10 +54,8 @@ public class Employee  {
         Employee employee = (Employee) o;
 
         if (id != employee.id) return false;
-        if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
-        if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
-
-        return true;
+        if (!Objects.equals(name, employee.name)) return false;
+        return Objects.equals(lastname, employee.lastname);
     }
 
     @Override
@@ -75,11 +73,6 @@ public class Employee  {
         jo.put("lastname", lastname);
         return jo;
     }
-    public void JSONtoEmployee( JSONObject jo) {
-        this.id =  (int) (long) jo.get("id");
-        this.name = (String) jo.get("name");
-        this.lastname = (String) jo.get("lastname");
-    }
 
     public Employee(JSONObject jo) {
         this.id =  (int) (long) jo.get("id");
@@ -87,11 +80,5 @@ public class Employee  {
         this.lastname = (String) jo.get("lastname");
     }
     public Employee() {
-    }
-
-    public Employee(String n, String s){
-        this.id = 11;
-        this.name = n;
-        this.lastname = s;
     }
 }

@@ -1,16 +1,12 @@
 package dwr.company.restauracje;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Objects;
 
 public class logSet {
     //Cordinates
@@ -24,22 +20,16 @@ public class logSet {
 
         //Set borderless window, styles from CSS and move window by mouse
         stage.initStyle(StageStyle.UNDECORATED);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
 
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                xCordinates = mouseEvent.getSceneX();
-                yCordinates = mouseEvent.getSceneY();
-            }
+        scene.setOnMousePressed(mouseEvent -> {
+            xCordinates = mouseEvent.getSceneX();
+            yCordinates = mouseEvent.getSceneY();
         });
 
-        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getScreenX() - xCordinates);
-                stage.setY(mouseEvent.getScreenY() - yCordinates);
-            }
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xCordinates);
+            stage.setY(mouseEvent.getScreenY() - yCordinates);
         });
 
 

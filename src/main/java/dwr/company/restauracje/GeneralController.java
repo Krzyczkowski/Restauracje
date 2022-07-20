@@ -5,37 +5,31 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import javax.swing.text.Position;
 import java.io.IOException;
-import java.net.URL;
-import java.security.spec.ECField;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class GeneralController{
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
-
     //Scene holder
+
     GeneralWindowSet actualWindow;
     public static int popup;
     //Data Fields
@@ -46,8 +40,8 @@ public class GeneralController{
     public Label orderPrice;
     @FXML
     private Label userName;
-    @FXML
-    private Label welcomeText;
+//    @FXML
+//    private Label welcomeText;
     @FXML
     private Label warnigLabel1 , warningLabel2, warningLabel3;
 
@@ -64,10 +58,11 @@ public class GeneralController{
     private TableView<Orders>tableWithHistory;
     @FXML
     private TableView<Positions> tableWithPositions,PositionsEditionTable; // tabela z pozycjami w zamowieniu (ta na dole)
+//    @FXML
+//    private TableView<Logins>logHistory;
+    @SuppressWarnings("rawtypes")
     @FXML
-    private TableView<Logins>logHistory;
-    @FXML
-    private TableColumn nr,name,lastName,pesel,salary,restuarant,amount;
+    private TableColumn nr,name,lastName,pesel,salary,restuarant;
     @FXML
     private TableColumn priceProductOrder, nameProductOrder,PositionsEditionProductName,PositionsEditionProductAmount,PositionsEditionProductPrice;
     @FXML
@@ -91,8 +86,8 @@ public class GeneralController{
     private TextField searchProduct;
     @FXML
     private TextField searchEmployee;
-    @FXML
-    public TextField editWarnigLabel;
+//    @FXML
+//    public TextField editWarnigLabel;
     @FXML
     public TextField searchProductOrders;
     @FXML
@@ -113,11 +108,11 @@ public class GeneralController{
     private Button addProduct, editProduct, deletProduct;
 
     //Elements dependent on data base
-    private ObservableList<Logins> employeesList = FXCollections.observableArrayList();
-    private ObservableList<Products> productList = FXCollections.observableArrayList();
-    private ObservableList<Storage> itemList = FXCollections.observableArrayList();
-    private ObservableList<Positions> positionList = FXCollections.observableArrayList();
-    private ObservableList<Orders> historyOrders = FXCollections.observableArrayList();
+    private final ObservableList<Logins> employeesList = FXCollections.observableArrayList();
+    private final ObservableList<Products> productList = FXCollections.observableArrayList();
+    private final ObservableList<Storage> itemList = FXCollections.observableArrayList();
+    private final ObservableList<Positions> positionList = FXCollections.observableArrayList();
+    private final ObservableList<Orders> historyOrders = FXCollections.observableArrayList();
 
     public static Logins toEditPopUp;
     public static Storage toEditStoragePopUp;
@@ -126,7 +121,7 @@ public class GeneralController{
     public static Positions selectedPostion;
     public static Orders selectedOrder;
 
-    private List<Positions> tempOrder = new ArrayList<Positions>(); // temp variable which helps with order
+    private List<Positions> tempOrder = new ArrayList<>(); // temp variable which helps with order
 
 
 
@@ -313,7 +308,8 @@ public class GeneralController{
             popup = 1;
             FXMLLoader loader = new FXMLLoader(App.class.getResource("editComponent.fxml"));
             Scene popupScene = new Scene(loader.load(), 333.0, 267.0);
-            popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            //popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            popupScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
             Stage popup = new Stage();
             popup.initStyle(StageStyle.UNDECORATED);
             popup.setScene(popupScene);
@@ -337,20 +333,14 @@ public class GeneralController{
 
     //Moveing popup's
     protected void moveWindow(Scene scene, Stage stage) {
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                xCordinates = mouseEvent.getSceneX();
-                yCordinates = mouseEvent.getSceneY();
-            }
+        scene.setOnMousePressed(mouseEvent -> {
+            xCordinates = mouseEvent.getSceneX();
+            yCordinates = mouseEvent.getSceneY();
         });
 
-        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getScreenX() - xCordinates);
-                stage.setY(mouseEvent.getScreenY() - yCordinates);
-            }
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xCordinates);
+            stage.setY(mouseEvent.getScreenY() - yCordinates);
         });
     }
     //Deal with data froma database
@@ -393,7 +383,7 @@ public class GeneralController{
                 productList.addAll(Client.getProducts(searchProduct.getText(),""));
         }
         else
-        productList.addAll(Client.getProducts());
+            productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
     }
 
@@ -412,7 +402,7 @@ public class GeneralController{
         tableWithProductsOrders.setItems(productList);
     }
     @FXML
-    protected void loadPositionsTable() throws Exception {
+    protected void loadPositionsTable() {
         PositionsProduct.setCellValueFactory(new PropertyValueFactory<Positions, String>("productName"));
         PositionsAmount.setCellValueFactory(new PropertyValueFactory<Positions, Integer>("amount"));
         PositionsCost.setCellValueFactory(new PropertyValueFactory<Positions, Float>("productPrice"));
@@ -429,27 +419,27 @@ public class GeneralController{
         tabelWithComponents.setItems(itemList);
     }
 
-    public void editAmountStorage(MouseEvent mouseEvent) throws Exception {
-        if (Integer.valueOf(amountOfComponent.getText()) >= -99999999 && !tabelWithComponents.getSelectionModel().isEmpty()) {
+    public void editAmountStorage() throws Exception {
+        if (Integer.parseInt(amountOfComponent.getText()) >= -99999999 && !tabelWithComponents.getSelectionModel().isEmpty()) {
             toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
-            toEditStoragePopUp.setAmount(Integer.valueOf(amountOfComponent.getText()));
+            toEditStoragePopUp.setAmount(Integer.parseInt(amountOfComponent.getText()));
             Client.updateStorageItem(toEditStoragePopUp);
         }
     }
 
-    public void selectComponent(MouseEvent mouseEvent) {
+    public void selectComponent() {
         toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
  //       amountOfComponent.setText(String.valueOf(toEditStoragePopUp.getAmount()));
     }
 
-    public void deleteStorage(MouseEvent mouseEvent) throws IOException {
+    public void deleteStorage() throws IOException {
         if (!tabelWithComponents.getSelectionModel().isEmpty()) {
             toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
             Client.deleteStorage(toEditStoragePopUp);
         }
     }
 
-    public void addProductToOrder(MouseEvent mouseEvent) {
+    public void addProductToOrder() {
         if (!tableWithProductsOrders.getSelectionModel().isEmpty()) {
             selectedProduct = tableWithProductsOrders.getSelectionModel().getSelectedItem();
             Positions pos = new Positions(0, selectedProduct.getId(), amountOfProductsInOrder.getValue(), 0, selectedProduct.getName(), selectedProduct.getPrice());
@@ -463,7 +453,7 @@ public class GeneralController{
         }
     }
 
-    public void deleteProductFromOrder(MouseEvent mouseEvent) {
+    public void deleteProductFromOrder() {
         if (!tableWithPositions.getSelectionModel().isEmpty()) {
             selectedPostion = tableWithPositions.getSelectionModel().getSelectedItem();
             tableWithPositions.getItems().remove(selectedPostion);
@@ -490,7 +480,7 @@ public class GeneralController{
         clientPhone.setText("000000000");
     }
 
-    public void makeOrder(MouseEvent mouseEvent) throws IOException {
+    public void makeOrder() throws IOException {
         Date date = new Date(System.currentTimeMillis());
         tempOrder.clear();
         if(positionList.size()>0) {
@@ -505,7 +495,7 @@ public class GeneralController{
                 warningLabel3.setText("brak danych klienta");
                 return;
             }
-            Orders order = new Orders(0,Client.id,c.getPhone(),Float.valueOf(orderPrice.getText()),date,Client.restaurantName);
+            Orders order = new Orders(0,Client.id,c.getPhone(),Float.parseFloat(orderPrice.getText()),date,Client.restaurantName);
             OrderContainer orderContainer= new OrderContainer(order,tempOrder,c);
             Client.makeOrder(orderContainer);
             tableWithPositions.getItems().clear();
@@ -516,7 +506,7 @@ public class GeneralController{
             warningLabel3.setText("brak wybranych produktów");
     }
 
-    public void selectOrderToEdit(MouseEvent mouseEvent) throws IOException {
+    public void selectOrderToEdit() throws IOException {
         selectedOrder = tableWithHistory.getSelectionModel().getSelectedItem();
         LoadPositionsEditionTable(selectedOrder);
     }
