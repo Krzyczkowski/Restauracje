@@ -171,9 +171,6 @@ public class GeneralController{
             //er.printStackTrace();
         }
     }
-
-
-
     public void acces() {
         if (Client.getLevelacces() < 3) {
             if (Client.getLevelacces() < 2) {
@@ -307,7 +304,6 @@ public class GeneralController{
             moveWindow(popupScene, popup);
             popup.show();
         } else {
-
         }
     }
 

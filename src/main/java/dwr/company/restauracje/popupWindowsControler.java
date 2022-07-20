@@ -79,7 +79,8 @@ public class popupWindowsControler implements Initializable{
     @FXML
     private ComboBox newProductCategory;
 
-
+    @FXML
+    private Label warningLabelEmp;
 
     //Other declarations
 
@@ -95,6 +96,11 @@ public class popupWindowsControler implements Initializable{
                     loadWorkerData();
                 } else {
                     command = "insert";
+                    try {
+                        newPlace.getItems().addAll(Client.getAllRestaurants());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 break;
             case 1:
@@ -170,21 +176,40 @@ public class popupWindowsControler implements Initializable{
 
     @FXML
     protected void saveEmployeInfo() throws IOException {
-        if (command.equals("update")){
-            Client.updateEmployee(newName.getText(),newSecondName.getText(),
-                    id,newLogin.getText(),newPassword.getText(),Integer.parseInt(newLevel.getText()),
-                    (String)newPlace.getValue(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
-
+        if(newName.getText().equals("")||newSecondName.getText().equals("")||
+                newLogin.getText().equals("")||newSalary.getText().equals("")||
+                    newPlace.getSelectionModel().isEmpty()||newPesel.getText().equals("")||
+                    newPassword.getText().equals("")||newLevel.getText().equals("")){
+                warningLabelEmp.setText("uzupełnij dane");
+        }else{
+            try{
+                Integer.parseInt(newLevel.getText());
+                Integer.parseInt(newPesel.getText());
+                Float.parseFloat(newSalary.getText());
+            }catch (NumberFormatException e){
+                warningLabelEmp.setText("nie poprawny format liczb");
+                return;
+            }
+            if(Integer.parseInt(newLevel.getText())>Client.getLevelacces()) {
+                warningLabelEmp.setText("Nie poprawny poziom dostępu");
+                return;
+            }
+            if (command.equals("update")){
+                Client.updateEmployee(newName.getText(),newSecondName.getText(),
+                        id,newLogin.getText(),newPassword.getText(),Integer.parseInt(newLevel.getText()),
+                        newPlace.getValue().toString(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
+            }
+            else if (command.equals("insert")) {
+                Client.insertEmployee(newName.getText(),newSecondName.getText(),
+                        0,newLogin.toString(),newPassword.toString(),Integer.parseInt(newLevel.getText()),
+                        newPlace.getValue().toString(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
+            }
+            GeneralController.toEditPopUp = null;
+            Stage stage = (Stage) exitButton.getScene().getWindow();
+            warningLabelEmp.setText("");
+            stage.close();
+            }
         }
-        else if (command.equals("insert")) {
-            Client.insertEmployee(newName.getText(),newSecondName.getText(),
-                    0,newLogin.toString(),newPassword.toString(),2,
-                        "macdonald",Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
-        }
-        GeneralController.toEditPopUp = null;
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-    }
 
     @FXML
     protected void saveProductInfo(){
