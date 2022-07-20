@@ -305,7 +305,7 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
     }
-    public static void makeProduct(Products p, List<Storage> ing){
+    public static void makeProduct(Products p, List<Storage> ing) throws IOException {
         message.clear();
         JSONObject newProduct = new JSONObject();
         newProduct.put("product",p.toJSON().toString());
@@ -316,6 +316,6 @@ class Client {
         newProduct.put("ingridients",ingridients);
         message.put("command", "makeProduct");
         message.put("params", newProduct.toString());
-        //out.writeUTF(message.toString());
+        out.writeUTF(message.toString());
     }
 }

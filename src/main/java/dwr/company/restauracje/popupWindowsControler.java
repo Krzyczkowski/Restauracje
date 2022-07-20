@@ -305,7 +305,7 @@ public class popupWindowsControler implements Initializable{
             warningLabel4.setText("wybierz składnik do usunięcia");
     }
 
-    public void onSaveProduct(MouseEvent mouseEvent) {
+    public void onSaveProduct(MouseEvent mouseEvent) throws IOException {
         if(newProductName.getText().equals("")|| newProductCategory.getSelectionModel().isEmpty()|| newProductComponentsTable.getItems().size()==0 || newProductPrice.getText().equals("") ){
             String s ="Należy wypełnić: ";
             if(newProductName.getText().equals(""))
@@ -337,7 +337,7 @@ public class popupWindowsControler implements Initializable{
             p.setName(newProductName.getText());
             p.setRestaurant(Client.restaurantName);
             p.setPrice(Float.valueOf(newProductPrice.getText()));
-
+            System.out.println("popoup wysyla makeProduct");
             Client.makeProduct(p,listOfIngridientsInNewProduct);
             warningLabel4.setText("");
             newProductName.setText("");

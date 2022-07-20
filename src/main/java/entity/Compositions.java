@@ -1,10 +1,13 @@
 package entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 public class Compositions {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Id
     @Column(name = "id")
     private int id;
@@ -17,6 +20,16 @@ public class Compositions {
     @Basic
     @Column(name = "amount")
     private int amount;
+
+    public Compositions(int id, int idproduct, int iditem, int amount) {
+        this.id = id;
+        this.idproduct = idproduct;
+        this.iditem = iditem;
+        this.amount = amount;
+    }
+
+    public Compositions() {
+    }
 
     public int getId() {
         return id;

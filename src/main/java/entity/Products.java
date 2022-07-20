@@ -1,12 +1,14 @@
 package entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 
 @Entity
 public class Products {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Id
     @Column(name = "id")
     private int id;
@@ -101,5 +103,16 @@ public class Products {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (category !=null ? category.hashCode():0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Products{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", restaurant='" + restaurant + '\'' +
+                '}';
     }
 }
