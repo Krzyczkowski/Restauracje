@@ -305,4 +305,17 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
     }
+    public static void makeProduct(Products p, List<Storage> ing){
+        message.clear();
+        JSONObject newProduct = new JSONObject();
+        newProduct.put("product",p.toJSON().toString());
+        JSONObject ingridients = new JSONObject();
+        for(int i=0;i<ing.size();i++){
+            ingridients.put("ingridient"+i,ing.get(i).toJSON().toString());
+        }
+        newProduct.put("ingridients",ingridients);
+        message.put("command", "makeProduct");
+        message.put("params", newProduct.toString());
+        //out.writeUTF(message.toString());
+    }
 }

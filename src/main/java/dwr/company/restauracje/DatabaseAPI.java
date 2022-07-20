@@ -294,6 +294,15 @@ public class DatabaseAPI {
         em.merge(cat);
         em.getTransaction().commit();
     }
+
+    public void makeProduct(Products p, List<Storage> ingList) {
+        em.getTransaction().begin();
+        Products newCreatedProduct = em.merge(p);
+        for(int i =0; i<ingList.size();i++){
+            Compositions c = new Compositions();
+        }
+
+    }
 }
 
 

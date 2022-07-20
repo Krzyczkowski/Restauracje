@@ -24,6 +24,7 @@
          </font>
       </Label>
       <TextField fx:id="newProductName" layoutX="204.0" layoutY="87.0" prefHeight="25.0" prefWidth="444.0" />
+      <TextField fx:id="newProductPrice" layoutX="150.0" layoutY="46.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="125.0" layoutY="125.0" prefHeight="32.0" prefWidth="106.0" text="Kategoria" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="22.0" />

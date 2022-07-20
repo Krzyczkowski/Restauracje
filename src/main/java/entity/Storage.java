@@ -21,6 +21,17 @@ public class Storage {
     @Column(name = "name")
     private String name;
 
+    public Integer getAmountForNewProduct() {
+        return amountForNewProduct;
+    }
+
+    public void setAmountForNewProduct(Integer amountForNewProduct) {
+        this.amountForNewProduct = amountForNewProduct;
+    }
+
+    @Transient
+    private Integer amountForNewProduct;
+
     public TextField getAmountOfIngridientInProduct() {
         return amountOfIngridientInProduct;
     }

@@ -1,9 +1,6 @@
 package dwr.company.restauracje;
 
-import entity.Employee;
-import entity.Logins;
-import entity.OrderContainer;
-import entity.Storage;
+import entity.*;
 import org.hibernate.criterion.Order;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -11,6 +8,8 @@ import org.json.simple.JSONValue;
 import java.io.*;
 import java.net.Socket;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Klasa odpowiedzialna za obsługe 1 klienta
@@ -130,9 +129,18 @@ class SerwerThread implements Runnable {
                     System.out.println(orderContainer);
                     makeOrder(orderContainer);
                     break;
-//                case "getIdRestaurantByName":
-//                    getIdRestaurantByName(JSON.get("params").toString());
-//                    break;
+                case "makeProduct":
+
+                    joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                    JSONObject joe2 = (JSONObject) JSONValue.parse(joe.get("ingridients").toString());
+                    Products p = new Products((JSONObject) JSONValue.parse(joe.get("product").toString()));
+                    List<Storage> ingList = new ArrayList<>();
+                    for(int i=0; i<joe2.size();i++){
+                        ingList.add(new Storage((JSONObject)JSONValue.parse(joe2.get("ingridient"+i).toString())));
+                    }
+                    makeProduct(p,ingList);
+
+                    break;
 
                 case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
                     System.out.println("SerwerThread.communication.getEmployeesFullInfo : params: "+JSON.get("params").toString());
@@ -185,6 +193,8 @@ class SerwerThread implements Runnable {
         }
         db.close();
     }
+
+    private void makeProduct(Products p, List<Storage> ingList) { db.makeProduct(p, ingList);}
 
     private void insertCategory(String name) {
         db.insertCategory(name);
@@ -306,6 +316,7 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
+
 
 
 //    static private void getIdRestaurantByName(String name) throws IOException {

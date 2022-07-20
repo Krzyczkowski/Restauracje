@@ -36,11 +36,13 @@ public class popupWindowsControler implements Initializable{
     @FXML
     protected TextField newSecondName, newPesel, newLevel, newSalary, newLogin, newName;
     @FXML
-    protected TextField newComponentName,newAmount;
+    protected TextField newComponentName,newAmount,newProductPrice;
     @FXML
     private TableView<Storage>componentsTable; // tabela ze wszystkimi skladnikami (lewa w dodaj produkt)
     @FXML
     private TableView<Storage>newProductComponentsTable;
+    @FXML
+    private Spinner amountToAdd;
     private ObservableList<Storage> storageList = FXCollections.observableArrayList();
     private Storage selectedIngridient;
 
@@ -76,8 +78,7 @@ public class popupWindowsControler implements Initializable{
     private ComboBox newPlace;
     @FXML
     private ComboBox newProductCategory;
-    @FXML
-    private Spinner<Integer> amountToAdd;
+
 
 
     //Other declarations
@@ -315,6 +316,16 @@ public class popupWindowsControler implements Initializable{
         }
         else{
             //wysłanie zapytania
+            List<Storage> listOfIngridientsInNewProduct;
+            listOfIngridientsInNewProduct=componentProductList;
+            Products p = new Products();
+            p.setId(0);
+            p.setCategory(newProductCategory.getValue().toString());
+            p.setName(newProductName.getText());
+            p.setRestaurant(Client.restaurantName);
+            p.setPrice(Float.valueOf(newProductPrice.getText()));
+
+            Client.makeProduct(p,listOfIngridientsInNewProduct);
             warningLabel4.setText("");
             newProductName.setText("");
             newProductComponentsTable.getItems().clear();
