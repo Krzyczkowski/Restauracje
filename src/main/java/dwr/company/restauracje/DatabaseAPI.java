@@ -296,11 +296,18 @@ public class DatabaseAPI {
     }
 
     public void makeProduct(Products p, List<Storage> ingList) {
+        System.out.println(p);
+        for(Storage s : ingList){
+            System.out.println(s);
+        }
         em.getTransaction().begin();
         Products newCreatedProduct = em.merge(p);
+        int idOfNewCreatedProduct = newCreatedProduct.getId();
         for(int i =0; i<ingList.size();i++){
-            Compositions c = new Compositions();
+            Compositions c = new Compositions(0,idOfNewCreatedProduct,ingList.get(i).getId(),ingList.get(i).getAmount());
+            em.merge(c);
         }
+        em.getTransaction().commit();
 
     }
 }

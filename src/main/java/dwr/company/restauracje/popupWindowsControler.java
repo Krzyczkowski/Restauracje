@@ -319,6 +319,7 @@ public class popupWindowsControler implements Initializable{
             warningLabel4.setText(s);
         }
         else{
+            float f;
             try{
                 Float.parseFloat(newProductPrice.getText());
             }catch (NumberFormatException e){

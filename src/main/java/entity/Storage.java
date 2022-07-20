@@ -132,4 +132,16 @@ public class Storage {
         jo.put("amount",amount);
         return jo;
     }
+
+    @Override
+    public String toString() {
+        return "Storage{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", name='" + name + '\'' +
+                ", amountForNewProduct=" + amountForNewProduct +
+                ", amountOfIngridientInProduct=" + amountOfIngridientInProduct +
+                ", restaurant='" + restaurant + '\'' +
+                '}';
+    }
 }

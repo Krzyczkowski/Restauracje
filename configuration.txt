@@ -18,3 +18,4 @@ updateEmployee:0
 deleteStorageItem:0
 deleteEmployee:0
 makeOrder:0
+makeProduct:0
