@@ -13,44 +13,44 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwr.company.restauracje.popupWindowsControler">
    <children>
-      <Label layoutX="284.0" layoutY="46.0" prefHeight="43.0" prefWidth="183.0" text="Nowy Produkt" textFill="#032475">
+      <Label layoutX="289.0" layoutY="37.0" prefHeight="43.0" prefWidth="183.0" text="Nowy Produkt" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="125.0" layoutY="84.0" prefHeight="32.0" prefWidth="82.0" text="Nazwa" textFill="#032475">
+      <Label layoutX="125.0" layoutY="84.0" prefHeight="32.0" prefWidth="63.0" text="Nazwa" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="newProductName" layoutX="204.0" layoutY="87.0" prefHeight="25.0" prefWidth="444.0" />
-      <TextField fx:id="newProductPrice" layoutX="150.0" layoutY="46.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="125.0" layoutY="125.0" prefHeight="32.0" prefWidth="106.0" text="Kategoria" textFill="#032475">
+      <TextField fx:id="newProductName" layoutX="204.0" layoutY="87.0" prefHeight="25.0" prefWidth="261.0" />
+      <TextField fx:id="newProductPrice" layoutX="518.0" layoutY="129.0" prefHeight="25.0" prefWidth="90.0" />
+      <Label layoutX="103.0" layoutY="126.0" prefHeight="32.0" prefWidth="90.0" text="Kategoria" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="22.0" />
          </font>
       </Label>
-      <ComboBox fx:id="newProductCategory" layoutX="231.0" layoutY="129.0" prefHeight="25.0" prefWidth="261.0" />
-      <TableView fx:id="componentsTable" layoutX="44.0" layoutY="195.0" prefHeight="346.0" prefWidth="297.0" style="-fx-background-color: bec5eb;">
+      <ComboBox fx:id="newProductCategory" layoutX="204.0" layoutY="129.0" prefHeight="25.0" prefWidth="261.0" />
+      <TableView fx:id="componentsTable" layoutX="44.0" layoutY="231.0" prefHeight="310.0" prefWidth="297.0" style="-fx-background-color: bec5eb;">
         <columns>
           <TableColumn fx:id="IngId" prefWidth="35.0" text="Id" />
           <TableColumn fx:id="IngName" prefWidth="161.0" text="Nazwa" />
             <TableColumn fx:id="IngAmount" prefWidth="100.0" text="Ilość" />
         </columns>
       </TableView>
-      <Label layoutX="44.0" layoutY="163.0" prefHeight="32.0" prefWidth="183.0" text="Wszystkie składniki" textFill="#032475">
+      <Label layoutX="45.0" layoutY="195.0" prefHeight="32.0" prefWidth="183.0" text="Wszystkie składniki" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="22.0" />
          </font>
       </Label>
-      <TableView fx:id="newProductComponentsTable" layoutX="427.0" layoutY="195.0" prefHeight="346.0" prefWidth="297.0" style="-fx-background-color: #59e397;">
+      <TableView fx:id="newProductComponentsTable" layoutX="427.0" layoutY="231.0" prefHeight="310.0" prefWidth="297.0" style="-fx-background-color: #59e397;">
          <columns>
             <TableColumn fx:id="newProductIngId" prefWidth="35.0" text="Id" />
             <TableColumn fx:id="newProductIngName" prefWidth="161.0" text="Nazwa" />
             <TableColumn fx:id="newProductIngAmount" prefWidth="100.0" text="Ilość" />
          </columns>
       </TableView>
-      <Label layoutX="426.0" layoutY="163.0" prefHeight="32.0" prefWidth="183.0" text="Składniki produktu" textFill="#032475">
+      <Label layoutX="426.0" layoutY="195.0" prefHeight="32.0" prefWidth="183.0" text="Składniki produktu" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="22.0" />
          </font>
@@ -79,7 +79,7 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="saveNewProduct" onMouseClicked="#onSaveProduct" layoutX="302.0" layoutY="552.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="169.0" text="Zapisz nowy produkt" />
+      <Button fx:id="saveNewProduct" layoutX="302.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#onSaveProduct" prefHeight="34.0" prefWidth="169.0" text="Zapisz nowy produkt" />
       <Label layoutX="44.0" layoutY="597.0" prefHeight="35.0" prefWidth="214.0" text="Nowa Kategoria" textFill="#032475">
          <font>
             <Font name="Calibri Bold" size="30.0" />
@@ -104,10 +104,15 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="deleteCategory" onAction="#warningWindow" layoutX="510.0" layoutY="129.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Usuń wybrną kategorie">
+      <Button fx:id="deleteCategory" layoutX="266.0" layoutY="158.0" mnemonicParsing="false" onAction="#warningWindow" prefHeight="25.0" prefWidth="138.0" text="Usuń wybraną kategorie">
          <font>
             <Font name="Calibri" size="12.0" />
          </font>
       </Button>
+      <Label layoutX="518.0" layoutY="84.0" prefHeight="32.0" prefWidth="63.0" text="Cena" textFill="#032475">
+         <font>
+            <Font name="Calibri Bold" size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

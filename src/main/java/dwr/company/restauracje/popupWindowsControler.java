@@ -306,7 +306,7 @@ public class popupWindowsControler implements Initializable{
     }
 
     public void onSaveProduct(MouseEvent mouseEvent) {
-        if(newProductName.getText().equals("")|| newProductCategory.getSelectionModel().isEmpty()|| newProductComponentsTable.getItems().size()==0 ){
+        if(newProductName.getText().equals("")|| newProductCategory.getSelectionModel().isEmpty()|| newProductComponentsTable.getItems().size()==0 || newProductPrice.getText().equals("") ){
             String s ="Należy wypełnić: ";
             if(newProductName.getText().equals(""))
                 s+="nazwe, ";
@@ -314,9 +314,20 @@ public class popupWindowsControler implements Initializable{
                 s+="kategorie, ";
             if(newProductComponentsTable.getItems().size()==0)
                 s+="składniki, ";
+            if(newProductPrice.getText().equals(""))
+                s+="cena, ";
             warningLabel4.setText(s);
         }
         else{
+            float f;
+            try{
+                f = Float.parseFloat(newProductPrice.getText());
+                System.out.println(f);
+            }catch (NumberFormatException e){
+                warningLabel4.setText("Podaj liczbe np. 2.5");
+                return;
+            }
+
             //wysłanie zapytania
             List<Storage> listOfIngridientsInNewProduct;
             listOfIngridientsInNewProduct=componentProductList;
