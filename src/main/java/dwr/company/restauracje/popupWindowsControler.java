@@ -319,10 +319,8 @@ public class popupWindowsControler implements Initializable{
             warningLabel4.setText(s);
         }
         else{
-            float f;
             try{
-                f = Float.parseFloat(newProductPrice.getText());
-                System.out.println(f);
+                Float.parseFloat(newProductPrice.getText());
             }catch (NumberFormatException e){
                 warningLabel4.setText("Podaj liczbe np. 2.5");
                 return;
@@ -337,7 +335,8 @@ public class popupWindowsControler implements Initializable{
             p.setName(newProductName.getText());
             p.setRestaurant(Client.restaurantName);
             p.setPrice(Float.valueOf(newProductPrice.getText()));
-
+            ingridients.clear();
+            newProductPrice.setText("");
             Client.makeProduct(p,listOfIngridientsInNewProduct);
             warningLabel4.setText("");
             newProductName.setText("");

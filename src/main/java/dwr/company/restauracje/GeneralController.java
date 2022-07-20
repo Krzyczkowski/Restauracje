@@ -357,7 +357,6 @@ public class GeneralController{
             }
         });
     }
-
     //Deal with data froma database
     @FXML
     protected void loadEmployesToTable() throws Exception {
@@ -382,7 +381,6 @@ public class GeneralController{
         historyOrders.clear();
         historyOrders.addAll(Client.getOrders( new Date(System.currentTimeMillis()).toString()));
         tableWithHistory.setItems(historyOrders);
-
     }
     @FXML
     public void loadProductToTable() throws Exception {
@@ -401,7 +399,6 @@ public class GeneralController{
         else
         productList.addAll(Client.getProducts());
         tableWithProducts.setItems(productList);
-
     }
 
     @FXML
@@ -417,9 +414,7 @@ public class GeneralController{
         } else
             productList.addAll(Client.getProducts());
         tableWithProductsOrders.setItems(productList);
-
     }
-
     @FXML
     protected void loadPositionsTable() throws Exception {
         PositionsProduct.setCellValueFactory(new PropertyValueFactory<Positions, String>("productName"));
@@ -428,8 +423,6 @@ public class GeneralController{
         positionList.addAll(tempOrder);
         tableWithPositions.setItems(positionList);
     }
-
-
     @FXML
     protected void loadStorageToTable() throws Exception {
         itemId.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("id"));
@@ -438,7 +431,6 @@ public class GeneralController{
         itemList.clear();
         itemList.addAll(Client.getStorage());
         tabelWithComponents.setItems(itemList);
-
     }
 
     public void editAmountStorage(MouseEvent mouseEvent) throws Exception {
@@ -469,14 +461,10 @@ public class GeneralController{
             tempOrder.clear();
             tempOrder.add(pos);
             positionList.addAll(tempOrder);
-
             tableWithPositions.setItems(positionList);
             loadAllPrice();
             amountOfProductsInOrder.getValueFactory().setValue(1);
-
-
         }
-
     }
 
     public void deleteProductFromOrder(MouseEvent mouseEvent) {
@@ -484,7 +472,6 @@ public class GeneralController{
             selectedPostion = tableWithPositions.getSelectionModel().getSelectedItem();
             tableWithPositions.getItems().remove(selectedPostion);
             loadAllPrice();
-
         }
     }
 
@@ -508,7 +495,6 @@ public class GeneralController{
     }
 
     public void makeOrder(MouseEvent mouseEvent) throws IOException {
-
         Date date = new Date(System.currentTimeMillis());
         tempOrder.clear();
         if(positionList.size()>0) {
