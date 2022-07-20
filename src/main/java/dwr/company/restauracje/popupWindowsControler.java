@@ -275,9 +275,11 @@ public class popupWindowsControler implements Initializable{
     public void addIngridientToProduct(MouseEvent mouseEvent) throws IOException {
         if (!componentsTable.getSelectionModel().isEmpty()) {
             selectedIngridient = componentsTable.getSelectionModel().getSelectedItem();
+            selectedIngridient.setAmount(Integer.valueOf(amountToAdd.getValue().toString()) );
             ingridients.add(selectedIngridient);
             loadNewProductIngridientsTable(ingridients);
             warningLabel4.setText("");
+            amountToAdd.getValueFactory().setValue(1);
         }
         else
             warningLabel4.setText("wybierz składnik do dodania");
