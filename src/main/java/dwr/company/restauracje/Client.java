@@ -205,9 +205,10 @@ class Client {
     public static void insertStorageItem(Storage s) throws IOException {
         message.clear();
         s.setId(0);
-        JSONObject jo = s.toJSONI();
+        s.setRestaurant(restaurantName);
+        JSONObject jo = s.toJSON();
         message.put("command", "insertStorageItem");
-        message.put("params", jo);
+        message.put("params", jo.toString());
         out.writeUTF(message.toString());
     }
     protected static void updateEmployee(String name, String lastName,int id, String login, String password, int levelacces, String restaurantname,float salary,int pesel) throws IOException {
