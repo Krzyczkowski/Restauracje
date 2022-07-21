@@ -191,6 +191,8 @@ class SerwerThread implements Runnable {
         db.close();
     }
 
+
+
     private void makeProduct(Products p, List<Storage> ingList) { db.makeProduct(p, ingList);}
 
     private void insertCategory(String name) {

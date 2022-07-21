@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -520,5 +521,10 @@ public class GeneralController{
         positionList.clear();
         positionList.addAll(pl);
         PositionsEditionTable.setItems(positionList);
+    }
+
+    public void deleteIngridientFromStorage(MouseEvent mouseEvent) throws IOException {
+        toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
+        Client.deleteStorage(toEditStoragePopUp);
     }
 }

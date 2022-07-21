@@ -206,6 +206,10 @@ public class DatabaseAPI {
     public void deleteItem(Storage st) {
         em.getTransaction().begin();
         Storage s = em.find(Storage.class, st.getId());
+        System.out.println(s);
+        em.createNativeQuery("DELETE FROM COMPOSITIONS c WHERE c.iditem = ?1").setParameter(1,s.getId()).executeUpdate();
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         em.remove(s);
         em.getTransaction().commit();
     }
