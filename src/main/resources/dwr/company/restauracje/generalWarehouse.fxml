@@ -113,7 +113,7 @@
                   <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="editAmount" layoutX="39.0" layoutY="554.0" mnemonicParsing="false" onAction="#openPopupComponent" prefHeight="34.0" prefWidth="202.0" text="Edytuj ilość">
+            <Button fx:id="editAmount"  onMouseClicked="#editAmountOfStorage" layoutX="39.0" layoutY="554.0" mnemonicParsing="false" onAction="#openPopupComponent" prefHeight="34.0" prefWidth="202.0" text="Edytuj ilość">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
@@ -123,7 +123,7 @@
                   <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Spinner layoutX="325.0" layoutY="554.0" prefHeight="34.0" prefWidth="202.0" />
+            <Spinner fx:id="newAmountOfIngridient" layoutX="325.0" layoutY="554.0" prefHeight="34.0" prefWidth="202.0" />
             <Label fx:id="warningLabel2" layoutX="39.0" layoutY="643.0" prefHeight="34.0" prefWidth="405.0" textFill="RED">
                <font>
                   <Font name="Calibri Bold" size="23.0" />

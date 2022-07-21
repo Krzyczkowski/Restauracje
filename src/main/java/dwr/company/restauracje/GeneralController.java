@@ -26,6 +26,7 @@ import java.util.Objects;
 
 @SuppressWarnings("ALL")
 public class GeneralController{
+    public Spinner newAmountOfIngridient;
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -137,6 +138,10 @@ public class GeneralController{
                     loadProductToTable();
                     break;
                 case 2:
+                    loadStorageToTable();
+                    SpinnerValueFactory<Integer> valueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
+                    valueFactory2.setValue(1);
+                    newAmountOfIngridient.setValueFactory(valueFactory2);
                     loadStorageToTable();
                     break;
                 case 3:
@@ -304,7 +309,7 @@ public class GeneralController{
     }
 
     @FXML
-    protected void openPopupComponent(ActionEvent event) throws IOException {
+    protected void openPopupComponent(ActionEvent event) throws Exception {
         if(event.getTarget().equals(addComponent)) {
             popup = 1;
             FXMLLoader loader = new FXMLLoader(App.class.getResource("editComponent.fxml"));
@@ -329,6 +334,7 @@ public class GeneralController{
         } else {
             warningLabel2.setText("Nie wybrano żadnego elemantu!");
         }
+        loadStorageToTable();
     }
 
 
@@ -429,6 +435,7 @@ public class GeneralController{
     }
 
     public void selectComponent() {
+        if(!tabelWithComponents.getSelectionModel().isEmpty())
         toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
  //       amountOfComponent.setText(String.valueOf(toEditStoragePopUp.getAmount()));
     }
@@ -523,8 +530,22 @@ public class GeneralController{
         PositionsEditionTable.setItems(positionList);
     }
 
-    public void deleteIngridientFromStorage(MouseEvent mouseEvent) throws IOException {
-        toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
-        Client.deleteStorage(toEditStoragePopUp);
+    public void deleteIngridientFromStorage(MouseEvent mouseEvent) throws Exception {
+        if(!tabelWithComponents.getSelectionModel().isEmpty()) {
+            toEditStoragePopUp = tabelWithComponents.getSelectionModel().getSelectedItem();
+            Client.deleteStorage(toEditStoragePopUp);
+            loadStorageToTable();
+        }
+    }
+
+    public void editAmountOfStorage(MouseEvent mouseEvent) throws Exception {
+        if(!tabelWithComponents.getSelectionModel().isEmpty()) {
+            Storage s = tabelWithComponents.getSelectionModel().getSelectedItem();
+            int am = Integer.valueOf(newAmountOfIngridient.getValue().toString());
+            s.setAmount(am);
+            Client.updateStorageItem(s);
+            loadStorageToTable();
+        }
+
     }
 }
