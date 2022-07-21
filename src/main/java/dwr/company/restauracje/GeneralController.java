@@ -334,7 +334,6 @@ public class GeneralController{
         } else {
             warningLabel2.setText("Nie wybrano żadnego elemantu!");
         }
-        loadStorageToTable();
     }
 
 
