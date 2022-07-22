@@ -285,6 +285,7 @@ public class GeneralController{
 
     @FXML
     protected void openPopupProduct(ActionEvent event) throws IOException {
+        selectedProduct = null;
         if(event.getTarget().equals(addProduct)) {
             popup = 2;
             FXMLLoader loader = new FXMLLoader(App.class.getResource("editProduct.fxml"));
@@ -296,15 +297,22 @@ public class GeneralController{
             moveWindow(popupScene, popup);
             popup.show();
         } else if (event.getTarget().equals(editProduct)){
-            popup = 2;
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("editProduct.fxml"));
-            Scene popupScene = new Scene(loader.load(), 767.0, 730.0);
-            popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-            Stage popup = new Stage();
-            popup.initStyle(StageStyle.UNDECORATED);
-            popup.setScene(popupScene);
-            moveWindow(popupScene, popup);
-            popup.show();
+            if(tableWithProducts.getSelectionModel().isEmpty()){
+                //warning brak wybranego elementu;
+            }
+            else{
+                selectedProduct=tableWithProducts.getSelectionModel().getSelectedItem();
+                popup = 2;
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("editProduct.fxml"));
+                Scene popupScene = new Scene(loader.load(), 767.0, 730.0);
+                popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+                Stage popup = new Stage();
+                popup.initStyle(StageStyle.UNDECORATED);
+                popup.setScene(popupScene);
+                moveWindow(popupScene, popup);
+                popup.show();
+            }
+
         } else {
         }
     }
