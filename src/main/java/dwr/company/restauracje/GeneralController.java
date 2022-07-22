@@ -132,7 +132,7 @@ public class GeneralController{
 
     @FXML
     public void initialize(){
-        try {//Loading correct screen
+        try {//Loading correct screenn
             switch (GeneralWindowSet.layout){
                 case 0:
                     loadEmployesToTable();
