@@ -247,9 +247,13 @@ public class GeneralController{
 
     @FXML
     protected void logOut() throws IOException {
-        Client.logout();
-        Stage stage = new Stage();
-        logSet againLog = new logSet(stage);
+        try {
+            Client.logout();
+            Stage stage = new Stage();
+            logSet againLog = new logSet(stage);
+        }catch(Exception e){
+            System.out.println(e);
+        }
         actualWindow.getWindow().close();
     }
 
