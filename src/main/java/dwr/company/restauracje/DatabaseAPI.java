@@ -228,10 +228,51 @@ public class DatabaseAPI {
             em.persist(p);
             System.out.println(p);
         }
-
+        em.getTransaction().commit();
+        makeOrderdeleteFromStorage(lp);
+    }
+    protected void makeOrderdeleteFromStorage(List<Positions> p){
+        em.getTransaction().begin();
+        Query query = em.createQuery( "SELECT st FROM Storage st where st.restaurant = ?1 ").setParameter(1,restaurant);
+        List<Storage> list = query.getResultList();
+        query = em.createQuery( "SELECT st FROM Compositions st ");
+        List<Compositions> ls= query.getResultList();
+        for(Positions pos : p){
+            for(Compositions com : ls){
+                if(com.getIdproduct()==pos.getIdproduct()){
+                    for(Storage st : list){
+                        if(st.getId()==com.getIditem()){
+                            st.setAmount(st.getAmount()-com.getAmount()*pos.getAmount());
+                            em.merge(st);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         em.getTransaction().commit();
     }
-
+    protected void makeOrderAddFromStorage(List<Positions> p){
+        em.getTransaction().begin();
+        Query query = em.createQuery( "SELECT st FROM Storage st where st.restaurant = ?1 ").setParameter(1,restaurant);
+        List<Storage> list = query.getResultList();
+        query = em.createQuery( "SELECT st FROM Compositions st ");
+        List<Compositions> ls= query.getResultList();
+        for(Positions pos : p){
+            for(Compositions com : ls){
+                if(com.getIdproduct()==pos.getIdproduct()){
+                    for(Storage st : list){
+                        if(st.getId()==com.getIditem()){
+                            st.setAmount(st.getAmount()+com.getAmount()*pos.getAmount());
+                            em.merge(st);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        em.getTransaction().commit();
+    }
 
     public JSONObject getOrders(String date) {
         JSONObject jo = new JSONObject();
