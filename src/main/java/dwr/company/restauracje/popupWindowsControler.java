@@ -106,8 +106,9 @@ public class popupWindowsControler implements Initializable{
                     valueFactory.setValue(1);
                     amountToAdd.setValueFactory(valueFactory);
                     loadPopupIngridients();
-                    if(GeneralController.selectedProduct != null);
-                        loadProductInfo();
+                    try{if(GeneralController.selectedProduct != null);
+                        loadProductInfo();}catch (Exception e){}
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
