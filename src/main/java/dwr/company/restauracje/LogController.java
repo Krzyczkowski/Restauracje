@@ -30,7 +30,7 @@ public class LogController{
     @FXML
     private Button refreshButton;
 
-    //Other declarations
+    //Other declarationss
     private GeneralWindowSet mainWindow;
 
     @FXML
