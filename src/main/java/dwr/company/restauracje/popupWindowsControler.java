@@ -256,11 +256,9 @@ public class popupWindowsControler implements Initializable{
     @FXML
     protected void decision(ActionEvent event){
         if(event.getTarget().equals(yesButton)){
-
             Stage stage = (Stage) yesButton.getScene().getWindow();
             stage.close();
         }else if (event.getTarget().equals(noButton)){
-
             Stage stage = (Stage) noButton.getScene().getWindow();
             stage.close();
         }
@@ -271,7 +269,6 @@ public class popupWindowsControler implements Initializable{
             xCordinates = mouseEvent.getSceneX();
             yCordinates = mouseEvent.getSceneY();
         });
-
         scene.setOnMouseDragged(mouseEvent -> {
             stage.setX(mouseEvent.getScreenX() - xCordinates);
             stage.setY(mouseEvent.getScreenY() - yCordinates);
