@@ -27,6 +27,7 @@ import java.util.Objects;
 @SuppressWarnings("ALL")
 public class GeneralController{
     public Spinner newAmountOfIngridient;
+    public ListView listWithNeed;
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -139,7 +140,7 @@ public class GeneralController{
                     break;
                 case 2:
                     loadStorageToTable();
-                    SpinnerValueFactory<Integer> valueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100) ;
+                    SpinnerValueFactory<Integer> valueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100) ;
                     valueFactory2.setValue(1);
                     newAmountOfIngridient.setValueFactory(valueFactory2);
                     loadStorageToTable();
@@ -422,6 +423,12 @@ public class GeneralController{
         itemAmount.setCellValueFactory(new PropertyValueFactory<Storage, String>("amount"));
         itemList.clear();
         itemList.addAll(Client.getStorage());
+        listWithNeed.getItems().clear();
+        for(Storage st : itemList){
+            if (st.getAmount()==0){
+                listWithNeed.getItems().add(st.getName());
+            }
+        }
         tabelWithComponents.setItems(itemList);
     }
 
