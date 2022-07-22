@@ -106,6 +106,8 @@ public class popupWindowsControler implements Initializable{
                     valueFactory.setValue(1);
                     amountToAdd.setValueFactory(valueFactory);
                     loadPopupIngridients();
+                    if(GeneralController.selectedProduct != null);
+                        loadProductInfo();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -115,6 +117,18 @@ public class popupWindowsControler implements Initializable{
             default:
                 break;
         }
+    }
+
+    private void loadProductInfo() {
+        Products p = GeneralController.selectedProduct;
+        newProductName.setText(p.getName());
+        for(int i = 0;i< newProductCategory.getItems().size();i++){
+            if(p.getCategory().equals( newProductCategory.getItems().get(i))){
+                newProductCategory.getSelectionModel().select(i);
+            }
+        }
+        newProductPrice.setText(String.valueOf(p.getPrice()));
+
     }
 
     private void loadPopupIngridients() throws IOException {
@@ -242,11 +256,9 @@ public class popupWindowsControler implements Initializable{
     @FXML
     protected void decision(ActionEvent event){
         if(event.getTarget().equals(yesButton)){
-
             Stage stage = (Stage) yesButton.getScene().getWindow();
             stage.close();
         }else if (event.getTarget().equals(noButton)){
-
             Stage stage = (Stage) noButton.getScene().getWindow();
             stage.close();
         }
@@ -257,7 +269,6 @@ public class popupWindowsControler implements Initializable{
             xCordinates = mouseEvent.getSceneX();
             yCordinates = mouseEvent.getSceneY();
         });
-
         scene.setOnMouseDragged(mouseEvent -> {
             stage.setX(mouseEvent.getScreenX() - xCordinates);
             stage.setY(mouseEvent.getScreenY() - yCordinates);
