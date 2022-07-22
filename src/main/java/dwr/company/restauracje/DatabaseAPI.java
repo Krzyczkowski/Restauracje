@@ -252,7 +252,7 @@ public class DatabaseAPI {
         }
         em.getTransaction().commit();
     }
-    protected void makeOrderAddFromStorage(List<Positions> p){
+    protected void positionAddToStorage(List<Positions> p){
         em.getTransaction().begin();
         Query query = em.createQuery( "SELECT st FROM Storage st where st.restaurant = ?1 ").setParameter(1,restaurant);
         List<Storage> list = query.getResultList();
@@ -331,6 +331,16 @@ public class DatabaseAPI {
         }
         em.getTransaction().commit();
 
+    }
+
+    public void deletePositionFromOrder(Positions p) {
+        System.out.println(p);
+        List<Positions > pl = new ArrayList<>();
+        pl.add(p);
+        positionAddToStorage(pl);
+        em.getTransaction().begin();
+        em.remove(p);
+        em.getTransaction().commit();
     }
 }
 

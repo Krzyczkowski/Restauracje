@@ -186,6 +186,9 @@ class SerwerThread implements Runnable {
                 case"insertCategory":
                     insertCategory(JSON.get("params").toString());
                     break;
+                case"deletePositionFromOrder":
+                    deletePositionFromOrder(new Positions ((JSONObject)JSON.get("params") ));
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
@@ -194,6 +197,7 @@ class SerwerThread implements Runnable {
         db.close();
     }
 
+    private void deletePositionFromOrder(Positions params) {db.deletePositionFromOrder(params);}
 
 
     private void makeProduct(Products p, List<Storage> ingList) { db.makeProduct(p, ingList);}

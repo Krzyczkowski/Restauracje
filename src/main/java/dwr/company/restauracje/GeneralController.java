@@ -28,6 +28,7 @@ import java.util.Objects;
 public class GeneralController{
     public Spinner newAmountOfIngridient;
     public ListView listWithNeed;
+    public Button editPositionButton;
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -556,5 +557,20 @@ public class GeneralController{
             loadStorageToTable();
         }
 
+    }
+
+
+    // EDIT and DELETE for Order History
+
+    public void editPosition(MouseEvent mouseEvent) {
+
+    }
+
+    public void deletePosition(MouseEvent mouseEvent) throws IOException {
+        if(!PositionsEditionTable.getSelectionModel().isEmpty()) {
+            Positions p = PositionsEditionTable.getSelectionModel().getSelectedItem();
+            Client.deletePositionFromOrder(p);
+            LoadPositionsEditionTable(tableWithHistory.getSelectionModel().getSelectedItem());
+        }
     }
 }

@@ -106,10 +106,16 @@
                      <TableColumn fx:id="PositionsEditionProductPrice" prefWidth="394.0" text="Cena (amount*product.price)" />
                  </columns>
              </TableView>
-
-
-
-
+             <Button fx:id="deletePositionButton" layoutX="280.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#deletePosition" prefHeight="41.0" prefWidth="100.0" text="Usuń Pozycję">
+                 <font>
+                     <Font name="Calibri" size="14.0" />
+                 </font>
+             </Button>
+             <Button fx:id="editPositionButton" layoutX="390.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#editPosition" prefHeight="41.0" prefWidth="100.0" text="Edytuj Pozycję">
+                 <font>
+                     <Font name="Calibri" size="14.0" />
+                 </font>
+             </Button>
 
             <TableView fx:id="tableWithHistory" onMouseClicked="#selectOrderToEdit"  layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
               <columns>

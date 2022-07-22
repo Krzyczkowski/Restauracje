@@ -19,3 +19,4 @@ deleteStorageItem:0
 deleteEmployee:0
 makeOrder:0
 makeProduct:0
+deletePositionFromOrder:0

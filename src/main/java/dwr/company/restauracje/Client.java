@@ -254,4 +254,11 @@ class Client {
         message.put("params", newProduct.toString());
         out.writeUTF(message.toString());
     }
+    public static void deletePositionFromOrder(Positions p) throws IOException {
+        System.out.println();
+        message.clear();
+        message.put("command", "deletePositionFromOrder");
+        message.put("params", p.toJSON().toString());
+        out.writeUTF(message.toString());
+    }
 }
