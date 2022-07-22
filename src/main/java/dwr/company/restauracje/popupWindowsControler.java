@@ -127,8 +127,8 @@ public class popupWindowsControler implements Initializable{
                 newProductCategory.getSelectionModel().select(i);
             }
         }
-        newProductPrice.setText(String.valueOf(p.getPrice()));
 
+        newProductPrice.setText(String.valueOf(p.getPrice()));
     }
 
     private void loadPopupIngridients() throws IOException {

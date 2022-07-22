@@ -258,7 +258,7 @@ class Client {
         System.out.println();
         message.clear();
         message.put("command", "deletePositionFromOrder");
-        message.put("params", p.toJSON().toString());
+        message.put("params", p.toJSONU());
         out.writeUTF(message.toString());
     }
 }

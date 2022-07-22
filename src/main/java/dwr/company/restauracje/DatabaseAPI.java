@@ -338,8 +338,11 @@ public class DatabaseAPI {
         List<Positions > pl = new ArrayList<>();
         pl.add(p);
         positionAddToStorage(pl);
+        pl.clear();
         em.getTransaction().begin();
-        em.remove(p);
+        Query query = em.createQuery( "SELECT st FROM Positions st where st.id = ?1 ").setParameter(1,p.getId());
+        pl = query.getResultList();
+        em.remove(pl.get(0));
         em.getTransaction().commit();
     }
 }
