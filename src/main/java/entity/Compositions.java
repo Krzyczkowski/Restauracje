@@ -1,6 +1,7 @@
 package entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 
@@ -31,6 +32,21 @@ public class Compositions {
     public Compositions() {
     }
 
+    public Compositions(JSONObject jo) {
+        this.id = Integer.parseInt(jo.get("id").toString());
+        this.idproduct = Integer.parseInt(jo.get("idproduct").toString());
+        this.iditem = Integer.parseInt(jo.get("iditem").toString());
+        this.amount = Integer.parseInt(jo.get("amount").toString());
+
+    }
+    public JSONObject toJSON() {
+        JSONObject jo = new JSONObject();
+        jo.put("id",id);
+        jo.put("idproduct",idproduct);
+        jo.put("iditem",iditem);
+        jo.put("amount",amount);
+        return jo;
+    }
     public int getId() {
         return id;
     }

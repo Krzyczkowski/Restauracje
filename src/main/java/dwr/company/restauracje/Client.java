@@ -201,6 +201,22 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
     }
+    public static List<Compositions> getComposition(int idProduct) throws IOException {
+        message.clear();
+        message.put("command", "getComposition");
+        message.put("params", idProduct);
+        out.writeUTF(message.toString());
+        message.clear();
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printComposition(message);
+    }
+
+    private static List<Compositions> printComposition(JSONObject jo) {
+        List<Compositions> list= new ArrayList<>();
+        for(int i = 0; i<jo.size(); i++)
+            list.add(new Compositions((JSONObject) jo.get(Integer.toString(i))));
+        return list;
+    }
 
     public static void insertStorageItem(Storage s) throws IOException {
         message.clear();

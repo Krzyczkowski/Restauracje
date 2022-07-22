@@ -5,6 +5,7 @@ getEmployeeById:0
 getEmployeeByName:0
 getIdRestaurantByName:0
 getEmployeesFullInfo:0
+getComposition:0
 getProducts:0
 getStorage:0
 getProduct:0

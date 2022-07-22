@@ -57,6 +57,12 @@ public class Storage {
         id = 0;
         restaurant="0";
     }
+    public Storage(Storage st){
+        amount = st.getAmount();
+        name = st.getName();
+        id = st.getId();
+        restaurant = st.getRestaurant();
+    }
     public Storage(String name, int amount){this.id=0;this.name=name;this.amount=amount;}
     public Storage(JSONObject jo) {
         id =    (int)(long) jo.get("id");

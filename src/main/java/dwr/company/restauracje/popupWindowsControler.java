@@ -106,9 +106,10 @@ public class popupWindowsControler implements Initializable{
                     valueFactory.setValue(1);
                     amountToAdd.setValueFactory(valueFactory);
                     loadPopupIngridients();
-                    try{if(GeneralController.selectedProduct != null);
-                        loadProductInfo();}catch (Exception e){}
-
+                    try{
+                        if(GeneralController.selectedProduct != null)
+                            loadProductInfo();
+                    }catch (Exception e){}
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -120,7 +121,7 @@ public class popupWindowsControler implements Initializable{
         }
     }
 
-    private void loadProductInfo() {
+    private void loadProductInfo() throws IOException {
         Products p = GeneralController.selectedProduct;
         newProductName.setText(p.getName());
         for(int i = 0;i< newProductCategory.getItems().size();i++){
@@ -128,8 +129,20 @@ public class popupWindowsControler implements Initializable{
                 newProductCategory.getSelectionModel().select(i);
             }
         }
-
         newProductPrice.setText(String.valueOf(p.getPrice()));
+        List<Compositions> l = Client.getComposition(p.getId());
+        ingridients.clear();
+        for(Compositions com : l){
+            for(Storage st : storageList){
+                if(st.getId()==com.getIditem()){
+                    Storage s = new Storage(st);
+                    s.setAmount(com.getAmount());
+                    ingridients.add(s);
+                }
+            }
+        }
+        loadNewProductIngridientsTable(ingridients);
+
     }
 
     private void loadPopupIngridients() throws IOException {

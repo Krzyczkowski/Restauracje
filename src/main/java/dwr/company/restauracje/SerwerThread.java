@@ -195,7 +195,9 @@ class SerwerThread implements Runnable {
                 case"deleteOrder":
                     deleteOrder(new Orders ((JSONObject)JSON.get("params")));
                     break;
-
+                case"getComposition":
+                    getComposition(Integer.parseInt(JSON.get("params").toString()));
+                    break;
 
             }else{
                 System.out.println("brak takich uprawnien!!");
@@ -208,7 +210,12 @@ class SerwerThread implements Runnable {
     private void deleteOrder(Orders params) {
         db.deleteOrder(params);
     }
-
+    private void getComposition(int i) throws IOException {
+        JSON.clear();
+        JSON = db.getComposition(i);
+        System.out.println(JSON.toString());
+        out.writeUTF(JSON.toString());
+    }
     private void editPositionFromOrder(Positions params, Integer newValue) {
         db.editPositionFromOrder(params,newValue);
     }
