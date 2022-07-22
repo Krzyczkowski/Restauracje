@@ -334,7 +334,6 @@ public class DatabaseAPI {
     }
 
     public void deletePositionFromOrder(Positions p) {
-        System.out.println(p);
         List<Positions > pl = new ArrayList<>();
         pl.add(p);
         positionAddToStorage(pl);
@@ -343,6 +342,28 @@ public class DatabaseAPI {
         Query query = em.createQuery( "SELECT st FROM Positions st where st.id = ?1 ").setParameter(1,p.getId());
         pl = query.getResultList();
         em.remove(pl.get(0));
+        em.getTransaction().commit();
+    }
+
+    public void editPositionFromOrder(Positions params, Integer newValue) {
+       deletePositionFromOrder(params);
+       params.setAmount(newValue);
+       List<Positions> pl = new ArrayList<>();
+       pl.add(params);
+       makeOrderdeleteFromStorage(pl);
+       em.getTransaction().begin();
+       em.merge(params);
+       em.getTransaction().commit();
+    }
+
+    public void deleteOrder(Orders params) {
+        System.out.println(params);
+        System.out.println("git");
+        em.getTransaction().begin();
+        em.createNativeQuery("DELETE FROM POSITIONS p WHERE p.idorder = ?1").setParameter(1,params.getId()).executeUpdate();
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        em.createNativeQuery("DELETE FROM ORDERS o WHERE o.id = ?1").setParameter(1,params.getId()).executeUpdate();
         em.getTransaction().commit();
     }
 }

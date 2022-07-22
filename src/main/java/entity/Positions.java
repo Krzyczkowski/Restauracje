@@ -83,7 +83,7 @@ public class Positions {
         jo.put("amount",amount);
         jo.put("productName",productName);
         jo.put("productPrice",productPrice);
-        jo.put("id",0);
+        jo.put("id",id);
         return jo;
     }
     public JSONObject toJSONU(){

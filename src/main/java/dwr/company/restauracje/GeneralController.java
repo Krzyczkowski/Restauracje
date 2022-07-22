@@ -29,6 +29,7 @@ public class GeneralController{
     public Spinner newAmountOfIngridient;
     public ListView listWithNeed;
     public Button editPositionButton;
+    public Spinner amountOfProductsInHistory;
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -147,6 +148,10 @@ public class GeneralController{
                     loadStorageToTable();
                     break;
                 case 3:
+                    loadHistoryToTable();
+                    SpinnerValueFactory<Integer> valueFactory3 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100) ;
+                    valueFactory3.setValue(0);
+                    amountOfProductsInHistory.setValueFactory(valueFactory3);
                     loadHistoryToTable();
                     break;
                 case 4:
@@ -570,8 +575,12 @@ public class GeneralController{
 
     // EDIT and DELETE for Order History
 
-    public void editPosition(MouseEvent mouseEvent) {
-
+    public void editPosition(MouseEvent mouseEvent) throws IOException {
+        if(!PositionsEditionTable.getSelectionModel().isEmpty()) {
+            Positions p = PositionsEditionTable.getSelectionModel().getSelectedItem();
+            Client.editPositionFromOrder(p,Integer.valueOf(amountOfProductsInHistory.getValue().toString()));
+            LoadPositionsEditionTable(tableWithHistory.getSelectionModel().getSelectedItem());
+        }
     }
 
     public void deletePosition(MouseEvent mouseEvent) throws IOException {
@@ -579,6 +588,17 @@ public class GeneralController{
             Positions p = PositionsEditionTable.getSelectionModel().getSelectedItem();
             Client.deletePositionFromOrder(p);
             LoadPositionsEditionTable(tableWithHistory.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public void readPositionAmount(MouseEvent mouseEvent) {
+    }
+
+    public void deleteOrder(MouseEvent mouseEvent) throws IOException {
+        if(!tableWithHistory.getSelectionModel().isEmpty()) {
+            Orders o = tableWithHistory.getSelectionModel().getSelectedItem();
+            Client.deleteOrder(o);
+            loadHistoryToTable();
         }
     }
 }

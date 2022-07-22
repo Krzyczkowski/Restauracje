@@ -14,6 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Spinner?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwr.company.restauracje.GeneralController">
     <children>
         <VBox alignment="TOP_CENTER" layoutX="850.0" prefHeight="700.0" prefWidth="350.0" spacing="20.0" style="-fx-background-color: #032475;">
@@ -96,10 +97,15 @@
                   <Font name="Calibri Bold" size="33.0" />
                </font>
             </Label>
+             <Button fx:id="deleteOrderButton" layoutX="400.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#deleteOrder" prefHeight="41.0" prefWidth="130.0" text="Usuń zamówienie">
+                 <font>
+                     <Font name="Calibri" size="14.0" />
+                 </font>
+             </Button>
 
 
 
-             <TableView fx:id="PositionsEditionTable"  layoutX="35.0" layoutY="388.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
+             <TableView fx:id="PositionsEditionTable"  onMouseClicked="#readPositionAmount" layoutX="35.0" layoutY="388.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
                  <columns>
                      <TableColumn fx:id="PositionsEditionProductName" prefWidth="100.0" text="Nazwa produktu" />
                      <TableColumn fx:id="PositionsEditionProductAmount" prefWidth="274.0" text=" Ilość " />
@@ -111,11 +117,20 @@
                      <Font name="Calibri" size="14.0" />
                  </font>
              </Button>
-             <Button fx:id="editPositionButton" layoutX="390.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#editPosition" prefHeight="41.0" prefWidth="100.0" text="Edytuj Pozycję">
+             <Button fx:id="editPositionButton" layoutX="590.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#editPosition" prefHeight="41.0" prefWidth="100.0" text="Zatwierdź">
                  <font>
                      <Font name="Calibri" size="14.0" />
                  </font>
              </Button>
+
+             <Spinner fx:id="amountOfProductsInHistory" layoutX="470.0" layoutY="340.0" prefHeight="41.0" prefWidth="86.0" />
+
+
+             <Label layoutX="390.0" layoutY="340.0"  prefHeight="41.0" prefWidth="297.0" text="Nowa ilość" textFill="#032475">
+                 <font>
+                     <Font name="Calibri Bold" size="15.0" />
+                 </font>
+             </Label>
 
             <TableView fx:id="tableWithHistory" onMouseClicked="#selectOrderToEdit"  layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
               <columns>

@@ -189,12 +189,28 @@ class SerwerThread implements Runnable {
                 case"deletePositionFromOrder":
                     deletePositionFromOrder(new Positions ((JSONObject)JSON.get("params") ));
                     break;
+                case"editPositionFromOrder":
+                    editPositionFromOrder(new Positions ((JSONObject)JSON.get("params")), Integer.valueOf(JSON.get("newValue").toString()));
+                    break;
+                case"deleteOrder":
+                    deleteOrder(new Orders ((JSONObject)JSON.get("params")));
+                    break;
+
+
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
             }
         }
         db.close();
+    }
+
+    private void deleteOrder(Orders params) {
+        db.deleteOrder(params);
+    }
+
+    private void editPositionFromOrder(Positions params, Integer newValue) {
+        db.editPositionFromOrder(params,newValue);
     }
 
     private void deletePositionFromOrder(Positions params) {db.deletePositionFromOrder(params);}

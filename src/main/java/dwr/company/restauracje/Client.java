@@ -261,4 +261,21 @@ class Client {
         message.put("params", p.toJSONU());
         out.writeUTF(message.toString());
     }
+
+    public static void editPositionFromOrder(Positions p, int newValue) throws IOException {
+        System.out.println();
+        message.clear();
+        message.put("command", "editPositionFromOrder");
+        message.put("params", p.toJSONU());
+        message.put("newValue",newValue);
+        out.writeUTF(message.toString());
+    }
+
+    public static void deleteOrder(Orders o) throws IOException {
+        System.out.println(o);
+        message.clear();
+        message.put("command", "deleteOrder");
+        message.put("params", o.toJSON());
+        out.writeUTF(message.toString());
+    }
 }

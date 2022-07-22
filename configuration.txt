@@ -20,3 +20,5 @@ deleteEmployee:0
 makeOrder:0
 makeProduct:0
 deletePositionFromOrder:0
+editPositionFromOrder:0
+deleteOrder:0
