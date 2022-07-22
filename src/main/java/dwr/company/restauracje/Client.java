@@ -215,7 +215,7 @@ class Client {
         JSONObject message = new JSONObject();
         Logins log = new Logins(id,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
         message.put("command","updateEmployee");
-        message.put("params",log.toJSON().toString());
+        message.put("params",log.toJSON());
         out.writeUTF(message.toString());
     }
     public static void updateStorageItem(Storage s) throws IOException {

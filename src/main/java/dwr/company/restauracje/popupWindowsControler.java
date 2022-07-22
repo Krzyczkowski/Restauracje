@@ -202,13 +202,14 @@ public class popupWindowsControler implements Initializable{
             GeneralController.toEditPopUp = null;
             Stage stage = (Stage) exitButton.getScene().getWindow();
             warningLabelEmp.setText("");
+            GeneralController.employeesList.clear();
+            GeneralController.employeesList.addAll(Client.getEmployeesFullInfo());
             stage.close();
             }
         }
 
     @FXML
     protected void saveProductInfo(){
-
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
 
@@ -220,7 +221,6 @@ public class popupWindowsControler implements Initializable{
             Client.insertStorageItem(s);
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
-
     }
 
     @FXML

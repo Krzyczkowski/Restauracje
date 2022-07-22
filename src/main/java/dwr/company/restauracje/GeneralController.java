@@ -110,7 +110,7 @@ public class GeneralController{
     private Button addProduct, editProduct, deletProduct;
 
     //Elements dependent on data base
-    private final ObservableList<Logins> employeesList = FXCollections.observableArrayList();
+    protected static ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private final ObservableList<Products> productList = FXCollections.observableArrayList();
     private final ObservableList<Storage> itemList = FXCollections.observableArrayList();
     private final ObservableList<Positions> positionList = FXCollections.observableArrayList();
@@ -514,8 +514,11 @@ public class GeneralController{
     }
 
     public void selectOrderToEdit() throws IOException {
-        selectedOrder = tableWithHistory.getSelectionModel().getSelectedItem();
-        LoadPositionsEditionTable(selectedOrder);
+        try{
+            selectedOrder = tableWithHistory.getSelectionModel().getSelectedItem();
+            LoadPositionsEditionTable(selectedOrder);
+        }catch (Exception e){
+        }
     }
 
     public void LoadPositionsEditionTable(Orders order) throws IOException {

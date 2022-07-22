@@ -278,6 +278,7 @@ class SerwerThread implements Runnable {
     }
     private void updateEmployee(Logins e) {
         JSON.clear();
+        System.out.println(1);
         db.updateEmployee(e);
     }
     private void getEmployeesFullInfo() throws IOException {
