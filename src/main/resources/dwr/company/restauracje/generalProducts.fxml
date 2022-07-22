@@ -123,7 +123,7 @@
                   <Font name="Calibri" size="19.0" />
                </font>
             </Button>
-            <Button fx:id="deletProduct" layoutX="644.0" layoutY="630.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="173.0" text="Usuń">
+            <Button fx:id="deletProduct" layoutX="644.0" layoutY="630.0" onAction="#deleteProduct" mnemonicParsing="false" prefHeight="34.0" prefWidth="173.0" text="Usuń">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>

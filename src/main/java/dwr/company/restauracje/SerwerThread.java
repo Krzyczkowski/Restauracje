@@ -127,18 +127,14 @@ class SerwerThread implements Runnable {
                     makeOrder(orderContainer);
                     break;
                 case "makeProduct":
-
                     joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
                     JSONObject joe2 = (JSONObject) JSONValue.parse(joe.get("ingridients").toString());
                     Products p = new Products((JSONObject) JSONValue.parse(joe.get("product").toString()));
                     List<Storage> ingList = new ArrayList<>();
-                    for(int i=0; i<joe2.size();i++){
+                    for(int i=0; i<joe2.size();i++)
                         ingList.add(new Storage((JSONObject)JSONValue.parse(joe2.get("ingridient"+i).toString())));
-                    }
                     makeProduct(p,ingList);
-
                     break;
-
                 case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
                     System.out.println("SerwerThread.communication.getEmployeesFullInfo : params: "+JSON.get("params").toString());
                     if (JSON.get("params").equals(""))
@@ -198,7 +194,20 @@ class SerwerThread implements Runnable {
                 case"getComposition":
                     getComposition(Integer.parseInt(JSON.get("params").toString()));
                     break;
-
+                case"updateProduct":
+                    joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                    JSONObject joe3 = (JSONObject) JSONValue.parse(joe.get("ingridients").toString());
+                    Products p1 = new Products((JSONObject) JSONValue.parse(joe.get("product").toString()));
+                    List<Storage> ing = new ArrayList<>();
+                    for(int i=0; i<joe3.size();i++)
+                    {
+                        ing.add(new Storage((JSONObject)JSONValue.parse(joe3.get("ingridient"+i).toString())));
+                    }
+                    updateProduct(p1,ing);
+                    break;
+                case"deleteProduct":
+                    deleteProduct(Integer.parseInt(JSON.get("params").toString()));
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
@@ -207,6 +216,12 @@ class SerwerThread implements Runnable {
         db.close();
     }
 
+    private void updateProduct(Products p1, List<Storage> ing) {
+        db.updateProduct(p1,ing);
+    }
+    private void deleteProduct(int id){
+        db.deleteProduct(id);
+    }
     private void deleteOrder(Orders params) {
         db.deleteOrder(params);
     }

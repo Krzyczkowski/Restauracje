@@ -263,11 +263,11 @@ class Client {
         newProduct.put("product",p.toJSON().toString());
         JSONObject ingridients = new JSONObject();
         for(int i=0;i<ing.size();i++){
-            ingridients.put("ingridient"+i,ing.get(i).toJSON().toString());
+            ingridients.put("ingridient"+i,ing.get(i).toJSON());
         }
         newProduct.put("ingridients",ingridients);
         message.put("command", "makeProduct");
-        message.put("params", newProduct.toString());
+        message.put("params", newProduct);
         out.writeUTF(message.toString());
     }
     public static void deletePositionFromOrder(Positions p) throws IOException {
@@ -292,6 +292,26 @@ class Client {
         message.clear();
         message.put("command", "deleteOrder");
         message.put("params", o.toJSON());
+        out.writeUTF(message.toString());
+    }
+
+    public static void updateProduct(Products p, List<Storage> ing) throws IOException {
+        message.clear();
+        JSONObject newProduct = new JSONObject();
+        newProduct.put("product",p.toJSON().toString());
+        JSONObject ingridients = new JSONObject();
+        for(int i=0;i<ing.size();i++){
+            ingridients.put("ingridient"+i,ing.get(i).toJSON());
+        }
+        newProduct.put("ingridients",ingridients);
+        message.put("command", "updateProduct");
+        message.put("params", newProduct);
+        out.writeUTF(message.toString());
+    }
+    public static void deleteProduct(int id) throws IOException {
+        message.clear();
+        message.put("command", "deleteProduct");
+        message.put("params", id);
         out.writeUTF(message.toString());
     }
 }

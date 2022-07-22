@@ -23,3 +23,5 @@ makeProduct:0
 deletePositionFromOrder:0
 editPositionFromOrder:0
 deleteOrder:0
+updateProduct:0
+deleteProduct:0

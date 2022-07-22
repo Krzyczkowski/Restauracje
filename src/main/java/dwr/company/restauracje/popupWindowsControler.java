@@ -48,7 +48,7 @@ public class popupWindowsControler implements Initializable{
     private TextField newProductName, newCategoryName;
     @FXML
     private PasswordField newPassword;
-    private String command;
+    private String command = "";
     private int id;
     //Button
     @FXML
@@ -142,7 +142,7 @@ public class popupWindowsControler implements Initializable{
             }
         }
         loadNewProductIngridientsTable(ingridients);
-
+        command = "update";
     }
 
     private void loadPopupIngridients() throws IOException {
@@ -368,19 +368,28 @@ public class popupWindowsControler implements Initializable{
                 return;
             }
             //wysłanie zapytania
+            Products p;
             List<Storage> listOfIngridientsInNewProduct;
             listOfIngridientsInNewProduct=componentProductList;
-            Products p = new Products();
-            p.setId(0);
+            if(command.equals("update")){
+                p = GeneralController.selectedProduct;
+            }
+            else{
+                p = new Products();
+                p.setId(0);
+            }
             p.setCategory(newProductCategory.getValue().toString());
             p.setName(newProductName.getText());
             p.setRestaurant(Client.restaurantName);
             p.setPrice(Float.parseFloat(newProductPrice.getText()));
-            ingridients.clear();
-            newProductPrice.setText("");
-            Client.makeProduct(p,listOfIngridientsInNewProduct);
+            if(command.equals("update"))
+                Client.updateProduct(p,listOfIngridientsInNewProduct);
+            else
+                Client.makeProduct(p,listOfIngridientsInNewProduct);
             warningLabel4.setText("");
             newProductName.setText("");
+            ingridients.clear();
+            newProductPrice.setText("");
             newProductComponentsTable.getItems().clear();
         }
     }

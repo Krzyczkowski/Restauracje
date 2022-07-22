@@ -378,6 +378,38 @@ public class DatabaseAPI {
         }
         return jo;
     }
+
+    public void updateProduct(Products p1, List<Storage> ing) {
+        em.getTransaction().begin();
+        Products p2=em.find(Products.class,p1.getId());
+        p2.setCategory(p1.getCategory());
+        p2.setName(p1.getName());
+        p2.setPrice(p1.getPrice());
+        em.merge(p2);
+        List<Compositions> l;
+        Query query = em.createQuery("SELECT st FROM Compositions st where st.idproduct = ?1 ").setParameter(1,p1.getId());
+        l= query.getResultList();
+        for(Compositions c : l)
+        {
+            em.remove(c);
+        }
+        for (Storage storage : ing) {
+            Compositions c = new Compositions(0, p1.getId(), storage.getId(), storage.getAmount());
+            em.merge(c);
+        }
+        em.getTransaction().commit();
+    }
+    public void deleteProduct(int id){
+        em.getTransaction().begin();
+        Products p2=em.find(Products.class,id);
+        List<Compositions> l;
+        Query query = em.createQuery("SELECT st FROM Compositions st where st.idproduct = ?1 ").setParameter(1,id);
+        l= query.getResultList();
+        for(Compositions c : l)
+            em.remove(c);
+        em.remove(p2);
+        em.getTransaction().commit();
+    }
 }
 
 

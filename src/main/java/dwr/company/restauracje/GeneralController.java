@@ -605,4 +605,16 @@ public class GeneralController{
             loadHistoryToTable();
         }
     }
+    @FXML
+    public void deleteProduct(ActionEvent actionEvent) throws Exception {
+        selectedProduct = null;
+        if(tableWithProducts.getSelectionModel().isEmpty()){
+            //warning brak wybranego elementu;
+        }
+        else{
+            selectedProduct=tableWithProducts.getSelectionModel().getSelectedItem();
+            Client.deleteProduct(selectedProduct.getId());
+        }
+        loadProductToTable();
+    }
 }
