@@ -3,6 +3,7 @@ getAllCategories:0
 getAllRestaurants:0
 getEmployeeById:0
 getEmployeeByName:0
+getComposition:0
 getIdRestaurantByName:0
 getEmployeesFullInfo:0
 getProducts:0

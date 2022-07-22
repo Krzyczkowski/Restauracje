@@ -345,6 +345,19 @@ public class DatabaseAPI {
         em.remove(pl.get(0));
         em.getTransaction().commit();
     }
+
+    public JSONObject getComposition(int id) {
+        List<Compositions> l;
+        em.getTransaction().begin();
+        Query query = em.createQuery( "SELECT st FROM Compositions st where st.idproduct = ?1 ").setParameter(1,id);
+        l= query.getResultList();
+        em.getTransaction().commit();
+        JSONObject jo = new JSONObject();
+        for(int i = 0; i<l.size(); i++){
+            jo.put(Integer.toString(i),l.get(i).toJSON());
+        }
+        return jo;
+    }
 }
 
 

@@ -120,7 +120,7 @@ public class popupWindowsControler implements Initializable{
         }
     }
 
-    private void loadProductInfo() {
+    private void loadProductInfo() throws IOException {
         Products p = GeneralController.selectedProduct;
         newProductName.setText(p.getName());
         for(int i = 0;i< newProductCategory.getItems().size();i++){
@@ -128,8 +128,21 @@ public class popupWindowsControler implements Initializable{
                 newProductCategory.getSelectionModel().select(i);
             }
         }
-
         newProductPrice.setText(String.valueOf(p.getPrice()));
+        List<Compositions> l = Client.getComposition(p.getId());
+        ingridients.clear();
+        for(Compositions com : l){
+            for(Storage st : storageList){
+                if(st.getId()==com.getIditem()){
+                    Storage s = st;
+                    s.setAmount(com.getAmount());
+                    ingridients.add(s);
+                }
+
+            }
+        }
+        loadNewProductIngridientsTable(ingridients);
+
     }
 
     private void loadPopupIngridients() throws IOException {
@@ -142,7 +155,6 @@ public class popupWindowsControler implements Initializable{
         storageList.clear();
         storageList.addAll(sl);
         componentsTable.setItems(storageList);
-
     }
     @FXML
     protected void createCategory() throws IOException {

@@ -187,6 +187,23 @@ class Client {
         message = (JSONObject) JSONValue.parse(in.readUTF());
         return printPositions(message);
     }
+    public static List<Compositions> getComposition(int idProduct) throws IOException {
+        message.clear();
+        message.put("command", "getComposition");
+        message.put("params", idProduct);
+        out.writeUTF(message.toString());
+        message.clear();
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printComposition(message);
+    }
+
+    private static List<Compositions> printComposition(JSONObject jo) {
+        List<Compositions> list= new ArrayList<>();
+        for(int i = 0; i<jo.size(); i++)
+            list.add(new Compositions((JSONObject) jo.get(Integer.toString(i))));
+        return list;
+    }
+
     protected static void insertEmployee(String name, String lastName, String login, String password, int levelacces, String restaurantname, float salary, int pesel) throws IOException {
         JSONObject message = new JSONObject();
         Logins log = new Logins(0,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
