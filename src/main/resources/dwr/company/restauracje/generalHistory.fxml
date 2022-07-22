@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +12,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Spinner?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwr.company.restauracje.GeneralController">
     <children>
         <VBox alignment="TOP_CENTER" layoutX="850.0" prefHeight="700.0" prefWidth="350.0" spacing="20.0" style="-fx-background-color: #032475;">
@@ -105,7 +102,7 @@
 
 
 
-             <TableView fx:id="PositionsEditionTable"  onMouseClicked="#readPositionAmount" layoutX="35.0" layoutY="388.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
+             <TableView fx:id="PositionsEditionTable" layoutX="35.0" layoutY="388.0" onMouseClicked="#readPositionAmount" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
                  <columns>
                      <TableColumn fx:id="PositionsEditionProductName" prefWidth="100.0" text="Nazwa produktu" />
                      <TableColumn fx:id="PositionsEditionProductAmount" prefWidth="274.0" text=" Ilość " />
@@ -126,13 +123,13 @@
              <Spinner fx:id="amountOfProductsInHistory" layoutX="470.0" layoutY="340.0" prefHeight="41.0" prefWidth="86.0" />
 
 
-             <Label layoutX="390.0" layoutY="340.0"  prefHeight="41.0" prefWidth="297.0" text="Nowa ilość" textFill="#032475">
+             <Label layoutX="390.0" layoutY="340.0" prefHeight="41.0" prefWidth="75.0" text="Nowa ilość" textFill="#032475">
                  <font>
                      <Font name="Calibri Bold" size="15.0" />
                  </font>
              </Label>
 
-            <TableView fx:id="tableWithHistory" onMouseClicked="#selectOrderToEdit"  layoutX="35.0" layoutY="80.0" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
+            <TableView fx:id="tableWithHistory" layoutX="35.0" layoutY="80.0" onMouseClicked="#selectOrderToEdit" prefHeight="246.0" prefWidth="769.0" style="-fx-background-color: bec5eb;">
               <columns>
                 <TableColumn fx:id="historyorder" prefWidth="100.0" text="nr zamówienia" />
                 <TableColumn fx:id="historyid" prefWidth="100.0" text="nr Klienta" />
@@ -141,7 +138,7 @@
               </columns>
             </TableView>
 
-            <Label layoutX="112.0" layoutY="344.0" prefHeight="41.0" prefWidth="297.0" text="Pozycje" textFill="#032475">
+            <Label layoutX="112.0" layoutY="344.0" prefHeight="41.0" prefWidth="137.0" text="Pozycje" textFill="#032475">
                <font>
                   <Font name="Calibri Bold" size="33.0" />
                </font>
