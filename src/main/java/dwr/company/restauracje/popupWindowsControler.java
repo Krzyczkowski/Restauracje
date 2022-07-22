@@ -219,6 +219,8 @@ public class popupWindowsControler implements Initializable{
     protected void saveComponentInfo()throws IOException {
             Storage s = new Storage(newComponentName.getText(),Integer.parseInt(newAmount.getText()));
             Client.insertStorageItem(s);
+            GeneralController.itemList.clear();
+            GeneralController.itemList.addAll(Client.getStorage());
             Stage stage = (Stage) exitButton.getScene().getWindow();
             stage.close();
     }

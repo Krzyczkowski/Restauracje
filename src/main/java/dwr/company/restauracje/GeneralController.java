@@ -112,7 +112,7 @@ public class GeneralController{
     //Elements dependent on data base
     protected static ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private final ObservableList<Products> productList = FXCollections.observableArrayList();
-    private final ObservableList<Storage> itemList = FXCollections.observableArrayList();
+    protected static ObservableList<Storage> itemList = FXCollections.observableArrayList();
     private final ObservableList<Positions> positionList = FXCollections.observableArrayList();
     private final ObservableList<Orders> historyOrders = FXCollections.observableArrayList();
 
