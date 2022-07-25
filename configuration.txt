@@ -14,6 +14,7 @@ getPositions:0
 insertStorageItem:0
 insertEmployee:0
 insertCategory:0
+insertRestaurant:3
 updateStorageItem:0
 updateEmployee:0
 deleteStorageItem:0

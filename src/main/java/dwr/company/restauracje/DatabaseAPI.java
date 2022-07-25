@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-@SuppressWarnings("unchecked")
+//@SuppressWarnings("unchecked")
 public class DatabaseAPI {
     static EntityManagerFactory emf;
     static EntityManager em;
@@ -408,6 +408,14 @@ public class DatabaseAPI {
         for(Compositions c : l)
             em.remove(c);
         em.remove(p2);
+        em.getTransaction().commit();
+    }
+
+    public void insertRestaurant(String params) {
+        Restaurants r = new Restaurants();
+        r.setName(params);
+        em.getTransaction().begin();
+        em.merge(r);
         em.getTransaction().commit();
     }
 }

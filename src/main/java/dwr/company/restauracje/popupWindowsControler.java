@@ -129,7 +129,7 @@ public class popupWindowsControler implements Initializable{
                 break;
             case 4:
                 try {
-                    comboWithRestaurants.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
+                    comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -409,6 +409,24 @@ public class popupWindowsControler implements Initializable{
             ingridients.clear();
             newProductPrice.setText("");
             newProductComponentsTable.getItems().clear();
+        }
+    }
+
+    public void addRestaurant() throws IOException {
+        if(newRestaurantName.getText().equals("")){
+            restaurantsWaringLabel.setText("Podaj nazwe Restauracji");
+        }
+        else{
+            for(int i = 0; i<comboWithRestaurants.getItems().size();i++){
+                if(newRestaurantName.getText().equals(comboWithRestaurants.getItems().get(i))){
+                    restaurantsWaringLabel.setText("taka restauracja już istnieje");
+                    return;
+                }
+            }
+            restaurantsWaringLabel.setText("dziala");
+            Client.insertRestaurant(newRestaurantName.getText());
+            comboWithRestaurants.getItems().clear();
+            comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
         }
     }
 }

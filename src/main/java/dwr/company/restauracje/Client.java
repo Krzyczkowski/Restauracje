@@ -62,6 +62,13 @@ class Client {
             return printRestaurants(message);
 
     }
+    public static List<String> getRestaurantNames() throws IOException {
+        message.clear();
+        message.put("command", "getAllRestaurants");
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        return printRestaurants(message);
+    }
     public static void logout() throws IOException {
         message.clear();
         message.put("command", "break");
@@ -308,10 +315,18 @@ class Client {
         message.put("params", newProduct);
         out.writeUTF(message.toString());
     }
+
     public static void deleteProduct(int id) throws IOException {
         message.clear();
         message.put("command", "deleteProduct");
         message.put("params", id);
+        out.writeUTF(message.toString());
+    }
+
+    public static void insertRestaurant(String text) throws IOException {
+        message.clear();
+        message.put("command", "insertRestaurant");
+        message.put("params", text);
         out.writeUTF(message.toString());
     }
 }

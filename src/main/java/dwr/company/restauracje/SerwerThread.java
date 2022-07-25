@@ -208,12 +208,19 @@ class SerwerThread implements Runnable {
                 case"deleteProduct":
                     deleteProduct(Integer.parseInt(JSON.get("params").toString()));
                     break;
+                case"insertRestaurant":
+                    insertRestaurant(JSON.get("params").toString());
+                    break;
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
             }
         }
         db.close();
+    }
+
+    private void insertRestaurant(String params) {
+        db.insertRestaurant(params);
     }
 
     private void updateProduct(Products p1, List<Storage> ing) {

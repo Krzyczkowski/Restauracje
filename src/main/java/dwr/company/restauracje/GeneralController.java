@@ -182,6 +182,7 @@ public class GeneralController{
     }
     public void acces() {
         if (Client.getLevelacces() < 3) {
+            addRestaurant.setDisable(true);
             if (Client.getLevelacces() < 2) {
                 menuButton1.setDisable(true);
                 menuButton2.setDisable(true);
