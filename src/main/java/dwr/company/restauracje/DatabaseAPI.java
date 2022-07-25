@@ -418,6 +418,84 @@ public class DatabaseAPI {
         em.merge(r);
         em.getTransaction().commit();
     }
+    public void deleteRestaurant(String params){
+        em.getTransaction().begin();
+        Restaurants r = em.find(Restaurants.class,params);
+        em.remove(r);
+
+        Query query = em.createQuery("select c from Categories c where c.restaurant=?1").setParameter(1,params);
+        List<Categories> cat = query.getResultList();
+        for(Categories c : cat)
+            em.remove(c);
+
+        query=em.createQuery("select p from Products p where p.restaurant=?1").setParameter(1,params);
+        List<Products> prod = query.getResultList();
+        for(Products p : prod)
+            em.remove(p);
+
+        query=em.createQuery("select p from Storage p where p.restaurant=?1").setParameter(1,params);
+        List<Storage> stor = query.getResultList();
+        for(Storage p : stor)
+            em.remove(p);
+
+        query=em.createQuery("select p from Orders p where p.restaurant=?1").setParameter(1,params);
+        List<Orders> o = query.getResultList();
+        for(Orders p : o)
+            em.remove(p);
+
+        query=em.createQuery("select p from Logins p where p.restaurantname=?1").setParameter(1,params);
+        List<Logins> log = query.getResultList();
+        for(Logins p : log)
+            em.remove(p);
+
+        em.getTransaction().commit();
+
+
+    }
+    public void updateRestaurant(String newName,String oldName){
+        em.getTransaction().begin();
+        Restaurants r = em.find(Restaurants.class,oldName);
+        em.remove(r);
+
+        Query query = em.createQuery("select c from Categories c where c.restaurant=?1").setParameter(1,oldName);
+        List<Categories> cat = query.getResultList();
+        for(Categories c : cat){
+            c.setRestaurant(newName);
+            em.merge(c);
+        }
+
+
+        query=em.createQuery("select p from Products p where p.restaurant=?1").setParameter(1,oldName);
+        List<Products> prod = query.getResultList();
+        for(Products p : prod){
+            p.setRestaurant(newName);
+            em.merge(p);
+        }
+
+        query=em.createQuery("select p from Storage p where p.restaurant=?1").setParameter(1,oldName);
+        List<Storage> stor = query.getResultList();
+        for(Storage p : stor){
+            p.setRestaurant(newName);
+            em.merge(p);
+        }
+
+        query=em.createQuery("select p from Orders p where p.restaurant=?1").setParameter(1,oldName);
+        List<Orders> o = query.getResultList();
+        for(Orders p : o){
+            p.setRestaurant(newName);
+            em.merge(p);
+        }
+
+        query=em.createQuery("select p from Logins p where p.restaurantname=?1").setParameter(1,oldName);
+        List<Logins> log = query.getResultList();
+        for(Logins p : log){
+            p.setRestaurantname(newName);
+            em.merge(p);
+        }
+
+        em.getTransaction().commit();
+
+    }
 }
 
 
