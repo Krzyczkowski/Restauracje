@@ -49,8 +49,17 @@ public class popupWindowsControler implements Initializable{
     @FXML
     private PasswordField newPassword;
     private String command = "";
+    @FXML
+    private TextField newRestaurantName;
+    @FXML
+    private TextField editRestaurantName;
     private int id;
     //Button
+    @FXML
+    private Button changerestaurantName;
+    @FXML
+    private Button deleteRestaurant;
+    @FXML Button addRestaurant;
     @FXML
     private Button exitButton;
     @FXML
@@ -73,7 +82,8 @@ public class popupWindowsControler implements Initializable{
     private ComboBox newPlace;
     @FXML
     private ComboBox newProductCategory;
-
+    @FXML
+    private ComboBox comboWithRestaurants;
     @FXML
     private Label warningLabelEmp;
 
@@ -81,7 +91,8 @@ public class popupWindowsControler implements Initializable{
 
     @FXML
     private Label warningLabel4;
-
+    @FXML
+    private Label restaurantsWaringLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,6 +126,13 @@ public class popupWindowsControler implements Initializable{
                 }
                 break;
             case 3:
+                break;
+            case 4:
+                try {
+                    comboWithRestaurants.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 break;

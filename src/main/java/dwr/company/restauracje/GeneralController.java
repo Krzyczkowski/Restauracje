@@ -111,7 +111,8 @@ public class GeneralController{
     private Button addComponent, editAmount, deleteComponent;
     @FXML
     private Button addProduct, editProduct, deletProduct;
-
+    @FXML
+    private Button addRestaurant;
     //Elements dependent on data base
     protected static ObservableList<Logins> employeesList = FXCollections.observableArrayList();
     private final ObservableList<Products> productList = FXCollections.observableArrayList();
@@ -243,6 +244,19 @@ public class GeneralController{
 
         actualWindow = new GeneralWindowSet();
         actualWindow.setOrderScene();
+    }
+
+    @FXML
+    protected void newRestaurantpopup() throws IOException {
+        popup = 4;
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("adinRestaurant.fxml"));
+        Scene popupScene = new Scene(loader.load(), 437.0, 302.0);
+        popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        Stage popup = new Stage();
+        popup.initStyle(StageStyle.UNDECORATED);
+        popup.setScene(popupScene);
+        moveWindow(popupScene, popup);
+        popup.show();
     }
 
     @FXML

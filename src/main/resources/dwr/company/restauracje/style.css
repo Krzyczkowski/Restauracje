@@ -523,3 +523,114 @@
     -fx-border-color: #032475;
     -fx-border-radius: 30;
 }
+
+#addRestaurant {
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 20;
+}
+
+#addRestaurant:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+#deletePositionButton{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deletePositionButton:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#editPositionButton{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#editPositionButton:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deleteOrderButton{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deleteOrderButton:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#deleteRestaurant{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deleteRestaurant:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#addRestaurantbtn{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#addRestaurantbtn:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#changerestaurantName{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#changerestaurantName:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+

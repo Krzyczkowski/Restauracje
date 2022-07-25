@@ -66,6 +66,18 @@
                             </font>
                         </Button>
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="435.0" style="-fx-background-color: #032475;" />
+                        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="106.0">
+                            <children>
+                                <Button fx:id="addRestaurant" onAction="#newRestaurantpopup" mnemonicParsing="false" prefHeight="42.0" prefWidth="183.0" text="Dodaj restauracje">
+                                    <HBox.margin>
+                                        <Insets right="20.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="Calibri Bold" size="20.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
                     </children>
                     <VBox.margin>
                         <Insets top="20.0" />

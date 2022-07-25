@@ -43,7 +43,7 @@ public class LogController{
     }
 
     @FXML
-    protected void authorization() {
+    protected void authorization() throws IOException {
         //Active srever
         try {
             if (Client.login(login.getText(),password.getText(),(String) place.getValue())) {
