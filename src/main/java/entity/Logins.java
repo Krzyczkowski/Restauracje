@@ -1,5 +1,6 @@
 package entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.json.simple.JSONObject;
 
 import javax.persistence.*;
@@ -8,7 +9,8 @@ import java.util.Objects;
 @SuppressWarnings("unchecked")
 @Entity
 public class Logins {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Id
 
     @Column(name = "id")
@@ -183,5 +185,17 @@ public class Logins {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Logins{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", levelaccess=" + levelaccess +
+                ", restaurantname='" + restaurantname + '\'' +
+                ", pesel=" + pesel +
+                ", salary=" + salary +
+                ", emp=" + emp +
+                '}';
+    }
 }

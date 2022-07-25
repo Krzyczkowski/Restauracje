@@ -73,10 +73,24 @@ public class DatabaseAPI {
         }
         return jo;
     }
-    public void insertEmployee (Employee e){
+    public void insertEmployee (Logins log, Employee emp){
+
+        log.setId(0);
+        emp.setId(0);
+        System.out.println(log);
+        System.out.println(emp);
+
         em.getTransaction().begin();
-        em.merge(e);
+        Employee e = em.merge(emp);
         em.getTransaction().commit();
+
+        em.getTransaction().begin();
+        em.createNativeQuery("INSERT INTO LOGINS (id,login,password,levelaccess,pesel,salary,restaurantname) values (?1 , ?2 , ?3 , ?4 , ?5 , ?6 , ?7)")
+                .setParameter(1,e.getId()).setParameter(2,log.getLogin()).setParameter(3,log.getPassword())
+                .setParameter(4,log.getLevelaccess()).setParameter(5,log.getPesel()).setParameter(6,log.getSalary())
+                .setParameter(7,log.getRestaurantname()).executeUpdate();
+        em.getTransaction().commit();
+
     }
     public void deleteEmployee (Integer id){
         em.getTransaction().begin();

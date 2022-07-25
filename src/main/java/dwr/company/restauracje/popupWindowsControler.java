@@ -242,14 +242,14 @@ public class popupWindowsControler implements Initializable{
             }
             else if (command.equals("insert")) {
                 Client.insertEmployee(newName.getText(),newSecondName.getText(),
-                        newLogin.toString(),newPassword.toString(),Integer.parseInt(newLevel.getText()),
+                        newLogin.getText(),newPassword.getText(),Integer.parseInt(newLevel.getText()),
                         newPlace.getValue().toString(),Float.parseFloat(newSalary.getText()),Integer.parseInt(newPesel.getText()));
             }
             GeneralController.toEditPopUp = null;
             Stage stage = (Stage) exitButton.getScene().getWindow();
             warningLabelEmp.setText("");
             GeneralController.employeesList.clear();
-            GeneralController.employeesList.addAll(Client.getEmployeesFullInfo());
+            //GeneralController.employeesList.addAll(Client.getEmployeesFullInfo());
             stage.close();
             }
         }

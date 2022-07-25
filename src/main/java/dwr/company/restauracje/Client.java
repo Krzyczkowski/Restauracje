@@ -197,8 +197,10 @@ class Client {
     protected static void insertEmployee(String name, String lastName, String login, String password, int levelacces, String restaurantname, float salary, int pesel) throws IOException {
         JSONObject message = new JSONObject();
         Logins log = new Logins(0,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
+        Employee emp = new Employee(0,name,lastName);
         message.put("command","insertEmployee");
-        message.put("params",log.toJSON());
+        message.put("logins",log.toJSON());
+        message.put("employee",emp.toJSON());
         out.writeUTF(message.toString());
     }
     public static void insertCategory(String name) throws IOException {

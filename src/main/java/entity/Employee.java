@@ -22,6 +22,12 @@ public class Employee  {
     @Column(name = "lastname")
     private String lastname;
 
+    public Employee(int id, String name, String lastname) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+    }
+
     public int getId() {
         return id;
     }
@@ -80,5 +86,14 @@ public class Employee  {
         this.lastname = (String) jo.get("lastname");
     }
     public Employee() {
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 }
