@@ -108,7 +108,7 @@ public class DatabaseAPI {
     {
         JSONObject jo = new JSONObject();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT log FROM Logins log");
+        Query query = em.createQuery("SELECT log FROM Logins log where log.levelaccess>0");
         List<Logins> list = query.getResultList();
 
         em.getTransaction().commit();
@@ -132,7 +132,7 @@ public class DatabaseAPI {
     }
     public Logins authorization(String userName, String password,String restaurant){
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT log FROM Logins log where log.login = ?1 and log.password = ?2 and log.restaurantname = ?3").setParameter(1, userName).setParameter(2,password).setParameter(3,restaurant);
+        Query query = em.createQuery("SELECT log FROM Logins log where log.login = ?1 and log.password = ?2 and log.restaurantname = ?3 and log.levelaccess>0 ").setParameter(1, userName).setParameter(2,password).setParameter(3,restaurant);
         List<Logins> list = query.getResultList();
         em.getTransaction().commit();
         if(list.size()==1) {
