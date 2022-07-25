@@ -423,13 +423,47 @@ public class popupWindowsControler implements Initializable{
                     return;
                 }
             }
-            restaurantsWaringLabel.setText("dziala");
+            //restaurantsWaringLabel.setText("dziala");
             Client.insertRestaurant(newRestaurantName.getText());
             comboWithRestaurants.getItems().clear();
             comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
         }
     }
-}
+
+    public void deleteRestaurant() throws IOException {
+        if(comboWithRestaurants.getSelectionModel().isEmpty()){
+            restaurantsWaringLabel.setText("wybierz restauracje");
+        }
+        else{
+            //delete
+            Client.deleteRestaurant(comboWithRestaurants.getValue().toString());
+            comboWithRestaurants.getItems().clear();
+            comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
+        }
+    }
+
+    public void changeRestaurant() throws IOException {
+        if(comboWithRestaurants.getSelectionModel().isEmpty()){
+            restaurantsWaringLabel.setText("wybierz restauracje");
+        }
+        else{
+            if(editRestaurantName.getText().equals("")){
+                restaurantsWaringLabel.setText("Podaj nazwe Restauracji");
+            }
+            else{
+                for(int i = 0; i<comboWithRestaurants.getItems().size();i++){
+                    if(editRestaurantName.getText().equals(comboWithRestaurants.getItems().get(i))){
+                        restaurantsWaringLabel.setText("taka restauracja już istnieje");
+                        return;
+                    }
+                }
+                //change
+                Client.updateRestaurant(comboWithRestaurants.getValue().toString(),editRestaurantName.getText());
+                comboWithRestaurants.getItems().clear();
+                comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
+        }
+    }
+}}
 
 
 

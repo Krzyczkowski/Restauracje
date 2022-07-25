@@ -331,4 +331,19 @@ class Client {
         message.put("params", text);
         out.writeUTF(message.toString());
     }
+
+    public static void deleteRestaurant(String text) throws IOException {
+        message.clear();
+        message.put("command", "deleteRestaurant");
+        message.put("params", text);
+        out.writeUTF(message.toString());
+    }
+
+    public static void updateRestaurant(String old, String text) throws IOException {
+        message.clear();
+        message.put("command", "updateRestaurant");
+        message.put("param2", text);
+        message.put("param1", old);
+        out.writeUTF(message.toString());
+    }
 }

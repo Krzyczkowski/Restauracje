@@ -17,6 +17,7 @@ insertCategory:0
 insertRestaurant:3
 updateStorageItem:0
 updateEmployee:0
+updateRestaurant:3
 deleteStorageItem:0
 deleteEmployee:0
 makeOrder:0
@@ -24,5 +25,6 @@ makeProduct:0
 deletePositionFromOrder:0
 editPositionFromOrder:0
 deleteOrder:0
+deleteRestaurant:3
 updateProduct:0
 deleteProduct:0

@@ -439,73 +439,100 @@ public class DatabaseAPI {
 
         Query query = em.createQuery("select c from Categories c where c.restaurant=?1").setParameter(1,params);
         List<Categories> cat = query.getResultList();
-        for(Categories c : cat)
-            em.remove(c);
+        if(!cat.isEmpty())
+            for(Categories c : cat)
+                em.remove(c);
 
         query=em.createQuery("select p from Products p where p.restaurant=?1").setParameter(1,params);
         List<Products> prod = query.getResultList();
-        for(Products p : prod)
-            em.remove(p);
+        if(!prod.isEmpty())
+            for(Products p : prod)
+            {
+                query=em.createQuery("select p from Positions p where p.idproduct=?1").setParameter(1,p.getId());
+                List<Positions> poz = query.getResultList();
+                if(!poz.isEmpty())
+                    for(Positions pos:poz){
+                        em.remove(pos);
+                    }
+                query=em.createQuery("select p from Compositions p where p.idproduct=?1").setParameter(1,p.getId());
+                List<Compositions> com = query.getResultList();
+                if(!com.isEmpty())
+                    for(Compositions pos:com)
+                        em.remove(pos);
+                em.remove(p);
+            }
 
         query=em.createQuery("select p from Storage p where p.restaurant=?1").setParameter(1,params);
         List<Storage> stor = query.getResultList();
-        for(Storage p : stor)
-            em.remove(p);
+        if(!stor.isEmpty())
+            for(Storage p : stor)
+                em.remove(p);
 
         query=em.createQuery("select p from Orders p where p.restaurant=?1").setParameter(1,params);
         List<Orders> o = query.getResultList();
-        for(Orders p : o)
-            em.remove(p);
+        if(!o.isEmpty())
+            for(Orders p : o)
+                em.remove(p);
 
         query=em.createQuery("select p from Logins p where p.restaurantname=?1").setParameter(1,params);
         List<Logins> log = query.getResultList();
-        for(Logins p : log)
-            em.remove(p);
+        if(!log.isEmpty())
+            for(Logins p : log)
+                em.remove(p);
 
         em.getTransaction().commit();
-
-
     }
     public void updateRestaurant(String newName,String oldName){
         em.getTransaction().begin();
         Restaurants r = em.find(Restaurants.class,oldName);
         em.remove(r);
-
-        Query query = em.createQuery("select c from Categories c where c.restaurant=?1").setParameter(1,oldName);
-        List<Categories> cat = query.getResultList();
-        for(Categories c : cat){
-            c.setRestaurant(newName);
-            em.merge(c);
+        Query query;
+        r = new Restaurants();
+        r.setName(newName);
+        em.merge(r);
+       query = em.createQuery("select c from Categories c where c.restaurant=?1").setParameter(1,oldName);
+       List<Categories> cat = query.getResultList();
+       if(!cat.isEmpty()) {
+           for (Categories c : cat) {
+               Categories c1 = new Categories();
+               c1.setRestaurant(newName);
+               c1.setId(c.getId());
+               em.remove(c);
+               em.merge(c1);
+            }
         }
-
-
         query=em.createQuery("select p from Products p where p.restaurant=?1").setParameter(1,oldName);
         List<Products> prod = query.getResultList();
-        for(Products p : prod){
-            p.setRestaurant(newName);
-            em.merge(p);
-        }
+        if(!prod.isEmpty())
+            for(Products p : prod){
+                System.out.println(1);
+                p.setRestaurant(newName);
+                em.merge(p);
+            }
 
         query=em.createQuery("select p from Storage p where p.restaurant=?1").setParameter(1,oldName);
         List<Storage> stor = query.getResultList();
-        for(Storage p : stor){
-            p.setRestaurant(newName);
-            em.merge(p);
-        }
-
+        if(!stor.isEmpty())
+            for(Storage p : stor){
+                p.setRestaurant(newName);
+                em.merge(p);
+            }
+        System.out.println(1);
         query=em.createQuery("select p from Orders p where p.restaurant=?1").setParameter(1,oldName);
         List<Orders> o = query.getResultList();
-        for(Orders p : o){
-            p.setRestaurant(newName);
-            em.merge(p);
-        }
-
+        if(!o.isEmpty())
+            for(Orders p : o){
+                p.setRestaurant(newName);
+                em.merge(p);
+            }
+        System.out.println(1);
         query=em.createQuery("select p from Logins p where p.restaurantname=?1").setParameter(1,oldName);
         List<Logins> log = query.getResultList();
-        for(Logins p : log){
-            p.setRestaurantname(newName);
-            em.merge(p);
-        }
+        if(!log.isEmpty())
+            for(Logins p : log){
+                p.setRestaurantname(newName);
+                em.merge(p);
+            }
 
         em.getTransaction().commit();
 

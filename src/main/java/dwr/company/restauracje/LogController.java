@@ -36,6 +36,7 @@ public class LogController{
     @FXML
     public void initialize() {
         try {
+            place.getItems().clear();
             place.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
         } catch (IOException e) {
             Warning.setText("Brak polaczenia z serwerem!");
