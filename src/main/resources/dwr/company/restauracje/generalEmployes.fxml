@@ -190,6 +190,11 @@
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Button>
+                   <Button fx:id="deleteEmployee" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="25.0" prefWidth="141.0" text="Usuń">
+                       <font>
+                           <Font name="Calibri" size="18.0" />
+                       </font>
+                   </Button>
                </children>
             </HBox>
          </children>

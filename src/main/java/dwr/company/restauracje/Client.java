@@ -346,4 +346,12 @@ class Client {
         message.put("param1", old);
         out.writeUTF(message.toString());
     }
+
+    public static void deleteEmployee(Logins s) throws IOException {
+        message.clear();
+        System.out.println(s);
+        message.put("command", "deleteEmployee");
+        message.put("params",s.toJSON());
+        out.writeUTF(message.toString());
+    }
 }

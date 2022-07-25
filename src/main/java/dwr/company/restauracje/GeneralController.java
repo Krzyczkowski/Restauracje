@@ -30,6 +30,7 @@ public class GeneralController{
     public ListView listWithNeed;
     public Button editPositionButton;
     public Spinner amountOfProductsInHistory;
+    public Button deleteEmployee;
     //Mouse click cordinates
     private double xCordinates = 0;
     private double yCordinates = 0;
@@ -631,5 +632,14 @@ public class GeneralController{
             Client.deleteProduct(selectedProduct.getId());
         }
         loadProductToTable();
+    }
+
+    public void deleteEmployee(ActionEvent actionEvent) throws Exception {
+        if(!employeeTable.getSelectionModel().isEmpty()) {
+            Logins s = employeeTable.getSelectionModel().getSelectedItem();
+            Client.deleteEmployee(s);
+            loadEmployesToTable();
+        }
+
     }
 }

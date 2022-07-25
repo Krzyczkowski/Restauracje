@@ -92,16 +92,19 @@ public class DatabaseAPI {
         em.getTransaction().commit();
 
     }
-    public void deleteEmployee (Integer id){
+    public void deleteEmployee (Logins l){
         em.getTransaction().begin();
         //deleteLogin(id);
-        em.remove(em.find(Employee.class, id));
+        l.setLevelaccess(0);
+        em.merge(l);
         em.getTransaction().commit();
     }
 
     public void updateEmployee(Logins e){
+        System.out.println(e);
         em.getTransaction().begin();
         em.merge(e);
+        em.merge(e.getEmp());
         em.getTransaction().commit();
     }
     public JSONObject getAllEmployeesFullInfo()

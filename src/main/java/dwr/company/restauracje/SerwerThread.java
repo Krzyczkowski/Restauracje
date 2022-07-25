@@ -111,7 +111,7 @@ class SerwerThread implements Runnable {
                     insertEmployee(new Logins((JSONObject) JSON.get("logins")),new Employee((JSONObject) JSON.get("employee")) );
                     break;
                 case "deleteEmployee":
-                    deleteEmployee((int) (long) JSON.get("params"));
+                    deleteEmployee(new Logins((JSONObject) JSON.get("params")));
                     break;
                 case "updateEmployee":
                     updateEmployee(new Logins((JSONObject) JSON.get("params")) );
@@ -335,9 +335,9 @@ class SerwerThread implements Runnable {
         JSON.clear();
         db.insertEmployee(e,emp);
     }
-    private void deleteEmployee(Integer id) {
+    private void deleteEmployee(Logins l) {
         JSON.clear();
-        db.deleteEmployee(id);
+        db.deleteEmployee(l);
     }
     private void updateEmployee(Logins e) {
         JSON.clear();
