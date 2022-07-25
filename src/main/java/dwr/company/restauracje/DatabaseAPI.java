@@ -374,14 +374,16 @@ public class DatabaseAPI {
     }
 
     public void deleteOrder(Orders params) {
-        System.out.println(params);
-        System.out.println("git");
         em.getTransaction().begin();
-        em.createNativeQuery("DELETE FROM POSITIONS p WHERE p.idorder = ?1").setParameter(1,params.getId()).executeUpdate();
+        Query q = em.createQuery("SELECT osi FROM Positions osi WHERE osi.idorder = ?1").setParameter(1,params.getId());
+        List<Positions> pos = q.getResultList();
+        for(Positions p : pos)
+            em.remove(p);
         em.getTransaction().commit();
         em.getTransaction().begin();
-        em.createNativeQuery("DELETE FROM ORDERS o WHERE o.id = ?1").setParameter(1,params.getId()).executeUpdate();
+        em.createNativeQuery("DELETE FROM ORDERS WHERE id=?1").setParameter(1,params.getId()).executeUpdate();
         em.getTransaction().commit();
+        positionAddToStorage(pos);
     }
     public JSONObject getComposition(int id) {
         List<Compositions> l;
