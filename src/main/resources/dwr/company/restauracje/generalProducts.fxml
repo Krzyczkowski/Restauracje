@@ -65,18 +65,6 @@
                             </font>
                         </Button>
                   <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="350.0" style="-fx-background-color: #032475;" />
-                        <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="106.0">
-                            <children>
-                                <Button fx:id="addRestaurant" onAction="#newRestaurantpopup" mnemonicParsing="false" prefHeight="42.0" prefWidth="183.0" text="Dodaj restauracje">
-                                    <HBox.margin>
-                                        <Insets right="20.0" />
-                                    </HBox.margin>
-                                    <font>
-                                        <Font name="Calibri Bold" size="20.0" />
-                                    </font>
-                                </Button>
-                            </children>
-                        </HBox>
                     </children>
                     <VBox.margin>
                         <Insets top="20.0" />
@@ -84,18 +72,21 @@
                 </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="108.0" prefWidth="350.0">
                <children>
-                  <Button fx:id="reportBug" mnemonicParsing="false" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #032475;" text="Zgłoś błąd" textFill="#adadad">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Calibri Bold" size="20.0" />
-                     </font></Button>
+                   <Button fx:id="addRestaurant" mnemonicParsing="false" onAction="#newRestaurantpopup" prefHeight="42.0" prefWidth="202.0" text="Restauracje">
+                       <HBox.margin>
+                           <Insets left="20.0" right="10.0" />
+                       </HBox.margin>
+                       <font>
+                           <Font name="Calibri Bold" size="20.0" />
+                       </font>
+                   </Button>
+                   <Button fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
+                       <HBox.margin>
+                           <Insets right="20.0" />
+                       </HBox.margin>
+                       <font>
+                           <Font name="Calibri Bold" size="20.0" />
+                       </font></Button>
                </children>
             </HBox>
             </children>

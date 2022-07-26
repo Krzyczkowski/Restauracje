@@ -634,3 +634,82 @@
     -fx-border-radius: 20;
 }
 
+#deleteEmployee{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#deleteEmployee:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#yesButton{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#yesButton:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#yesButtonR{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#yesButtonR:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#noButton{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#noButton:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}
+
+#noButtonR{
+    -fx-background-radius: 20;
+    -fx-background-color: #032475;
+    -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-border-color: #032475;
+}
+
+#noButtonR:hover{
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-text-fill: #032475;
+    -fx-border-color: #032475;
+    -fx-border-radius: 20;
+}

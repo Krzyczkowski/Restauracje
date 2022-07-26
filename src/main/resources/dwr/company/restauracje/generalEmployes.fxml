@@ -67,18 +67,6 @@
                             </font>
                         </Button>
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="435.0" style="-fx-background-color: #032475;" />
-                  <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="106.0">
-                     <children>
-                        <Button fx:id="addRestaurant" onAction="#newRestaurantpopup" mnemonicParsing="false" prefHeight="42.0" prefWidth="183.0" text="Dodaj restauracje">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Calibri Bold" size="20.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
                     </children>
                     <VBox.margin>
                         <Insets top="20.0" />
@@ -86,9 +74,12 @@
                 </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="101.0" prefWidth="350.0">
                <children>
-                  <Button fx:id="reportBug" mnemonicParsing="false" onMouseClicked="#report" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: #032475;" text="Zgłoś błąd" textFill="#adadad">
+                  <Button fx:id="addRestaurant" mnemonicParsing="false" onAction="#newRestaurantpopup" prefHeight="42.0" prefWidth="202.0" text="Restauracje">
+                     <HBox.margin>
+                        <Insets left="20.0" right="10.0" />
+                     </HBox.margin>
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
                   <Button fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
@@ -107,32 +98,13 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="229.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="567.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="591.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="591.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="591.0" minHeight="10.0" prefHeight="315.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="591.0" minHeight="10.0" prefHeight="50.599998474121094" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="591.0" minHeight="10.0" prefHeight="70.00000915527345" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="591.0" minHeight="10.0" prefHeight="474.79999084472655" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="591.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="43.0" prefWidth="559.0" text="Historia Logowań" textFill="#032475">
-               <GridPane.margin>
-                  <Insets left="30.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Calibri Bold" size="34.0" />
-               </font>
-            </Label>
-            <TableView fx:id="logHistory" prefHeight="192.0" prefWidth="810.0" style="-fx-background-color: bec5eb;" GridPane.rowIndex="1">
-              <columns>
-                <TableColumn prefWidth="392.0" text="Pracownik" />
-                <TableColumn prefWidth="417.0" text="Data Logowania" />
-              </columns>
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </TableView>
-            <Label prefHeight="43.0" prefWidth="559.0" text="Lista Pracowników" textFill="#032475" GridPane.rowIndex="2">
+            <Label prefHeight="43.0" prefWidth="559.0" text="Lista Pracowników" textFill="#032475">
                <font>
                   <Font name="Calibri Bold" size="34.0" />
                </font>
@@ -140,7 +112,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <TableView fx:id="employeeTable" prefHeight="214.0" prefWidth="800.0" style="-fx-background-color: bec5eb;" GridPane.rowIndex="4">
+            <TableView fx:id="employeeTable" prefHeight="214.0" prefWidth="800.0" style="-fx-background-color: bec5eb;" GridPane.rowIndex="2">
               <columns>
                   <TableColumn fx:id="nr" prefWidth="50.0" text="Nr" />
                   <TableColumn fx:id="name" prefWidth="150.0" text="Imie" />
@@ -153,7 +125,7 @@
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>
             </TableView>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="3">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="1">
                <children>
                   <TextField fx:id="searchEmployee" prefHeight="25.0" prefWidth="455.0">
                      <font>
@@ -170,7 +142,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="5">
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="3">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
