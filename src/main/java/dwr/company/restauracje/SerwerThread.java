@@ -213,18 +213,29 @@ class SerwerThread implements Runnable {
                         case "deleteRestaurant":
                             deleteRestaurant(JSON.get("params").toString());
                             break;
+                        case "deleteCategory":
+                            deleteCategory(JSON.get("params").toString());
+                            break;
                         case "updateRestaurant":
                             updateRestaurant(JSON.get("param1").toString(), JSON.get("param2").toString());
                             break;
                     }
+                    JSON.clear();
+                    JSON.put("0","0");
+                    out.writeUTF(JSON.toString());
                 }
             }else{
-                System.out.println("brak takich uprawnien!!");
-                //out.writeUTF("brak takich uprawnien!!");
+                JSON.clear();
+                JSON.put("0","1");
+                out.writeUTF(JSON.toString());
             }
 
         }
         db.close();
+    }
+
+    private void deleteCategory(String params) {
+        db.deleteCategory(params);
     }
 
     private void updateRestaurant(String param1, String param2) {

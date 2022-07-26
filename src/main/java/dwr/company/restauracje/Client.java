@@ -67,7 +67,13 @@ class Client {
         message.put("command", "getAllRestaurants");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printRestaurants(message);
+        if(!message.get("0").toString().equals("1"))
+            return printRestaurants(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<String>();
+        }
     }
     public static void logout() throws IOException {
         message.clear();
@@ -124,7 +130,13 @@ class Client {
         out.writeUTF(message.toString());
         String str = in.readUTF();
         message = (JSONObject) JSONValue.parse(str);
-        return printLogins(message);
+        if(!message.get("0").equals("1"))
+            return printLogins(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Logins>();
+        }
     }
     protected static List<Logins>   getEmployeesFullInfo(String s) throws IOException {
         JSONObject message = new JSONObject();
@@ -132,7 +144,13 @@ class Client {
         message.put("params",s);
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printLogins(message);
+        if(!message.get("0").equals("1"))
+            return printLogins(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Logins>();
+        }
     }
     public static List<String>      getAllRestaurants() throws IOException {
         JSONObject message = new JSONObject();
@@ -140,7 +158,13 @@ class Client {
         message.put("params","");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printRestaurants(message);
+        if(!message.get("0").equals("1"))
+            return printRestaurants(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<String>();
+        }
     }
 
     public static List<Products> getProducts() throws IOException {
@@ -149,7 +173,14 @@ class Client {
         message.put("params", "");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printProducts(message);
+        if(!message.get("0").equals("1"))
+            return printProducts(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Products>();
+        }
+
     }
     public static List<Products> getProducts(String name,String category) throws IOException{
         message.clear();
@@ -160,21 +191,39 @@ class Client {
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printProducts(message);
+        if(!message.get("0").equals("1"))
+            return printProducts(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Products>();
+        }
     }
     public static List<String> getCategories() throws IOException {
         message.clear();
         message.put("command", "getAllCategories");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printCategories(message);
+        if(!message.get("0").equals("1"))
+            return printCategories(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<String>();
+        }
     }
     public static List<Storage> getStorage() throws IOException {
         message.clear();
         message.put("command", "getStorage");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printStorage(message);
+        if(!message.get("0").equals("1"))
+            return printStorage(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Storage>();
+        }
     }
     public static List<Orders> getOrders(String  date) throws IOException {
         message.clear();
@@ -183,7 +232,13 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printOrders(message);
+        if(!message.get("0").equals("1"))
+            return printOrders(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Orders>();
+        }
     }
     public static List<Positions> getPositions(int idOrder) throws IOException {
         message.clear();
@@ -192,23 +247,14 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printPositions(message);
-    }
-    protected static void insertEmployee(String name, String lastName, String login, String password, int levelacces, String restaurantname, float salary, int pesel) throws IOException {
-        JSONObject message = new JSONObject();
-        Logins log = new Logins(0,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
-        Employee emp = new Employee(0,name,lastName);
-        message.put("command","insertEmployee");
-        message.put("logins",log.toJSON());
-        message.put("employee",emp.toJSON());
-        out.writeUTF(message.toString());
-    }
-    public static void insertCategory(String name) throws IOException {
-        message.clear();
-        message.put("command", "insertCategory");
-        message.put("params",name );
-        out.writeUTF(message.toString());
-        message.clear();
+        if(!message.get("0").equals("1"))
+            return printPositions(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Positions>();
+        }
+
     }
     public static List<Compositions> getComposition(int idProduct) throws IOException {
         message.clear();
@@ -217,8 +263,44 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        return printComposition(message);
+        if(!message.get("0").equals("1"))
+            return printComposition(message);
+        else
+        {
+            System.out.println("brak praw dostępu");
+            return new ArrayList<Compositions>();
+        }
+
     }
+    protected static void insertEmployee(String name, String lastName, String login, String password, int levelacces, String restaurantname, float salary, int pesel) throws IOException {
+        message.clear();
+        Logins log = new Logins(0,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
+        Employee emp = new Employee(0,name,lastName);
+        message.put("command","insertEmployee");
+        message.put("logins",log.toJSON());
+        message.put("employee",emp.toJSON());
+        message.clear();
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        if(!message.get("0").equals("1"))
+            System.out.println("Operacja powiodła sie");
+        else
+            System.out.println("brak praw dostępu");
+        message.clear();
+    }
+    public static void insertCategory(String name) throws IOException {
+        message.clear();
+        message.put("command", "insertCategory");
+        message.put("params",name );
+        out.writeUTF(message.toString());
+        message.clear();
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        if(!message.get("0").equals("1"))
+            System.out.println("Operacja powiodła sie");
+        else
+            System.out.println("brak praw dostępu");
+        message.clear();
+    }
+
 
     private static List<Compositions> printComposition(JSONObject jo) {
         List<Compositions> list= new ArrayList<>();
@@ -235,6 +317,7 @@ class Client {
         message.put("command", "insertStorageItem");
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
+        check();
     }
     protected static void updateEmployee(String name, String lastName,int id, String login, String password, int levelacces, String restaurantname,float salary,int pesel) throws IOException {
         JSONObject message = new JSONObject();
@@ -242,6 +325,7 @@ class Client {
         message.put("command","updateEmployee");
         message.put("params",log.toJSON());
         out.writeUTF(message.toString());
+        check();
     }
     public static void updateStorageItem(Storage s) throws IOException {
         message.clear();
@@ -249,6 +333,9 @@ class Client {
         message.put("command", "updateStorageItem");
         message.put("params", jo);
         out.writeUTF(message.toString());
+        message.clear();
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        check();
     }
     public static void deleteStorage(Storage s) throws IOException {
         message.clear();
@@ -257,6 +344,7 @@ class Client {
         message.put("command", "deleteStorageItem");
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
+        check();
     }
     public static void makeOrder(OrderContainer orderContainer) throws IOException {
         message.clear();
@@ -265,6 +353,7 @@ class Client {
         message.put("command", "makeOrder");
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
+        check();
     }
     public static void makeProduct(Products p, List<Storage> ing) throws IOException {
         message.clear();
@@ -278,6 +367,7 @@ class Client {
         message.put("command", "makeProduct");
         message.put("params", newProduct);
         out.writeUTF(message.toString());
+        check();
     }
     public static void deletePositionFromOrder(Positions p) throws IOException {
         System.out.println();
@@ -285,6 +375,7 @@ class Client {
         message.put("command", "deletePositionFromOrder");
         message.put("params", p.toJSONU());
         out.writeUTF(message.toString());
+        check();
     }
 
     public static void editPositionFromOrder(Positions p, int newValue) throws IOException {
@@ -294,6 +385,7 @@ class Client {
         message.put("params", p.toJSONU());
         message.put("newValue",newValue);
         out.writeUTF(message.toString());
+        check();
     }
 
     public static void deleteOrder(Orders o) throws IOException {
@@ -302,6 +394,7 @@ class Client {
         message.put("command", "deleteOrder");
         message.put("params", o.toJSON());
         out.writeUTF(message.toString());
+        check();
     }
 
     public static void updateProduct(Products p, List<Storage> ing) throws IOException {
@@ -316,6 +409,7 @@ class Client {
         message.put("command", "updateProduct");
         message.put("params", newProduct);
         out.writeUTF(message.toString());
+        check();
     }
 
     public static void deleteProduct(int id) throws IOException {
@@ -323,6 +417,7 @@ class Client {
         message.put("command", "deleteProduct");
         message.put("params", id);
         out.writeUTF(message.toString());
+        check();;
     }
 
     public static void insertRestaurant(String text) throws IOException {
@@ -330,6 +425,7 @@ class Client {
         message.put("command", "insertRestaurant");
         message.put("params", text);
         out.writeUTF(message.toString());
+        check();
     }
 
     public static void deleteRestaurant(String text) throws IOException {
@@ -337,6 +433,7 @@ class Client {
         message.put("command", "deleteRestaurant");
         message.put("params", text);
         out.writeUTF(message.toString());
+        check();
     }
 
     public static void updateRestaurant(String old, String text) throws IOException {
@@ -345,6 +442,7 @@ class Client {
         message.put("param2", text);
         message.put("param1", old);
         out.writeUTF(message.toString());
+        check();
     }
 
     public static void deleteEmployee(Logins s) throws IOException {
@@ -353,5 +451,27 @@ class Client {
         message.put("command", "deleteEmployee");
         message.put("params",s.toJSON());
         out.writeUTF(message.toString());
+        check();
+    }
+    public static void check() {
+        try {
+            message.clear();
+            message = (JSONObject) JSONValue.parse(in.readUTF());
+            if (!message.get("0").equals("1"))
+                System.out.println("Operacja powiodła sie");
+            else
+                System.out.println("brak praw dostępu");
+            message.clear();
+        } catch (Exception e){
+            System.out.println("Błąd odczytu");
+        }
+    }
+
+    public static void deleteCategory(String s) throws IOException {
+        message.clear();
+        message.put("command","deletecategory");
+        message.put("params",s);
+        out.writeUTF(message.toString());
+        check();
     }
 }

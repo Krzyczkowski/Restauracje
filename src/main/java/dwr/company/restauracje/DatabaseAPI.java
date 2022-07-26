@@ -542,4 +542,33 @@ public class DatabaseAPI {
         em.getTransaction().commit();
 
     }
+
+    public void deleteCategory(String params) {
+        em.getTransaction().begin();
+        Query query = em.createQuery("select c from Categories c where c.restaurant=?1").setParameter(1,params);
+        List<Categories> cat = query.getResultList();
+        if(!cat.isEmpty())
+            for(Categories c : cat){
+                query=em.createQuery("select p from Products p where p.category=?1").setParameter(1,params);
+                List<Products> prod = query.getResultList();
+                if(!prod.isEmpty())
+                    for(Products p : prod)
+                    {
+                        query=em.createQuery("select p from Positions p where p.idproduct=?1").setParameter(1,p.getId());
+                        List<Positions> poz = query.getResultList();
+                        if(!poz.isEmpty())
+                            for(Positions pos:poz){
+                                em.remove(pos);
+                            }
+                        query=em.createQuery("select p from Compositions p where p.idproduct=?1").setParameter(1,p.getId());
+                        List<Compositions> com = query.getResultList();
+                        if(!com.isEmpty())
+                            for(Compositions pos:com)
+                                em.remove(pos);
+                        em.remove(p);
+                    }
+                em.remove(c);
+            }
+        em.getTransaction().commit();
+    }
 }

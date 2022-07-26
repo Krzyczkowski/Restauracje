@@ -40,6 +40,7 @@ public class popupWindowsControler implements Initializable{
     private Spinner amountToAdd;
     private final ObservableList<Storage> storageList = FXCollections.observableArrayList();
     private Storage selectedIngridient;
+    private String nameCategory,nameRestaurant;
     private boolean yesORno;
     private final ObservableList<Storage> componentProductList = FXCollections.observableArrayList();
 
@@ -78,8 +79,6 @@ public class popupWindowsControler implements Initializable{
     private Button deleteCategory;
     @FXML
     private Button yesButton, noButton;
-    @FXML
-    private Button yesButtonR, noButtonR;
     @FXML
     private ComboBox newPlace;
     @FXML
@@ -130,15 +129,11 @@ public class popupWindowsControler implements Initializable{
             case 3:
                 break;
             case 4:
-                yesORno = false;
                 try {
                     comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                break;
-            case 5:
-                yesORno = false;
                 break;
             default:
                 break;
@@ -280,35 +275,33 @@ public class popupWindowsControler implements Initializable{
     @FXML
     protected void warningWindow() throws IOException {
         GeneralController.popup = 3;
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteCatgory.fxml"));
-        Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
-        //popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        popupScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
-        Stage popup = new Stage();
-        popup.initStyle(StageStyle.UNDECORATED);
-        popup.setScene(popupScene);
-        moveWindow(popupScene, popup);
-        popup.show();
+        if(!newProductCategory.getSelectionModel().isEmpty()){
+            warningLabel4.setText("");
+            nameCategory = newProductCategory.getValue().toString();
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteCatgory.fxml"));
+            Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
+            //popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            popupScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
+            Stage popup = new Stage();
+            popup.initStyle(StageStyle.UNDECORATED);
+            popup.setScene(popupScene);
+            moveWindow(popupScene, popup);
+            popup.show();
+        }
+        else{
+            warningLabel4.setText("wybierz kategorie");
+        }
     }
 
     @FXML
-    protected void warningWindow2() throws IOException {
-        GeneralController.popup = 5;
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteRestaurant.fxml"));
-        Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
-        //popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        popupScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
-        Stage popup = new Stage();
-        popup.initStyle(StageStyle.UNDECORATED);
-        popup.setScene(popupScene);
-        moveWindow(popupScene, popup);
-        popup.show();
-    }
-
-    @FXML
-    protected void decision(ActionEvent event){
+    protected void decision(ActionEvent event) throws IOException {
         if(event.getTarget().equals(yesButton)){
-            yesORno = true;
+            if(GeneralController.popup==3){
+                Client.deleteCategory(nameCategory);
+            }
+            if(GeneralController.popup==4){
+                Client.deleteRestaurant(nameRestaurant);
+            }
             Stage stage = (Stage) yesButton.getScene().getWindow();
             stage.close();
         }else if (event.getTarget().equals(noButton)){
@@ -452,15 +445,14 @@ public class popupWindowsControler implements Initializable{
     }
 
     public void deleteRestaurant() throws IOException {
-        if(yesORno){
-            if (comboWithRestaurants.getSelectionModel().isEmpty()) {
-                restaurantsWaringLabel.setText("wybierz restauracje");
-            } else {
-                //delete
-                Client.deleteRestaurant(comboWithRestaurants.getValue().toString());
-                comboWithRestaurants.getItems().clear();
-                comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
-            }
+        if(comboWithRestaurants.getSelectionModel().isEmpty()){
+            restaurantsWaringLabel.setText("wybierz restauracje");
+        }
+        else{
+            //delete
+            Client.deleteRestaurant(comboWithRestaurants.getValue().toString());
+            comboWithRestaurants.getItems().clear();
+            comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
         }
     }
 
