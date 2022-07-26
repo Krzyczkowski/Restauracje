@@ -95,132 +95,134 @@ class SerwerThread implements Runnable {
                 break;
 
             // sprawdzenie czy w pliku privileges znajduje sie dana funkcja
-            if(Configuration.privileges.containsKey(message) && clientAccessLevel>= Configuration.privileges.get(message))
-            switch (message) {
-                case "getAllEmployees":
-                    if(clientAccessLevel>= Configuration.privileges.get("getAllEmployees"))
-                        getAllEmployees();
-                    break;
-                case "getEmployeeById":
-                    getEmployeeById( (int)(long) JSON.get("params"));
-                    break;
-                case "getEmployeeByName":
-                    getEmployeeByName( (String) JSON.get("params"));
-                    break;
-                case "insertEmployee":
-                    insertEmployee(new Logins((JSONObject) JSON.get("logins")),new Employee((JSONObject) JSON.get("employee")) );
-                    break;
-                case "deleteEmployee":
-                    deleteEmployee(new Logins((JSONObject) JSON.get("params")));
-                    break;
-                case "updateEmployee":
-                    updateEmployee(new Logins((JSONObject) JSON.get("params")) );
-                    break;
-                case "getAllRestaurants":
-                    getAllRestaurants();
-                    break;
-                case "makeOrder":
-                    //System.out.println(JSON.get("params"));
-                    JSONObject joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
-                    OrderContainer orderContainer = (new OrderContainer(joe) );
-                    System.out.println(orderContainer);
-                    makeOrder(orderContainer);
-                    break;
-                case "makeProduct":
-                    joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
-                    JSONObject joe2 = (JSONObject) JSONValue.parse(joe.get("ingridients").toString());
-                    Products p = new Products((JSONObject) JSONValue.parse(joe.get("product").toString()));
-                    List<Storage> ingList = new ArrayList<>();
-                    for(int i=0; i<joe2.size();i++)
-                        ingList.add(new Storage((JSONObject)JSONValue.parse(joe2.get("ingridient"+i).toString())));
-                    makeProduct(p,ingList);
-                    break;
-                case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
-                    System.out.println("SerwerThread.communication.getEmployeesFullInfo : params: "+JSON.get("params").toString());
-                    if (JSON.get("params").equals(""))
-                        getEmployeesFullInfo();
-                    else
-                        getEmployeesFullInfo(JSON.get("params").toString());
-                    break;
-                case "getProducts":
-                    if (JSON.get("params").equals(""))
-                        getProducts();
-                    else
-                        getProducts(JSON.get("params").toString());
-                    break;
-                case "getAllCategories":
-                    getCategories();
-                    break;
-                case "getStorage":
-                    getStorage();
-                    break;
-                case "insertStorageItem":
-                    JSONObject jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
-                    System.out.println(jo);
-                    Storage st = new Storage(jo);
-                    insertStorageItem(st);
-                    break;
-                case "updateStorageItem":
-                    updateStorageAmount(new Storage((JSONObject) JSON.get("params")));
-                    break;
-///                case "getProductName":
-///                    getProductName(Integer.valueOf(JSON.get("id").toString()));
-//                    break;
-                case "deleteStorageItem":
-                    //System.out.println(JSON.get("params"));
-                    jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
-                    System.out.println(jo);
-                    st = new Storage(jo);
-                    deleteStorageItem(st);
-                    break;
-                case"getOrders":
-                    getOrders(JSON.get("params").toString());
-                    break;
-                case"getPositions":
-                    getPositions(Integer.parseInt(JSON.get("params").toString()));
-                    break;
-                case"insertCategory":
-                    insertCategory(JSON.get("params").toString());
-                    break;
-                case"deletePositionFromOrder":
-                    deletePositionFromOrder(new Positions ((JSONObject)JSON.get("params") ));
-                    break;
-                case"editPositionFromOrder":
-                    editPositionFromOrder(new Positions ((JSONObject)JSON.get("params")), Integer.valueOf(JSON.get("newValue").toString()));
-                    break;
-                case"deleteOrder":
-                    deleteOrder(new Orders ((JSONObject)JSON.get("params")));
-                    break;
-                case"getComposition":
-                    getComposition(Integer.parseInt(JSON.get("params").toString()));
-                    break;
-                case"updateProduct":
-                    joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
-                    JSONObject joe3 = (JSONObject) JSONValue.parse(joe.get("ingridients").toString());
-                    Products p1 = new Products((JSONObject) JSONValue.parse(joe.get("product").toString()));
-                    List<Storage> ing = new ArrayList<>();
-                    for(int i=0; i<joe3.size();i++)
-                    {
-                        ing.add(new Storage((JSONObject)JSONValue.parse(joe3.get("ingridient"+i).toString())));
+            if(Configuration.privileges.containsKey(message) && clientAccessLevel>= Configuration.privileges.get(message)){
+                if(message.startsWith("get")){
+                    switch (message) {
+                        case "getAllEmployees":
+                            getAllEmployees();
+                            break;
+                        case "getEmployeeById":
+                            getEmployeeById((int) (long) JSON.get("params"));
+                            break;
+                        case "getEmployeeByName":
+                            getEmployeeByName((String) JSON.get("params"));
+                            break;
+                        case "getAllRestaurants":
+                            getAllRestaurants();
+                            break;
+                        case "getEmployeesFullInfo":  // information about employees with salary, access power, login+pasword etc.
+                            if (JSON.get("params").equals(""))
+                                getEmployeesFullInfo();
+                            else
+                                getEmployeesFullInfo(JSON.get("params").toString());
+                            break;
+                        case "getProducts":
+                            if (JSON.get("params").equals(""))
+                                getProducts();
+                            else
+                                getProducts(JSON.get("params").toString());
+                            break;
+                        case "getAllCategories":
+                            getCategories();
+                            break;
+                        case "getStorage":
+                            getStorage();
+                            break;
+                        case "getOrders":
+                            getOrders(JSON.get("params").toString());
+                            break;
+                        case "getPositions":
+                            getPositions(Integer.parseInt(JSON.get("params").toString()));
+                            break;
+                        case "getComposition":
+                            getComposition(Integer.parseInt(JSON.get("params").toString()));
+                            break;
                     }
-                    updateProduct(p1,ing);
-                    break;
-                case"deleteProduct":
-                    deleteProduct(Integer.parseInt(JSON.get("params").toString()));
-                    break;
-                case"insertRestaurant":
-                    insertRestaurant(JSON.get("params").toString());
-                    break;
-                case"deleteRestaurant":
-                    deleteRestaurant(JSON.get("params").toString());
-                    break;
-                case"updateRestaurant":
-                    updateRestaurant(JSON.get("param1").toString(),JSON.get("param2").toString());
-                    break;
+                }
+                else{
+                    switch (message) {
+                        case "insertEmployee":
+                            insertEmployee(new Logins((JSONObject) JSON.get("logins")), new Employee((JSONObject) JSON.get("employee")));
+                            break;
+                        case "deleteEmployee":
+                            deleteEmployee(new Logins((JSONObject) JSON.get("params")));
+                            break;
+                        case "updateEmployee":
+                            updateEmployee(new Logins((JSONObject) JSON.get("params")));
+                            break;
+                        case "makeOrder":
+                            JSONObject joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                            OrderContainer orderContainer = (new OrderContainer(joe));
+                            System.out.println(orderContainer);
+                            makeOrder(orderContainer);
+                            break;
+                        case "makeProduct":
+                            joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                            JSONObject joe2 = (JSONObject) JSONValue.parse(joe.get("ingridients").toString());
+                            Products p = new Products((JSONObject) JSONValue.parse(joe.get("product").toString()));
+                            List<Storage> ingList = new ArrayList<>();
+                            for (int i = 0; i < joe2.size(); i++)
+                                ingList.add(new Storage((JSONObject) JSONValue.parse(joe2.get("ingridient" + i).toString())));
+                            makeProduct(p, ingList);
+                            break;
+
+                        case "insertStorageItem":
+                            JSONObject jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                            System.out.println(jo);
+                            Storage st = new Storage(jo);
+                            insertStorageItem(st);
+                            break;
+                        case "updateStorageItem":
+                            updateStorageAmount(new Storage((JSONObject) JSON.get("params")));
+                            break;
+                        case "deleteStorageItem":
+                            //System.out.println(JSON.get("params"));
+                            jo = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                            System.out.println(jo);
+                            st = new Storage(jo);
+                            deleteStorageItem(st);
+                            break;
+                        case "insertCategory":
+                            insertCategory(JSON.get("params").toString());
+                            break;
+                        case "deletePositionFromOrder":
+                            deletePositionFromOrder(new Positions((JSONObject) JSON.get("params")));
+                            break;
+                        case "editPositionFromOrder":
+                            editPositionFromOrder(new Positions((JSONObject) JSON.get("params")), Integer.valueOf(JSON.get("newValue").toString()));
+                            break;
+                        case "deleteOrder":
+                            deleteOrder(new Orders((JSONObject) JSON.get("params")));
+                            break;
+                        case "updateProduct":
+                            joe = (JSONObject) JSONValue.parse(JSON.get("params").toString());
+                            JSONObject joe3 = (JSONObject) JSONValue.parse(joe.get("ingridients").toString());
+                            Products p1 = new Products((JSONObject) JSONValue.parse(joe.get("product").toString()));
+                            List<Storage> ing = new ArrayList<>();
+                            for (int i = 0; i < joe3.size(); i++) {
+                                ing.add(new Storage((JSONObject) JSONValue.parse(joe3.get("ingridient" + i).toString())));
+                            }
+                            updateProduct(p1, ing);
+                            break;
+                        case "deleteProduct":
+                            deleteProduct(Integer.parseInt(JSON.get("params").toString()));
+                            break;
+                        case "insertRestaurant":
+                            insertRestaurant(JSON.get("params").toString());
+                            break;
+                        case "deleteRestaurant":
+                            deleteRestaurant(JSON.get("params").toString());
+                            break;
+                        case "updateRestaurant":
+                            updateRestaurant(JSON.get("param1").toString(), JSON.get("param2").toString());
+                            break;
+                    }
+                }
             }else{
                 System.out.println("brak takich uprawnien!!");
                 //out.writeUTF("brak takich uprawnien!!");
             }
+
         }
         db.close();
     }
@@ -373,9 +375,6 @@ class SerwerThread implements Runnable {
         db.insertStorageItem(s);
     }
 
-///    private void getProductName(Integer id){
-//        db.getProductName(id);
-//    }
     private void getPositions(Integer id)throws  IOException{
         JSON.clear();
         JSON = db.getPositions(id);
@@ -385,11 +384,6 @@ class SerwerThread implements Runnable {
 
 
 
-///    static private void getIdRestaurantByName(String name) throws IOException {
-//        Integer i = db.getIdRestaurantByName(name);
-//        System.out.println(i.toString());
-//        out.writeUTF(i.toString());
-//    }
 
 }
 

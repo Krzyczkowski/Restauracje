@@ -543,15 +543,3 @@ public class DatabaseAPI {
 
     }
 }
-
-
-
-
-
-
-
-
-//        em.createNativeQuery("INSERT INTO employee (name, lastname) VALUES (?,?)")
-//        .setParameter(1, e.getName())
-//        .setParameter(2, e.getLastname())
-//        .executeUpdate();
