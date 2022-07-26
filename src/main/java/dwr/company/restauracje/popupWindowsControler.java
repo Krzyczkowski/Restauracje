@@ -297,10 +297,10 @@ public class popupWindowsControler implements Initializable{
     protected void decision(ActionEvent event) throws IOException {
         if(event.getTarget().equals(yesButton)){
             if(GeneralController.popup==3){
-                Client.deleteCategory(nameCategory);
+                Client.deleteCategory(newProductCategory.getValue().toString());
             }
             if(GeneralController.popup==4){
-                Client.deleteRestaurant(nameRestaurant);
+                Client.deleteRestaurant(comboWithRestaurants.getValue().toString());
             }
             Stage stage = (Stage) yesButton.getScene().getWindow();
             stage.close();
