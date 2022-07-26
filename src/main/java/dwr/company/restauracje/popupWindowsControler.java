@@ -41,7 +41,6 @@ public class popupWindowsControler implements Initializable{
     private final ObservableList<Storage> storageList = FXCollections.observableArrayList();
     private Storage selectedIngridient;
     private String nameCategory,nameRestaurant;
-    private boolean yesORno;
     private final ObservableList<Storage> componentProductList = FXCollections.observableArrayList();
 
     private final List <Storage> ingridients = new ArrayList<>();
@@ -274,8 +273,8 @@ public class popupWindowsControler implements Initializable{
 
     @FXML
     protected void warningWindow() throws IOException {
-        GeneralController.popup = 3;
         if(!newProductCategory.getSelectionModel().isEmpty()){
+            GeneralController.popup = 3;
             warningLabel4.setText("");
             nameCategory = newProductCategory.getValue().toString();
             FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteCatgory.fxml"));
@@ -290,6 +289,26 @@ public class popupWindowsControler implements Initializable{
         }
         else{
             warningLabel4.setText("wybierz kategorie");
+
+        }
+    }
+
+    @FXML
+    protected void warningWindow2() throws IOException {
+        if(comboWithRestaurants.getSelectionModel().isEmpty()){
+            restaurantsWaringLabel.setText("wybierz restauracje");
+        }
+        else{
+            GeneralController.popup = 5;
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteRestaurant.fxml"));
+            Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
+            //popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            popupScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
+            Stage popup = new Stage();
+            popup.initStyle(StageStyle.UNDECORATED);
+            popup.setScene(popupScene);
+            moveWindow(popupScene, popup);
+            popup.show();
         }
     }
 
@@ -301,6 +320,8 @@ public class popupWindowsControler implements Initializable{
             }
             if(GeneralController.popup==4){
                 Client.deleteRestaurant(comboWithRestaurants.getValue().toString());
+                comboWithRestaurants.getItems().clear();
+                comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
             }
             Stage stage = (Stage) yesButton.getScene().getWindow();
             stage.close();
@@ -439,18 +460,6 @@ public class popupWindowsControler implements Initializable{
             }
             //restaurantsWaringLabel.setText("dziala");
             Client.insertRestaurant(newRestaurantName.getText());
-            comboWithRestaurants.getItems().clear();
-            comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
-        }
-    }
-
-    public void deleteRestaurant() throws IOException {
-        if(comboWithRestaurants.getSelectionModel().isEmpty()){
-            restaurantsWaringLabel.setText("wybierz restauracje");
-        }
-        else{
-            //delete
-            Client.deleteRestaurant(comboWithRestaurants.getValue().toString());
             comboWithRestaurants.getItems().clear();
             comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
         }

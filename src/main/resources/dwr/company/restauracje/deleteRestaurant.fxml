@@ -28,12 +28,12 @@
             <Font name="Calibri Bold" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="yesButtonR" layoutX="170.0" layoutY="84.0" mnemonicParsing="false" onAction="#decision" text="Tak">
+      <Button fx:id="yesButton" layoutX="170.0" layoutY="84.0" mnemonicParsing="false" onAction="#decision" text="Tak">
          <font>
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="noButtonR" layoutX="228.0" layoutY="84.0" mnemonicParsing="false" onAction="#decision" text="Nie">
+      <Button fx:id="noButton" layoutX="228.0" layoutY="84.0" mnemonicParsing="false" onAction="#decision" text="Nie">
          <font>
             <Font name="Calibri Bold" size="18.0" />
          </font>
