@@ -584,15 +584,16 @@ public class DatabaseAPI {
         return p.getPrice();
     }
     public static void refreshOrderPrice(int id){
-        em.getTransaction().begin();
+
         Query query = em.createQuery( "SELECT pos FROM Positions pos where pos.idorder = ?1 ").setParameter(1,id);
         List<Positions> pl = query.getResultList();
         float sum = 0;
         System.out.println("ilosc pozycji:" + pl.size());
         for(Positions p : pl){
-            sum+=p.getAmount()*getProductPrice(p.getIdproduct());
+            sum+=(p.getAmount()*getProductPrice(p.getIdproduct()));
         }
         Orders o = em.find(Orders.class,id);
+        em.getTransaction().begin();
         o.setTotalprice(sum);
         em.merge(o);
         em.getTransaction().commit();
