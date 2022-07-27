@@ -114,4 +114,3 @@ create table categories
     restaurant varchar not null,
     primary key (id, restaurant)
 );
-

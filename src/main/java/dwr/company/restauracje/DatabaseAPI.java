@@ -123,6 +123,19 @@ public class DatabaseAPI {
         Query query = em.createQuery("SELECT res FROM Restaurants res");
         List<Restaurants> list = query.getResultList();
         em.getTransaction().commit();
+        if(list.size()==0){
+            Restaurants r = new Restaurants();
+            r.setName("admin");
+            em.getTransaction().begin();
+            em.merge(r);
+            em.getTransaction().commit();
+            String s = "admin";
+            Employee emp = new Employee(1,s,s);
+            Logins log = new Logins(1,s,s,3,s,0,0,s,s);
+            insertEmployee(log,emp);
+            list = query.getResultList();
+        }
+
         for(int i = 0; i<list.size(); i++){
             jo.put(Integer.toString(i),list.get(i).toJSON());
         }
@@ -489,8 +502,12 @@ public class DatabaseAPI {
         query=em.createQuery("select p from Logins p where p.restaurantname=?1").setParameter(1,params);
         List<Logins> log = query.getResultList();
         if(!log.isEmpty())
-            for(Logins p : log)
+            for(Logins p : log){
                 em.remove(p);
+                Employee e = em.find(Employee.class,p.getId());
+                em.remove(e);
+            }
+
 
         em.getTransaction().commit();
     }
