@@ -51,6 +51,14 @@ class Client {
         restaurantName = DBName;
         return levelacces>0;
     }
+
+    /**
+     * pierwsze wczytanie restauracji oraz połączenie z serwerem
+     * @param host adres hosta
+     * @param port port hosta
+     * @return
+     * @throws IOException
+     */
     public static List<String> InitGetRestaurantNames(String host, Integer port) throws IOException {
         Socket socket = new Socket(host, port);
             out = new DataOutputStream(socket.getOutputStream());
@@ -62,17 +70,34 @@ class Client {
             return printRestaurants(message);
 
     }
+
+    /**
+     * kończy połączenie z serwerem
+     * @throws IOException
+     */
     public static void logout() throws IOException {
         message.clear();
         message.put("command", "break");
         out.writeUTF(message.toString());
     }
+
+    /**
+     * Przetwarza JSONObject na liste restauracji(String)
+     * @param message JSONObject
+     * @return List String
+     */
     private static List<String>printRestaurants(JSONObject message){
         List<String> list = new ArrayList<>();
         for(int i = 0; i<message.size(); i++)
             list.add(new Restaurants((JSONObject) message.get(Integer.toString(i))).getName());
         return list;
     }
+
+    /**
+     * przetwarza JSONObject na liste danych pracownikow(Logins)
+     * @param message
+     * @return
+     */
     private  static List<Logins> printLogins(JSONObject message){
         List<Logins> list= new ArrayList<>();
         for(int i = 0; i<message.size(); i++)
@@ -305,26 +330,14 @@ class Client {
         message.put("command","insertEmployee");
         message.put("logins",log.toJSON());
         message.put("employee",emp.toJSON());
-        message.clear();
-        message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            System.out.println("Operacja powiodła sie");
-        else
-            System.out.println("brak praw dostępu");
-        message.clear();
+        check();
     }
     public static void insertCategory(String name) throws IOException {
         message.clear();
         message.put("command", "insertCategory");
         message.put("params",name );
         out.writeUTF(message.toString());
-        message.clear();
-        message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            System.out.println("Operacja powiodła sie");
-        else
-            System.out.println("brak praw dostępu");
-        message.clear();
+        check();
     }
 
 
@@ -359,7 +372,6 @@ class Client {
     public static void deleteStorage(Storage s) throws IOException {
         message.clear();
         JSONObject jo = s.toJSON();
-        //System.out.println(jo.toString());
         message.put("command", "deleteStorageItem");
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
@@ -389,7 +401,6 @@ class Client {
         check();
     }
     public static void deletePositionFromOrder(Positions p) throws IOException {
-        System.out.println();
         message.clear();
         message.put("command", "deletePositionFromOrder");
         message.put("params", p.toJSONU());
@@ -398,18 +409,15 @@ class Client {
     }
 
     public static void editPositionFromOrder(Positions p, int newValue) throws IOException {
-        System.out.println();
         message.clear();
         message.put("command", "editPositionFromOrder");
         message.put("params", p.toJSONU());
         message.put("newValue",newValue);
-        System.out.println(p.getAmount()+":ilosc:"+newValue);
         out.writeUTF(message.toString());
         check();
     }
 
     public static void deleteOrder(Orders o) throws IOException {
-        System.out.println(o);
         message.clear();
         message.put("command", "deleteOrder");
         message.put("params", o.toJSON());
@@ -467,7 +475,6 @@ class Client {
 
     public static void deleteEmployee(Logins s) throws IOException {
         message.clear();
-        System.out.println(s);
         message.put("command", "deleteEmployee");
         message.put("params",s.toJSON());
         out.writeUTF(message.toString());
@@ -489,7 +496,6 @@ class Client {
 
     public static void deleteCategory(String s) throws IOException {
         message.clear();
-        System.out.println(s);
         message.put("command","deleteCategory");
         message.put("params",s);
         out.writeUTF(message.toString());

@@ -364,7 +364,6 @@ public class DatabaseAPI {
     public void editPositionFromOrder(Positions params, Integer newValue) {
        deletePositionFromOrder(params);
        System.out.println(getProductPrice(params.getIdproduct()));
-       refreshOrderPrice(params.getIdorder());
        params.setAmount(newValue);
        List<Positions> pl = new ArrayList<>();
        pl.add(params);
@@ -601,6 +600,7 @@ public class DatabaseAPI {
         for(Positions p : pl){
             sum+=(p.getAmount()*getProductPrice(p.getIdproduct()));
         }
+        System.out.println(sum);
         Orders o = em.find(Orders.class,id);
 
         o.setTotalprice(sum);
