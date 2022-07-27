@@ -123,7 +123,7 @@ public class DatabaseAPI {
         Query query = em.createQuery("SELECT res FROM Restaurants res");
         List<Restaurants> list = query.getResultList();
         em.getTransaction().commit();
-        if(list.size()==0){
+        if(list.size()==0){ //jeśli nie ma żadnej restauracji (pierwsze uruchomienie lub wszsytskie usunięte) dodaja użytkownika admin i restauracje admin
             Restaurants r = new Restaurants();
             r.setName("admin");
             em.getTransaction().begin();
