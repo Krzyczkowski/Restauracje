@@ -364,7 +364,6 @@ public class DatabaseAPI {
     public void editPositionFromOrder(Positions params, Integer newValue) {
        deletePositionFromOrder(params);
        System.out.println(getProductPrice(params.getIdproduct()));
-       refreshOrderPrice(params.getIdorder());
        params.setAmount(newValue);
        List<Positions> pl = new ArrayList<>();
        pl.add(params);
@@ -372,6 +371,7 @@ public class DatabaseAPI {
        em.getTransaction().begin();
        em.merge(params);
        em.getTransaction().commit();
+       refreshOrderPrice(params.getIdorder());
     }
 
     public void deleteOrder(Orders params) {
@@ -584,17 +584,20 @@ public class DatabaseAPI {
         return p.getPrice();
     }
     public static void refreshOrderPrice(int id){
-
+        em.getTransaction().begin();
         Query query = em.createQuery( "SELECT pos FROM Positions pos where pos.idorder = ?1 ").setParameter(1,id);
+        em.getTransaction().commit();
         List<Positions> pl = query.getResultList();
+
         float sum = 0;
         System.out.println("ilosc pozycji:" + pl.size());
         for(Positions p : pl){
             sum+=(p.getAmount()*getProductPrice(p.getIdproduct()));
         }
         Orders o = em.find(Orders.class,id);
-        em.getTransaction().begin();
+
         o.setTotalprice(sum);
+        em.getTransaction().begin();
         em.merge(o);
         em.getTransaction().commit();
     }
