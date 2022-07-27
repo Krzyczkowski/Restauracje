@@ -354,7 +354,7 @@ public class DatabaseAPI {
         em.getTransaction().begin();
         Query query = em.createQuery( "SELECT st FROM Positions st where st.id = ?1 ").setParameter(1,p.getId());
         Orders o =em.find(Orders.class,p.getIdorder());
-        o.setTotalprice(o.getTotalprice()-(p.getProductPrice()*p.getAmount()));
+        o.setTotalprice(o.getTotalprice()-p.getProductPrice());
         em.merge(o);
         pl = query.getResultList();
         em.remove(pl.get(0));
@@ -363,10 +363,8 @@ public class DatabaseAPI {
 
     public void editPositionFromOrder(Positions params, Integer newValue) {
        deletePositionFromOrder(params);
-       Orders o =em.find(Orders.class,params.getIdorder());
-       System.out.println(newValue+" "+params.getAmount()+" "+params.getProductPrice());
-       o.setTotalprice(o.getTotalprice()+((newValue- params.getAmount())* params.getProductPrice()/params.getAmount()));
-       em.merge(o);
+       System.out.println(getProductPrice(params.getIdproduct()));
+       refreshOrderPrice(params.getIdorder());
        params.setAmount(newValue);
        List<Positions> pl = new ArrayList<>();
        pl.add(params);
@@ -579,5 +577,25 @@ public class DatabaseAPI {
             }
         em.getTransaction().commit();
     }
-
+    public static Float getProductPrice(int id){
+        em.getTransaction().begin();
+        Products p = em.find(Products.class,id);
+        em.getTransaction().commit();
+        return p.getPrice();
+    }
+    public static void refreshOrderPrice(int id){
+        em.getTransaction().begin();
+        Query query = em.createQuery( "SELECT pos FROM Positions pos where pos.idorder = ?1 ").setParameter(1,id);
+        List<Positions> pl = query.getResultList();
+        float sum = 0;
+        System.out.println("ilosc pozycji:" + pl.size());
+        for(Positions p : pl){
+            sum+=p.getAmount()*getProductPrice(p.getIdproduct());
+        }
+        Orders o = em.find(Orders.class,id);
+        o.setTotalprice(sum);
+        em.merge(o);
+        em.getTransaction().commit();
+    }
 }
+
