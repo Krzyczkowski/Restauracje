@@ -423,10 +423,16 @@ public class DatabaseAPI {
         em.getTransaction().begin();
         Products p2=em.find(Products.class,id);
         List<Compositions> l;
-        Query query = em.createQuery("SELECT st FROM Compositions st where st.idproduct = ?1 ").setParameter(1,id);
+        List<Positions> p;
+        Query query;
+        query = em.createQuery("SELECT st FROM Compositions st where st.idproduct = ?1 ").setParameter(1,id);
         l= query.getResultList();
         for(Compositions c : l)
             em.remove(c);
+        query = em.createQuery("select com FROM Positions com where com.idproduct = ?1").setParameter(1,id);
+        p = query.getResultList();
+        for(Positions d:p)
+            em.remove(d);
         em.remove(p2);
         em.getTransaction().commit();
     }
@@ -584,7 +590,6 @@ public class DatabaseAPI {
         return p.getPrice();
     }
     public static void refreshOrderPrice(int id){
-
         Query query = em.createQuery( "SELECT pos FROM Positions pos where pos.idorder = ?1 ").setParameter(1,id);
         List<Positions> pl = query.getResultList();
         float sum = 0;
