@@ -364,6 +364,7 @@ public class DatabaseAPI {
     public void editPositionFromOrder(Positions params, Integer newValue) {
        deletePositionFromOrder(params);
        System.out.println(getProductPrice(params.getIdproduct()));
+       refreshOrderPrice(params.getIdorder());
        params.setAmount(newValue);
        List<Positions> pl = new ArrayList<>();
        pl.add(params);
@@ -423,10 +424,16 @@ public class DatabaseAPI {
         em.getTransaction().begin();
         Products p2=em.find(Products.class,id);
         List<Compositions> l;
-        Query query = em.createQuery("SELECT st FROM Compositions st where st.idproduct = ?1 ").setParameter(1,id);
+        List<Positions> p;
+        Query query;
+        query = em.createQuery("SELECT st FROM Compositions st where st.idproduct = ?1 ").setParameter(1,id);
         l= query.getResultList();
         for(Compositions c : l)
             em.remove(c);
+        query = em.createQuery("select com FROM Positions com where com.idproduct = ?1").setParameter(1,id);
+        p = query.getResultList();
+        for(Positions d:p)
+            em.remove(d);
         em.remove(p2);
         em.getTransaction().commit();
     }
