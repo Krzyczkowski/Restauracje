@@ -600,6 +600,7 @@ public class GeneralController{
             Positions p = PositionsEditionTable.getSelectionModel().getSelectedItem();
             Client.editPositionFromOrder(p,Integer.valueOf(amountOfProductsInHistory.getValue().toString()));
             LoadPositionsEditionTable(tableWithHistory.getSelectionModel().getSelectedItem());
+            //loadHistoryToTable();
         }
     }
 
@@ -608,6 +609,7 @@ public class GeneralController{
             Positions p = PositionsEditionTable.getSelectionModel().getSelectedItem();
             Client.deletePositionFromOrder(p);
             LoadPositionsEditionTable(tableWithHistory.getSelectionModel().getSelectedItem());
+            //loadHistoryToTable();
         }
     }
 
