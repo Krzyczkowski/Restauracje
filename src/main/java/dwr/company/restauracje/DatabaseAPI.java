@@ -354,7 +354,7 @@ public class DatabaseAPI {
         em.getTransaction().begin();
         Query query = em.createQuery( "SELECT st FROM Positions st where st.id = ?1 ").setParameter(1,p.getId());
         Orders o =em.find(Orders.class,p.getIdorder());
-        o.setTotalprice(o.getTotalprice()+(p.getProductPrice()*p.getAmount()));
+        o.setTotalprice(o.getTotalprice()-(p.getProductPrice()*p.getAmount()));
         em.merge(o);
         pl = query.getResultList();
         em.remove(pl.get(0));
@@ -364,7 +364,8 @@ public class DatabaseAPI {
     public void editPositionFromOrder(Positions params, Integer newValue) {
        deletePositionFromOrder(params);
        Orders o =em.find(Orders.class,params.getIdorder());
-       o.setTotalprice(o.getTotalprice()-((newValue- params.getAmount())* params.getProductPrice()));
+       System.out.println(newValue+" "+params.getAmount()+" "+params.getProductPrice());
+       o.setTotalprice(o.getTotalprice()+((newValue- params.getAmount())* params.getProductPrice()/params.getAmount()));
        em.merge(o);
        params.setAmount(newValue);
        List<Positions> pl = new ArrayList<>();

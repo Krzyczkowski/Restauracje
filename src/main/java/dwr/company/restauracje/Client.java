@@ -62,19 +62,6 @@ class Client {
             return printRestaurants(message);
 
     }
-    public static List<String> getRestaurantNames() throws IOException {
-        message.clear();
-        message.put("command", "getAllRestaurants");
-        out.writeUTF(message.toString());
-        message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").toString().equals("1"))
-            return printRestaurants(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<String>();
-        }
-    }
     public static void logout() throws IOException {
         message.clear();
         message.put("command", "break");
@@ -111,6 +98,12 @@ class Client {
             list.add(new Storage((JSONObject) message.get(Integer.toString(i))));
         return list;
     }
+    private static List<Compositions> printComposition(JSONObject jo) {
+        List<Compositions> list= new ArrayList<>();
+        for(int i = 0; i<jo.size(); i++)
+            list.add(new Compositions((JSONObject) jo.get(Integer.toString(i))));
+        return list;
+    }
     private static List<Orders> printOrders(JSONObject jo) {
         List<Orders> list= new ArrayList<>();
         for(int i = 0; i<jo.size(); i++)
@@ -123,6 +116,21 @@ class Client {
             list.add(new Positions((JSONObject) jo.get(Integer.toString(i))));
         return list;
     }
+    public static List<String> getRestaurantNames() throws IOException {
+        message.clear();
+        message.put("command", "getAllRestaurants");
+        out.writeUTF(message.toString());
+        message = (JSONObject) JSONValue.parse(in.readUTF());
+        if(!message.isEmpty()) {
+            if (!message.get("0").toString().equals("1"))
+                return printRestaurants(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<String>();
+            }
+        }
+        return new ArrayList<String>();
+    }
     protected static List<Logins>   getEmployeesFullInfo() throws IOException {
         JSONObject message = new JSONObject();
         message.put("command","getEmployeesFullInfo");
@@ -130,13 +138,15 @@ class Client {
         out.writeUTF(message.toString());
         String str = in.readUTF();
         message = (JSONObject) JSONValue.parse(str);
-        if(!message.get("0").equals("1"))
-            return printLogins(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Logins>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printLogins(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Logins>();
+            }
         }
+        return new ArrayList<Logins>();
     }
     protected static List<Logins>   getEmployeesFullInfo(String s) throws IOException {
         JSONObject message = new JSONObject();
@@ -144,13 +154,15 @@ class Client {
         message.put("params",s);
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printLogins(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Logins>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printLogins(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Logins>();
+            }
         }
+        return new ArrayList<Logins>();
     }
     public static List<String>      getAllRestaurants() throws IOException {
         JSONObject message = new JSONObject();
@@ -158,13 +170,15 @@ class Client {
         message.put("params","");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printRestaurants(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<String>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printRestaurants(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<String>();
+            }
         }
+        return new ArrayList<String>();
     }
 
     public static List<Products> getProducts() throws IOException {
@@ -173,57 +187,65 @@ class Client {
         message.put("params", "");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printProducts(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Products>();
+        if(!message.isEmpty()) {
+            if(!message.get("0").equals("1"))
+                return printProducts(message);
+            else
+            {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Products>();
+            }
         }
-
+        return new ArrayList<Products>();
     }
-    public static List<Products> getProducts(String name,String category) throws IOException{
+    public static List<Products> getProducts(String name,String category) throws IOException {
         message.clear();
         JSONObject jo = new JSONObject();
-        jo.put("name",name);
-        jo.put("category",category);
+        jo.put("name", name);
+        jo.put("category", category);
         message.put("command", "getProducts");
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printProducts(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Products>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printProducts(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Products>();
+            }
         }
+        return new ArrayList<Products>();
     }
     public static List<String> getCategories() throws IOException {
         message.clear();
         message.put("command", "getAllCategories");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printCategories(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<String>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printCategories(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<String>();
+            }
         }
+        return new ArrayList<String>();
     }
     public static List<Storage> getStorage() throws IOException {
         message.clear();
         message.put("command", "getStorage");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printStorage(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Storage>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printStorage(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Storage>();
+            }
         }
+        return new ArrayList<Storage>();
     }
     public static List<Orders> getOrders(String  date) throws IOException {
         message.clear();
@@ -232,13 +254,15 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printOrders(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Orders>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printOrders(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Orders>();
+            }
         }
+        return new ArrayList<Orders>();
     }
     public static List<Positions> getPositions(int idOrder) throws IOException {
         message.clear();
@@ -247,14 +271,15 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printPositions(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Positions>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printPositions(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Positions>();
+            }
         }
-
+        return new ArrayList<Positions>();
     }
     public static List<Compositions> getComposition(int idProduct) throws IOException {
         message.clear();
@@ -263,14 +288,15 @@ class Client {
         out.writeUTF(message.toString());
         message.clear();
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.get("0").equals("1"))
-            return printComposition(message);
-        else
-        {
-            System.out.println("brak praw dostępu");
-            return new ArrayList<Compositions>();
+        if(!message.isEmpty()) {
+            if (!message.get("0").equals("1"))
+                return printComposition(message);
+            else {
+                System.out.println("brak praw dostępu");
+                return new ArrayList<Compositions>();
+            }
         }
-
+        return new ArrayList<Compositions>();
     }
     protected static void insertEmployee(String name, String lastName, String login, String password, int levelacces, String restaurantname, float salary, int pesel) throws IOException {
         message.clear();
@@ -302,12 +328,7 @@ class Client {
     }
 
 
-    private static List<Compositions> printComposition(JSONObject jo) {
-        List<Compositions> list= new ArrayList<>();
-        for(int i = 0; i<jo.size(); i++)
-            list.add(new Compositions((JSONObject) jo.get(Integer.toString(i))));
-        return list;
-    }
+
 
     public static void insertStorageItem(Storage s) throws IOException {
         message.clear();
@@ -382,6 +403,7 @@ class Client {
         message.put("command", "editPositionFromOrder");
         message.put("params", p.toJSONU());
         message.put("newValue",newValue);
+        System.out.println(p.getAmount()+":ilosc:"+newValue);
         out.writeUTF(message.toString());
         check();
     }
