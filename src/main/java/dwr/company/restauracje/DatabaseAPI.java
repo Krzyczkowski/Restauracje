@@ -607,6 +607,7 @@ public class DatabaseAPI {
         em.getTransaction().begin();
         em.merge(o);
         em.getTransaction().commit();
+
     }
 }
 
