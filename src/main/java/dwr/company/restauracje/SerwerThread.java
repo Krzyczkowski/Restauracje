@@ -233,7 +233,7 @@ class SerwerThread implements Runnable {
                 }
             }else{
                 JSON.clear();
-                JSON.put("0","1");
+                JSON.put("0","1");      // zwrocenie wiadomosci klientowi o bledzie
                 out.writeUTF(JSON.toString());
             }
 
