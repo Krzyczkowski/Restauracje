@@ -411,6 +411,7 @@ public class GeneralController{
     }
     @FXML
     public void loadProductToTable() throws Exception {
+        choseCategory.getItems().clear();
         choseCategory.getItems().addAll(Client.getCategories());
         productName.setCellValueFactory(new PropertyValueFactory<Products, String>("name"));
         productCategory.setCellValueFactory(new PropertyValueFactory<Products, String>("category"));
