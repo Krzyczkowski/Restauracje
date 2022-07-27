@@ -4,7 +4,7 @@ getAllRestaurants:0
 getEmployeeById:0
 getEmployeeByName:0
 getIdRestaurantByName:0
-getEmployeesFullInfo:3
+getEmployeesFullInfo:2
 getComposition:0
 getProducts:0
 getStorage:0

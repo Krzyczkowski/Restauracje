@@ -16,6 +16,7 @@ public class DatabaseAPI {
     static EntityManagerFactory emf;
     static EntityManager em;
     String restaurant;
+    int levelacces;
     public DatabaseAPI(){
         //org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.INFO);//OFF
@@ -47,29 +48,35 @@ public class DatabaseAPI {
         em.getTransaction().commit();
         return (prepareJSON(list));
     }
-    public JSONObject getEmployeeByName(String name){
-        em.getTransaction().begin();
-        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.name like ?1").setParameter(1, name + "%");
-        List<Employee> list = query.getResultList();
-        em.getTransaction().commit();
-        return (prepareJSON(list));
-    }
     public JSONObject getAllEmployeesFullInfo(String name){
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT emp FROM Employee emp where emp.name like ?1 or emp.lastname like ?1 ").setParameter(1, "%"+name + "%");
-        List<Employee> list = query.getResultList();
+        Query query;
+        if(levelacces<3)
+            query = em.createQuery("SELECT log FROM Logins log where log.levelaccess>0 and log.restaurantname = ?3 and log.levelaccess<=?2 and (log.emp.name like ?1 or log.emp.lastname like ?1)").setParameter(1,name).setParameter(2,levelacces).setParameter(3,restaurant);
+        else
+            query = em.createQuery("SELECT log FROM Logins log where log.levelaccess>0  and (log.emp.name like ?1 or log.emp.lastname like ?1)").setParameter(1,name);
+        List<Logins> list = query.getResultList();
         System.out.println(list.size());
-        List<Logins> list1 = new ArrayList<>();
-        for (Employee employee : list) {
-            query = em.createQuery("select log from Logins log where log.id = ?1").setParameter(1, employee.getId());
-            Logins log = (Logins) query.getSingleResult();
-            em.merge(log);
-            list1.add(log);
-        }
         em.getTransaction().commit();
         JSONObject jo = new JSONObject();
         for(int i = 0; i<list.size(); i++){
-            jo.put(Integer.toString(i),list1.get(i).toJSON());
+            jo.put(Integer.toString(i),list.get(i).toJSON());
+        }
+        return jo;
+    }
+    public JSONObject getAllEmployeesFullInfo()
+    {
+        JSONObject jo = new JSONObject();
+        em.getTransaction().begin();
+        Query query;
+        if(levelacces<3)
+            query = em.createQuery("SELECT log FROM Logins log where log.levelaccess>0 and log.restaurantname = ?3 and log.levelaccess<=?2 ").setParameter(2,levelacces).setParameter(3,restaurant);
+        else
+            query = em.createQuery("SELECT log FROM Logins log where log.levelaccess>0 ");
+        List<Logins> list = query.getResultList();
+        em.getTransaction().commit();
+        for(int i = 0; i<list.size(); i++){
+            jo.put(Integer.toString(i),list.get(i).toJSON());
         }
         return jo;
     }
@@ -107,19 +114,7 @@ public class DatabaseAPI {
         em.merge(e.getEmp());
         em.getTransaction().commit();
     }
-    public JSONObject getAllEmployeesFullInfo()
-    {
-        JSONObject jo = new JSONObject();
-        em.getTransaction().begin();
-        Query query = em.createQuery("SELECT log FROM Logins log where log.levelaccess>0");
-        List<Logins> list = query.getResultList();
 
-        em.getTransaction().commit();
-        for(int i = 0; i<list.size(); i++){
-            jo.put(Integer.toString(i),list.get(i).toJSON());
-        }
-        return jo;
-    }
 
 
     public JSONObject getAllRestaurants(){
@@ -140,6 +135,7 @@ public class DatabaseAPI {
         em.getTransaction().commit();
         if(list.size()==1) {
             this.restaurant=list.get(0).getRestaurantname();
+            this.levelacces=list.get(0).getLevelaccess();
             return list.get(0);
         }
 
@@ -545,15 +541,20 @@ public class DatabaseAPI {
 
     public void deleteCategory(String params) {
         em.getTransaction().begin();
-        Query query = em.createQuery("select c from Categories c where c.restaurant=?1").setParameter(1,params);
+        System.out.println("params: "+params);
+        Query query = em.createQuery("select c from Categories c where c.restaurant=?1 and c.id=?2").setParameter(1,restaurant).setParameter(2,params);
         List<Categories> cat = query.getResultList();
+        System.out.println(1);
         if(!cat.isEmpty())
             for(Categories c : cat){
+                System.out.println(1);
                 query=em.createQuery("select p from Products p where p.category=?1").setParameter(1,params);
                 List<Products> prod = query.getResultList();
+                System.out.println(1);
                 if(!prod.isEmpty())
                     for(Products p : prod)
                     {
+
                         query=em.createQuery("select p from Positions p where p.idproduct=?1").setParameter(1,p.getId());
                         List<Positions> poz = query.getResultList();
                         if(!poz.isEmpty())
@@ -571,4 +572,5 @@ public class DatabaseAPI {
             }
         em.getTransaction().commit();
     }
+
 }

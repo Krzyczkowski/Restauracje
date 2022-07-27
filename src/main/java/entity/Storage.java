@@ -64,12 +64,7 @@ public class Storage {
         restaurant = st.getRestaurant();
     }
     public Storage(String name, int amount){this.id=0;this.name=name;this.amount=amount;}
-    public Storage(JSONObject jo) {
-        id =    (int)(long) jo.get("id");
-        amount =(int)(long) jo.get("amount");
-        name =jo.get("name").toString();
-        restaurant = jo.get("restaurant").toString();
-    }
+
 ///    public Storage(JSONObject jo,String s) {
 //        amount =(int)(long) jo.get("amount");
 //        name =jo.get("name").toString();
@@ -123,6 +118,12 @@ public class Storage {
         result = 31 * result + amount;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+    public Storage(JSONObject jo) {
+        id =    (int)(long) jo.get("id");
+        amount =(int)(long) jo.get("amount");
+        name =jo.get("name").toString();
+        restaurant = jo.get("restaurant").toString();
     }
     public JSONObject toJSON(){
         JSONObject jo = new JSONObject();

@@ -333,8 +333,6 @@ class Client {
         message.put("command", "updateStorageItem");
         message.put("params", jo);
         out.writeUTF(message.toString());
-        message.clear();
-        message = (JSONObject) JSONValue.parse(in.readUTF());
         check();
     }
     public static void deleteStorage(Storage s) throws IOException {
@@ -469,7 +467,8 @@ class Client {
 
     public static void deleteCategory(String s) throws IOException {
         message.clear();
-        message.put("command","deletecategory");
+        System.out.println(s);
+        message.put("command","deleteCategory");
         message.put("params",s);
         out.writeUTF(message.toString());
         check();

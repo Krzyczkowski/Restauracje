@@ -40,7 +40,7 @@ public class popupWindowsControler implements Initializable{
     private Spinner amountToAdd;
     private final ObservableList<Storage> storageList = FXCollections.observableArrayList();
     private Storage selectedIngridient;
-    private String nameCategory,nameRestaurant;
+    private static String nameCategory,nameRestaurant;
     private final ObservableList<Storage> componentProductList = FXCollections.observableArrayList();
 
     private final List <Storage> ingridients = new ArrayList<>();
@@ -277,6 +277,7 @@ public class popupWindowsControler implements Initializable{
             GeneralController.popup = 3;
             warningLabel4.setText("");
             nameCategory = newProductCategory.getValue().toString();
+            System.out.println(nameCategory);
             FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteCatgory.fxml"));
             Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
             //popupScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -299,6 +300,7 @@ public class popupWindowsControler implements Initializable{
             restaurantsWaringLabel.setText("wybierz restauracje");
         }
         else{
+            nameRestaurant=comboWithRestaurants.getValue().toString();
             GeneralController.popup = 5;
             FXMLLoader loader = new FXMLLoader(App.class.getResource("deleteRestaurant.fxml"));
             Scene popupScene = new Scene(loader.load(), 437.0, 167.0);
@@ -316,12 +318,10 @@ public class popupWindowsControler implements Initializable{
     protected void decision(ActionEvent event) throws IOException {
         if(event.getTarget().equals(yesButton)){
             if(GeneralController.popup==3){
-                Client.deleteCategory(newProductCategory.getValue().toString());
+                Client.deleteCategory(nameCategory);
             }
-            if(GeneralController.popup==4){
-                Client.deleteRestaurant(comboWithRestaurants.getValue().toString());
-                comboWithRestaurants.getItems().clear();
-                comboWithRestaurants.getItems().addAll(Client.getRestaurantNames());
+            else{
+                Client.deleteRestaurant(nameRestaurant);
             }
             Stage stage = (Stage) yesButton.getScene().getWindow();
             stage.close();
