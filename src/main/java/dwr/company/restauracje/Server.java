@@ -16,22 +16,15 @@ class Server {
              throw new RuntimeException(e);
          }
          try {
-            // server is listening on port 1234
+            // nasluchiwanie na porcie 1235
             server = new ServerSocket(1235);
             server.setReuseAddress(true);
-            // running infinite loop for getting
-            // client request
+            // nieskonczona petla nasluchująca żądań klienta
             while (true) {
-                // socket object to receive incoming client
-                // requests
                 Socket client = server.accept();
-                // Displaying that new client is connected
-                // to server
-                System.out.println("NEW CLIENT:" + client.getInetAddress().getHostAddress());
-                // create a new thread object
+                System.out.println("NOWY CLIENT:" + client.getInetAddress().getHostAddress());
+                // tworzenie nowego Thread'u
                 SerwerThread clientSock = new SerwerThread(client,config);
-                // This thread will handle the client
-                // separately
                 new Thread(clientSock).start();
             }
         } catch (IOException e) {
