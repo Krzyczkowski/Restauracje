@@ -100,7 +100,8 @@ public class popupWindowsControler implements Initializable{
             case 0:
                 if(GeneralController.toEditPopUp != null){
                     loadWorkerData();
-                } else {
+                }
+                else {
                     command = "insert";
                     try {
                         newPlace.getItems().addAll(Client.getAllRestaurants());

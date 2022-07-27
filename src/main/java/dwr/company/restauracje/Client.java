@@ -383,6 +383,7 @@ class Client {
         message.put("command","insertEmployee");
         message.put("logins",log.toJSON());
         message.put("employee",emp.toJSON());
+        out.writeUTF(message.toString());
         check();
     }
     public static void insertCategory(String name) throws IOException {
