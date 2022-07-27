@@ -67,7 +67,6 @@ class Client {
             out.writeUTF(message.toString());
             message = (JSONObject) JSONValue.parse(in.readUTF());
             return printRestaurants(message);
-
     }
 
     /**
