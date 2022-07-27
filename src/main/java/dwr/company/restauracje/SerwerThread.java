@@ -338,12 +338,6 @@ class SerwerThread implements Runnable {
         System.out.println(JSON.toString());
         out.writeUTF(JSON.toString());
     }
-//    private void getEmployeeByName(String name) throws IOException{
-//        JSON.clear();
-//        JSON = db.getEmployeeByName(name);
-//        System.out.println(JSON.toString());
-//        out.writeUTF(JSON.toString());
-//    }
     private void insertEmployee(Logins e, Employee emp) {
         JSON.clear();
         db.insertEmployee(e,emp);
