@@ -27,6 +27,7 @@ class SerwerThread implements Runnable {
         this.clientSocket = socket;
         conf = privileges;
     }
+
     public void run() {
         try {
             out = new DataOutputStream(clientSocket.getOutputStream());
