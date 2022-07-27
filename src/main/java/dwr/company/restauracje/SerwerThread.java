@@ -82,6 +82,15 @@ class SerwerThread implements Runnable {
             authorization();
         }}catch (Exception e){}
     }
+
+    /**
+     *  główna  funkcja komunikacji z klientem
+     *  nasłuchuje żądania klienta w formie JSONObject
+     *  gdzie głównym kluczem jest command (rodzaj żadania)
+     *  oraz params gdzie klient przesyła np. id konkretnego obiektu
+     *  funckaja sprawdza również czy istnieje dana funkcja i
+     *  czy klient ma do niej uprawniuenia (z pliku configuration.txt)
+     */
     private void communication() throws IOException {
         while (true) {
             message = in.readUTF();
@@ -104,9 +113,6 @@ class SerwerThread implements Runnable {
                         case "getEmployeeById":
                             getEmployeeById((int) (long) JSON.get("params"));
                             break;
-//                        case "getEmployeeByName":
-//                            getEmployeeByName((String) JSON.get("params"));
-//                            break;
                         case "getAllRestaurants":
                             getAllRestaurants();
                             break;
@@ -234,8 +240,9 @@ class SerwerThread implements Runnable {
         db.close();
     }
 
-    private void deleteCategory(String params) {
-        db.deleteCategory(params);
+
+    private void deleteCategory(String categoryName) {
+        db.deleteCategory(categoryName);
     }
 
     private void updateRestaurant(String param1, String param2) {
