@@ -56,8 +56,7 @@ class Client {
      * pierwsze wczytanie restauracji oraz połączenie z serwerem
      * @param host adres hosta
      * @param port port hosta
-     * @return
-     * @throws IOException
+     * @return List String
      */
     public static List<String> InitGetRestaurantNames(String host, Integer port) throws IOException {
         Socket socket = new Socket(host, port);
@@ -73,7 +72,6 @@ class Client {
 
     /**
      * kończy połączenie z serwerem
-     * @throws IOException
      */
     public static void logout() throws IOException {
         message.clear();
@@ -194,7 +192,6 @@ class Client {
     /**
      * Wysyła polecenie do serwera a następnie przetwarza odpowiedź na liste Dancyh pracownika(Logins)
      * @return List Logins
-     * @throws IOException
      */
     protected static List<Logins>   getEmployeesFullInfo() throws IOException {
         JSONObject message = new JSONObject();
@@ -209,7 +206,6 @@ class Client {
      * Wysyła polecenie do serwera a następnie przetwarza odpowiedź na liste Dancyh pracownika(Logins)
      * @return List Logins
      * @param like słowo od którego ma zaczynać sie imie lub nazwisko
-     * @throws IOException
      */
     protected static List<Logins>   getEmployeesFullInfo(String like) throws IOException {
         JSONObject message = new JSONObject();
@@ -236,8 +232,10 @@ class Client {
         }
         return new ArrayList<Logins>();
     }
-
-
+    /**
+     * Wysyła polecenie zwrócenie wszystkich nazw restauracji
+     * @return List String
+     */
     public static List<String>      getAllRestaurants() throws IOException {
         JSONObject message = new JSONObject();
         message.put("command","getAllRestaurants");
@@ -261,16 +259,7 @@ class Client {
         message.put("params", "");
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
-        if(!message.isEmpty()) {
-            if(!message.get("0").equals("1"))
-                return printProducts(message);
-            else
-            {
-                System.out.println("brak praw dostępu");
-                return new ArrayList<Products>();
-            }
-        }
-        return new ArrayList<Products>();
+        return getProductsCheck();
     }
     public static List<Products> getProducts(String name,String category) throws IOException {
         message.clear();
@@ -281,10 +270,14 @@ class Client {
         message.put("params", jo.toString());
         out.writeUTF(message.toString());
         message = (JSONObject) JSONValue.parse(in.readUTF());
+        return getProductsCheck();
+    }
+    private static List<Products> getProductsCheck() {
         if(!message.isEmpty()) {
-            if (!message.get("0").equals("1"))
+            if(!message.get("0").equals("1"))
                 return printProducts(message);
-            else {
+            else
+            {
                 System.out.println("brak praw dostępu");
                 return new ArrayList<Products>();
             }
@@ -372,6 +365,18 @@ class Client {
         }
         return new ArrayList<Compositions>();
     }
+
+    /**
+     * wysyła żądanie stworzenie
+     * @param name imie
+     * @param lastName nazwisko
+     * @param login login
+     * @param password  haslo
+     * @param levelacces    poziomo dostępu
+     * @param restaurantname    nazwa restauracji
+     * @param salary    wynagrodzenie
+     * @param pesel     pesel
+     */
     protected static void insertEmployee(String name, String lastName, String login, String password, int levelacces, String restaurantname, float salary, int pesel) throws IOException {
         message.clear();
         Logins log = new Logins(0,login,password,levelacces,restaurantname,pesel,salary,name,lastName);
@@ -426,6 +431,11 @@ class Client {
         out.writeUTF(message.toString());
         check();
     }
+
+    /**
+     * tworzenie zamówienia przez wysłanie orderConainer(Order,Client,Positions)
+     * @param orderContainer kontener na zamówienie
+     */
     public static void makeOrder(OrderContainer orderContainer) throws IOException {
         message.clear();
         JSONObject jo = new JSONObject();
@@ -435,13 +445,19 @@ class Client {
         out.writeUTF(message.toString());
         check();
     }
-    public static void makeProduct(Products p, List<Storage> ing) throws IOException {
+
+    /**
+     * tworzenie produktu przez wysłanie produktu oraz jego składników
+     * @param products Produkt
+     * @param storageList Lista Składników Produktu
+     */
+    public static void makeProduct(Products products, List<Storage> storageList) throws IOException {
         message.clear();
         JSONObject newProduct = new JSONObject();
-        newProduct.put("product",p.toJSON().toString());
+        newProduct.put("product",products.toJSON().toString());
         JSONObject ingridients = new JSONObject();
-        for(int i=0;i<ing.size();i++){
-            ingridients.put("ingridient"+i,ing.get(i).toJSON());
+        for(int i=0;i<storageList.size();i++){
+            ingridients.put("ingridient"+i,storageList.get(i).toJSON());
         }
         newProduct.put("ingridients",ingridients);
         message.put("command", "makeProduct");
