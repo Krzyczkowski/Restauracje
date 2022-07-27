@@ -34,14 +34,14 @@
                     </children>
                 </HBox>
                 <Circle fx:id="userIcon" fill="DODGERBLUE" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-                <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="331.0" textAlignment="CENTER" textFill="WHITE">
+                <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="331.0" text="User name" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="Calibri Bold" size="36.0" />
                     </font>
                 </Label>
-                <VBox prefHeight="345.0" prefWidth="350.0">
+                <VBox prefHeight="317.0" prefWidth="350.0">
                     <children>
-                        <Button fx:id="menuButton0" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#orderSection" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="menuButton0" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#orderSection" prefHeight="42.0" prefWidth="350.0" text="Zamówienie" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
@@ -66,31 +66,31 @@
                                 <Font name="Calibri Bold" size="27.0" />
                             </font>
                         </Button>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="435.0" style="-fx-background-color: #032475;" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="435.0" style="-fx-background-color: #032475;" />
                     </children>
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin>
                 </VBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="101.0" prefWidth="350.0">
-               <children>
-                  <Button fx:id="addRestaurant" mnemonicParsing="false" onAction="#newRestaurantpopup" prefHeight="42.0" prefWidth="202.0" text="Restauracje">
-                     <HBox.margin>
-                        <Insets left="20.0" right="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Calibri Bold" size="20.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Calibri Bold" size="20.0" />
-                     </font></Button>
-               </children>
-            </HBox>
+                <HBox alignment="CENTER_RIGHT" prefHeight="108.0" prefWidth="350.0">
+                    <children>
+                        <Button fx:id="addRestaurant" mnemonicParsing="false" onAction="#newRestaurantpopup" prefHeight="42.0" prefWidth="202.0" text="Restauracje">
+                            <HBox.margin>
+                                <Insets left="20.0" right="10.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="Calibri Bold" size="20.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="41.0" prefWidth="153.0" text="Wyloguj">
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="Calibri Bold" size="20.0" />
+                            </font></Button>
+                    </children>
+                </HBox>
             </children>
         </VBox>
       <GridPane layoutX="1.0" layoutY="-6.0" prefHeight="707.0" prefWidth="849.0">
