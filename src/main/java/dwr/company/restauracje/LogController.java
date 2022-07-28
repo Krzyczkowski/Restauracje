@@ -83,6 +83,7 @@ public class LogController{
     @FXML
     protected void refresh(){
         try {
+            place.getItems().clear();
             place.getItems().addAll(Client.InitGetRestaurantNames("localhost",1235));
             Warning.setText("");
         } catch (IOException e) {

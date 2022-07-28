@@ -414,21 +414,20 @@ public class popupWindowsControler implements Initializable{
                 s+="cena, ";
             warningLabel4.setText(s);
         }
-        else{
-            try{
+        else {
+            try {
                 Float.parseFloat(newProductPrice.getText());
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 warningLabel4.setText("Podaj liczbe np. 2.5");
                 return;
             }
             //wysłanie zapytania
             Products p;
             List<Storage> listOfIngridientsInNewProduct;
-            listOfIngridientsInNewProduct=componentProductList;
-            if(command.equals("update")){
+            listOfIngridientsInNewProduct = componentProductList;
+            if (command.equals("update")) {
                 p = GeneralController.selectedProduct;
-            }
-            else{
+            } else {
                 p = new Products();
                 p.setId(0);
             }
@@ -436,10 +435,10 @@ public class popupWindowsControler implements Initializable{
             p.setName(newProductName.getText());
             p.setRestaurant(Client.restaurantName);
             p.setPrice(Float.parseFloat(newProductPrice.getText()));
-            if(command.equals("update"))
-                Client.updateProduct(p,listOfIngridientsInNewProduct);
+            if (command.equals("update"))
+                Client.updateProduct(p, listOfIngridientsInNewProduct);
             else
-                Client.makeProduct(p,listOfIngridientsInNewProduct);
+                Client.makeProduct(p, listOfIngridientsInNewProduct);
             warningLabel4.setText("");
             newProductName.setText("");
             ingridients.clear();

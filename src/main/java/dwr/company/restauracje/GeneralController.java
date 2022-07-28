@@ -460,7 +460,7 @@ public class GeneralController{
         itemList.addAll(Client.getStorage());
         listWithNeed.getItems().clear();
         for(Storage st : itemList){
-            if (st.getAmount()==0){
+            if (st.getAmount() <= 0){
                 listWithNeed.getItems().add(st.getName());
             }
         }
